@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 
+import Layout from './hoc/Layout/Layout';
+import OrganizerRegistry from './containers/OrganizerRegistry/OrganizerRegistry';
+
 class App extends Component {
   render() {
     return (
-      <div><h1>WORK IN PROGRESS</h1></div>
-    );
+      <div>
+        <Layout>
+          <OrganizerRegistry />
+        </Layout>
+      </div>);
   }
 }
 
