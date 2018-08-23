@@ -1,7 +1,6 @@
 # YKI-Frontend
 
-Web client for National Certificates of Language Proficiency ("Yleisten Kielitutkintojen Ilmottautumisjärjestelmä") service.
-
+Web client for National Certificates of Language Proficiency service (Yleisten Kielitutkintojen Ilmottautumisjärjestelmä).
 
 ### License
 
