@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Logo from '../../Logo/Logo';
 import styles from './SideDrawer.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import Aux from '../../../hoc/Aux/Aux';
 
-const sideDrawer = (props) => {
+const sideDrawer = props => {
   let attachedStyles = [styles.SideDrawer, styles.Close];
   if (props.open) {
     attachedStyles = [styles.SideDrawer, styles.Open];
@@ -26,6 +27,11 @@ const sideDrawer = (props) => {
       </div>
     </Aux>
   );
+};
+
+sideDrawer.propTypes = {
+  open: PropTypes.bool.isRequired,
+  closed: PropTypes.any,
 };
 
 export default sideDrawer;

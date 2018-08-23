@@ -10,7 +10,8 @@ class App extends Component {
         <Layout>
           <OrganizerRegistry />
         </Layout>
-      </div>);
+      </div>
+    );
   }
 }
 
