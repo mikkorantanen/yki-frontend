@@ -22,7 +22,7 @@ const toolbar = props => (
 );
 
 toolbar.propTypes = {
-  drawerToggleClicked: PropTypes.clicked,
+  drawerToggleClicked: PropTypes.func,
 };
 
 export default toolbar;
