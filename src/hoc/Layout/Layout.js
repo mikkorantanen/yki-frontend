@@ -36,7 +36,7 @@ class Layout extends Component {
 }
 
 Layout.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.object,
 };
 
 export default Layout;
