@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Logo from '../../Logo/Logo';
 import styles from './SideDrawer.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
+import DrawerToggle from './DrawerToggle/DrawerToggle';
 import Aux from '../../../hoc/Aux/Aux';
 
 const sideDrawer = props => {
@@ -14,7 +15,7 @@ const sideDrawer = props => {
   return (
     <Aux>
       <Backdrop show={props.open} clicked={props.closed} />
-      <drawerToggle />
+      <DrawerToggle />
       <div className={attachedStyles.join(' ')} onClick={props.closed}>
         <div className={styles.Logo}>
           <Logo />
@@ -31,7 +32,7 @@ const sideDrawer = props => {
 
 sideDrawer.propTypes = {
   open: PropTypes.bool.isRequired,
-  closed: PropTypes.any,
+  closed: PropTypes.func,
 };
 
 export default sideDrawer;

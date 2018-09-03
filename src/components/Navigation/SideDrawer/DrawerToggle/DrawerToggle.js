@@ -12,7 +12,7 @@ const drawerToggle = props => (
 );
 
 drawerToggle.propTypes = {
-  clicked: PropTypes.clicked,
+  clicked: PropTypes.func,
 };
 
 export default drawerToggle;
