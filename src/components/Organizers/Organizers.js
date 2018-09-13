@@ -21,9 +21,11 @@ export const Organizers = ({ organizers, error }) => (
       <table>
         <thead>
           <tr>
-            <td>Oppilaitoksen nimi</td>
+            <td>Paikkakunta</td>
+            <td>Järjestäjä</td>
             <td>Voimassaolo</td>
             <td>Kielet</td>
+            <td>Yhteyshenkilö</td>
           </tr>
         </thead>
         <tbody>
