@@ -79,7 +79,7 @@ module.exports = app => {
   app.get('/organisaatio-service/rest/organisaatio/v3/:oid', (req, res) => {
     try {
       const { oid } = req.params;
-      const data = fs.readFileSync(`./config/rest/organisaatio/${oid}.json`);
+      const data = fs.readFileSync(`./dev/rest/organisaatio/${oid}.json`);
       res.send(data);
     } catch (err) {
       console.log(err);
