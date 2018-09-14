@@ -1,9 +1,7 @@
 .OrganizerFormRow {
   margin-bottom: 0.7em;
 }
-.OrganizerFormRow span,
-label,
-input {
+.OrganizerFormRow label {
   display: inline-block;
   position: relative;
   width: 150px;

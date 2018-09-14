@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 
 import styles from './OrganizerForm.css';
@@ -30,8 +31,8 @@ class OrganizerForm extends Component {
     const { organizer } = this.state;
   }
   render() {
+    const organization = this.props.organization;
     const {
-      organizer,
       validityStart,
       validityEnd,
       contactName,
@@ -44,13 +45,8 @@ class OrganizerForm extends Component {
           <h2>Järjestäjän lisääminen</h2>
           <fieldset>
             <div className={styles.OrganizerFormRow}>
-              <label htmlFor="organizer">Järjestäjä</label>
-              <input
-                type="text"
-                id="organizer"
-                value={organizer}
-                onChange={this.handleChange}
-              />
+              <label htmlFor="organization">Järjestäjä</label>
+              {organization.nimi.fi}
             </div>
             <div className={styles.OrganizerFormRow}>
               <label htmlFor="validity">Voimassaolo</label>

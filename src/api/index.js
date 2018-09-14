@@ -10,14 +10,15 @@ function handleErrors(response) {
   throw new Error(response.statusText, response);
 }
 
-const apiRequest = async (name, url, params = {}) => {
+const apiRequest = async (name, url, params = {}, method = 'get', body) => {
   try {
-    const promise = fetch(`${config.baseUrl}/${url}`, { method: 'GET' }).then(
+    const promise = fetch(`${config.baseUrl}/${url}`, { method: method }).then(
       handleErrors,
     );
     store.dispatch({
       type: `${name}_SUCCESS`,
       params,
+      body: JSON.stringify(body),
       response: await promise,
     });
     return promise;
@@ -25,6 +26,16 @@ const apiRequest = async (name, url, params = {}) => {
     store.dispatch({ type: `${name}_ERROR`, params, error: err.message });
     console.error(`${name} failed: ${err.message}`);
   }
+};
+
+export const loadOrganizationsByOids = oids => {
+  return apiRequest(
+    'LOAD_ORGANIZATIONS_BY_OIDS',
+    'organisaatio-service/rest/organisaatio/v3/findbyoids',
+    {},
+    'post',
+    oids,
+  );
 };
 
 export const loadOrganizers = () => {
@@ -36,5 +47,12 @@ export const loadOrganization = oid => {
     'LOAD_ORGANIZATION',
     `organisaatio-service/rest/organisaatio/v3/${oid}`,
     oid,
+  );
+};
+
+export const loadOrganizationsByFreeText = searchText => {
+  return apiRequest(
+    'LOAD_ORGANIZATIONS_BY_FREE_TEXT',
+    `organisaatio-service/rest/organisaatio/v2/hae/nimi?searchStr=${searchText}&aktiiviset=true&suunnitellut=true&lakkautetut=false`,
   );
 };
