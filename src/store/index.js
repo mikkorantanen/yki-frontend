@@ -2,7 +2,8 @@ import { createStore } from 'redux';
 
 const initialState = {
   organizers: [],
-  organizations: {},
+  organizations: [],
+  organizationsSearchResult: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -11,13 +12,15 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, organizers: action.response.organizers };
     case 'LOAD_ORGANIZERS_ERROR':
       return { ...state, organizers: [], error: action.error };
-    case 'LOAD_ORGANIZATION_SUCCESS':
+    case 'LOAD_ORGANIZATIONS_BY_OIDS_SUCCESS':
       return {
         ...state,
-        organizations: {
-          ...state.organizations,
-          [action.params]: action.response,
-        },
+        organizations: action.response,
+      };
+    case 'LOAD_ORGANIZATIONS_BY_FREE_TEXT_SUCCESS':
+      return {
+        ...state,
+        organizationsSearchResult: action.response.organisaatiot,
       };
     default:
       return state;

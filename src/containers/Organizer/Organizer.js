@@ -1,11 +1,9 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 
-import { connect } from 'react-redux';
 import format from 'date-fns/format';
 
 import * as constants from '../../common/Constants';
-import { loadOrganization } from '../../api/index';
 
 const languageCodeToLanguage = {
   fi: 'suomi',
@@ -23,13 +21,6 @@ const levelCodeToLevel = {
   PERUS: 'perustaso',
   KESKI: 'keskitaso',
   YLIN: 'ylin taso',
-};
-
-const mapStateToProps = (state, props) => {
-  return {
-    organization: state.organizations[props.organizer.oid],
-    error: state.error,
-  };
 };
 
 const getLanguageTexts = languages => {
@@ -50,10 +41,7 @@ const getContactPerson = organizer => {
   }`;
 };
 
-export class Organizer extends React.Component {
-  componentDidMount() {
-    loadOrganization(this.props.organizer.oid);
-  }
+export default class Organizer extends React.Component {
   render() {
     const { organizer, organization } = this.props;
     return organizer && organization ? (
@@ -70,5 +58,3 @@ export class Organizer extends React.Component {
     ) : null;
   }
 }
-
-export default connect(mapStateToProps)(Organizer);

@@ -10,11 +10,16 @@ import styles from './Organizers.css';
 const mapStateToProps = state => {
   return {
     organizers: state.organizers,
+    organizations: state.organizations,
     error: state.error,
   };
 };
 
-export const Organizers = ({ organizers, error }) => (
+const getOrganization = (oid, organizations) => {
+  return organizations.find(o => o.oid === oid);
+};
+
+export const Organizers = ({ organizers, organizations, error }) => (
   <div className={styles.Organizers}>
     {error && <p>Error getting organizers</p>}
     {organizers.length > 0 && (
@@ -30,7 +35,11 @@ export const Organizers = ({ organizers, error }) => (
         </thead>
         <tbody>
           {organizers.map((org, i) => (
-            <Organizer key={i} organizer={org} />
+            <Organizer
+              key={i}
+              organizer={org}
+              organization={getOrganization(org.oid, organizations)}
+            />
           ))}
         </tbody>
       </table>

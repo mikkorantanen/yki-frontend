@@ -56,7 +56,10 @@ module.exports = app => {
   app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
 
   app.use((req, res, next) => {
-    if (req.originalUrl.indexOf('/yki/api') === 0) {
+    if (
+      req.originalUrl.indexOf('/yki/api') === 0 ||
+      req.originalUrl.indexOf('/organisaatio-service')
+    ) {
       // eslint-disable-next-line
       console.log(
         'Time:',
@@ -83,7 +86,6 @@ module.exports = app => {
     }
   });
 
-  // http://localhost:3000/organisaatio-service/rest/organisaatio/v3/1.2.246.562.10.28646781493
   app.get('/organisaatio-service/rest/organisaatio/v3/:oid', (req, res) => {
     try {
       const { oid } = req.params;
@@ -94,4 +96,17 @@ module.exports = app => {
       res.status(404).send(err.message);
     }
   });
+
+  app.post(
+    '/organisaatio-service/rest/organisaatio/v3/findbyoids',
+    (req, res) => {
+      try {
+        const data = fs.readFileSync(`./dev/rest/organisaatio/findbyoids.json`);
+        res.send(data);
+      } catch (err) {
+        console.log(err);
+        res.status(404).send(err.message);
+      }
+    },
+  );
 };

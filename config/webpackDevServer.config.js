@@ -5,7 +5,7 @@ const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMi
 const ignoredFiles = require('react-dev-utils/ignoredFiles');
 const config = require('./webpack.config.dev');
 const paths = require('./paths');
-const setupMock = require('../dev/mock');
+const setupMock = require('../dev/Mock');
 
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const host = process.env.HOST || '0.0.0.0';
@@ -81,7 +81,13 @@ module.exports = function(proxy, allowedHost) {
       disableDotRule: true,
     },
     public: allowedHost,
-    proxy,
+    proxy: {
+      '/organisaatio-service': {
+          target: 'https://virkailija.untuvaopintopolku.fi',
+          secure: false,
+          changeOrigin: true,
+      }
+    },
     before(app) {
       // This lets us open files from the runtime error overlay.
       app.use(errorOverlayMiddleware());
