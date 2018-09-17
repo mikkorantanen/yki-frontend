@@ -85,6 +85,15 @@ module.exports = app => {
     }
   });
 
+  app.post('/yki/api/virkailija/organizers', (req, res) => {
+    try {
+      organizers.push(req.body);
+      res.send({ success: true });
+    } catch (err) {
+      res.status(404).send(err.message);
+    }
+  });
+
   app.get('/organisaatio-service/rest/organisaatio/v3/:oid', (req, res) => {
     try {
       const { oid } = req.params;

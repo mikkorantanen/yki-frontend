@@ -1,7 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 
-import format from 'date-fns/format';
+import * as moment from 'moment';
 
 import * as constants from '../../common/Constants';
 
@@ -49,8 +49,8 @@ export default class Organizer extends React.Component {
         <td>{organization.postiosoite.postitoimipaikka}</td>
         <td>{organization.nimi.fi}</td>
         <td>
-          {format(organizer.agreement_start_date, constants.DATE_FORMAT)} -{' '}
-          {format(organizer.agreement_end_date, constants.DATE_FORMAT)}
+          {moment(organizer.agreement_start_date).format(constants.DATE_FORMAT)}{' '}
+          - {moment(organizer.agreement_end_date).format(constants.DATE_FORMAT)}
         </td>
         <td>{getLanguageTexts(organizer.languages)}</td>
         <td>{getContactPerson(organizer)}</td>
