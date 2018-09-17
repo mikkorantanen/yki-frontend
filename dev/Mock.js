@@ -1,5 +1,6 @@
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const fetch = require('node-fetch');
 
 const getCurrentTime = () => {
   const tzoffset = new Date().getTimezoneOffset() * 60000;
@@ -9,45 +10,43 @@ const getCurrentTime = () => {
   return localISOTime;
 };
 
-const organizers = {
-  organizers: [
-    {
-      oid: '1.2.246.562.10.28646781493',
-      agreement_start_date: '2018-01-01T00:00:00.000Z',
-      agreement_end_date: '2019-01-01T00:00:00.000Z',
-      contact_name: 'Iida Ikola',
-      contact_email: 'iida.ikola@amiedu.fi',
-      contact_phone_number: '0101234546',
-      languages: [
-        {
-          language_code: 'fi',
-          level_code: 'PERUS',
-        },
-        {
-          language_code: 'fi',
-          level_code: 'KESKI',
-        },
-        {
-          language_code: 'sv',
-          level_code: 'YLIN',
-        },
-        {
-          language_code: 'sv',
-          level_code: 'PERUS',
-        },
-      ],
-    },
-    {
-      oid: '1.2.246.562.10.39706139522',
-      agreement_start_date: '2018-01-01T00:00:00.000Z',
-      agreement_end_date: '2029-01-01T00:00:00.000Z',
-      contact_name: 'Ismo Supinen',
-      contact_email: 'ismo.supinen@jkl.fi',
-      contact_phone_number: '01412345467',
-      languages: null,
-    },
-  ],
-};
+const organizers = [
+  {
+    oid: '1.2.246.562.10.28646781493',
+    agreement_start_date: '2018-01-01T00:00:00.000Z',
+    agreement_end_date: '2019-01-01T00:00:00.000Z',
+    contact_name: 'Iida Ikola',
+    contact_email: 'iida.ikola@amiedu.fi',
+    contact_phone_number: '0101234546',
+    languages: [
+      {
+        language_code: 'fi',
+        level_code: 'PERUS',
+      },
+      {
+        language_code: 'fi',
+        level_code: 'KESKI',
+      },
+      {
+        language_code: 'sv',
+        level_code: 'YLIN',
+      },
+      {
+        language_code: 'sv',
+        level_code: 'PERUS',
+      },
+    ],
+  },
+  {
+    oid: '1.2.246.562.10.39706139522',
+    agreement_start_date: '2018-01-01T00:00:00.000Z',
+    agreement_end_date: '2029-01-01T00:00:00.000Z',
+    contact_name: 'Ismo Supinen',
+    contact_email: 'ismo.supinen@jkl.fi',
+    contact_phone_number: '01412345467',
+    languages: null,
+  },
+];
 
 const getNumberBetween = (min, max) => Math.random() * (max - min) + min;
 
@@ -80,7 +79,7 @@ module.exports = app => {
 
   app.get('/yki/api/virkailija/organizers', (req, res) => {
     try {
-      res.send(organizers);
+      res.send({ organizers: organizers });
     } catch (err) {
       res.status(404).send(err.message);
     }
@@ -97,16 +96,40 @@ module.exports = app => {
     }
   });
 
+  // need to proxy here because dev server bug: https://github.com/webpack/webpack-dev-server/issues/1440
   app.post(
     '/organisaatio-service/rest/organisaatio/v3/findbyoids',
-    (req, res) => {
+    async (req, res) => {
       try {
-        const data = fs.readFileSync(`./dev/rest/organisaatio/findbyoids.json`);
-        res.send(data);
+        const promise = await fetch(
+          'https://virkailija.untuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v3/findbyoids',
+          {
+            method: 'POST',
+            body: JSON.stringify(req.body),
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+        res.send(await promise.json());
       } catch (err) {
         console.log(err);
         res.status(404).send(err.message);
       }
     },
   );
+
+  // app.post(
+  //   '/organisaatio-service/rest/organisaatio/v3/findbyoids',
+  //   (req, res) => {
+  //     try {
+  //       const data = fs.readFileSync(`./dev/rest/organisaatio/findbyoids.json`);
+  //       res.send(data);
+  //     } catch (err) {
+  //       console.log(err);
+  //       res.status(404).send(err.message);
+  //     }
+  //   },
+  // );
 };

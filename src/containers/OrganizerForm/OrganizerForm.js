@@ -9,6 +9,10 @@ import * as constants from '../../common/Constants';
 
 import ophStyles from '../../oph-styles.css';
 
+const getOrganizationName = org => {
+  return org ? [org.nimi.fi, org.nimi.sv, org.nimi.en].filter(o => o)[0] : null;
+};
+
 class OrganizerForm extends Component {
   constructor() {
     super();
@@ -23,13 +27,16 @@ class OrganizerForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleChange(event) {
     this.setState({ [event.target.id]: event.target.value });
   }
+
   handleSubmit(event) {
     event.preventDefault();
     const { organizer } = this.state;
   }
+
   render() {
     const organization = this.props.organization;
     const {
@@ -42,11 +49,10 @@ class OrganizerForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <h2>Järjestäjän lisääminen</h2>
           <fieldset>
             <div className={styles.OrganizerFormRow}>
               <label htmlFor="organization">Järjestäjä</label>
-              {organization.nimi.fi}
+              {getOrganizationName(organization)}
             </div>
             <div className={styles.OrganizerFormRow}>
               <label htmlFor="validity">Voimassaolo</label>

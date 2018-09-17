@@ -1,21 +1,38 @@
-import { createStore } from 'redux';
+import { combineReducers, createStore } from 'redux';
+import { produce } from 'immer';
 
 const initialState = {
   organizers: [],
   organizations: [],
   organizationsSearchResult: [],
+  busyCounter: 0,
 };
 
-const rootReducer = (state = initialState, action) => {
+const data = (state = initialState, action) => {
   switch (action.type) {
     case 'LOAD_ORGANIZERS_SUCCESS':
-      return { ...state, organizers: action.response.organizers };
+      return {
+        ...state,
+        organizers: action.response.organizers,
+        busyCounter: state.busyCounter - 1,
+      };
     case 'LOAD_ORGANIZERS_ERROR':
       return { ...state, organizers: [], error: action.error };
+    case 'LOAD_ORGANIZERS_PENDING':
+      return {
+        ...state,
+        busyCounter: state.busyCounter + 1,
+      };
     case 'LOAD_ORGANIZATIONS_BY_OIDS_SUCCESS':
       return {
         ...state,
+        busyCounter: state.busyCounter - 1,
         organizations: action.response,
+      };
+    case 'LOAD_ORGANIZATIONS_BY_OIDS_PENDING':
+      return {
+        ...state,
+        busyCounter: state.busyCounter + 1,
       };
     case 'LOAD_ORGANIZATIONS_BY_FREE_TEXT_SUCCESS':
       return {
@@ -26,6 +43,7 @@ const rootReducer = (state = initialState, action) => {
       return state;
   }
 };
-const store = createStore(rootReducer);
+
+const store = createStore(data);
 
 export default store;
