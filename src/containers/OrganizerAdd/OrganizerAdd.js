@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 
-import styles from './OrganizationSearch.css';
+import styles from './OrganizerAdd.css';
 
 import { connect } from 'react-redux';
 
@@ -25,7 +25,7 @@ const mapStateToProps = state => {
   };
 };
 
-export class OrganizerSearch extends Component {
+export class OrganizerAdd extends Component {
   constructor() {
     super();
     this.state = {
@@ -49,14 +49,20 @@ export class OrganizerSearch extends Component {
   render() {
     const { seachText, showForm, selectedOption } = this.state;
     const foundOrganizations = this.props.organizationsSearchResult;
+    const count = foundOrganizations.length;
     const selectedOrganization = foundOrganizations.find(
-      f => f.oid === selectedOption,
+      o => o.oid === selectedOption,
     );
-    console.log('showForm', showForm);
     return (
       <div>
-        <div className={styles.OrganizerFormRow}>
-          <label htmlFor="organizationSearchField">Nimi</label>
+        <h2>Järjestäjän lisääminen</h2>
+        <div>
+          <label
+            className={styles.OrganizerAddLabel}
+            htmlFor="organizationSearchField"
+          >
+            Haku
+          </label>
           <input
             type="text"
             id="organizationSearchField"
@@ -65,8 +71,26 @@ export class OrganizerSearch extends Component {
           />
         </div>
         <div>
-          <form>
-            {foundOrganizations.map((org, i) => (
+          <form className={styles.OrganizerAddForm}>
+            {count === 0 && <span>Ei hakutuloksia</span>}
+            {count > 20 ? (
+              <span>Löytyi {count} organisaatiota, tarkenna hakua</span>
+            ) : (
+              foundOrganizations.map((org, i) => (
+                <div key={i} className="radio">
+                  <label>
+                    <input
+                      type="radio"
+                      value={org.oid}
+                      checked={selectedOption === org.oid}
+                      onChange={this.handleOptionChange}
+                    />
+                    {[org.nimi.fi, org.nimi.sv, org.nimi.en].filter(o => o)[0]}
+                  </label>
+                </div>
+              ))
+            )}
+            {/* {foundOrganizations.map((org, i) => (
               <div key={i} className="radio">
                 <label>
                   <input
@@ -75,10 +99,10 @@ export class OrganizerSearch extends Component {
                     checked={selectedOption === org.oid}
                     onChange={this.handleOptionChange}
                   />
-                  {org.nimi.fi}
+                  {[org.nimi.fi, org.nimi.sv, org.nimi.en].filter(o => o)[0]}
                 </label>
               </div>
-            ))}
+            ))} */}
           </form>
         </div>
         {showForm && <OrganizerForm organization={selectedOrganization} />}
@@ -87,4 +111,4 @@ export class OrganizerSearch extends Component {
   }
 }
 
-export default connect(mapStateToProps)(OrganizerSearch);
+export default connect(mapStateToProps)(OrganizerAdd);

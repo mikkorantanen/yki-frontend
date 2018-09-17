@@ -1,0 +1,10 @@
+.OrganizerAddLabel {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+}
+
+.OrganizerAddForm {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

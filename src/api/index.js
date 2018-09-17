@@ -10,15 +10,41 @@ function handleErrors(response) {
   throw new Error(response.statusText, response);
 }
 
-const apiRequest = async (name, url, params = {}, method = 'get', body) => {
+const apiGet = async (name, url, params = {}) => {
   try {
-    const promise = fetch(`${config.baseUrl}/${url}`, { method: method }).then(
-      handleErrors,
-    );
+    const promise = fetch(`${config.baseUrl}/${url}`, {
+      method: 'GET',
+      headers: new Headers({
+        Accept: 'application/json',
+      }),
+    }).then(handleErrors);
+    store.dispatch({ type: `${name}_PENDING`, params });
     store.dispatch({
       type: `${name}_SUCCESS`,
       params,
+      response: await promise,
+    });
+    return promise;
+  } catch (err) {
+    store.dispatch({ type: `${name}_ERROR`, params, error: err.message });
+    console.error(`${name} failed: ${err.message}`);
+  }
+};
+
+const apiPost = async (name, url, body, params = {}) => {
+  try {
+    const promise = fetch(`${config.baseUrl}/${url}`, {
+      method: 'POST',
       body: JSON.stringify(body),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    }).then(handleErrors);
+    store.dispatch({ type: `${name}_PENDING`, params });
+    store.dispatch({
+      type: `${name}_SUCCESS`,
+      params,
       response: await promise,
     });
     return promise;
@@ -29,21 +55,19 @@ const apiRequest = async (name, url, params = {}, method = 'get', body) => {
 };
 
 export const loadOrganizationsByOids = oids => {
-  return apiRequest(
+  return apiPost(
     'LOAD_ORGANIZATIONS_BY_OIDS',
     'organisaatio-service/rest/organisaatio/v3/findbyoids',
-    {},
-    'post',
     oids,
   );
 };
 
 export const loadOrganizers = () => {
-  return apiRequest('LOAD_ORGANIZERS', 'yki/api/virkailija/organizers');
+  return apiGet('LOAD_ORGANIZERS', 'yki/api/virkailija/organizers');
 };
 
 export const loadOrganization = oid => {
-  return apiRequest(
+  return apiGet(
     'LOAD_ORGANIZATION',
     `organisaatio-service/rest/organisaatio/v3/${oid}`,
     oid,
@@ -51,7 +75,7 @@ export const loadOrganization = oid => {
 };
 
 export const loadOrganizationsByFreeText = searchText => {
-  return apiRequest(
+  return apiGet(
     'LOAD_ORGANIZATIONS_BY_FREE_TEXT',
     `organisaatio-service/rest/organisaatio/v2/hae/nimi?searchStr=${searchText}&aktiiviset=true&suunnitellut=true&lakkautetut=false`,
   );
