@@ -1,13 +1,13 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 
-import styles from './OrganizerForm.css';
-
-import format from 'date-fns/format';
+import * as moment from 'moment';
 
 import * as constants from '../../common/Constants';
+import * as api from '../../api';
 
 import ophStyles from '../../oph-styles.css';
+import styles from './OrganizerForm.css';
 
 const getOrganizationName = org => {
   return org ? [org.nimi.fi, org.nimi.sv, org.nimi.en].filter(o => o)[0] : null;
@@ -17,8 +17,8 @@ class OrganizerForm extends Component {
   constructor() {
     super();
     this.state = {
-      organizer: '',
-      validityStart: format(new Date(), constants.DATE_FORMAT),
+      organizationName: '',
+      validityStart: moment(new Date()).format(constants.DATE_FORMAT),
       validityEnd: '',
       contactName: '',
       contactPhoneNumber: '',
@@ -34,7 +34,28 @@ class OrganizerForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { organizer } = this.state;
+    const {
+      validityStart,
+      validityEnd,
+      contactName,
+      contactPhoneNumber,
+      contactEmail,
+    } = this.state;
+    const request = {
+      oid: this.props.organization.oid,
+      agreement_start_date: moment(
+        validityStart,
+        constants.DATE_FORMAT,
+      ).toISOString(),
+      agreement_end_date: moment(
+        validityEnd,
+        constants.DATE_FORMAT,
+      ).toISOString(),
+      contact_name: contactName,
+      contact_email: contactPhoneNumber,
+      contact_phone_number: contactEmail,
+    };
+    api.createOrganizer(request);
   }
 
   render() {
@@ -51,7 +72,7 @@ class OrganizerForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <fieldset>
             <div className={styles.OrganizerFormRow}>
-              <label htmlFor="organization">Järjestäjä</label>
+              <label htmlFor="organizationName">Järjestäjä</label>
               {getOrganizationName(organization)}
             </div>
             <div className={styles.OrganizerFormRow}>

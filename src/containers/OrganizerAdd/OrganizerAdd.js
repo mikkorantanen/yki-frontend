@@ -20,8 +20,9 @@ const searchOrganizations = AwesomeDebouncePromise(
 
 const mapStateToProps = state => {
   return {
+    organizers: state.organizers,
     organizationsSearchResult: state.organizationsSearchResult,
-    error: state.error,
+    organizerAddResult: state.organizerAddResult,
   };
 };
 
@@ -48,14 +49,24 @@ export class OrganizerAdd extends Component {
 
   render() {
     const { seachText, showForm, selectedOption } = this.state;
-    const foundOrganizations = this.props.organizationsSearchResult;
-    const count = foundOrganizations.length;
-    const selectedOrganization = foundOrganizations.find(
+    const {
+      organizers,
+      organizationsSearchResult,
+      organizerAddResult,
+    } = this.props;
+    const organizationsWithoutOrganizer = organizationsSearchResult.filter(
+      f => !organizers.some(o => o.oid === f.oid),
+    );
+    const count = organizationsWithoutOrganizer.length;
+    const selectedOrganization = organizationsWithoutOrganizer.find(
       o => o.oid === selectedOption,
     );
     return (
       <div>
         <h2>Järjestäjän lisääminen</h2>
+        {organizerAddResult === true && (
+          <h3>Järjestäjän lisääminen onnistui</h3>
+        )}
         <div>
           <label
             className={styles.OrganizerAddLabel}
@@ -73,10 +84,10 @@ export class OrganizerAdd extends Component {
         <div>
           <form className={styles.OrganizerAddForm}>
             {count === 0 && <span>Ei hakutuloksia</span>}
-            {count > 20 ? (
+            {count > 30 ? (
               <span>Löytyi {count} organisaatiota, tarkenna hakua</span>
             ) : (
-              foundOrganizations.map((org, i) => (
+              organizationsWithoutOrganizer.map((org, i) => (
                 <div key={i} className="radio">
                   <label>
                     <input
@@ -90,19 +101,6 @@ export class OrganizerAdd extends Component {
                 </div>
               ))
             )}
-            {/* {foundOrganizations.map((org, i) => (
-              <div key={i} className="radio">
-                <label>
-                  <input
-                    type="radio"
-                    value={org.oid}
-                    checked={selectedOption === org.oid}
-                    onChange={this.handleOptionChange}
-                  />
-                  {[org.nimi.fi, org.nimi.sv, org.nimi.en].filter(o => o)[0]}
-                </label>
-              </div>
-            ))} */}
           </form>
         </div>
         {showForm && <OrganizerForm organization={selectedOrganization} />}

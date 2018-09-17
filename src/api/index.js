@@ -66,6 +66,14 @@ export const loadOrganizers = () => {
   return apiGet('LOAD_ORGANIZERS', 'yki/api/virkailija/organizers');
 };
 
+export const createOrganizer = organizer => {
+  return apiPost(
+    'CREATE_ORGANIZER',
+    'yki/api/virkailija/organizers',
+    organizer,
+  );
+};
+
 export const loadOrganization = oid => {
   return apiGet(
     'LOAD_ORGANIZATION',

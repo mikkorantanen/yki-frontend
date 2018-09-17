@@ -1,10 +1,10 @@
-import { combineReducers, createStore } from 'redux';
-import { produce } from 'immer';
+import { createStore } from 'redux';
 
 const initialState = {
   organizers: [],
   organizations: [],
   organizationsSearchResult: [],
+  organizerAddResult: null,
   busyCounter: 0,
 };
 
@@ -38,6 +38,11 @@ const data = (state = initialState, action) => {
       return {
         ...state,
         organizationsSearchResult: action.response.organisaatiot,
+      };
+    case 'CREATE_ORGANIZER_SUCCESS':
+      return {
+        ...state,
+        organizerAddResult: action.response.success,
       };
     default:
       return state;
