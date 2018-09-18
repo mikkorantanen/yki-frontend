@@ -4,14 +4,13 @@ import React, { Component } from 'react';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 
 import styles from './OrganizerAdd.css';
+import ophStyles from '../../oph-styles.css';
 
 import { connect } from 'react-redux';
 
 import * as api from '../../api';
-
-import OrganizerForm from '../OrganizerForm/OrganizerForm';
-
-import ophStyles from '../../oph-styles.css';
+import OrganizerForm from './OrganizerForm/OrganizerForm';
+import Spinner from '../../components/Spinner/Spinner';
 
 const searchOrganizations = AwesomeDebouncePromise(
   api.loadOrganizationsByFreeText,
@@ -23,6 +22,7 @@ const mapStateToProps = state => {
     organizers: state.organizers,
     organizationsSearchResult: state.organizationsSearchResult,
     organizerAddResult: state.organizerAddResult,
+    apiPending: state.busyCounter > 0,
   };
 };
 
@@ -31,7 +31,7 @@ export class OrganizerAdd extends Component {
     super();
     this.state = {
       seachText: '',
-      selectedOption: '',
+      selectedOption: null,
       showForm: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -43,17 +43,13 @@ export class OrganizerAdd extends Component {
     searchOrganizations(seachText);
   };
 
-  handleOptionChange = changeEvent => {
-    this.setState({ selectedOption: changeEvent.target.value, showForm: true });
+  handleOnClick = oid => {
+    this.setState({ selectedOption: oid });
   };
 
   render() {
-    const { seachText, showForm, selectedOption } = this.state;
-    const {
-      organizers,
-      organizationsSearchResult,
-      organizerAddResult,
-    } = this.props;
+    const { seachText, selectedOption } = this.state;
+    const { organizers, organizationsSearchResult, apiPending } = this.props;
     const organizationsWithoutOrganizer = organizationsSearchResult.filter(
       f => !organizers.some(o => o.oid === f.oid),
     );
@@ -64,46 +60,54 @@ export class OrganizerAdd extends Component {
     return (
       <div>
         <h2>Järjestäjän lisääminen</h2>
-        {organizerAddResult === true && (
-          <h3>Järjestäjän lisääminen onnistui</h3>
+        {apiPending && <Spinner />}
+        {selectedOption ? (
+          <OrganizerForm organization={selectedOrganization} />
+        ) : (
+          <div className={styles.OrganizerAddSearch}>
+            <form className={styles.OrganizerAddForm}>
+              <div className={ophStyles['oph-field']}>
+                <label
+                  className={ophStyles['oph-label']}
+                  htmlFor="organizationSearchField"
+                >
+                  Haku
+                </label>
+                <input
+                  type="text"
+                  id="organizationSearchField"
+                  className={ophStyles['oph-input']}
+                  value={seachText}
+                  onChange={this.handleChange}
+                />
+              </div>
+              {count === 0 && !apiPending && <span>Ei hakutuloksia</span>}
+              {count > 30 ? (
+                <span>Löytyi {count} organisaatiota, tarkenna hakua</span>
+              ) : (
+                organizationsWithoutOrganizer.map((org, i) => (
+                  <div key={i}>
+                    <button
+                      className={[
+                        styles.OrganizerAddResultButton,
+                        ophStyles['oph-button'],
+                        ophStyles['oph-button-ghost'],
+                      ].join(' ')}
+                      type="button"
+                      onClick={() => this.handleOnClick(org.oid)}
+                    >
+                      {
+                        [org.nimi.fi, org.nimi.sv, org.nimi.en].filter(
+                          o => o,
+                        )[0]
+                      }
+                    </button>
+                  </div>
+                ))
+              )}
+            </form>
+          </div>
         )}
-        <div>
-          <label
-            className={styles.OrganizerAddLabel}
-            htmlFor="organizationSearchField"
-          >
-            Haku
-          </label>
-          <input
-            type="text"
-            id="organizationSearchField"
-            value={seachText}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <form className={styles.OrganizerAddForm}>
-            {count === 0 && <span>Ei hakutuloksia</span>}
-            {count > 30 ? (
-              <span>Löytyi {count} organisaatiota, tarkenna hakua</span>
-            ) : (
-              organizationsWithoutOrganizer.map((org, i) => (
-                <div key={i} className="radio">
-                  <label>
-                    <input
-                      type="radio"
-                      value={org.oid}
-                      checked={selectedOption === org.oid}
-                      onChange={this.handleOptionChange}
-                    />
-                    {[org.nimi.fi, org.nimi.sv, org.nimi.en].filter(o => o)[0]}
-                  </label>
-                </div>
-              ))
-            )}
-          </form>
-        </div>
-        {showForm && <OrganizerForm organization={selectedOrganization} />}
       </div>
     );
   }

@@ -1,10 +1,7 @@
-.OrganizerAddLabel {
-  display: inline-block;
-  position: relative;
-  width: 40px;
+.OrganizerAddSearch {
+  width: 60%;
 }
 
-.OrganizerAddForm {
-  margin-top: 10px;
-  margin-bottom: 10px;
+.OrganizerAddResultButton {
+  text-align: left;
 }

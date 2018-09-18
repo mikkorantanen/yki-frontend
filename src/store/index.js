@@ -37,12 +37,23 @@ const data = (state = initialState, action) => {
     case 'LOAD_ORGANIZATIONS_BY_FREE_TEXT_SUCCESS':
       return {
         ...state,
+        busyCounter: state.busyCounter - 1,
         organizationsSearchResult: action.response.organisaatiot,
+      };
+    case 'LOAD_ORGANIZATIONS_BY_FREE_TEXT_PENDING':
+      return {
+        ...state,
+        busyCounter: state.busyCounter + 1,
       };
     case 'CREATE_ORGANIZER_SUCCESS':
       return {
         ...state,
         organizerAddResult: action.response.success,
+      };
+    case 'CREATE_ORGANIZER_RESET':
+      return {
+        ...state,
+        organizerAddResult: null,
       };
     default:
       return state;
