@@ -21,7 +21,9 @@ const mapStateToProps = state => {
   };
 };
 
-const fieldClass = ophStyles['oph-field'];
+const errorClass = [ophStyles['oph-field-text'], ophStyles['oph-error']].join(
+  ' ',
+);
 const labelClass = ophStyles['oph-label'];
 const inputClass = ophStyles['oph-input'];
 const requiredFieldClass = [
@@ -67,6 +69,17 @@ const onSubmit = values => {
   api.createOrganizer(request);
 };
 
+const inputWithMeta = (input, meta, label) => {
+  return (
+    <div className={requiredFieldClass}>
+      <label className={labelClass}>{label}</label>
+      <input {...input} className={inputClass} type="text" />
+      {meta.error &&
+        meta.touched && <div className={errorClass}>{meta.error}</div>}
+    </div>
+  );
+};
+
 class OrganizerForm extends Component {
   render() {
     const {
@@ -83,61 +96,51 @@ class OrganizerForm extends Component {
             validityStart: moment(new Date()).format(constants.DATE_FORMAT),
           }}
           render={({ handleSubmit, form, pristine, values, invalid }) => (
-            // {getOrganizationName(organization)}
             <form onSubmit={handleSubmit} className={styles.OrganizerForm}>
               <h4>{getOrganizationName(organization)}</h4>
-              <Field
-                name="validityStart"
-                validate={composeValidators(required, validDate)}
-              >
-                {({ input, meta }) => (
-                  <div className={requiredFieldClass}>
-                    <label className={labelClass}>Alkupäivämäärä</label>
-                    <input {...input} className={inputClass} type="text" />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
-              <Field
-                name="validityEnd"
-                validate={composeValidators(required, validDate)}
-              >
-                {({ input, meta }) => (
-                  <div className={requiredFieldClass}>
-                    <label className={labelClass}>Loppupäivämäärä</label>
-                    <input {...input} className={inputClass} type="text" />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
-              <h4>Yhteyshenkilö</h4>
-              <Field name="contactName" validate={required}>
-                {({ input, meta }) => (
-                  <div className={requiredFieldClass}>
-                    <label className={labelClass}>Nimi</label>
-                    <input {...input} type="text" className={inputClass} />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
-              <Field name="contactEmail" validate={required}>
-                {({ input, meta }) => (
-                  <div className={requiredFieldClass}>
-                    <label className={labelClass}>Sähköposti</label>
-                    <input {...input} className={inputClass} type="text" />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
-              <Field name="contactPhoneNumber" validate={required}>
-                {({ input, meta }) => (
-                  <div className={requiredFieldClass}>
-                    <label className={labelClass}>Puhelinnumero</label>
-                    <input {...input} className={inputClass} type="text" />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </div>
-                )}
-              </Field>
+              <fieldset>
+                <legend>Sopimus</legend>
+                <Field
+                  name="validityStart"
+                  validate={composeValidators(required, validDate)}
+                >
+                  {({ input, meta }) =>
+                    inputWithMeta(input, meta, 'Alkupäivämäärä')
+                  // <div className={requiredFieldClass}>
+                  //   <label className={labelClass}>Alkupäivämäärä</label>
+                  //   <input {...input} className={inputClass} type="text" />
+                  //   {meta.error &&
+                  //     meta.touched && (
+                  //       <div className={errorClass}>{meta.error}</div>
+                  //     )}
+                  // </div>
+                  }
+                </Field>
+                <Field
+                  name="validityEnd"
+                  validate={composeValidators(required, validDate)}
+                >
+                  {({ input, meta }) =>
+                    inputWithMeta(input, meta, 'Loppupäivämäärä')
+                  }
+                </Field>
+              </fieldset>
+              <fieldset>
+                <legend>Yhteyshenkilö</legend>
+                <Field name="contactName" validate={required}>
+                  {({ input, meta }) => inputWithMeta(input, meta, 'Nimi')}
+                </Field>
+                <Field name="contactEmail" validate={required}>
+                  {({ input, meta }) =>
+                    inputWithMeta(input, meta, 'Sähköposti')
+                  }
+                </Field>
+                <Field name="contactPhoneNumber" validate={required}>
+                  {({ input, meta }) =>
+                    inputWithMeta(input, meta, 'Puhelinnumero')
+                  }
+                </Field>
+              </fieldset>
               <div className={styles.OrganizerFormSaveButton}>
                 <button
                   type="submit"
