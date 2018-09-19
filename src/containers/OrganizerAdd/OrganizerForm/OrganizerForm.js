@@ -30,6 +30,8 @@ const requiredFieldClass = [
   ophStyles['oph-field'],
   ophStyles['oph-field-is-required'],
 ].join(' ');
+const checkBoxButtonInputClass = ophStyles['oph-checkbox-button-input'];
+const checkBoxButtonTextClass = ophStyles['oph-checkbox-button-text'];
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -52,6 +54,18 @@ const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined);
 
 const onSubmit = values => {
+  const languages = Object.keys(values.languages)
+    .map(l => {
+      if (values.languages[l]) {
+        const codeAndLevel = l.split('-');
+        return {
+          language_code: codeAndLevel[0],
+          level_code: codeAndLevel[1].toUpperCase(),
+        };
+      }
+    })
+    .filter(l => l);
+
   const request = {
     oid: values.oid,
     agreement_start_date: moment(
@@ -65,6 +79,7 @@ const onSubmit = values => {
     contact_name: values.contactName,
     contact_email: values.contactPhoneNumber,
     contact_phone_number: values.contactEmail,
+    languages: languages,
   };
   api.createOrganizer(request);
 };
@@ -78,6 +93,52 @@ const inputWithMeta = (input, meta, label) => {
         meta.touched && <div className={errorClass}>{meta.error}</div>}
     </div>
   );
+};
+
+const languageCheckBox = (language, level, index) => {
+  const id = `${language}-${level}`;
+  return (
+    <Field key={index} name={`languages.${id}`} type="checkbox">
+      {({ input }) => (
+        <label htmlFor={id}>
+          <input
+            {...input}
+            id={id}
+            className={checkBoxButtonInputClass}
+            type="checkbox"
+            value="1"
+          />
+          <span className={checkBoxButtonTextClass}>{level}</span>
+        </label>
+      )}
+    </Field>
+  );
+};
+
+const all = ['perus', 'keski', 'ylin'];
+const languageLevels = [
+  { lang: 'suomi', code: 'fi', levels: all },
+  { lang: 'ruotsi', code: 'sv', levels: all },
+  { lang: 'englanti', code: 'en', levels: all },
+  { lang: 'espanja', code: 'es', levels: ['perus', 'keski'] },
+  { lang: 'italia', code: 'it', levels: all },
+  { lang: 'ranska', code: 'fr', levels: all },
+  { lang: 'saame', code: 'se', levels: all },
+  { lang: 'saksa', code: 'de', levels: all },
+  { lang: 'venäjä', code: 'ru', levels: all },
+];
+
+const createLanguageCheckboxes = () => {
+  return languageLevels.map((ll, i) => {
+    return (
+      <fieldset key={i}>
+        <legend>{ll.lang}</legend>
+        {ll.levels.map((level, i) => {
+          return languageCheckBox(ll.code, level, i);
+        })}
+      </fieldset>
+    );
+  });
 };
 
 class OrganizerForm extends Component {
@@ -106,14 +167,6 @@ class OrganizerForm extends Component {
                 >
                   {({ input, meta }) =>
                     inputWithMeta(input, meta, 'Alkupäivämäärä')
-                  // <div className={requiredFieldClass}>
-                  //   <label className={labelClass}>Alkupäivämäärä</label>
-                  //   <input {...input} className={inputClass} type="text" />
-                  //   {meta.error &&
-                  //     meta.touched && (
-                  //       <div className={errorClass}>{meta.error}</div>
-                  //     )}
-                  // </div>
                   }
                 </Field>
                 <Field
@@ -139,6 +192,12 @@ class OrganizerForm extends Component {
                   {({ input, meta }) =>
                     inputWithMeta(input, meta, 'Puhelinnumero')
                   }
+                </Field>
+              </fieldset>
+              <fieldset>
+                <legend>Kielet</legend>
+                <Field name="languages">
+                  {({ input, meta }) => createLanguageCheckboxes()}
                 </Field>
               </fieldset>
               <div className={styles.OrganizerFormSaveButton}>
