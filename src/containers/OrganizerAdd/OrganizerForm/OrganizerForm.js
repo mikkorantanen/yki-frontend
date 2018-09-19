@@ -156,7 +156,14 @@ class OrganizerForm extends Component {
             oid: this.props.organization ? this.props.organization.oid : '',
             validityStart: moment(new Date()).format(constants.DATE_FORMAT),
           }}
-          render={({ handleSubmit, form, pristine, values, invalid }) => (
+          render={({
+            handleSubmit,
+            form,
+            pristine,
+            values,
+            invalid,
+            submitting,
+          }) => (
             <form onSubmit={handleSubmit} className={styles.OrganizerForm}>
               <h4>{getOrganizationName(organization)}</h4>
               <fieldset>
@@ -203,7 +210,9 @@ class OrganizerForm extends Component {
               <div className={styles.OrganizerFormSaveButton}>
                 <button
                   type="submit"
-                  disabled={pristine || invalid}
+                  disabled={
+                    pristine || invalid || organizerAddResult || submitting
+                  }
                   className={[
                     ophStyles['oph-button'],
                     ophStyles['oph-button-primary'],
