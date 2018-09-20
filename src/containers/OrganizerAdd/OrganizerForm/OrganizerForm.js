@@ -117,15 +117,15 @@ const languageCheckBox = (language, level, index) => {
 
 const all = ['perus', 'keski', 'ylin'];
 const languageLevels = [
-  { lang: 'suomi', code: 'fi', levels: all },
-  { lang: 'ruotsi', code: 'sv', levels: all },
-  { lang: 'englanti', code: 'en', levels: all },
-  { lang: 'espanja', code: 'es', levels: ['perus', 'keski'] },
-  { lang: 'italia', code: 'it', levels: all },
-  { lang: 'ranska', code: 'fr', levels: all },
-  { lang: 'saame', code: 'se', levels: all },
-  { lang: 'saksa', code: 'de', levels: all },
-  { lang: 'venäjä', code: 'ru', levels: all },
+  { lang: 'Suomi', code: 'fi', levels: all },
+  { lang: 'Ruotsi', code: 'sv', levels: all },
+  { lang: 'Englanti', code: 'en', levels: all },
+  { lang: 'Espanja', code: 'es', levels: all },
+  { lang: 'Italia', code: 'it', levels: ['perus', 'keski'] },
+  { lang: 'Ranska', code: 'fr', levels: all },
+  { lang: 'Pohjoissaame', code: 'se', levels: all },
+  { lang: 'Saksa', code: 'de', levels: all },
+  { lang: 'Venäjä', code: 'ru', levels: all },
 ];
 
 const createLanguageCheckboxes = () => {
