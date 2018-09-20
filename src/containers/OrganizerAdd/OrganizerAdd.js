@@ -51,7 +51,9 @@ export class OrganizerAdd extends Component {
     const { seachText, selectedOption } = this.state;
     const { organizers, organizationsSearchResult, apiPending } = this.props;
     const organizationsWithoutOrganizer = organizationsSearchResult.filter(
-      f => !organizers.some(o => o.oid === f.oid),
+      f =>
+        !organizers.some(o => o.oid === f.oid) &&
+        f.organisaatiotyypit[0] === 'OPPILAITOS',
     );
     const count = organizationsWithoutOrganizer.length;
     const selectedOrganization = organizationsWithoutOrganizer.find(

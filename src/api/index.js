@@ -85,6 +85,6 @@ export const loadOrganization = oid => {
 export const loadOrganizationsByFreeText = searchText => {
   return apiGet(
     'LOAD_ORGANIZATIONS_BY_FREE_TEXT',
-    `organisaatio-service/rest/organisaatio/v2/hae/nimi?searchStr=${searchText}&aktiiviset=true&suunnitellut=true&lakkautetut=false`,
+    `organisaatio-service/rest/organisaatio/v2/hae/tyyppi?searchStr=${searchText}&aktiiviset=true&suunnitellut=true&lakkautetut=false`,
   );
 };
