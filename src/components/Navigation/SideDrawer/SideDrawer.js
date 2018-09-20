@@ -5,7 +5,6 @@ import Logo from '../../Logo/Logo';
 import styles from './SideDrawer.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import DrawerToggle from './DrawerToggle/DrawerToggle';
-import Aux from '../../../hoc/Aux/Aux';
 
 const sideDrawer = props => {
   let attachedStyles = [styles.SideDrawer, styles.Close];
@@ -13,7 +12,7 @@ const sideDrawer = props => {
     attachedStyles = [styles.SideDrawer, styles.Open];
   }
   return (
-    <Aux>
+    <React.Fragment>
       <Backdrop show={props.open} clicked={props.closed} />
       <DrawerToggle />
       <div className={attachedStyles.join(' ')} onClick={props.closed}>
@@ -26,7 +25,7 @@ const sideDrawer = props => {
           </ul>
         </nav>
       </div>
-    </Aux>
+    </React.Fragment>
   );
 };
 
