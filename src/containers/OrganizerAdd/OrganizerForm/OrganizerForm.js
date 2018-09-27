@@ -1,25 +1,15 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
-
 import { Form, Field } from 'react-final-form';
-
 import * as moment from 'moment';
-
-import * as constants from '../../../common/Constants';
-import * as api from '../../../api';
-import Alert from '../../../components/Alert/Alert';
-import { resetCreateOrganizer } from '../../../actions/index';
 
 import ophStyles from '../../../oph-styles.css';
 import styles from './OrganizerForm.css';
-
-const mapStateToProps = state => {
-  return {
-    organizerAddResult: state.organizerAddResult,
-  };
-};
+import * as constants from '../../../common/Constants';
+import * as api from '../../../api/api';
+import Alert from '../../../components/Alert/Alert';
+import * as actionCreators from '../../../store/actions/index';
 
 const errorClass = [ophStyles['oph-field-text'], ophStyles['oph-error']].join(
   ' ',
@@ -32,12 +22,6 @@ const requiredFieldClass = [
 ].join(' ');
 const checkBoxButtonInputClass = ophStyles['oph-checkbox-button-input'];
 const checkBoxButtonTextClass = ophStyles['oph-checkbox-button-text'];
-
-const mapDispatchToProps = dispatch => {
-  return {
-    resetCreateOrganizer: () => dispatch(resetCreateOrganizer()),
-  };
-};
 
 const getOrganizationName = org => {
   return org ? [org.nimi.fi, org.nimi.sv, org.nimi.en].filter(o => o)[0] : null;
@@ -231,6 +215,18 @@ class OrganizerForm extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    organizerAddResult: state.org.organizerAddResult,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    resetCreateOrganizer: () => dispatch(actionCreators.resetCreateOrganizer()),
+  };
+};
 
 export default connect(
   mapStateToProps,

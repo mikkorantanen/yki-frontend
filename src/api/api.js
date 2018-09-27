@@ -1,4 +1,4 @@
-import store from '../store';
+import store from '../store/reducers/organizer';
 
 const config = {
   baseUrl: '',
@@ -18,6 +18,7 @@ const apiGet = async (name, url, params = {}) => {
         Accept: 'application/json',
       }),
     }).then(handleErrors);
+
     store.dispatch({ type: `${name}_PENDING`, params });
     store.dispatch({
       type: `${name}_SUCCESS`,

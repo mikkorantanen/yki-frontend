@@ -1,21 +1,11 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
-
 import { connect } from 'react-redux';
 
 import Organizer from '../../containers/Organizer/Organizer';
 import Spinner from '../Spinner/Spinner';
 import styles from './Organizers.css';
 import ophStyles from '../../oph-styles.css';
-
-const mapStateToProps = state => {
-  return {
-    organizers: state.organizers,
-    organizations: state.organizations,
-    error: state.error,
-    apiPending: state.busyCounter > 0,
-  };
-};
 
 const getOrganization = (oid, organizations) => {
   return organizations.find(o => o.oid === oid);
@@ -55,5 +45,14 @@ export const Organizers = ({
     )}
   </div>
 );
+
+const mapStateToProps = state => {
+  return {
+    organizers: state.org.organizers,
+    organizations: state.org.organizations,
+    error: state.error,
+    apiPending: state.org.busyCounter > 0,
+  };
+};
 
 export default connect(mapStateToProps)(Organizers);
