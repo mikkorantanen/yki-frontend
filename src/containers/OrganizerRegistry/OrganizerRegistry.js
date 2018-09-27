@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import * as api from '../../api';
+import * as api from '../../api/api';
 import Organizers from '../../components/Organizers/Organizers';
 import OrganizerAdd from '../OrganizerAdd/OrganizerAdd';
 
@@ -8,12 +8,9 @@ import ophStyles from '../../oph-styles.css';
 import styles from './OrganizerRegistry.css';
 
 class OrganizerRegistry extends Component {
-  constructor() {
-    super();
-    this.state = {
-      showOrganizerForm: false,
-    };
-  }
+  state = {
+    showOrganizerForm: false,
+  };
 
   componentDidMount = async () => {
     const response = await api.loadOrganizers();

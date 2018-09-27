@@ -8,7 +8,7 @@ import ophStyles from '../../oph-styles.css';
 
 import { connect } from 'react-redux';
 
-import * as api from '../../api';
+import * as api from '../../api/api';
 import OrganizerForm from './OrganizerForm/OrganizerForm';
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -16,15 +16,6 @@ const searchOrganizations = AwesomeDebouncePromise(
   api.loadOrganizationsByFreeText,
   500,
 );
-
-const mapStateToProps = state => {
-  return {
-    organizers: state.organizers,
-    organizationsSearchResult: state.organizationsSearchResult,
-    organizerAddResult: state.organizerAddResult,
-    apiPending: state.busyCounter > 0,
-  };
-};
 
 export class OrganizerAdd extends Component {
   constructor() {
@@ -114,5 +105,14 @@ export class OrganizerAdd extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    organizers: state.organizers,
+    organizationsSearchResult: state.organizationsSearchResult,
+    organizerAddResult: state.organizerAddResult,
+    apiPending: state.busyCounter > 0,
+  };
+};
 
 export default connect(mapStateToProps)(OrganizerAdd);

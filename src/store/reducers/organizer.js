@@ -1,5 +1,3 @@
-import { createStore } from 'redux';
-
 const initialState = {
   organizers: [],
   organizations: [],
@@ -8,7 +6,7 @@ const initialState = {
   busyCounter: 0,
 };
 
-const data = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'LOAD_ORGANIZERS_SUCCESS':
       return {
@@ -60,6 +58,4 @@ const data = (state = initialState, action) => {
   }
 };
 
-const store = createStore(data);
-
-export default store;
+export default reducer;
