@@ -19,15 +19,15 @@ const apiGet = async (name, url, params = {}) => {
       }),
     }).then(handleErrors);
 
-    store.dispatch({ type: `${name}_PENDING`, params });
-    store.dispatch({
-      type: `${name}_SUCCESS`,
-      params,
-      response: await promise,
-    });
+    //store.dispatch({ type: `${name}_PENDING`, params });
+    //store.dispatch({
+    //   type: `${name}_SUCCESS`,
+    //   params,
+    //   response: await promise,
+    // });
     return promise;
   } catch (err) {
-    store.dispatch({ type: `${name}_ERROR`, params, error: err.message });
+    //store.dispatch({ type: `${name}_ERROR`, params, error: err.message });
     console.error(`${name} failed: ${err.message}`);
   }
 };
@@ -42,15 +42,15 @@ const apiPost = async (name, url, body, params = {}) => {
         'Content-Type': 'application/json',
       }),
     }).then(handleErrors);
-    store.dispatch({ type: `${name}_PENDING`, params });
-    store.dispatch({
-      type: `${name}_SUCCESS`,
-      params,
-      response: await promise,
-    });
+    //store.dispatch({ type: `${name}_PENDING`, params });
+    //store.dispatch({
+    //   type: `${name}_SUCCESS`,
+    //   params,
+    //   response: await promise,
+    // });
     return promise;
   } catch (err) {
-    store.dispatch({ type: `${name}_ERROR`, params, error: err.message });
+    //store.dispatch({ type: `${name}_ERROR`, params, error: err.message });
     console.error(`${name} failed: ${err.message}`);
   }
 };
@@ -68,19 +68,11 @@ export const loadOrganizers = () => {
 };
 
 export const createOrganizer = organizer => {
-  return apiPost(
-    'CREATE_ORGANIZER',
-    'yki/api/virkailija/organizers',
-    organizer,
-  );
+  return apiPost('CREATE_ORGANIZER', 'yki/api/virkailija/organizers', organizer);
 };
 
 export const loadOrganization = oid => {
-  return apiGet(
-    'LOAD_ORGANIZATION',
-    `organisaatio-service/rest/organisaatio/v3/${oid}`,
-    oid,
-  );
+  return apiGet('LOAD_ORGANIZATION', `organisaatio-service/rest/organisaatio/v3/${oid}`, oid);
 };
 
 export const loadOrganizationsByFreeText = searchText => {

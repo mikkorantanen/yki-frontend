@@ -1,38 +1,34 @@
+/* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import * as api from '../../api/api';
-import Organizers from '../../components/Organizers/Organizers';
+import * as actions from '../../store/actions/index';
+import Organizers from '../Organizers/Organizers';
 import OrganizerAdd from '../OrganizerAdd/OrganizerAdd';
-
 import ophStyles from '../../oph-styles.css';
-import styles from './OrganizerRegistry.css';
+import classes from './OrganizerRegistry.css';
 
 class OrganizerRegistry extends Component {
   state = {
     showOrganizerForm: false,
   };
 
-  componentDidMount = async () => {
-    const response = await api.loadOrganizers();
-    const oids = response.organizers.map(o => o.oid);
-    api.loadOrganizationsByOids(oids);
-  };
+  componentDidMount() {
+    this.props.onFetchOrganizerRegistryContent();
+  }
 
   render() {
     const showOrganizerForm = this.state.showOrganizerForm;
     return (
-      <div className={styles.OrganizerRegistry}>
+      <div className={classes.OrganizerRegistry}>
         {showOrganizerForm ? (
           <OrganizerAdd />
         ) : (
           <React.Fragment>
-            <Organizers />
+            <Organizers loading={this.props.loading} registry={this.props.organizerRegistry} />
             <button
               type="submit"
-              className={[
-                ophStyles['oph-button'],
-                ophStyles['oph-button-primary'],
-              ].join(' ')}
+              className={[ophStyles['oph-button'], ophStyles['oph-button-primary']].join(' ')}
               onClick={() => this.setState({ showOrganizerForm: true })}
             >
               Lisää uusi
@@ -44,4 +40,22 @@ class OrganizerRegistry extends Component {
   }
 }
 
-export default OrganizerRegistry;
+const mapStateToProps = state => {
+  return {
+    organizerRegistry: state.org.organizerRegistry,
+    loading: state.org.loading,
+    error: state.org.error,
+    // apiPending: state.org.busyCounter > 0,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchOrganizerRegistryContent: () => dispatch(actions.fetchOrganizerRegistryContent()),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(OrganizerRegistry);

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
+import ophStyles from './oph-styles.css';
 import Layout from './hoc/Layout/Layout';
 import OrganizerRegistry from './containers/OrganizerRegistry/OrganizerRegistry';
-import ophStyles from './oph-styles.css';
 
 class App extends Component {
   render() {

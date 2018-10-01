@@ -1,3 +1,3 @@
 export {} from './examSession';
-export { resetCreateOrganizer } from './organizer';
+export { fetchOrganizerRegistryContent, resetCreateOrganizer } from './organizer';
 export {} from './registration';
