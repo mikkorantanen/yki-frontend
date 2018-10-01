@@ -2,21 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Logo from '../../Logo/Logo';
-import styles from './SideDrawer.css';
+import classes from './SideDrawer.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import DrawerToggle from './DrawerToggle/DrawerToggle';
 
 const sideDrawer = props => {
-  let attachedStyles = [styles.SideDrawer, styles.Close];
+  let attachedClasses = [classes.SideDrawer, classes.Close];
   if (props.open) {
-    attachedStyles = [styles.SideDrawer, styles.Open];
+    attachedClasses = [classes.SideDrawer, classes.Open];
   }
   return (
     <React.Fragment>
       <Backdrop show={props.open} clicked={props.closed} />
       <DrawerToggle />
-      <div className={attachedStyles.join(' ')} onClick={props.closed}>
-        <div className={styles.Logo}>
+      <div className={attachedClasses.join(' ')} onClick={props.closed}>
+        <div className={classes.Logo}>
           <Logo />
         </div>
         <nav>

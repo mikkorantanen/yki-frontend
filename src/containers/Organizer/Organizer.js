@@ -27,18 +27,14 @@ const getLanguageTexts = languages => {
   let parsed = '';
   if (languages) {
     parsed = languages.map(l => {
-      return `${languageCodeToLanguage[l.language_code]}/${
-        levelCodeToLevel[l.level_code]
-      } `;
+      return `${languageCodeToLanguage[l.language_code]}/${levelCodeToLevel[l.level_code]} `;
     });
   }
   return parsed;
 };
 
 const getContactPerson = organizer => {
-  return `${organizer.contact_name} ${organizer.contact_email} ${
-    organizer.contact_phone_number
-  }`;
+  return `${organizer.contact_name} ${organizer.contact_email} ${organizer.contact_phone_number}`;
 };
 
 export default class Organizer extends React.Component {
@@ -49,8 +45,8 @@ export default class Organizer extends React.Component {
         <td>{organization.postiosoite.postitoimipaikka}</td>
         <td>{organization.nimi.fi}</td>
         <td>
-          {moment(organizer.agreement_start_date).format(constants.DATE_FORMAT)}{' '}
-          - {moment(organizer.agreement_end_date).format(constants.DATE_FORMAT)}
+          {moment(organizer.agreement_start_date).format(constants.DATE_FORMAT)} -{' '}
+          {moment(organizer.agreement_end_date).format(constants.DATE_FORMAT)}
         </td>
         <td>{getLanguageTexts(organizer.languages)}</td>
         <td>{getContactPerson(organizer)}</td>
