@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 import ophStyles from './oph-styles.css';
 import Layout from './hoc/Layout/Layout';
@@ -9,7 +10,12 @@ class App extends Component {
     return (
       <div className={ophStyles['oph-typography']}>
         <Layout>
-          <OrganizerRegistry />
+          <Switch>
+            <Route exact path="/" component={OrganizerRegistry} />
+            <Route path="/jarjestajarekisteri" component={OrganizerRegistry} />
+            <Route path="/tutkintatilaisuudet" component={OrganizerRegistry} />
+            <Route path="/jarjestajarekisteri" component={OrganizerRegistry} />
+          </Switch>
         </Layout>
       </div>
     );
