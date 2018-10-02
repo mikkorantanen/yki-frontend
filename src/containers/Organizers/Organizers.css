@@ -1,8 +1,13 @@
+.Organizers {
+  min-width: 550px;
+}
+
 .Organizers table {
   width: 100%;
   table-layout: fixed;
 }
-.Organizers th, td {
+.Organizers th,
+td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #e1e1e1;
