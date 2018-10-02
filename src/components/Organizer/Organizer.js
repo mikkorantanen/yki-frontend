@@ -26,10 +26,16 @@ const organizer = props => {
 
   return (
     <div className={classes.Organizer}>
-      <h3>{props.organization.nimi.fi}</h3>
+      <h2>{props.organization.nimi.fi}</h2>
       <p>{website}</p>
+      <p>
+        <strong>Katuosoite</strong>
+      </p>
       <p>{address}</p>
-      <p>Yhteyshenkilö: {contactPerson}</p>
+      <p>
+        <strong>Yhteyshenkilö</strong>
+      </p>
+      <p>{contactPerson}</p>
     </div>
   );
 };

@@ -25,6 +25,7 @@ class OrganizerRegistry extends Component {
           <OrganizerAdd />
         ) : (
           <React.Fragment>
+            <h1>Järjestäjärekisteri</h1>
             <Organizers loading={this.props.loading} registry={this.props.organizerRegistry} />
             <button
               type="submit"
