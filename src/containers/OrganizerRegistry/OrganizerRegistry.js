@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions/index';
 import Organizers from '../Organizers/Organizers';
-import ophStyles from '../../oph-styles.css';
+import Button from '../../components/UI/Button/Button';
+import ophStyles from '../../assets/css/oph-styles.css';
 import classes from './OrganizerRegistry.css';
 
 class OrganizerRegistry extends Component {
@@ -21,13 +22,7 @@ class OrganizerRegistry extends Component {
       <div className={classes.OrganizerRegistry}>
         <h1>Järjestäjärekisteri</h1>
         <Organizers loading={this.props.loading} registry={this.props.organizerRegistry} />
-        <button
-          type="submit"
-          className={[ophStyles['oph-button'], ophStyles['oph-button-primary']].join(' ')}
-          onClick={this.addOrganizerHandler}
-        >
-          Lisää uusi
-        </button>
+        <Button clicked={this.addOrganizerHandler}>Lisää uusi</Button>
       </div>
     );
   }

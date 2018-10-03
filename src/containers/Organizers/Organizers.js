@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Organizer from '../../components/Organizer/Organizer';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './Organizers.css';
-import ophStyles from '../../oph-styles.css';
+//import ophStyles from '../../oph-styles.css';
 
 class Organizers extends Component {
   render() {
