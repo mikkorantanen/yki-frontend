@@ -1,3 +1,74 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import classes from './AddOrganizer.css';
+import ophStyles from '../../../oph-styles.css';
+import * as actions from '../../../store/actions/index';
+
+class AddOrganizer extends Component {
+  state = {
+    organizerSearchText: '',
+    selectedOrganizer: {},
+    addOrganizerForm: {
+      contractStart: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Nimi',
+        },
+        validation: {
+          required: false,
+        },
+        valid: true,
+      },
+    },
+    formIsValid: false,
+  };
+
+  addOrganizerHandler = event => {
+    event.preventDefault();
+  };
+
+  inputChangedHandler = (event, inputIdentifier) => {};
+
+  render() {
+    let searchResults = this.state.searchResults;
+
+    return (
+      <div className={classes.AddOrganizer}>
+        <h1>Hae lisättävä järjestäjä</h1>
+        <input
+          type="text"
+          id="organizationSearchField"
+          className={ophStyles['oph-input']}
+          placeholder="Järjestäjän nimi"
+          value={this.state.organizerSearchText}
+          onChange={this.handleChange}
+        />
+        <p>{searchResults}</p>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    searchResults: state.org.searchOrganizationsByNameResult,
+    loading: state.org.loading,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSearchFieldChange: name => dispatch(actions.searchOrganizationByName(name)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AddOrganizer);
+
 // /* eslint react/prop-types: 0 */
 // import React, { Component } from 'react';
 

@@ -4,38 +4,30 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions/index';
 import Organizers from '../Organizers/Organizers';
-import OrganizerAdd from '../OrganizerAdd/OrganizerAdd';
 import ophStyles from '../../oph-styles.css';
 import classes from './OrganizerRegistry.css';
 
 class OrganizerRegistry extends Component {
-  state = {
-    showOrganizerForm: false,
-  };
-
   componentDidMount() {
     this.props.onFetchOrganizerRegistryContent();
   }
 
+  addOrganizerHandler = () => {
+    this.props.history.push('/jarjestajarekisteri/uusi');
+  };
+
   render() {
-    const showOrganizerForm = this.state.showOrganizerForm;
     return (
       <div className={classes.OrganizerRegistry}>
-        {showOrganizerForm ? (
-          <OrganizerAdd />
-        ) : (
-          <React.Fragment>
-            <h1>Järjestäjärekisteri</h1>
-            <Organizers loading={this.props.loading} registry={this.props.organizerRegistry} />
-            <button
-              type="submit"
-              className={[ophStyles['oph-button'], ophStyles['oph-button-primary']].join(' ')}
-              onClick={() => this.setState({ showOrganizerForm: true })}
-            >
-              Lisää uusi
-            </button>
-          </React.Fragment>
-        )}
+        <h1>Järjestäjärekisteri</h1>
+        <Organizers loading={this.props.loading} registry={this.props.organizerRegistry} />
+        <button
+          type="submit"
+          className={[ophStyles['oph-button'], ophStyles['oph-button-primary']].join(' ')}
+          onClick={this.addOrganizerHandler}
+        >
+          Lisää uusi
+        </button>
       </div>
     );
   }
