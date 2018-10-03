@@ -60,6 +60,26 @@ export const fetchOrganizerRegistryContentFail = error => {
   };
 };
 
+export const searchOrganizationByName = name => {
+  const searchOrganizationsByNameResult = [];
+  return dispatch => {
+    dispatch(searchOrganizationByNameStart());
+    axios
+      .get(
+        `organisaatio-service/rest/organisaatio/v2/hae/tyyppi?searchStr=${name}&aktiiviset=true&suunnitellut=true&lakkautetut=false`,
+      )
+      .then(res => {
+        for (const key in res.data.organisaatiot) {
+          searchResults.push(res.data.organisaatiot[key]);
+        }
+        dispatch(searchOrganizerByNameSuccess(searchOrganizationsByNameResult));
+      })
+      .catch(err => {
+        dispatch(searchOrganizerByNameFail(err));
+      });
+  };
+};
+
 // old
 export const resetCreateOrganizer = () => ({
   type: actionTypes.CREATE_ORGANIZER_RESET,
