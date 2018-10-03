@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import ophStyles from './oph-styles.css';
+import ophStyles from './assets/css/oph-styles.css';
 import Layout from './hoc/Layout/Layout';
 import OrganizerRegistry from './containers/OrganizerRegistry/OrganizerRegistry';
 import NewOrganizer from './containers/Organizers/AddOrganizer/AddOrganizer';

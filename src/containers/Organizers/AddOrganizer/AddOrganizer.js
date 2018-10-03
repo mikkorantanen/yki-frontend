@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import classes from './AddOrganizer.css';
-import ophStyles from '../../../oph-styles.css';
+import ophStyles from '../../../assets/css/oph-styles.css';
 import * as actions from '../../../store/actions/index';
 
 class AddOrganizer extends Component {
   state = {
-    organizerSearchText: '',
+    searchOrganizationInput: '',
     selectedOrganizer: {},
     addOrganizerForm: {
       contractStart: {
@@ -29,11 +29,11 @@ class AddOrganizer extends Component {
     event.preventDefault();
   };
 
+  searchInputHandler = () => {};
+
   inputChangedHandler = (event, inputIdentifier) => {};
 
   render() {
-    let searchResults = this.state.searchResults;
-
     return (
       <div className={classes.AddOrganizer}>
         <h1>Hae lisättävä järjestäjä</h1>
@@ -42,10 +42,10 @@ class AddOrganizer extends Component {
           id="organizationSearchField"
           className={ophStyles['oph-input']}
           placeholder="Järjestäjän nimi"
-          value={this.state.organizerSearchText}
-          onChange={this.handleChange}
+          value={this.state.searchOrganizationInput}
+          onChange={this.searchInputHandler}
         />
-        <p>{searchResults}</p>
+        <p>{this.state.searchResults}</p>
       </div>
     );
   }

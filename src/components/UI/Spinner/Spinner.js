@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ophStyles from '../../../oph-styles.css';
+import ophStyles from '../../../assets/css/oph-styles.css';
 
 const spinner = () => (
   <div className={ophStyles['oph-spinner']} aria-label="Loading">
