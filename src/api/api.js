@@ -1,5 +1,3 @@
-import store from '../store/reducers/organizer';
-
 const config = {
   baseUrl: '',
   locale: '',
@@ -18,16 +16,8 @@ const apiGet = async (name, url, params = {}) => {
         Accept: 'application/json',
       }),
     }).then(handleErrors);
-
-    //store.dispatch({ type: `${name}_PENDING`, params });
-    //store.dispatch({
-    //   type: `${name}_SUCCESS`,
-    //   params,
-    //   response: await promise,
-    // });
     return promise;
   } catch (err) {
-    //store.dispatch({ type: `${name}_ERROR`, params, error: err.message });
     console.error(`${name} failed: ${err.message}`);
   }
 };
@@ -42,15 +32,8 @@ const apiPost = async (name, url, body, params = {}) => {
         'Content-Type': 'application/json',
       }),
     }).then(handleErrors);
-    //store.dispatch({ type: `${name}_PENDING`, params });
-    //store.dispatch({
-    //   type: `${name}_SUCCESS`,
-    //   params,
-    //   response: await promise,
-    // });
     return promise;
   } catch (err) {
-    //store.dispatch({ type: `${name}_ERROR`, params, error: err.message });
     console.error(`${name} failed: ${err.message}`);
   }
 };
