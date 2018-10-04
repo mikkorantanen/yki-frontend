@@ -2,22 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Logo from '../../Logo/Logo';
-import styles from './SideDrawer.css';
+import classes from './SideDrawer.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import DrawerToggle from './DrawerToggle/DrawerToggle';
-import Aux from '../../../hoc/Aux/Aux';
 
 const sideDrawer = props => {
-  let attachedStyles = [styles.SideDrawer, styles.Close];
+  let attachedClasses = [classes.SideDrawer, classes.Close];
   if (props.open) {
-    attachedStyles = [styles.SideDrawer, styles.Open];
+    attachedClasses = [classes.SideDrawer, classes.Open];
   }
   return (
-    <Aux>
+    <React.Fragment>
       <Backdrop show={props.open} clicked={props.closed} />
       <DrawerToggle />
-      <div className={attachedStyles.join(' ')} onClick={props.closed}>
-        <div className={styles.Logo}>
+      <div className={attachedClasses.join(' ')} onClick={props.closed}>
+        <div className={classes.Logo}>
           <Logo />
         </div>
         <nav>
@@ -26,13 +25,13 @@ const sideDrawer = props => {
           </ul>
         </nav>
       </div>
-    </Aux>
+    </React.Fragment>
   );
 };
 
 sideDrawer.propTypes = {
   open: PropTypes.bool.isRequired,
-  closed: PropTypes.func,
+  closed: PropTypes.func.isRequired,
 };
 
 export default sideDrawer;
