@@ -1,5 +1,5 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './Button.css';
 import ophStyles from '../../../assets/css/oph-styles.css';
@@ -18,5 +18,12 @@ const button = props => (
     {props.children}
   </button>
 );
+
+button.propTypes = {
+  disabled: PropTypes.bool,
+  btnType: PropTypes.string,
+  clicked: PropTypes.func,
+  children: PropTypes.any,
+};
 
 export default button;

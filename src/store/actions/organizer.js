@@ -66,7 +66,7 @@ export const searchOrganizationByName = name => {
     dispatch(searchOrganizationByNameStart());
     axios
       .get(
-        `organisaatio-service/rest/organisaatio/v2/hae/tyyppi?searchStr=${name}&aktiiviset=true&suunnitellut=true&lakkautetut=false`,
+        `organisaatio-service/rest/organisaatio/v4/hae?searchStr=${name}&aktiiviset=true&suunnitellut=true&lakkautetut=false`,
       )
       .then(res => {
         for (const key in res.data.organisaatiot) {

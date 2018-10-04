@@ -1,10 +1,9 @@
-/* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Organizer from '../../components/Organizer/Organizer';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './Organizers.css';
-//import ophStyles from '../../oph-styles.css';
 
 class Organizers extends Component {
   render() {
@@ -17,5 +16,10 @@ class Organizers extends Component {
     return organizers;
   }
 }
+
+Organizers.propTypes = {
+  loading: PropTypes.bool,
+  registry: PropTypes.array,
+};
 
 export default Organizers;
