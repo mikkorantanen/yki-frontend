@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const fetch = require('node-fetch');
+const axios = require('axios');
 
 const getCurrentTime = () => {
   const tzoffset = new Date().getTimezoneOffset() * 60000;
@@ -101,24 +102,19 @@ module.exports = app => {
   });
 
   // need to proxy here because dev server bug: https://github.com/webpack/webpack-dev-server/issues/1440
-  app.post('/organisaatio-service/rest/organisaatio/v4/findbyoids', async (req, res) => {
-    try {
-      const promise = await fetch(
+  app.post('/organisaatio-service/rest/organisaatio/v4/findbyoids', (req, res) => {
+    axios
+      .post(
         'https://virkailija.untuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/findbyoids',
-        {
-          method: 'POST',
-          body: JSON.stringify(req.body),
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-        },
-      );
-      res.send(await promise.json());
-    } catch (err) {
-      console.log(err);
-      res.status(404).send(err.message);
-    }
+        req.body,
+      )
+      .then(response => {
+        res.send(response.data);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(404).send(err.message);
+      });
   });
 
   // app.post(
