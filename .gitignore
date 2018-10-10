@@ -6,6 +6,10 @@
 # testing
 /coverage
 
+# Cypress test results
+/cypress/videos
+/cypress/screenshots
+
 # production
 /build
 
