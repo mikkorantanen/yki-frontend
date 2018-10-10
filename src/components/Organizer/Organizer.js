@@ -63,7 +63,7 @@ const organizer = props => {
   };
 
   const languages = (
-    <p>
+    <div>
       <strong>Kielet</strong>
       <br />
       {props.organizer.languages
@@ -75,7 +75,7 @@ const organizer = props => {
             );
           })
         : '-'}
-    </p>
+    </div>
   );
 
   return (
