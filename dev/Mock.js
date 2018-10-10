@@ -1,6 +1,5 @@
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const fetch = require('node-fetch');
 const axios = require('axios');
 
 const getCurrentTime = () => {
@@ -116,17 +115,4 @@ module.exports = app => {
         res.status(404).send(err.message);
       });
   });
-
-  // app.post(
-  //   '/organisaatio-service/rest/organisaatio/v3/findbyoids',
-  //   (req, res) => {
-  //     try {
-  //       const data = fs.readFileSync(`./dev/rest/organisaatio/findbyoids.json`);
-  //       res.send(data);
-  //     } catch (err) {
-  //       console.log(err);
-  //       res.status(404).send(err.message);
-  //     }
-  //   },
-  // );
 };
