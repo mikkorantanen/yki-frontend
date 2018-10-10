@@ -27,13 +27,6 @@ class OrganizerRegistry extends Component {
   }
 }
 
-OrganizerRegistry.propTypes = {
-  onFetchOrganizerRegistryContent: PropTypes.func.isRequired,
-  organizerRegistry: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-  history: PropTypes.object,
-};
-
 const mapStateToProps = state => {
   return {
     organizerRegistry: state.org.organizerRegistry,
@@ -46,6 +39,13 @@ const mapDispatchToProps = dispatch => {
   return {
     onFetchOrganizerRegistryContent: () => dispatch(actions.fetchOrganizerRegistryContent()),
   };
+};
+
+OrganizerRegistry.propTypes = {
+  onFetchOrganizerRegistryContent: PropTypes.func.isRequired,
+  organizerRegistry: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  history: PropTypes.object,
 };
 
 export default connect(

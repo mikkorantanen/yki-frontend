@@ -1,0 +1,10 @@
+.Hyperlink,
+.Hyperlink:visited {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.Hyperlink:hover {
+  color: hsla(195, 100%, 47%, 1);
+}
