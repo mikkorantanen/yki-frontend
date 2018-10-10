@@ -21,6 +21,20 @@ src
 └── hoc           # Higher-Order Components
 ```
 
+## E2E Tests
+
+[Cypress](https://docs.cypress.io/) is used for end to end testing.
+
+Open Cypress Test Runner.
+```bash
+npm run cypress:open
+```
+
+Run all tests headlessly in the Electron browser.
+```bash
+npm run cypress:run
+```
+
 ### License
 
 YKI is licensed under the [EUPL](./LICENSE).
