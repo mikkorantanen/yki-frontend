@@ -10,7 +10,11 @@ class Organizers extends Component {
     let organizers = <Spinner />;
     if (!this.props.loading) {
       organizers = this.props.registry.map((org, i) => (
-        <Organizer key={i} organizer={org.organizer} organization={org.organization} />
+        <Organizer
+          key={i}
+          organizer={org.organizer}
+          organization={org.organization}
+        />
       ));
     }
     return organizers;

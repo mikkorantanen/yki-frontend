@@ -4,7 +4,9 @@ const axios = require('axios');
 
 const getCurrentTime = () => {
   const tzoffset = new Date().getTimezoneOffset() * 60000;
-  const localISOTime = new Date(Date.now() - tzoffset).toISOString().slice(0, -1);
+  const localISOTime = new Date(Date.now() - tzoffset)
+    .toISOString()
+    .slice(0, -1);
   return localISOTime;
 };
 
@@ -66,7 +68,10 @@ module.exports = app => {
         JSON.stringify(req.body),
       );
       if (req.query.delay) {
-        return setTimeout(next, parseInt(req.query.delay, 10) || getNumberBetween(500, 1500));
+        return setTimeout(
+          next,
+          parseInt(req.query.delay, 10) || getNumberBetween(500, 1500),
+        );
       }
     }
     next();
@@ -101,18 +106,21 @@ module.exports = app => {
   });
 
   // need to proxy here because dev server bug: https://github.com/webpack/webpack-dev-server/issues/1440
-  app.post('/organisaatio-service/rest/organisaatio/v4/findbyoids', (req, res) => {
-    axios
-      .post(
-        'https://virkailija.untuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/findbyoids',
-        req.body,
-      )
-      .then(response => {
-        res.send(response.data);
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(404).send(err.message);
-      });
-  });
+  app.post(
+    '/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    (req, res) => {
+      axios
+        .post(
+          'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/findbyoids',
+          req.body,
+        )
+        .then(response => {
+          res.send(response.data);
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(404).send(err.message);
+        });
+    },
+  );
 };

@@ -13,8 +13,12 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route exact path="/" component={OrganizerRegistry} />
-            <Route exact path="/jarjestajarekisteri" component={OrganizerRegistry} />
-            <Route path="/jarjestajarekisteri/uusi" component={NewOrganizer} />
+            <Route
+              exact
+              path="/jarjestajarekisteri"
+              component={OrganizerRegistry}
+            />
+            <Route path="/jarjestajarekisteri/uusi" component={AddOrganizer} />
             <Route path="/tutkintatilaisuudet" component={OrganizerRegistry} />
             <Route path="/jarjestajarekisteri" component={OrganizerRegistry} />
           </Switch>
