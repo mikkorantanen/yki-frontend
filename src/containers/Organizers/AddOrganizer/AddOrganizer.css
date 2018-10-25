@@ -2,3 +2,17 @@
   width: 80%;
   margin: auto;
 }
+
+.SearchResults {
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+
+.SearchResults li {
+  font-size: 1.2rem;
+  padding: 10px;
+}
+
+.SearchResults li:hover {
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+}

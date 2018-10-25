@@ -5,32 +5,51 @@ import moment from 'moment';
 import classes from './Organizer.css';
 import Hyperlink from '../../components/UI/Hyperlink/Hyperlink';
 import * as constants from '../../common/Constants';
+import { getMatchingName } from '../../util/util';
 
 const organizer = props => {
-  const url = props.organization.yhteystiedot.find(org => {
-    return org.www;
-  }).www;
+  const name = getMatchingName(props.organization.nimi, props.lang);
 
+  const wwwObj = props.organization.yhteystiedot.find(org => {
+    return org.www;
+  });
+  const url = wwwObj && wwwObj.www ? wwwObj.www : '-';
   const website = (
     <p>
       <Hyperlink to={url} />
     </p>
   );
 
-  const address = (
-    <p>
-      <strong>Katuosoite</strong>
-      <br />
-      {props.organization.kayntiosoite.osoite},{' '}
-      {props.organization.kayntiosoite.postinumeroUri.split('_').pop()}{' '}
-      {props.organization.kayntiosoite.postitoimipaikka}{' '}
-    </p>
-  );
+  const address = () => {
+    let addr = '';
+    const addrInfo =
+      Object.keys(props.organization.kayntiosoite).length >=
+      Object.keys(props.organization.postiosoite).length
+        ? props.organization.kayntiosoite
+        : props.organization.postiosoite;
+    const addrType =
+      addrInfo.osoiteTyyppi === 'kaynti' ? 'Käyntiosoite' : 'Postiosoite';
+    if (Object.keys(addrInfo).length !== 0) {
+      addr += addrInfo.osoite ? addrInfo.osoite : '<katuosoite puuttuu>';
+      addr += addrInfo.postinumeroUri
+        ? ', ' + addrInfo.postinumeroUri.split('_').pop()
+        : '';
+      addr += addrInfo.postitoimipaikka ? ' ' + addrInfo.postitoimipaikka : '';
+    }
+    return (
+      <p>
+        <strong>{addrType}</strong>
+        <br />
+        {addr}
+      </p>
+    );
+  };
 
   const contactPerson = (
     <p>
       <strong>Yhteyshenkilö</strong> <br />
-      {props.organizer.contact_name} <Hyperlink type="email" to={props.organizer.contact_email} />{' '}
+      {props.organizer.contact_name}{' '}
+      <Hyperlink type="email" to={props.organizer.contact_email} />{' '}
       <Hyperlink type="phone" to={props.organizer.contact_phone_number} />
     </p>
   );
@@ -39,7 +58,10 @@ const organizer = props => {
     <p>
       <strong>Sopimuskausi</strong>
       <br />
-      {moment(props.organizer.agreement_start_date).format(constants.DATE_FORMAT)} -{' '}
+      {moment(props.organizer.agreement_start_date).format(
+        constants.DATE_FORMAT,
+      )}{' '}
+      -{' '}
       {moment(props.organizer.agreement_end_date).format(constants.DATE_FORMAT)}
     </p>
   );
@@ -55,13 +77,11 @@ const organizer = props => {
     de: 'saksa',
     ru: 'venäjä',
   };
-
   const levelCodeToLevel = {
     PERUS: 'perustaso',
     KESKI: 'keskitaso',
     YLIN: 'ylin taso',
   };
-
   const languages = (
     <div>
       <strong>Kielet</strong>
@@ -70,7 +90,8 @@ const organizer = props => {
         ? props.organizer.languages.map(lang => {
             return (
               <p key={lang.language_code + lang.level_code}>
-                {languageCodeToLanguage[lang.language_code]} / {levelCodeToLevel[lang.level_code]}
+                {languageCodeToLanguage[lang.language_code]} /{' '}
+                {levelCodeToLevel[lang.level_code]}
               </p>
             );
           })
@@ -80,10 +101,10 @@ const organizer = props => {
 
   return (
     <div className={classes.Organizer}>
-      <h2>{props.organization.nimi.fi}</h2>
+      <h3>{name}</h3>
       {website}
       {contractDuration}
-      {address}
+      {address()}
       {contactPerson}
       {languages}
     </div>
@@ -91,6 +112,7 @@ const organizer = props => {
 };
 
 organizer.propTypes = {
+  lang: PropTypes.string.isRequired,
   organizer: PropTypes.object.isRequired,
   organization: PropTypes.object.isRequired,
 };

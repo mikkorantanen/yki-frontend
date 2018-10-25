@@ -12,6 +12,7 @@ class Organizers extends Component {
       organizers = this.props.registry.map((org, i) => (
         <Organizer
           key={i}
+          lang={this.props.lang}
           organizer={org.organizer}
           organization={org.organization}
         />
@@ -22,8 +23,9 @@ class Organizers extends Component {
 }
 
 Organizers.propTypes = {
-  loading: PropTypes.bool,
-  registry: PropTypes.array,
+  lang: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+  registry: PropTypes.array.isRequired,
 };
 
 export default Organizers;
