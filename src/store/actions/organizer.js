@@ -1,6 +1,29 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 
+export const fetchOrganizerRegistryContentStart = () => {
+  return {
+    type: actionTypes.FETCH_ORGANIZER_REGISTRY_CONTENT_START,
+    loading: true,
+  };
+};
+
+export const fetchOrganizerRegistryContentSuccess = registry => {
+  return {
+    type: actionTypes.FETCH_ORGANIZER_REGISTRY_CONTENT_SUCCESS,
+    organizerRegistry: registry,
+    loading: false,
+  };
+};
+
+export const fetchOrganizerRegistryContentFail = error => {
+  return {
+    type: actionTypes.FETCH_ORGANIZER_REGISTRY_CONTENT_FAIL,
+    error: error,
+    loading: false,
+  };
+};
+
 export const fetchOrganizerRegistryContent = () => {
   const fetchedOrganizers = [];
   const organizationIds = [];
@@ -42,31 +65,3 @@ export const fetchOrganizerRegistryContent = () => {
       });
   };
 };
-
-export const fetchOrganizerRegistryContentStart = () => {
-  return {
-    type: actionTypes.FETCH_ORGANIZER_REGISTRY_CONTENT_START,
-    loading: true,
-  };
-};
-
-export const fetchOrganizerRegistryContentSuccess = registry => {
-  return {
-    type: actionTypes.FETCH_ORGANIZER_REGISTRY_CONTENT_SUCCESS,
-    organizerRegistry: registry,
-    loading: false,
-  };
-};
-
-export const fetchOrganizerRegistryContentFail = error => {
-  return {
-    type: actionTypes.FETCH_ORGANIZER_REGISTRY_CONTENT_FAIL,
-    error: error,
-    loading: false,
-  };
-};
-
-// old
-export const resetCreateOrganizer = () => ({
-  type: actionTypes.CREATE_ORGANIZER_RESET,
-});

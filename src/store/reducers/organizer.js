@@ -28,52 +28,6 @@ const reducer = (state = initialState, action) => {
         error: action.error,
         loading: false,
       };
-
-    case actionTypes.LOAD_ORGANIZERS_PENDING:
-      return {
-        ...state,
-        busyCounter: state.busyCounter + 1,
-      };
-    case actionTypes.LOAD_ORGANIZERS_SUCCESS:
-      return {
-        ...state,
-        organizers: action.response.organizers,
-        busyCounter: state.busyCounter - 1,
-      };
-    case actionTypes.LOAD_ORGANIZERS_ERROR:
-      return { ...state, organizers: [], error: action.error };
-    case actionTypes.LOAD_ORGANIZATIONS_BY_OIDS_PENDING:
-      return {
-        ...state,
-        busyCounter: state.busyCounter + 1,
-      };
-    case actionTypes.LOAD_ORGANIZATIONS_BY_OIDS_SUCCESS:
-      return {
-        ...state,
-        busyCounter: state.busyCounter - 1,
-        organizations: action.response,
-      };
-    case actionTypes.LOAD_ORGANIZATIONS_BY_FREE_TEXT_PENDING:
-      return {
-        ...state,
-        busyCounter: state.busyCounter + 1,
-      };
-    case actionTypes.LOAD_ORGANIZATIONS_BY_FREE_TEXT_SUCCESS:
-      return {
-        ...state,
-        busyCounter: state.busyCounter - 1,
-        organizationsSearchResult: action.response.organisaatiot,
-      };
-    case actionTypes.CREATE_ORGANIZER_SUCCESS:
-      return {
-        ...state,
-        organizerAddResult: action.response.success,
-      };
-    case actionTypes.CREATE_ORGANIZER_RESET:
-      return {
-        ...state,
-        organizerAddResult: null,
-      };
     default:
       return state;
   }
