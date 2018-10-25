@@ -6,6 +6,7 @@ import ophStyles from '../../../assets/css/oph-styles.css';
 
 const button = props => (
   <button
+    type={props.type}
     disabled={props.disabled}
     className={[
       ophStyles['oph-button'],
@@ -20,6 +21,7 @@ const button = props => (
 );
 
 button.propTypes = {
+  type: PropTypes.string,
   disabled: PropTypes.bool,
   btnType: PropTypes.string,
   clicked: PropTypes.func,
