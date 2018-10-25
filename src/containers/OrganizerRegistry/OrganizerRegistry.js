@@ -20,7 +20,10 @@ class OrganizerRegistry extends Component {
     return (
       <div className={classes.OrganizerRegistry}>
         <h1>Järjestäjärekisteri</h1>
-        <Organizers loading={this.props.loading} registry={this.props.organizerRegistry} />
+        <Organizers
+          loading={this.props.loading}
+          registry={this.props.organizerRegistry}
+        />
         <Button clicked={this.addOrganizerHandler}>Lisää uusi</Button>
       </div>
     );
@@ -37,7 +40,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchOrganizerRegistryContent: () => dispatch(actions.fetchOrganizerRegistryContent()),
+    onFetchOrganizerRegistryContent: () =>
+      dispatch(actions.fetchOrganizerRegistryContent()),
   };
 };
 
