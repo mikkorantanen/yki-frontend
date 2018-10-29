@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import classes from './Hyperlink.css';
+import classes from './Hyperlink.module.css';
 
 const hyperlink = props => {
   let prefix = '';

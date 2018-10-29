@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { withFormik, Field, Form, ErrorMessage } from 'formik';
 
-import classes from './AddOrganizerForm.css';
+import classes from './AddOrganizerForm.module.css';
 import ophStyles from '../../../../assets/css/oph-styles.css';
 import LanguageSelect from '../../../../components/LanguageSelect/LanguageSelect';
 import Button from '../../../../components/UI/Button/Button';
@@ -32,12 +32,12 @@ const formikEnhancer = withFormik({
   }),
   handleSubmit: (values, { setSubmitting, props }) => {
     const languages = [];
-    values.languages.map(lang => {
+    for (const lang in values.languages) {
       languages.push({
         language_code: lang.code,
         level_code: lang.level,
       });
-    });
+    }
     const payload = {
       oid: values.oid,
       agreement_start_date: values.agreementStart,

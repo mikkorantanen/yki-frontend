@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Logo from '../../Logo/Logo';
-import classes from './SideDrawer.css';
+import classes from './SideDrawer.module.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import DrawerToggle from './DrawerToggle/DrawerToggle';
 

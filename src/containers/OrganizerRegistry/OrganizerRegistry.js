@@ -7,7 +7,7 @@ import Organizers from '../Organizers/Organizers';
 import Button from '../../components/UI/Button/Button';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios';
-import classes from './OrganizerRegistry.css';
+import classes from './OrganizerRegistry.module.css';
 
 class OrganizerRegistry extends Component {
   componentDidMount() {

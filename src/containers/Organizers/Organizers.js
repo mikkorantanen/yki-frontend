@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Organizer from '../../components/Organizer/Organizer';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import classes from './Organizers.css';
+// import classes from './Organizers.module.css';
 
 class Organizers extends Component {
   render() {

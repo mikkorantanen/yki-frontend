@@ -11,8 +11,8 @@ class LanguageSelect extends Component {
 
   componentDidMount() {
     const languages = [];
-    LANGUAGES.map(lang => {
-      lang.levels.map(level => {
+    for (const lang in LANGUAGES) {
+      for (const level in lang.levels) {
         const lName = lang.name + ' / ' + this.capitalizeFirstLetter(level);
         languages.push({
           value: lName,
@@ -20,8 +20,8 @@ class LanguageSelect extends Component {
           code: lang.code,
           level: level,
         });
-      });
-    });
+      }
+    }
 
     this.setState({ languages: languages });
   }

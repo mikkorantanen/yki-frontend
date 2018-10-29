@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import axios from '../../../axios';
-import classes from './AddOrganizer.css';
+import classes from './AddOrganizer.module.css';
 import ophStyles from '../../../assets/css/oph-styles.css';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Modal from '../../../components/UI/Modal/Modal';
@@ -161,12 +161,6 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onAddOrganizer: () => dispatch(actions.onAddOrganizer()),
-  };
-};
-
 AddOrganizer.propTypes = {
   lang: PropTypes.string,
   history: PropTypes.object,
@@ -174,5 +168,5 @@ AddOrganizer.propTypes = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  null,
 )(AddOrganizer);
