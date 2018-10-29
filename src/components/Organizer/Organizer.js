@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-import classes from './Organizer.css';
+import classes from './Organizer.module.css';
 import Hyperlink from '../../components/UI/Hyperlink/Hyperlink';
 import * as constants from '../../common/Constants';
 import { getMatchingName } from '../../util/util';
