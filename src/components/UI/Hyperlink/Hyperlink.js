@@ -18,9 +18,11 @@ const hyperlink = props => {
   }
 
   return (
-    <a href={prefix + props.to} className={classes.Hyperlink}>
-      {props.to}
-    </a>
+    <p>
+      <a href={prefix + props.to} className={classes.Hyperlink}>
+        {props.to}
+      </a>
+    </p>
   );
 };
 

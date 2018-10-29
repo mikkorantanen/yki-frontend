@@ -6,11 +6,11 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import App from './App';
-import './index.css';
-import registerServiceWorker from './registerServiceWorker';
+import * as serviceWorker from './serviceWorker';
 import organizerReducer from './store/reducers/organizer';
 import examSessionReducer from './store/reducers/examSession';
 import registrationReducer from './store/reducers/registration';
+import './index.css';
 
 const rootReducer = combineReducers({
   org: organizerReducer,
@@ -35,4 +35,4 @@ const app = (
 );
 
 ReactDOM.render(app, document.getElementById('root'));
-registerServiceWorker();
+serviceWorker.unregister();
