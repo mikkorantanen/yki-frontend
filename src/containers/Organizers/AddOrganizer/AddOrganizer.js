@@ -8,7 +8,7 @@ import ophStyles from '../../../assets/css/oph-styles.css';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Modal from '../../../components/UI/Modal/Modal';
 import AddOrganizerForm from './AddOrganizerForm/AddOrganizerForm';
-import { getMatchingName } from '../../../util/util';
+import { getLocalizedName } from '../../../util/organizerUtil';
 
 class AddOrganizer extends Component {
   state = {
@@ -124,7 +124,7 @@ class AddOrganizer extends Component {
       <ul className={classes.SearchResults}>
         {this.state.organizationsMatchingSearch.map(org => (
           <li key={org.oid} onClick={() => this.selectOrganizationHandler(org)}>
-            {getMatchingName(org.nimi)}
+            {getLocalizedName(org.nimi)}
           </li>
         ))}
       </ul>
@@ -132,7 +132,7 @@ class AddOrganizer extends Component {
 
     const orgName =
       Object.keys(this.state.selectedOrganization).length !== 0
-        ? getMatchingName(this.state.selectedOrganization.nimi)
+        ? getLocalizedName(this.state.selectedOrganization.nimi)
         : '';
 
     const addOrganizerForm = (

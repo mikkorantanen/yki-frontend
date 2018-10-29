@@ -24,7 +24,7 @@ class OrganizerRegistry extends Component {
       <div className={classes.OrganizerRegistry}>
         <h1>Järjestäjärekisteri</h1>
         <Organizers
-          lang={this.props.lang}
+          localization={this.props.localization}
           loading={this.props.loading}
           registry={this.props.organizerRegistry}
         />
@@ -38,7 +38,7 @@ const mapStateToProps = state => {
   return {
     organizerRegistry: state.org.organizerRegistry,
     loading: state.org.loading,
-    lang: state.org.lang,
+    localization: state.org.localization,
     error: state.org.error,
   };
 };
@@ -54,7 +54,7 @@ OrganizerRegistry.propTypes = {
   onFetchOrganizerRegistryContent: PropTypes.func.isRequired,
   organizerRegistry: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  lang: PropTypes.string.isRequired,
+  localization: PropTypes.string.isRequired,
   history: PropTypes.object,
 };
 
