@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fi.oph.yki</groupId>
+    <artifactId>yki-frontend</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>yki-frontend</name>
+    <description>yki-frontend</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.6.RELEASE</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+    </dependencies>
+    <repositories>
+        <repository>
+            <id>oph-sade-artifactory-snapshots</id>
+            <url>https://artifactory.opintopolku.fi/artifactory/oph-sade-snapshot-local</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>oph-sade-artifactory-releases</id>
+            <url>https://artifactory.opintopolku.fi/artifactory/oph-sade-release-local</url>
+        </repository>
+    </repositories>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>Copy frontend build to target</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/main/js/build</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>webpack</id>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <target name="webpack">
+                                <property environment="env" />
+
+                                <exec executable="cmd.exe" dir="${project.basedir}/src/main/js/" osfamily="windows" resultproperty="cmdresult">
+                                    <env key="PATH" path="${env.PATH};${project.basedir}/node_modules/.bin" />
+                                    <env key="PROJECT_TARGET" path="${project.build.directory}/${project.build.finalName}" />
+                                    <arg line="npm install --no-optional &amp; npm run build" />
+                                </exec>
+
+                                <exec executable="bash" dir="${project.basedir}/src/main/js/" osfamily="unix" resultproperty="cmdresult">
+                                    <env key="PATH" path="${env.PATH};${project.basedir}/node_modules/.bin" />
+                                    <env key="PROJECT_TARGET" path="${project.build.directory}/${project.build.finalName}" />
+                                    <arg value="-c" />
+                                    <arg value="npm install --no-optional; npm run build" />
+                                </exec>
+
+                                <condition property="cmdsuccess">
+                                    <equals arg1="${cmdresult}" arg2="0" />
+                                </condition>
+                                <fail unless="cmdsuccess" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

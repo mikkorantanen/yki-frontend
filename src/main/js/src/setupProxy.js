@@ -78,7 +78,7 @@ module.exports = function(app) {
     next();
   });
 
-  app.get('/yki/api/virkailija/organizers', (req, res) => {
+  app.get('/yki/api/virkailija/organizer', (req, res) => {
     try {
       res.send({ organizers: organizers });
     } catch (err) {
@@ -86,7 +86,7 @@ module.exports = function(app) {
     }
   });
 
-  app.post('/yki/api/virkailija/organizers', (req, res) => {
+  app.post('/yki/api/virkailija/organizer', (req, res) => {
     try {
       organizers.push(req.body);
       res.send({ success: true });
@@ -108,7 +108,7 @@ module.exports = function(app) {
 
   // need to proxy here because dev server bug: https://github.com/webpack/webpack-dev-server/issues/1440
   app.post(
-    '/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    '/organisaatio-service/rest/organisaatio/v3/findbyoids',
     (req, res) => {
       axios
         .post(

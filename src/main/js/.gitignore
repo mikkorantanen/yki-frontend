@@ -1,13 +1,17 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-node_modules/
+/node_modules
 
 # testing
-coverage
+/coverage
+
+# Cypress test results
+/cypress/videos
+/cypress/screenshots
 
 # production
-build/
+/build
 
 # misc
 .DS_Store
@@ -17,22 +21,3 @@ build/
 .env.production.local
 
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-*.iml
-
-.vscode
-
-.classpath
-.project
-.settings/
-.bin/
-.cache/
-.idea/
-etc/
-bin/
-node/
-target/
-temp/
-package-lock.json

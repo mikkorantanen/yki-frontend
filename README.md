@@ -1,38 +1,12 @@
-# YKI-Frontend
+# YKI frontend
 
-Web client for National Certificates of Language Proficiency service (Yleisten Kielitutkintojen Ilmottautumisjärjestelmä).
+Spring boot application for serving YKI frontend application.
 
-## Getting Started
-
-```bash
-npm install       # install dependencies
-npm start         # start the development server on localhost:3000
-npm test          # run the Jest test suite
-npm run build     # create an optimized production build
-```
-
-## Project Structure
+## Packaging
+Maven is used for packaging Spring boot application with React frontend application as a fat JAR.
 
 ```bash
-src
-├── assets        # Logo, images etc.
-├── components    # Stateless (functional) components
-├── containers    # Stateful components
-└── hoc           # Higher-Order Components
-```
-
-## E2E Tests
-
-[Cypress](https://docs.cypress.io/) is used for end to end testing.
-
-Open Cypress Test Runner.
-```bash
-npm run cypress:open
-```
-
-Run all tests headlessly in the Electron browser.
-```bash
-npm run cypress:run
+./mvnw clean install
 ```
 
 ### License

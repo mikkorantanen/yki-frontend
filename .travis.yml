@@ -1,15 +1,48 @@
-language: node_js
+sudo: required
 
-node_js:
-  - 'lts/*'
+language: java
+
+jdk:
+  - oraclejdk8
+
+node_js :
+  - "lts/*"
+
+services:
+  - docker
 
 cache:
   directories:
-    - '$HOME/.npm'
+    - "$HOME/.m2"
+    - "$HOME/.npm"
+
+env:
+  global:
+  # AWS_ACCESS_KEY_ID
+  - secure: ZK7or1zq8DiaAlo63ONWak0bKP9AdnBipmtAWavXTCPWOiAhy4BXCAGrmGCjgYTB9QOwpisUnd2U8pqyLoydwY6+GSHnZNRiJSiV6GW7Ls2NeEax4iiG3gaELzh2IwIeHwTedG6zvvCxTm4eErRLedV8ouuSZh2f0nbqtZF4qDTuscyb6NSaiKVkoN+QEty2Ssl5v+af3Q1ugX9NrleSjc11WxiO9LrRssjOvK63EdQukztDEC/zsrXEIHE8OBdD2NX4ZBEazsi+0IHADqfNJadOA509c+sFljqaSMCxxq1WkUgRhc82HhLt2kqJExg2KaSmrLNVwU76OqFwLMdogzcLI/cUzZeQz13e5QOxfnBumThG8fkXaF2rTR3phlV6MSCdgVYE3slZBW+XnG9vFyGuYx00U4RwIo2/pc1znBRt8E8x+DpqK6YU1+RXHy9dycm9P+vze3ld0i3vMxlEaVrnjfDNr8QkkwlZFDpMHkjDLChW4BP810SiIW+JXf/OG98PqURBJE98EvApSxMEuN5z6jG4/V5R5G9L49rEBZugKYsPrVQD4Ras+f3VNFxgUK6b5nWl2eMVPVao2dus+pMRCsAPs5WxU2sNPVv/9KUWEbVponv9JTNuHw2nmKohYRL6lSoud291cYt0K2f9JJAYNtO8O1SUuq7DkMF0h4k=
+  # AWS_SECRET_ACCESS_KEY
+  - secure: DRXrEZ+UFnzPmnWqYAjnyZZVyN9eBv3E7x6eEtvssKN0IdNkdf+sgy17qdCO9AzwQoIZ7QnWA6n+RKCFIOg8GIRyrBOl6/lm204hXL+TO50dIP80xTJkNTS0+dsCOVqvlx9uH+jvQOWLbr/gROqVXZCYLk/KX4NEvO04uoz4+PVSooi6hdIGmlI3QYWd7EBvi8n115m+9IIi3EVnzrBvlbCedgr/BhIGh0pKBNvKCxQbqKEqWWTtrMNOQ6QU/EPCXKEPCJh4FQ6MPH3ySJa9oWXCr3CbNspIRqrOtqM5XFGTFnRHEFOdlFaOE8GEnv3oD0bkYnkXZJZb/ACj6QN73xlw8o9aQUK2fHBnrzZjubZaNLrUvHrlNsWefFr59fY+23nfYDEBqs+ukAZTWnClw/xBOmofA8BqFltkt0W78opiW1gK8HCtcjKKKmUcpmrXQqWs48qxOLweaPbC0RwxC2RBmDTZQN03jJDXiV/F6CIb7vws08oEqCYqcacnPGY5vUcWQCfqRhN1Wlj+GSaQqXuntsEJ7GGsV4k7CPj5fYxkHl7roeuad4IzC2Sax9p1KRCczsjW3BdxtGeV0OdxnF5KOXXQ35Eg3JP1Cn3pY/oDjEeudUr0bYchiHtZToJPDSbfFyW8rOXGZYtQUqLUG9/bN1wVByZyWZm4kgRrbTg=
+
+install:
+  - git clone https://github.com/Opetushallitus/ci-tools.git
+  - source ci-tools/common/setup-tools.sh
+  - export ARTIFACT_NAME="yki-frontend"
 
 script:
-  - npm test
+  - "npm i --prefix src/main/js/ && npm test --prefix src/main/js/"
+  - "./mvnw clean install"
+  - mv target/yki-frontend-*.jar $DOCKER_BUILD_DIR/artifact/${ARTIFACT_NAME}.jar
+  - cp -vr src/main/resources/* $DOCKER_BUILD_DIR/config/
+  - export BASE_IMAGE="baseimage-fatjar:latest-master"
+  - "./ci-tools/common/pull-image.sh"
+  - "./ci-tools/build/build-fatjar.sh $ARTIFACT_NAME"
+
+deploy:
+  provider: script
+  script: "./ci-tools/build/upload-image.sh $ARTIFACT_NAME"
+  on:
+    all_branches: true
 
 notifications:
   flowdock:
-    secure: 'oQfd5NgPVYEAfS8d6De/zwus7jttQRgwHSJI4xNXcYwLyxr8EwgkbvcwzNRneUKJrxav77dpkHE2eOZNTCMHzdWxqVlFCzA83KkYN17LrI4BoJ8ZGPFwDu2ktbXIsFAWyHsOgBE3m5Lfxesuh2/a/MuhLzg9o6kjbc6vDPZVNVy0C0S6oVfm6iUWviCS2V2VNxlieV5ljAnfFk8bl6fEtfygZuD6UnBq4eNKm3YtUeMYV01+u4UfDPxe1qggtfoX2OWe5A9QdgZdyptQ7zpbt/XaCM/VRTq0zDDA0Q/fapBFmWI8vVJQXkD0ZGY1gWaBn2Tm/P8V8GDm2B0CRLAfnke85YnkuSySdmcnmLNWUncdXRQXnjSFJARinD2bbYs/IWGeO9o1Ktrtr7fQQwSy66anATr3e2KKglUf3+aba/DhDGS8vMByi+iS2u95hDn/ojS7+t9HP9h94RFtPn2t+fGWIQyDtk/0DS886/p1MbX6vDLRop3xMw4VMhBKs39o5wIof7jSeXcrsZG13XjYAY6VSqJ4TjdGFzLi1AQs9qnjmIXjLBodvVZEp8F0W7ZxOcpn9EtQ+3qg8RTBgLyILpjhBDrrHTF+LOIGnbUKZxPSc683DjNTjfNFQckDWApli6UzjLViK3Z4W+s3bo6y6OdSXDLvXd3nu3GJiCJ85gM='
+    secure: oQfd5NgPVYEAfS8d6De/zwus7jttQRgwHSJI4xNXcYwLyxr8EwgkbvcwzNRneUKJrxav77dpkHE2eOZNTCMHzdWxqVlFCzA83KkYN17LrI4BoJ8ZGPFwDu2ktbXIsFAWyHsOgBE3m5Lfxesuh2/a/MuhLzg9o6kjbc6vDPZVNVy0C0S6oVfm6iUWviCS2V2VNxlieV5ljAnfFk8bl6fEtfygZuD6UnBq4eNKm3YtUeMYV01+u4UfDPxe1qggtfoX2OWe5A9QdgZdyptQ7zpbt/XaCM/VRTq0zDDA0Q/fapBFmWI8vVJQXkD0ZGY1gWaBn2Tm/P8V8GDm2B0CRLAfnke85YnkuSySdmcnmLNWUncdXRQXnjSFJARinD2bbYs/IWGeO9o1Ktrtr7fQQwSy66anATr3e2KKglUf3+aba/DhDGS8vMByi+iS2u95hDn/ojS7+t9HP9h94RFtPn2t+fGWIQyDtk/0DS886/p1MbX6vDLRop3xMw4VMhBKs39o5wIof7jSeXcrsZG13XjYAY6VSqJ4TjdGFzLi1AQs9qnjmIXjLBodvVZEp8F0W7ZxOcpn9EtQ+3qg8RTBgLyILpjhBDrrHTF+LOIGnbUKZxPSc683DjNTjfNFQckDWApli6UzjLViK3Z4W+s3bo6y6OdSXDLvXd3nu3GJiCJ85gM=
