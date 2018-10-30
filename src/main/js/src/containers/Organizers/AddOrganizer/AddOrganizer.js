@@ -52,7 +52,7 @@ class AddOrganizer extends Component {
       oid: this.state.selectedOrganization.oid,
     };
     axios
-      .post('/yki/api/virkailija/organizers', body)
+      .post('/yki/api/virkailija/organizer', body)
       .catch(err => {
         console.error(`ADD_ORGANIZER failed: ${err}`);
       })

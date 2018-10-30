@@ -32,7 +32,7 @@ export const fetchOrganizerRegistryContent = () => {
   return dispatch => {
     dispatch(fetchOrganizerRegistryContentStart());
     axios
-      .get('/yki/api/virkailija/organizers')
+      .get('/yki/api/virkailija/organizer')
       .then(res => {
         for (const key in res.data.organizers) {
           fetchedOrganizers.push(res.data.organizers[key]);

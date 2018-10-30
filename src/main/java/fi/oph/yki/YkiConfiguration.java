@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 public class YkiConfiguration {
 
     private static final Logger logger = LoggerFactory.getLogger(YkiConfiguration.class);
-    
+
     @Value("${logback.access:#{null}}")
     private String logbackAccess;
 
