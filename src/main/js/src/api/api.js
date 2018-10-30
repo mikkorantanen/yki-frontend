@@ -47,11 +47,11 @@ export const loadOrganizationsByOids = oids => {
 };
 
 export const loadOrganizers = () => {
-  return apiGet('LOAD_ORGANIZERS', 'yki/api/virkailija/organizers');
+  return apiGet('LOAD_ORGANIZERS', 'yki/api/virkailija/organizer');
 };
 
 export const createOrganizer = organizer => {
-  return apiPost('CREATE_ORGANIZER', 'yki/api/virkailija/organizers', organizer);
+  return apiPost('CREATE_ORGANIZER', 'yki/api/virkailija/organizer', organizer);
 };
 
 export const loadOrganization = oid => {
