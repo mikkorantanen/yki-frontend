@@ -108,7 +108,7 @@ module.exports = function(app) {
 
   // need to proxy here because dev server bug: https://github.com/webpack/webpack-dev-server/issues/1440
   app.post(
-    '/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    '/organisaatio-service/rest/organisaatio/v3/findbyoids',
     (req, res) => {
       axios
         .post(

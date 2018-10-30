@@ -41,7 +41,7 @@ export const fetchOrganizerRegistryContent = () => {
           organizationIds.push(fetchedOrganizers[key].oid);
         }
         return axios.post(
-          '/organisaatio-service/rest/organisaatio/v4/findbyoids',
+          '/organisaatio-service/rest/organisaatio/v3/findbyoids',
           organizationIds,
         );
       })
