@@ -1,15 +1,15 @@
 describe('Organizer registry', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit('/yki/');
   });
 
   it('front page loads', () => {
-    cy.get('h1').contains('Järjestäjärekisteri');
+    cy.get('h1').contains('Kielitutkintojen järjestäjärekisteri');
   });
 
   it('add organizer button opens new page', () => {
     cy.get('button')
-      .contains('Lisää uusi')
+      .contains('Lisää järjestäjä')
       .click();
     cy.get('h1').contains('Hae lisättävä järjestäjä');
   });
