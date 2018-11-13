@@ -12,7 +12,7 @@ public class YkiController {
 
     private static final Logger logger = LoggerFactory.getLogger(YkiController.class);
 
-    @GetMapping(value = { "/", "/ilmoittautuminen", "/rekisteri" })
+    @GetMapping(value = { "/", "/ilmoittautuminen", "/jarjestajarekisteri" })
     public String index() {
         return "/index.html";
     }
