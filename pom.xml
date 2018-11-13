@@ -79,6 +79,27 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>write buildversion.txt</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <echo message="writing target/classes/resources/buildversion.txt" />
+                                <echo file="target/classes/resources/buildversion.txt">
+                                    <![CDATA[artifactId=${project.artifactId}
+version=${project.version}
+buildNumber=${TRAVIS_BUILD_NUMBER}
+branchName=${TRAVIS_BRANCH}
+vcsRevision=${TRAVIS_COMMIT}
+buildTime=${maven.build.timestamp}
+]]>
+                                </echo>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>webpack</id>
                         <phase>generate-resources</phase>
                         <configuration>
