@@ -14,9 +14,7 @@ instance.interceptors.response.use(
       (window.location.href.includes('jarjestajarekisteri') ||
         window.location.href.includes('tutkintotilaisuudet'))
     ) {
-      window.location.href = `auth/cas?success-redirect=${
-        window.location.href
-      }`;
+      window.location.replace('/yki/auth/cas');
     }
     return Promise.reject(error);
   },
