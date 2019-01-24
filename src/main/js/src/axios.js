@@ -12,7 +12,8 @@ instance.interceptors.response.use(
     if (
       error.response.status === 401 &&
       (window.location.href.includes('jarjestajarekisteri') ||
-        window.location.href.includes('tutkintotilaisuudet'))
+        window.location.href.includes('tutkintotilaisuudet') ||
+        window.location.href.includes('tutkintopaivat'))
     ) {
       window.location.replace('/yki/auth/cas');
     }

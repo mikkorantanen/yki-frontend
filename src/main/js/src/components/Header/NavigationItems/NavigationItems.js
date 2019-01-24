@@ -5,24 +5,26 @@ import { connect } from 'react-redux';
 import classes from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 
-export const registryItem = props => {
+const items = props => {
   return props.user && props.user.isAdmin ? (
     <React.Fragment>
       <NavigationItem link="/jarjestajarekisteri">
         {props.t('common.registry')}
       </NavigationItem>
       <div className={classes.Separator} />
+      <NavigationItem link="/tutkintopaivat">
+        {props.t('common.examDates')}
+      </NavigationItem>
     </React.Fragment>
-  ) : null;
-};
-
-export const navigationItems = props => (
-  <ul className={classes.NavigationItems}>
-    {registryItem(props)}
+  ) : (
     <NavigationItem link="/tutkintotilaisuudet">
       {props.t('common.examSessions')}
     </NavigationItem>
-  </ul>
+  );
+};
+
+export const navigationItems = props => (
+  <ul className={classes.NavigationItems}>{items(props)}</ul>
 );
 
 const mapStateToProps = state => {

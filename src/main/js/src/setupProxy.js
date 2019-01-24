@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const axios = require('axios');
+const moment = require('moment');
 
 const getCurrentTime = () => {
   const tzoffset = new Date().getTimezoneOffset() * 60000;
@@ -9,6 +10,10 @@ const getCurrentTime = () => {
     .slice(0, -1);
   return localISOTime;
 };
+
+const examDates = JSON.parse(
+  fs.readFileSync('./dev/rest/examSessions/examDates.json'),
+);
 
 const getExamSessions = () => {
   return JSON.parse(
@@ -25,39 +30,6 @@ const getRegistrations = () => {
 };
 
 let registrations = getRegistrations();
-
-const examDates = {
-  dates: [
-    {
-      exam_date: '2019-10-27',
-      registration_start_date: '2019-09-03',
-      registration_end_date: '2019-09-28',
-      languages: [{ language_code: 'eng' }],
-    },
-    {
-      exam_date: '2019-11-10',
-      registration_start_date: '2019-09-03',
-      registration_end_date: '2019-09-28',
-      languages: [{ language_code: 'fin' }],
-    },
-    {
-      exam_date: '2019-11-17',
-      registration_start_date: '2019-09-03',
-      registration_end_date: '2019-09-28',
-      languages: [
-        { language_code: 'spa' },
-        { language_code: 'sme' },
-        { language_code: 'deu' },
-      ],
-    },
-    {
-      exam_date: '2020-01-26',
-      registration_start_date: '2019-12-03',
-      registration_end_date: '2019-12-14',
-      languages: [{ language_code: 'fin' }],
-    },
-  ],
-};
 
 const organizers = [
   {
@@ -358,7 +330,10 @@ module.exports = function(app) {
   app.get('/yki/api/exam-date', (req, res) => {
     try {
       res.set('Content-Type', 'application/json; charset=utf-8');
-      res.send(examDates);
+      const futureExamDates = examDates.dates.filter(d => {
+        return moment(d.registration_end_date).isSameOrAfter(moment());
+      });
+      res.send({ dates:futureExamDates});
     } catch (err) {
       res.status(404).send(err.message);
     }

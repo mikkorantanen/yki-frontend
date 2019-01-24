@@ -139,28 +139,32 @@ const examSessionForm = props => {
   };
 
   const examDateFields = (examDates, selectedLanguage) => {
-    return examDates.map(examDate => {
-      const enabled = R.includes(
-        { language_code: selectedLanguage },
-        examDate.languages,
-      );
-      const languages = examDate.languages
-        .map(l => {
-          return languageToString(l.language_code).toLowerCase();
-        })
-        .join(', ');
-      return (
-        <Field
-          component={RadioButtonComponent}
-          name="examDate"
-          id={examDate.exam_date}
-          key={examDate.exam_date}
-          label={moment(examDate.exam_date).format(DATE_FORMAT)}
-          extraLabel={languages}
-          disabled={!enabled}
-        />
-      );
-    });
+    return examDates
+      .filter(e => {
+        return moment(e.exam_date).isBefore(moment().add(1, 'year'));
+      })
+      .map(examDate => {
+        const enabled = R.includes(
+          { language_code: selectedLanguage },
+          examDate.languages,
+        );
+        const languages = examDate.languages
+          .map(l => {
+            return languageToString(l.language_code).toLowerCase();
+          })
+          .join(', ');
+        return (
+          <Field
+            component={RadioButtonComponent}
+            name="examDate"
+            id={examDate.exam_date}
+            key={examDate.exam_date}
+            label={moment(examDate.exam_date).format(DATE_FORMAT)}
+            extraLabel={languages}
+            disabled={!enabled}
+          />
+        );
+      });
   };
 
   const registrationPediod = (examDates, selectedExamDate) => {
