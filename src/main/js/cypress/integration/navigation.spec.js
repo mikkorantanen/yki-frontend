@@ -3,7 +3,7 @@ describe('Navigation', () => {
     cy.server();
   });
 
-  it('when admin is logged in then navigation shows registration and exam sessions', () => {
+  it('when admin is logged in then navigation shows registration and exam dates', () => {
     cy.log('Admin is logged in');
     cy.route({
       method: 'GET',
@@ -19,9 +19,9 @@ describe('Navigation', () => {
       },
     });
 
-    cy.visit('/tutkintotilaisuudet');
+    cy.visit('/tutkintopaivat');
     cy.get('a')
-      .contains('Tutkintotilaisuudet')
+      .contains('Tutkintopäivät')
       .should('exist');
     cy.get('a')
       .contains('Järjestäjärekisteri')

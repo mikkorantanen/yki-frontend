@@ -1,0 +1,266 @@
+{
+    "dates": [
+        {
+            "exam_date": "2018-03-23",
+            "registration_start_date": "2018-02-01",
+            "registration_end_date": "2018-02-28",
+            "languages": [
+                {
+                    "language_code": "eng"
+                },
+                {
+                    "language_code": "ita"
+                },
+                {
+                    "language_code": "rus"
+                }
+            ]
+        },
+        {
+            "exam_date": "2019-03-23",
+            "registration_start_date": "2019-02-01",
+            "registration_end_date": "2019-02-28",
+            "languages": [
+                {
+                    "language_code": "eng"
+                },
+                {
+                    "language_code": "ita"
+                },
+                {
+                    "language_code": "rus"
+                }
+            ]
+        },
+        {
+            "exam_date": "2019-04-06",
+            "registration_start_date": "2019-02-01",
+            "registration_end_date": "2019-02-28",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        },
+        {
+            "exam_date": "2019-04-13",
+            "registration_start_date": "2019-02-01",
+            "registration_end_date": "2019-02-28",
+            "languages": [
+                {
+                    "language_code": "fra"
+                },
+                {
+                    "language_code": "swe"
+                },
+                {
+                    "language_code": "sme"
+                }
+            ]
+        },
+        {
+            "exam_date": "2019-05-18",
+            "registration_start_date": "2019-04-15",
+            "registration_end_date": "2019-04-30",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        },
+        {
+            "exam_date": "2019-08-31",
+            "registration_start_date": "2019-06-03",
+            "registration_end_date": "2019-06-14",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        },
+        {
+            "exam_date": "2019-10-05",
+            "registration_start_date": "2019-08-19",
+            "registration_end_date": "2019-08-30",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        },
+        {
+            "exam_date": "2019-10-26",
+            "registration_start_date": "2019-09-02",
+            "registration_end_date": "2019-09-30",
+            "languages": [
+                {
+                    "language_code": "eng"
+                }
+            ]
+        },
+        {
+            "exam_date": "2019-11-09",
+            "registration_start_date": "2019-09-02",
+            "registration_end_date": "2019-09-30",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        },
+        {
+            "exam_date": "2019-11-16",
+            "registration_start_date": "2019-09-02",
+            "registration_end_date": "2019-09-30",
+            "languages": [
+                {
+                    "language_code": "spa"
+                },
+                {
+                    "language_code": "swe"
+                },
+                {
+                    "language_code": "deu"
+                }
+            ]
+        },
+        {
+            "exam_date": "2020-01-25",
+            "registration_start_date": "2019-12-02",
+            "registration_end_date": "2019-12-13",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        },
+        {
+            "exam_date": "2020-03-14",
+            "registration_start_date": "2020-02-02",
+            "registration_end_date": "2020-02-28",
+            "languages": [
+                {
+                    "language_code": "eng"
+                },
+                {
+                    "language_code": "ita"
+                },
+                {
+                    "language_code": "rus"
+                }
+            ]
+        },
+        {
+            "exam_date": "2020-03-28",
+            "registration_start_date": "2020-02-03",
+            "registration_end_date": "2020-02-28",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        },
+        {
+            "exam_date": "2020-04-04",
+            "registration_start_date": "2020-02-03",
+            "registration_end_date": "2020-02-28",
+            "languages": [
+                {
+                    "language_code": "fra"
+                },
+                {
+                    "language_code": "swe"
+                },
+                {
+                    "language_code": "sme"
+                }
+            ]
+        },
+        {
+            "exam_date": "2020-05-23",
+            "registration_start_date": "2020-04-20",
+            "registration_end_date": "2020-04-30",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        },
+        {
+            "exam_date": "2020-08-29",
+            "registration_start_date": "2020-06-01",
+            "registration_end_date": "2020-06-12",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        },
+        {
+            "exam_date": "2020-10-03",
+            "registration_start_date": "2020-08-17",
+            "registration_end_date": "2020-08-31",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        },
+        {
+            "exam_date": "2020-10-23",
+            "registration_start_date": "2020-09-01",
+            "registration_end_date": "2020-09-30",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        },
+        {
+            "exam_date": "2020-10-24",
+            "registration_start_date": "2020-09-01",
+            "registration_end_date": "2020-09-30",
+            "languages": [
+                {
+                    "language_code": "eng"
+                }
+            ]
+        },
+        {
+            "exam_date": "2020-11-07",
+            "registration_start_date": "2020-09-01",
+            "registration_end_date": "2020-09-30",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        },
+        {
+            "exam_date": "2020-11-14",
+            "registration_start_date": "2020-09-01",
+            "registration_end_date": "2020-09-30",
+            "languages": [
+                {
+                    "language_code": "spa"
+                },
+                {
+                    "language_code": "swe"
+                },
+                {
+                    "language_code": "deu"
+                }
+            ]
+        },
+        {
+            "exam_date": "2021-01-30",
+            "registration_start_date": "2020-12-01",
+            "registration_end_date": "2020-12-11",
+            "languages": [
+                {
+                    "language_code": "fin"
+                }
+            ]
+        }
+    ]
+}

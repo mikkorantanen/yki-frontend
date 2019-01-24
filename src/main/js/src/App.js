@@ -9,6 +9,7 @@ import registryReducer from './store/reducers/registry';
 import examSessionReducer from './store/reducers/examSession';
 import registrationReducer from './store/reducers/registration';
 import userReducer from './store/reducers/user';
+import examDatesReducer from './store/reducers/examDates';
 import ErrorBoundary from './containers/ErrorBoundary/ErrorBoundary';
 import Spinner from './components/UI/Spinner/Spinner';
 import Registration from './containers/Registration/Registration';
@@ -16,6 +17,7 @@ import NotFound from './components/NotFound/NotFound';
 import PaymentRedirect from './containers/PaymentRedirect/PaymentRedirect';
 import PaymentStatus from './components/PaymentStatus/PaymentStatus';
 import Init from './containers/Init/Init';
+import ExamDates from './containers/ExamDates/ExamDates';
 
 const Registry = lazy(() => import('./containers/Registry/Registry'));
 const ExamSessions = lazy(() =>
@@ -27,6 +29,7 @@ const rootReducer = combineReducers({
   exam: examSessionReducer,
   reg: registrationReducer,
   user: userReducer,
+  dates: examDatesReducer,
 });
 
 const store = createStore(
@@ -52,6 +55,7 @@ const app = () => (
               />
               {/* TODO: change back to use component={Component} after react-router-dom updates version */}
               <Route path="/jarjestajarekisteri" render={() => <Registry />} />
+              <Route path="/tutkintopaivat" render={() => <ExamDates/>} />
             </ErrorBoundary>
             <Route component={NotFound} />
           </Switch>

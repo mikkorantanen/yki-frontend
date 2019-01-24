@@ -16,4 +16,5 @@ export {
   registryFailReset,
 } from './registry';
 export {} from './registration';
+export { fetchExamDates, examDatesFailReset } from './examDates';
 export { fetchUser } from './user';
