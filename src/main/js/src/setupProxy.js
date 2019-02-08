@@ -47,6 +47,18 @@ const getRegistrations = () => {
 
 let registrations = getRegistrations();
 
+const countries = JSON.parse(
+  fs.readFileSync('./dev/rest/codes/maatjavaltiot2.json'),
+);
+
+const genders = JSON.parse(
+  fs.readFileSync('./dev/rest/codes/sukupuoli.json'),
+);
+
+const postOffice = JSON.parse(
+  fs.readFileSync('./dev/rest/codes/posti.json'),
+);
+
 const organizers = [
   {
     oid: '1.2.246.562.10.28646781493',
@@ -393,7 +405,7 @@ module.exports = function(app) {
     }
   });
 
-  app.get('/yki/api/exam-sessions', (req, res) => {
+  app.get('/yki/api/exam-session', (req, res) => {
     try {
       res.set('Content-Type', 'application/json; charset=utf-8');
       res.send(allExamSessions);
@@ -409,4 +421,32 @@ module.exports = function(app) {
       res.status(404).send(err.message);
     }
   });
+
+  app.get('/yki/api/code/maatjavaltiot2', (req, res) => {
+    try {
+      res.set('Content-Type', 'application/json; charset=utf-8');
+      res.send(countries);
+    } catch (err) {
+      res.status(404).send(err.message);
+    }
+  });
+
+  app.get('/yki/api/code/sukupuoli', (req, res) => {
+    try {
+      res.set('Content-Type', 'application/json; charset=utf-8');
+      res.send(genders);
+    } catch (err) {
+      res.status(404).send(err.message);
+    }
+  });
+
+  app.get('/yki/api/code/posti/:id', (req, res) => {
+    try {
+      res.set('Content-Type', 'application/json; charset=utf-8');
+      res.send(postOffice);
+    } catch (err) {
+      res.status(404).send(err.message);
+    }
+  });
+
 };

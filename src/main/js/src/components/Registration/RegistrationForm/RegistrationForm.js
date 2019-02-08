@@ -192,9 +192,11 @@ export const registrationForm = props => {
           last_name: values.lastName,
           nationalities: [values.nationality],
           ssn: props.initData.user.ssn,
-          birthdate: moment(values.birthdate, DATE_FORMAT).format(
-            ISO_DATE_FORMAT_SHORT,
-          ),
+          birthdate: values.birthdate
+            ? moment(values.birthdate, DATE_FORMAT).format(
+                ISO_DATE_FORMAT_SHORT,
+              )
+            : null,
           gender: values.gender,
           certificate_lang: values.certificateLang,
           exam_lang: values.examLang,
