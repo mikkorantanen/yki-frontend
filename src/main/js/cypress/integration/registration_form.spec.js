@@ -83,7 +83,7 @@ describe('Registration form', () => {
     cy.server();
     cy.route({
       method: 'POST',
-      url: '/yki/api/registration/submit?lang=fi',
+      url: '/yki/api/registration/1/submit?lang=fi',
       status: 500,
       response: {
         success: false,
