@@ -107,7 +107,7 @@ const registryItemForm = props => {
                 <div className={classes.Separator}>−</div>
                 <div>
                   <label htmlFor="agreementEnd" className={classes.Label}>
-                    {props.t('registryItem.agreementStart')}
+                    {props.t('registryItem.agreementEnd')}
                   </label>
                   <DatePicker
                     id="agreementEnd"
