@@ -24,6 +24,7 @@
 
 .Row:hover {
   color: hsla(195, 100%, 47%, 1);
+  cursor: pointer;
 }
 
 @media (max-width: 900px) {
