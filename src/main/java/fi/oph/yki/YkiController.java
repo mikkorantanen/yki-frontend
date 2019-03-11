@@ -1,7 +1,5 @@
 package fi.oph.yki;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,11 +14,13 @@ public class YkiController {
             "/jarjestajarekisteri",
             "/tutkintotilaisuudet",
             "/maksu",
+            "/tutkintotilaisuus",
             "/ilmoittautuminen/**",
             "/tutkintopaivat/**",
             "/jarjestajarekisteri/**",
             "/tutkintotilaisuudet/**",
-            "/maksu/**"})
+            "/maksu/**",
+            "/tutkintotilaisuus/**"})
     public String index() {
         return "/index.html";
     }
