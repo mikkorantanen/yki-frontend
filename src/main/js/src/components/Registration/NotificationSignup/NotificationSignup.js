@@ -2,11 +2,11 @@ import React, { useState, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 
 import classes from './NotificationSignup.module.css';
 import Button from '../../UI/Button/Button';
+import axios from '../../../axios';
 
 const notificationSignup = ({ examSessionId }) => {
   const [t] = useTranslation();
