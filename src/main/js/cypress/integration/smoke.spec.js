@@ -11,7 +11,7 @@ describe('Smoke test', () => {
       cy.get('input')
         .contains('Kirjaudu')
         .click();
-
+      cy.wait(2000);
       cy.get('h1')
         .contains('Kielitutkintojen järjestäjärekisteri')
         .should('exist');
@@ -24,7 +24,7 @@ describe('Smoke test', () => {
       cy.get('input')
         .contains('Kirjaudu')
         .click();
-      cy.wait(1000);
+      cy.wait(2000);
       cy.get('h2')
         .contains('Tulevat tutkintotilaisuudet')
         .should('exist');
