@@ -82,7 +82,7 @@
   "examSession.downloadExcel": "Lataa excel_en",
   "examSession.maxParticipants": "Osallistujapaikkojen määrä_en",
   "examSession.upcomingExamSessions": "Tulevat tutkintotilaisuudet_en",
-  "feature.languageSelect.disable": "true",
+  "feature.languageSelect.disable": "false",
   "payment.redirect.error": "Maksamiseen siirtyminen epäonnistui_en",
   "payment.redirect.error.info": "Kokeile hetken kuluttua uudelleen._en",
   "payment.status.cancel": "Maksutapahtuma keskeytyi!_en",
