@@ -95,7 +95,7 @@ const examSessionListItem = ({
     <button
       className={[
         classes.RegisterButton,
-        !session.open || session.queue_full
+        !session.open || (!spotsAvailable && session.queue_full)
           ? classes.RegistrationLocked
           : spotsAvailable
           ? classes.ButtonForSignup
