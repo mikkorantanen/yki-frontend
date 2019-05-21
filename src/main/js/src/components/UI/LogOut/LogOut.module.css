@@ -1,0 +1,12 @@
+.LogOut {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: hsl(0, 0%, 100%);
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.LogOut:hover {
+  text-decoration-line: underline;
+}
