@@ -85,6 +85,7 @@
   "examSession.maxParticipants": "Maximum participants",
   "examSession.upcomingExamSessions": "Upcoming language proficiency tests",
   "feature.languageSelect.disable": "true",
+  "logout.text": "Logout",
   "payment.redirect.error": "Redirection to payment failed",
   "payment.redirect.error.info": "Try again in a while.",
   "payment.status.cancel": "Payment cancelled!",

@@ -5,6 +5,7 @@
   color: hsl(0, 0%, 100%);
   font-size: 16px;
   text-decoration: none;
+  margin-right: 7px;
 }
 
 .LogOut:hover {
