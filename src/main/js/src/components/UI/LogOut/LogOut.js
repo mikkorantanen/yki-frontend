@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 
 import classes from './LogOut.module.css';
 
-const logOut = ({ user }) => {
+export const LogOut = ({ user }) => {
+  const { t } = useTranslation();
+
   return (
     user ? 
       <React.Fragment>
-      <a className={classes.LogOut} href={`/yki/auth/logout`}>
-      {/* add translation */}
-        Log out
+      <a id='logout-link' className={classes.LogOut} href={`/yki/auth/logout`}>
+        {t('logout.text')}
       </a>
       </React.Fragment>
       : null
@@ -23,4 +24,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(logOut);
+export default connect(mapStateToProps)(LogOut);

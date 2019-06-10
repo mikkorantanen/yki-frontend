@@ -17,7 +17,6 @@ const header = ({ nav }) =>
     <header className={classes.RegistrationHeader}>
       <Logo />
       <span>Opetushallitus</span>
-      {/* Kirjaudu ulos nappula tähän? */}
       <div className={classes.HeaderLinksContainer}>
         <LogOut />
         <LanguageSelect />

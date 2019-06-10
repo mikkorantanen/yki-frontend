@@ -121,6 +121,7 @@
   "examSession.upcomingExamSessions": "Tulevat tutkintotilaisuudet",
   "examSessions.agreementNotFound": "Ei löytynyt voimassaolevaa järjestäjäsopimusta.",
   "feature.languageSelect.disable": "false",
+  "logout.text": "Kirjaudu ulos",
   "payment.redirect.error": "Maksamiseen siirtyminen epäonnistui",
   "payment.redirect.error.info": "Kokeile hetken kuluttua uudelleen.",
   "payment.status.cancel": "Maksutapahtuma keskeytyi!",

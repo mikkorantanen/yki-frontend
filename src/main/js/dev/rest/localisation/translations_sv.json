@@ -121,6 +121,7 @@
   "examSession.upcomingExamSessions": "Kommande examenstillfällen",
   "examSessions.agreementNotFound": "Giltigt anordnaravtal hittades inte.",
   "feature.languageSelect.disable": "true",
+  "logout.text": "Logga ut",
   "payment.redirect.error": "Övergång till betalning misslyckades",
   "payment.redirect.error.info": "Försök på nytt om en stund.",
   "payment.status.cancel": "Betalningen avbröts!",
