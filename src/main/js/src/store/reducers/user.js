@@ -14,12 +14,14 @@ const reducer = (state = initialState, action) => {
         loading: true,
       };
     case actionTypes.FETCH_USER_SUCCESS:
+      console.log("ok: ", action.user);
       return {
         ...state,
         user: action.user,
         loading: false,
       };
     case actionTypes.FETCH_USER_FAIL:
+      console.log("fail: ", action.error);
       return {
         ...state,
         error: action.error,
