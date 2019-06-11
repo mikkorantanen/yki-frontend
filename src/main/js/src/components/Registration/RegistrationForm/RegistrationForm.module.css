@@ -72,6 +72,21 @@
   height: 28px;
 }
 
+.PhoneNumber {
+  width: 200px;
+}
+
+.PhoneNumberPrefix {
+  display: inline-block;
+  width: 20%;
+}
+
+.PhoneNumber input {
+  display: inline-block;
+  width: 75%;
+  height: 28px;
+}
+
 .NationalitySelect {
   height: 32px;
   width: 200px;

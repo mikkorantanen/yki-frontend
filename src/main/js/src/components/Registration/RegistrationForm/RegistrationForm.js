@@ -21,7 +21,8 @@ export const registrationForm = props => {
 
   function validatePhoneNumber(value) {
     if (value) {
-      const phoneNumber = parsePhoneNumberFromString(value);
+      // don't allow other than digits in input, since we inject the prefix ourselves
+      const phoneNumber = /^\d+$/.test(value) && parsePhoneNumberFromString("+358" + value);
       return phoneNumber && phoneNumber.isValid();
     } else {
       return true;
@@ -126,6 +127,28 @@ export const registrationForm = props => {
       </div>
     );
   };
+  const phoneNumberField = (name) => (
+    <React.Fragment>
+      <h3> {props.t(`registration.form.${name}`)}</h3>
+      <div className={classes.PhoneNumber}>
+        <div className={classes.PhoneNumberPrefix}>
+          +358
+        </div>
+        <Field
+          name={name}
+          data-cy={`input-${name}`}
+          type='tel'
+          aria-label={props.t(`registration.form.aria.${name}`)}
+        />
+      </div>
+      <ErrorMessage
+        name={name}
+        data-cy={`input-error-${name}`}
+        component="span"
+        className={classes.ErrorMessage}
+      />
+    </React.Fragment>
+  )
 
   const inputField = (name, placeholder = '', extra, type = 'text') => (
     <React.Fragment>
@@ -215,7 +238,7 @@ export const registrationForm = props => {
           post_office: values.postOffice,
           zip: values.zip,
           street_address: values.streetAddress,
-          phone_number: parsePhoneNumberFromString(values.phoneNumber).format(
+          phone_number: parsePhoneNumberFromString("+358" + values.phoneNumber).format(
             'E.164',
           ),
           email: values.email,
@@ -239,7 +262,7 @@ export const registrationForm = props => {
               <ZipAndPostOffice values={values} setFieldValue={setFieldValue} />
             </div>
             <div className={classes.FormElement}>
-              {inputField('phoneNumber', null, ' (+358)', 'tel')}
+              {phoneNumberField('phoneNumber')}
             </div>
             <div className={classes.FormElement}>
               {readonlyWhenExistsInput('email', initialValues, 'email')}

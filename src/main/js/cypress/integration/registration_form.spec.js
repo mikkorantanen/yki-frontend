@@ -92,7 +92,7 @@ describe('Registration form', () => {
         error: { expired: true },
       },
     });
-    cy.get('[data-cy=input-phoneNumber]').type('+358401234567');
+    cy.get('[data-cy=input-phoneNumber]').type('401234567');
     cy.get('[data-cy=input-email]').type('test@test.com');
     cy.get('[data-cy=input-confirmEmail]').type('test@test.com');
     cy.get('[data-cy=form-submit-button]').click();
@@ -108,7 +108,7 @@ describe('Registration form', () => {
   it('suomi.fi authenticated user can fill and submit form', () => {
     cy.get('[data-cy=exam-details-card').should('exist');
 
-    cy.get('[data-cy=input-phoneNumber]').type('+358401234567');
+    cy.get('[data-cy=input-phoneNumber]').type('401234567');
     cy.get('[data-cy=input-email]').type('test@test.com');
     cy.get('[data-cy=input-confirmEmail]').type('test@test.com');
 
@@ -130,7 +130,7 @@ describe('Registration form', () => {
     cy.get('[data-cy=input-streetAddress]').type('Somestreet 11 A');
     cy.get('[data-cy=input-zip]').type('1234');
     cy.get('[data-cy=input-postOffice]').type('Somewhere');
-    cy.get('[data-cy=input-phoneNumber]').type('+358401234567');
+    cy.get('[data-cy=input-phoneNumber]').type('401234567');
 
     cy.get('[data-cy=select-nationality]').select('643');
     cy.get('[data-cy=input-birthdate]').type('10.10.1970');
