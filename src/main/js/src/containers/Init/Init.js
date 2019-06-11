@@ -9,9 +9,7 @@ import Alert from '../../components/Alert/Alert';
 
 class Init extends Component {
   componentDidMount() {
-    if (!window.location.hostname.startsWith('yki')){
-      this.props.onFetchUser();
-    }
+    this.props.onFetchUser();
   }
 
   render() {
