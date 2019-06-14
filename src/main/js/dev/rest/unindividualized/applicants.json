@@ -1,0 +1,16 @@
+{
+  "applicants": [
+    {
+      "firstName": "Kalle",
+      "lastName": "Mäkinen",
+      "email": "kalle.makinen@firma.fi",
+      "oid": "83764.3245.23.2"
+    },
+    {
+      "firstName": "Sven",
+      "lastName": "Petterson",
+      "email": "SvenP.Petterson@gmeil.fi",
+      "oid": "28362.1111.22.1"
+    }
+  ]
+}

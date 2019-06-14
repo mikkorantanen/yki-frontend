@@ -16,6 +16,10 @@ const examDates = JSON.parse(
   fs.readFileSync('./dev/rest/examSessions/examDates.json'),
 );
 
+const unindividualizedApplicants = JSON.parse(
+  fs.readFileSync('./dev/rest/unindividualized/applicants.json')
+);
+
 const initRegistration = JSON.parse(
   fs.readFileSync('./dev/rest/registration/registrationInit.json'),
 );
@@ -454,6 +458,15 @@ module.exports = function(app) {
       res.send({ dates: futureExamDates });
     } catch (err) {
       res.status(404).send(err.message);
+    }
+  });
+
+  app.get('/yki/api/unindividualized', (req, res) => {
+    try {
+      res.set('Content-Type', 'application/json; charset=utf-8');
+      res.send({ unindividualized: unindividualizedApplicants});
+    } catch (e) {
+      res.status(404).send(e.message);
     }
   });
 

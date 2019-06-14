@@ -9,6 +9,7 @@ import registryReducer from './store/reducers/registry';
 import examSessionReducer from './store/reducers/examSession';
 import registrationReducer from './store/reducers/registration';
 import userReducer from './store/reducers/user';
+import unindividualizedReducer from './store/reducers/unindividualized';
 import examDatesReducer from './store/reducers/examDates';
 import ErrorBoundary from './containers/ErrorBoundary/ErrorBoundary';
 import Spinner from './components/UI/Spinner/Spinner';
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   registration: registrationReducer,
   user: userReducer,
   dates: examDatesReducer,
+  unindividualized: unindividualizedReducer,
 });
 
 const store = createStore(

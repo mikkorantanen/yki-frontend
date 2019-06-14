@@ -30,3 +30,4 @@ export {
 } from './registration';
 export { fetchExamDates, examDatesFailReset } from './examDates';
 export { fetchUser } from './user';
+export { fetchUnindividualizedApplicants } from './unindividualized'

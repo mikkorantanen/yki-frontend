@@ -52,7 +52,7 @@ class ExamDates extends Component {
         return (
           <React.Fragment key={i}>
             <h3>
-              {this.props.t('common.registationPeriod')}{' '}
+              {this.props.t('common.registationPeriod')}
               {moment(dates[0].registration_start_date).format(
                 DATE_FORMAT_WITHOUT_YEAR,
               )}
