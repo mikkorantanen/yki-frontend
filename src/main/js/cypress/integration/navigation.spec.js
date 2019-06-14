@@ -3,7 +3,7 @@ describe('Navigation', () => {
     cy.server();
   });
 
-  it('when admin is logged in then navigation shows registration and exam dates', () => {
+  it('when admin is logged in then navigation shows registration, exam dates and undividualized list', () => {
     cy.log('Admin is logged in');
     cy.route({
       method: 'GET',
@@ -25,6 +25,9 @@ describe('Navigation', () => {
       .should('exist');
     cy.get('a')
       .contains('Järjestäjärekisteri')
+      .should('exist');
+    cy.get('a')
+      .contains('Yksilöimättömät hakijat')
       .should('exist');
   });
 
@@ -50,6 +53,9 @@ describe('Navigation', () => {
       .should('exist');
     cy.get('a')
       .contains('Järjestäjärekisteri')
+      .should('not.exist');
+    cy.get('a')
+      .contains('Yksilöimättömät hakijat')
       .should('not.exist');
   });
 });

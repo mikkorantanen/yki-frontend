@@ -30,6 +30,9 @@ const Registry = lazy(() => import('./containers/Registry/Registry'));
 const ExamSessions = lazy(() =>
   import('./containers/ExamSessions/ExamSessions'),
 );
+const UnindividualizedList = lazy(() =>
+  import('./containers/Unindividualized/UnindividualizedList'),
+);
 
 const rootReducer = combineReducers({
   registry: registryReducer,
@@ -96,6 +99,7 @@ const app = () => (
               {/* TODO: change back to use component={Component} after react-router-dom updates version */}
               <Route path="/jarjestajarekisteri" render={() => <Registry />} />
               <Route path="/tutkintopaivat" render={() => <ExamDates />} />
+              <Route path="/yksiloimattomat" render={() => <UnindividualizedList />} />
             </ErrorBoundary>
             <Route component={NotFound} />
           </Switch>

@@ -15,6 +15,11 @@ const items = props => {
       <NavigationItem link="/tutkintopaivat">
         {props.t('common.examDates')}
       </NavigationItem>
+      <div className={classes.Separator} />
+      <NavigationItem link="/yksiloimattomat">
+        {/* {props.t('common.unindividualized')} */}
+        Yksilöimättömät hakijat
+      </NavigationItem>
     </React.Fragment>
   ) : (
     <NavigationItem link="/tutkintotilaisuudet">
