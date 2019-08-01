@@ -17,7 +17,7 @@ const examDates = JSON.parse(
 );
 
 const unindividualizedApplicants = JSON.parse(
-  fs.readFileSync('./dev/rest/unindividualized/applicants.json')
+  fs.readFileSync('./dev/rest/unindividualized/unindividualizedApplicants.json')
 );
 
 const initRegistration = JSON.parse(
@@ -461,7 +461,7 @@ module.exports = function(app) {
     }
   });
 
-  app.get('/yki/api/unindividualized', (req, res) => {
+  app.get('/yki/api/virkailija/unindividualized', (req, res) => {
     try {
       res.set('Content-Type', 'application/json; charset=utf-8');
       res.send({ unindividualized: unindividualizedApplicants});

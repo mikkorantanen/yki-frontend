@@ -32,9 +32,9 @@ export const fetchUnindividualizedApplicants = () => {
   return dispatch => {
     dispatch(fetchUnindividualizedStart());
     axios
-    .get('/yki/api/unindividualized')
+    .get('/yki/api/virkailija/unindividualized')
     .then(res => {
-      dispatch(fetchUnindividualizedSuccess(res.data.unindividualized.applicants))
+      dispatch(fetchUnindividualizedSuccess(res.data.unindividualized.unindividualized))
     }).catch(err => {
       dispatch(fetchUnindividualizedFail(err));
     });

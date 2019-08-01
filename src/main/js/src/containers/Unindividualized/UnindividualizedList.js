@@ -4,6 +4,7 @@ import Page from '../../hoc/Page/Page';
 import { connect } from 'react-redux';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './UnindividualizedList.module.css';
+import Hyperlink from '../../components/UI/Hyperlink/Hyperlink';
 
 class UnindividualizedList extends Component {
   componentDidMount = () => {
@@ -11,16 +12,26 @@ class UnindividualizedList extends Component {
   };
 
   unindividualizedTable = () => {
+    const getPerson = (personIndex) => this.props.unindividualized[personIndex];
+
     return (
       <div className={classes.Grid} data-cy="unindividualized-table">
         <h3> Nimi </h3>
         <h3> Email </h3>
-        <h3> Oid </h3>
-        {this.props.unindividualized.map(person => 
-          <React.Fragment key={person.oid}>
-            <p> <a href="#"> {person.firstName + " " + person.lastName} </a> </p>
-            <p> {person.email} </p>
-            <p> {person.oid} </p>
+        <h3> Ilmoittautumistiedot </h3>
+        {Object.keys(this.props.unindividualized).map(personIndex => 
+          <React.Fragment key={personIndex}>
+            <Hyperlink
+              to={`/henkilo-ui/virkailija/${getPerson(personIndex).oidHenkilo}`}
+              text={`${getPerson(personIndex).etunimet} ${getPerson(personIndex).sukunimi}`}
+            />
+            <Hyperlink to={getPerson(personIndex).email} type="email"/>
+            <p>
+              {`Paikka: ${getPerson(personIndex).exam_location_name}`} <br />
+              {`Kieli: ${getPerson(personIndex).exam_lang}`} <br />
+              {`Taso: ${getPerson(personIndex).exam_level}`} <br />
+              {`Pvm: ${getPerson(personIndex).exam_date}`}
+            </p>
           </React.Fragment>
         )}
       </div>
@@ -32,7 +43,7 @@ class UnindividualizedList extends Component {
       <Spinner />
     ) : (
       <div>
-        {this.props.unindividualized.length > 0 ? 
+        {this.props.unindividualized ? 
           this.unindividualizedTable() : 
           <p>Ei yksilöimättömiä hakijoita</p>}
       </div>
