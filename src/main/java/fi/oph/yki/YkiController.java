@@ -11,6 +11,7 @@ public class YkiController {
     @GetMapping(value = {"/",
             "/ilmoittautuminen",
             "/tutkintopaivat",
+            "/yksiloimattomat",
             "/jarjestajarekisteri",
             "/tutkintotilaisuudet",
             "/maksu",
