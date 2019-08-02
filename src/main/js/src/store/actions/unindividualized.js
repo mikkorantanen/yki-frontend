@@ -34,7 +34,7 @@ export const fetchUnindividualizedApplicants = () => {
     axios
     .get('/yki/api/virkailija/unindividualized')
     .then(res => {
-      dispatch(fetchUnindividualizedSuccess(res.data.unindividualized.unindividualized))
+      dispatch(fetchUnindividualizedSuccess(res.data.unindividualized))
     }).catch(err => {
       dispatch(fetchUnindividualizedFail(err));
     });

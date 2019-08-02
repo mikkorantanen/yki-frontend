@@ -1,26 +1,22 @@
-{
-  "unindividualized": 
-    {
-      "1.2.246.562.24.35400122362": {
-        "etunimet": "Kalle Olavi",
-        "sukunimi": "Mäkinen",
-        "oidHenkilo": "1.2.246.562.24.35400122362",
-        "email": "kalle.makinen@firma.fi",
-        "exam_level": "KESKI",
-        "exam_lang": "fin",
-        "exam_location_name": "Meripalatsi - Hakaniemenranta 13C",
-        "exam_date": "2019-12-29"
-      },
-      "1.2.246.562.24.95896786417": {        
-        "etunimet": "Sven Per",
-        "sukunimi": "Petterson",
-        "oidHenkilo": "1.2.246.562.24.95896786417",
-        "email": "SvenP.Petterson@gmeil.fi",
-        "exam_level": "KESKI",
-        "exam_lang": "fin",
-        "exam_location_name": "Meripalatsi - Hakaniemenranta 13C",
-        "exam_date": "2019-12-29"
-      }
-
-    }
+{ 
+  "1.2.246.562.24.35400122362": {
+    "etunimet": "Kalle Olavi",
+    "sukunimi": "Mäkinen",
+    "oidHenkilo": "1.2.246.562.24.35400122362",
+    "email": "kalle.makinen@firma.fi",
+    "exam_level": "KESKI",
+    "exam_lang": "fin",
+    "exam_location_name": "Meripalatsi - Hakaniemenranta 13C",
+    "exam_date": "2019-12-29"
+  },
+  "1.2.246.562.24.95896786417": {        
+    "etunimet": "Sven Per",
+    "sukunimi": "Petterson",
+    "oidHenkilo": "1.2.246.562.24.95896786417",
+    "email": "SvenP.Petterson@gmeil.fi",
+    "exam_level": "KESKI",
+    "exam_lang": "fin",
+    "exam_location_name": "Meripalatsi - Hakaniemenranta 13C",
+    "exam_date": "2019-12-29"
+  }
 }
