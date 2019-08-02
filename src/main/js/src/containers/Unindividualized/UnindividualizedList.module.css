@@ -7,6 +7,25 @@
   align-items: center;
 }
 
+.FilterContainer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  height: 55px;
+  width: 100%;
+}
+
+.Filter {
+  height: 55px;
+  width: 100%;
+}
+
+.Filter > input {
+  height: 35px;
+  width: 330px;
+  padding-right: 10px;
+}
+
 .Grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(50px, 1fr));

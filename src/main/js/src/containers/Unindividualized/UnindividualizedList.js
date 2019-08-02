@@ -7,30 +7,53 @@ import classes from './UnindividualizedList.module.css';
 import Hyperlink from '../../components/UI/Hyperlink/Hyperlink';
 
 class UnindividualizedList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      searchInput: '',
+    }
+  }
   componentDidMount = () => {
     this.props.onFetchApplicants();
   };
 
-  unindividualizedTable = () => {
-    const getPerson = (personIndex) => this.props.unindividualized[personIndex];
+  searchInputChangeHandler = event => {
+    this.setState({ searchInput: event.target.value });
+  };
 
+  getPersonByOid = (personIndex) => this.props.unindividualized[personIndex];
+
+  filterBySearchInput = () => {
+    const oids = Object.keys(this.props.unindividualized);
+    const searchInput = this.state.searchInput.toUpperCase();
+
+    return searchInput.length > 2 ? 
+              oids.filter(o => {
+                const person = this.getPersonByOid(o);
+                return person.email.toUpperCase().includes(searchInput) || 
+                      `${person.etunimet} ${person.sukunimi}`.toUpperCase().includes(searchInput)})
+              : oids;
+  }
+
+  unindividualizedTable = () => {
     return (
       <div className={classes.Grid} data-cy="unindividualized-table">
         <h3> Nimi </h3>
         <h3> Email </h3>
         <h3> Ilmoittautumistiedot </h3>
-        {Object.keys(this.props.unindividualized).map(personIndex => 
+        {this.filterBySearchInput().map(personIndex => 
           <React.Fragment key={personIndex}>
             <Hyperlink
-              to={`/henkilo-ui/virkailija/${getPerson(personIndex).oidHenkilo}`}
-              text={`${getPerson(personIndex).etunimet} ${getPerson(personIndex).sukunimi}`}
+              to={`/henkilo-ui/virkailija/${this.getPersonByOid(personIndex).oidHenkilo}`}
+              text={`${this.getPersonByOid(personIndex).etunimet} ${this.getPersonByOid(personIndex).sukunimi}`}
             />
-            <Hyperlink to={getPerson(personIndex).email} type="email"/>
+            <Hyperlink to={this.getPersonByOid(personIndex).email} type="email"/>
             <p>
-              {`Paikka: ${getPerson(personIndex).exam_location_name}`} <br />
-              {`Kieli: ${getPerson(personIndex).exam_lang}`} <br />
-              {`Taso: ${getPerson(personIndex).exam_level}`} <br />
-              {`Pvm: ${getPerson(personIndex).exam_date}`}
+              {`Paikka: ${this.getPersonByOid(personIndex).exam_location_name}`} <br />
+              {`Kieli: ${this.getPersonByOid(personIndex).exam_lang}`} <br />
+              {`Taso: ${this.getPersonByOid(personIndex).exam_level}`} <br />
+              {`Pvm: ${this.getPersonByOid(personIndex).exam_date}`}
             </p>
           </React.Fragment>
         )}
@@ -43,6 +66,13 @@ class UnindividualizedList extends Component {
       <Spinner />
     ) : (
       <div>
+        {/* filterbar */}
+        <div className={classes.FilterContainer}>
+          <div className={classes.Filter}>
+            <input type="text" placeholder="Hae nimeä tai sähköpostia" onChange={this.searchInputChangeHandler} />
+          </div>
+        </div>
+        {/* content table */}
         {this.props.unindividualized ? 
           this.unindividualizedTable() : 
           <p>Ei yksilöimättömiä hakijoita</p>}
