@@ -118,6 +118,7 @@ class NewRegistryItem extends PureComponent {
     const orgTypes = {
       organisaatiotyyppi_01: this.props.t('registry.search.orgType01'),
       organisaatiotyyppi_02: this.props.t('registry.search.orgType02'),
+      organisaatiotyyppi_05: this.props.t('registry.search.orgType05'),
     };
     const searchResults = (
       <div className={classes.SearchResults}>
