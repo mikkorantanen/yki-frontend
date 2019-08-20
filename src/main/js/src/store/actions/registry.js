@@ -78,7 +78,8 @@ export const fetchOrganizations = () => {
         const organizations_01_02 = res.data.organisaatiot.filter(org => {
           return (
             org.organisaatiotyypit.includes('organisaatiotyyppi_01') ||
-            org.organisaatiotyypit.includes('organisaatiotyyppi_02')
+            org.organisaatiotyypit.includes('organisaatiotyyppi_02') ||
+            org.organisaatiotyypit.includes('organisaatiotyyppi_05')
           );
         });
         dispatch(fetchOrganizationsSuccess(organizations_01_02));
