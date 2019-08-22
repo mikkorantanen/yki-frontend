@@ -119,6 +119,6 @@ describe('<ExamSessionForm />', () => {
         examSessionContent={examSessionContent}
       />,
     );
-    expect(form.find('select').children()).toHaveLength(3);
+    expect(form.find('select').children()).toHaveLength(2);
   });
 });

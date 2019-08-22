@@ -4,6 +4,14 @@ import moment from 'moment';
 
 import { ISO_DATE_FORMAT_SHORT } from '../../common/Constants';
 
+const flattenOrganizationHierarchy = (orgChildrenResponse) => {  
+  const mapConcatOrgs = (orgs) => {
+    return orgs.map(o => [{nimi: o.nimi, oid: o.oid }].concat(mapConcatOrgs(o.children)));
+  }
+
+  return mapConcatOrgs(orgChildrenResponse).flat(20);
+}
+
 const fetchExamSessionContentStart = () => {
   return {
     type: actionTypes.FETCH_EXAM_SESSION_CONTENT_START,
@@ -42,9 +50,9 @@ export const fetchExamSessionContent = () => {
               `/organisaatio-service/rest/organisaatio/v4/${organizer.oid}`,
             ),
             axios.get(
-              `/organisaatio-service/rest/organisaatio/v4/${
+              `/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?aktiiviset=true&suunnitellut=true&lakkautetut=false&oid=${
                 organizer.oid
-              }/children`,
+              }`,
             ),
             axios.get(
               `/yki/api/virkailija/organizer/${
@@ -60,11 +68,12 @@ export const fetchExamSessionContent = () => {
                 examSessionRes,
                 examDateRes,
               ]) => {
+                flattenOrganizationHierarchy(organizationChildrenRes.data.organisaatiot);
                 dispatch(
                   fetchExamSessionContentSuccess({
                     organizer: organizer,
                     organization: organizationRes.data,
-                    organizationChildren: organizationChildrenRes.data,
+                    organizationChildren: flattenOrganizationHierarchy(organizationChildrenRes.data.organisaatiot),
                     examSessions: examSessionRes.data.exam_sessions,
                     examDates: examDateRes.data.dates,
                   }),
