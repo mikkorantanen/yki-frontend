@@ -196,21 +196,13 @@ const examSessionForm = props => {
     }
   };
 
-  const organizationSelection = (organizer, children, lang) => {
-    const organizerOption = (
-      <option value="" key={organizer.oid}>
-        {getLocalizedName(organizer.nimi, lang)}
+  // FIXME: no need for organizer param
+  const organizationSelection = (organizer, children, lang) => 
+    children.map(c => 
+      <option value={c.oid} key={c.oid}>
+        {getLocalizedName(c.nimi, lang)}
       </option>
     );
-    const officeOptions = children.map(c => {
-      return (
-        <option value={c.oid} key={c.oid}>
-          {getLocalizedName(c.nimi, lang)}
-        </option>
-      );
-    });
-    return [organizerOption].concat(officeOptions);
-  };
 
   return (
     <Formik
@@ -298,6 +290,7 @@ const examSessionForm = props => {
               >
                 {organizationSelection(
                   props.examSessionContent.organization,
+                  // fixme: not actually children, its the whole hierarchy
                   props.examSessionContent.organizationChildren,
                   props.i18n.lang,
                 )}
