@@ -11,7 +11,8 @@ export const LogOut = ({ user }) => {
     user ? 
       <React.Fragment>
       <a id='logout-link' className={classes.LogOut} href={`/yki/auth/logout`}>
-        {t('logout.text')}
+        {/* {t('logout.text')} */}
+        Kirjaudu ulos
       </a>
       </React.Fragment>
       : null
