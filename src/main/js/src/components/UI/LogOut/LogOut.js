@@ -1,11 +1,11 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
 import classes from './LogOut.module.css';
 
 export const LogOut = ({ user }) => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   return (
     user ? 
