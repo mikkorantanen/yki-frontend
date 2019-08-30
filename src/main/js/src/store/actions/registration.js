@@ -29,10 +29,18 @@ const locationByLang = (examSession, lang)=> {
 };
 
 const extractExamLocations = examSessions => {
+  console.log("EXAM SESSIONS: examSessions");
+
   const getUniqueLocations = (locations, examSession) => {
     const location = {fi: locationByLang(examSession, 'fi'), sv: locationByLang(examSession, 'sv')};
+    console.log("this exam session: ", examSession)
+    console.log("gathered locations: ", locations);
+    console.log("parsed location: ", location);
+    console.log("does include: ", R.includes(location, locations));
     return R.includes(location, locations) ? locations : R.append(location, locations);
   };
+
+  console.log()
 
   const unique = R.reduce(getUniqueLocations, []);
   const sortByFi = R.sort(R.prop('fi'));
