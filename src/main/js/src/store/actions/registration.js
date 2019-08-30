@@ -34,7 +34,7 @@ const extractExamLocations = examSessions => {
     return R.includes(location, locations) ? locations : R.append(location, locations);
   };
 
-  const unique = R.reduce(getUniqueLocations, []);
+  const unique = R.reduce(getUniqueLocations, []); 
   const sortByFi = R.sort(R.prop('fi'));
 
   return {
