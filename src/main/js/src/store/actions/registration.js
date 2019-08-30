@@ -29,13 +29,10 @@ const locationByLang = (examSession, lang)=> {
 };
 
 const extractExamLocations = examSessions => {
-
   const getUniqueLocations = (locations, examSession) => {
     const location = {fi: locationByLang(examSession, 'fi'), sv: locationByLang(examSession, 'sv')};
     return R.includes(location, locations) ? locations : R.append(location, locations);
   };
-
-  console.log()
 
   const unique = R.reduce(getUniqueLocations, []);
   const sortByFi = R.sort(R.prop('fi'));
