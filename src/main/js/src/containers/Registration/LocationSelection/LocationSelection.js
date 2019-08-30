@@ -28,6 +28,16 @@ const locationSelection = props => {
     });
   };
 
+  // should probably fix in store level. Problem is, if virkailijas add exam sessions with different
+  // objects like { fi: "Helsinki" sv: "Helsinki" } and { fi: "Helsinki" sv: "Helsingfors" } we have duplicates
+  const uniqueLocations = (locations, language) => {
+    const langToUse = i18n.language === 'sv' ? 'sv' : 'fi';
+    return Array.from(new Set(locations.map(l => l[langToUse])))
+      .map(location => langToUse === 'sv' ? 
+        { sv: location, fi: locations.find(l => l.sv === location).fi } : 
+        { sv: locations.find(l => l.fi === location).sv, fi: location });
+  }
+
   return (
     <React.Fragment>
       <Header />
@@ -48,7 +58,7 @@ const locationSelection = props => {
           <button onClick={() => selectLocation('')} role="link">
             {t('common.location.all')}
           </button>
-          {props.locations.map(l => (
+          {uniqueLocations(props.locations).map(l => (
             <button key={l.fi} onClick={() => selectLocation(l.fi)} role="link">
               {i18n.language === 'sv' ? l.sv : l.fi}
             </button>
