@@ -113,7 +113,7 @@ describe('Registration form', () => {
     cy.get('[data-cy=input-confirmEmail]').type('test@test.com');
 
     cy.log('exam language selection should exist when exam lang is not fi/se');
-    cy.get('[data-cy=radio-examLang-en]').click();
+    cy.get('[data-cy=radio-examLang-sv]').click();
 
     cy.get('[data-cy=form-submit-button]').click();
 
