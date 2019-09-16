@@ -298,13 +298,6 @@ export const registrationForm = props => {
                     checkedValue={'sv'}
                     label={props.t('common.language.swe')}
                   />
-                  <Field
-                    component={RadioButtonComponent}
-                    name="examLang"
-                    id={'examLang-en'}
-                    checkedValue={'en'}
-                    label={props.t('common.language.eng')}
-                  />
                 </RadioButtonGroup>
               </div>
             )}
