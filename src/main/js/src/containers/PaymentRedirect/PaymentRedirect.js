@@ -41,6 +41,7 @@ export class PaymentRedirect extends Component {
         ref={this.paymentForm}
         action={this.state.formData.uri}
         method="POST"
+        acceptCharset="ISO-8859-1"
       >
         {this.state.formData.params.PARAMS_IN.split(',').map((p, i) => {
           return (
