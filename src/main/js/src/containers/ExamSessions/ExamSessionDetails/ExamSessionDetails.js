@@ -11,6 +11,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import ParticipantList from '../../../components/UpcomingExamSessions/ParticipantList/ParticipantList';
 import ExamSessionUpdateForm from './ExamSessionUpdateForm/ExamSessionUpdateForm';
 import * as actions from '../../../store/actions/index';
+import { ExamSessionPostAdmission } from './PostAdmission/ExamSessionPostAdmission';
 
 export class ExamSessionDetails extends Component {
   componentDidMount = () => {
@@ -42,17 +43,20 @@ export class ExamSessionDetails extends Component {
           onDelete={this.props.onSubmitDeleteExamSession}
           examSession={this.props.examSession}
         />
+        <ExamSessionPostAdmission postAdmission={this.props.examSession.postAdmission} />
         {this.props.loading ? (
           <Spinner />
         ) : (
-          <ParticipantList
-            examSession={this.props.examSession}
-            participants={this.props.participants}
-            examSessions={this.props.examSessions}
-            onCancel={this.props.onCancelRegistration}
-            onConfirmPayment={this.props.onConfirmPayment}
-            onRelocate={this.props.onRelocate}
-          />
+          <React.Fragment>
+            <ParticipantList
+              examSession={this.props.examSession}
+              participants={this.props.participants}
+              examSessions={this.props.examSessions}
+              onCancel={this.props.onCancelRegistration}
+              onConfirmPayment={this.props.onConfirmPayment}
+              onRelocate={this.props.onRelocate}
+            />
+          </React.Fragment>
         )}
       </div>
     );
