@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ExamSessionPostAdmissionEdit } from './ExamSessionPostAdmissionEdit';
-import { ExamSessionPostAdmissionCreate } from './ExamSessionPostAdmissionCreate';
-import Button from '../../../../components/UI/Button/Button';
+import ExamSessionPostAdmissionCreate from './ExamSessionPostAdmissionCreate';
 import classes from './ExamSessionPostAdmission.module.css';
 
 export class ExamSessionPostAdmission extends Component {
