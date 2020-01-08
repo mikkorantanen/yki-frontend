@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -7,15 +8,15 @@ import DatePicker from '../../../../components/UI/DatePicker/DatePicker';
 import { DATE_FORMAT } from '../../../../common/Constants';
 import * as actions from '../../../../store/actions/index';
 
-const examSessionPostAdmissionCreate = props => {
+const ExamSessionPostAdmissionCreate = props => {
   const validationSchema = Yup.object().shape({
     postAdmissionStart: Yup.string().required('Pakollinen'),
     postAdmissionEnd: Yup.string().required('Pakollinen'),
     postAdmissionQuota: Yup.number().required().min(1, 'Vähintään 1').integer(),
   });
   
-  const postAdmissionAddHandler = (examSessionId, postadmission) => {
-    props.onPostAdmissionAdd(examSessionId, postadmission);
+  const postAdmissionAddHandler = (postadmission) => {
+    props.onPostAdmissionAdd(props.examSession.id, postadmission);
     props.onCancel();
   }
 
@@ -43,6 +44,7 @@ const examSessionPostAdmissionCreate = props => {
           post_admission_quota: values.postAdmissionQuota
         }
 
+        postAdmissionAddHandler(submitPayload);
       }}
       render={({ values, setFieldValue, isValid, handleReset }) => (
         <Form>
@@ -107,11 +109,21 @@ const examSessionPostAdmissionCreate = props => {
     )
 }
 
+const mapStateToProps = state => {
+  return {};
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     onPostAdmissionAdd: (examSessionId, postadmission) => 
       dispatch(actions.addPostAdmission(examSessionId, postadmission))
   }
+};
+
+ExamSessionPostAdmissionCreate.propTypes = {
+  examSession: PropTypes.object.isRequired,
+  onPostAdmissionAdd: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 }
 
-export default examSessionPostAdmissionCreate;
+export default connect(mapStateToProps, mapDispatchToProps)(ExamSessionPostAdmissionCreate);

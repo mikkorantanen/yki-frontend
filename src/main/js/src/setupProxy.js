@@ -283,7 +283,6 @@ module.exports = function(app) {
       const postadmission = req.body;
       const requestPostAdmissionId = req.params.id;
       const examSessionIndex = examSessions.exam_sessions.findIndex(x => x.id == requestPostAdmissionId);
-
       const postAdmissionEntry = {
         id: getNumberBetween(1000, 100000),
         quota: postadmission.quota,
@@ -291,7 +290,7 @@ module.exports = function(app) {
         post_admission_end_date: postadmission.post_admission_end_date,
       };
 
-      examSessions.exam_sessions[examSessionIndex].post_admission = backendData;
+      examSessions.exam_sessions[examSessionIndex].post_admission = postAdmissionEntry;
       res.send({ success: true });
     }
     catch (err) {

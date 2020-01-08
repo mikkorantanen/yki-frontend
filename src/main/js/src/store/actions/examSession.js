@@ -429,7 +429,3 @@ const addPostAdmissionFail = error => {
     error: Object.assign(error, { key: 'error.examSession.updateFailed'})
   }
 }
-
-const addExa
-
-
