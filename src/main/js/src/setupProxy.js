@@ -278,6 +278,27 @@ module.exports = function(app) {
     }
   });
 
+  app.post('/yki/api/virkailija/organizer/exam-session/:id/post-admission', (req, res) => {
+    try {
+      const postadmission = req.body;
+      const requestPostAdmissionId = req.params.id;
+      const examSessionIndex = examSessions.exam_sessions.findIndex(x => x.id == requestPostAdmissionId);
+
+      const postAdmissionEntry = {
+        id: getNumberBetween(1000, 100000),
+        quota: postadmission.quota,
+        post_admission_start_date: postadmission.post_admission_start_date,
+        post_admission_end_date: postadmission.post_admission_end_date,
+      };
+
+      examSessions.exam_sessions[examSessionIndex].post_admission = backendData;
+      res.send({ success: true });
+    }
+    catch (err) {
+      res.status(404).send(err.message);
+    }
+  });
+
   app.post(
     '/yki/api/virkailija/organizer/:oid/file', upload.single('file'), (req, res) => {
       try {
