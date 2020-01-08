@@ -392,10 +392,44 @@ const relocateExamSessionFail = error => {
   };
 };
 
-export const addExamSession = (examSessionId, postAdmission) => {
+export const addPostAdmission = (examSessionId, postAdmission) => {
   return dispatch => {
-    dispatch(addExamSessionStart());
+    dispatch(addPostAdmissionStart());
+    axios
+      .post(`/yki/api/virkailija/organizer/exam-session/${examSessionId}/post-admission`, postAdmission)
+      .then(() => {
+        dispatch(addPostAdmissionSuccess());
+        dispatch(fetchExamSessionContent());
+      })
+      .catch(err => {
+        dispatch(addPostAdmissionFail(err));
+      });
   }
 }
+
+const addPostAdmissionStart = () => {
+  return {
+    type: actionTypes.ADD_POST_ADMISSION_START,
+    loading: true,
+  }
+}
+
+const addPostAdmissionSuccess = () => {
+  return {
+    type: actionTypes.ADD_POST_ADMISSION_SUCCESS,
+    loading: false,
+  }
+}
+
+const addPostAdmissionFail = error => {
+  return {
+    type: actionTypes.ADD_POST_ADMISSION_FAIL,
+    loading: false,
+    // TODO: switch to correct translation key
+    error: Object.assign(error, { key: 'error.examSession.updateFailed'})
+  }
+}
+
+const addExa
 
 

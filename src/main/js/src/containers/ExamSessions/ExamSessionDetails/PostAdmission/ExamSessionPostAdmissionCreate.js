@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from '../../../../components/UI/DatePicker/DatePicker';
 import { DATE_FORMAT } from '../../../../common/Constants';
+import * as actions from '../../../../store/actions/index';
 
 const examSessionPostAdmissionCreate = props => {
   const validationSchema = Yup.object().shape({
@@ -13,6 +14,11 @@ const examSessionPostAdmissionCreate = props => {
     postAdmissionQuota: Yup.number().required().min(1, 'Vähintään 1').integer(),
   });
   
+  const postAdmissionAddHandler = (examSessionId, postadmission) => {
+    props.onPostAdmissionAdd(examSessionId, postadmission);
+    props.onCancel();
+  }
+
   const formikCheckbox = ({ field, type }) => {
     return (
       <label>
@@ -99,6 +105,13 @@ const examSessionPostAdmissionCreate = props => {
         </Form>
       )}/>
     )
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onPostAdmissionAdd: (examSessionId, postadmission) => 
+      dispatch(actions.addPostAdmission(examSessionId, postadmission))
+  }
 }
 
 export default examSessionPostAdmissionCreate;
