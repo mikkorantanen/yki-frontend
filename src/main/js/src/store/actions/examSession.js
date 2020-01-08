@@ -391,3 +391,11 @@ const relocateExamSessionFail = error => {
     loading: false,
   };
 };
+
+export const addExamSession = (examSessionId, postAdmission) => {
+  return dispatch => {
+    dispatch(addExamSessionStart());
+  }
+}
+
+

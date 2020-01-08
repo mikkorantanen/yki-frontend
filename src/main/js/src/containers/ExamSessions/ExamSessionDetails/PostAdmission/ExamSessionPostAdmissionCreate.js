@@ -10,8 +10,7 @@ const examSessionPostAdmissionCreate = props => {
   const validationSchema = Yup.object().shape({
     postAdmissionStart: Yup.string().required('Pakollinen'),
     postAdmissionEnd: Yup.string().required('Pakollinen'),
-    postAdmissionParticipantAmount: Yup.number().required().min(1, 'Vähintään 1').integer(),
-    postAdmissionNotifyQueue: Yup.boolean(),
+    postAdmissionQuota: Yup.number().required().min(1, 'Vähintään 1').integer(),
   });
   
   const formikCheckbox = ({ field, type }) => {
@@ -28,11 +27,17 @@ const examSessionPostAdmissionCreate = props => {
       initialValues={{
         postAdmissionStart: '',
         postAdmissionEnd: '',
-        postAdmissionParticipantAmount: '',
-        postAdmissionNotifyQueue: true,
+        postAdmissionQuota: '',
       }}
       validationSchema={validationSchema}
-      onSubmit={() => alert("test")}
+      onSubmit={values => {
+        const submitPayload = {
+          post_admission_start_date: values.postAdmissionStart,
+          post_admission_end_date: values.postAdmissionEnd,
+          post_admission_quota: values.postAdmissionQuota
+        }
+
+      }}
       render={({ values, setFieldValue, isValid, handleReset }) => (
         <Form>
           <div data-cy="post-admission-form-create">
@@ -69,34 +74,24 @@ const examSessionPostAdmissionCreate = props => {
                   )
                 }
                 // locale={props.i18n.language}
-                tabIndex="1"
+                tabIndex="2"
               />
             </div>
             <div>
               <label htmlFor="postAdmissionParticipantAmount">Paikkojen määrä</label>
               <Field
-                id="postAdmissionParticipantAmount"
-                name="postAdmissionParticipantAmount"
-                data-cy="input-admission-participant-amount"
+                id="postAdmissionQuota"
+                name="postAdmissionQuota"
+                data-cy="input-admission-quota"
                 tabIndex="3"
               />
             </div>
-            <div>
-              <Field
-                id="postAdmissionNotifyQueue"
-                name="postAdmissionNotifyQueue"
-                data-cy="input-admission-notify-queue"
-                type="checkbox"
-                component={formikCheckbox}
-                tabIndex="4"
-              />
-            </div>
             <div data-cy="admission-create-form-controls">
-              <button type="submit" tabIndex="5">
+              <button type="submit" tabIndex="4">
                 Ok
               </button>
               
-              <button type="button" onClick={props.onCancel} tabIndex="6">
+              <button type="button" onClick={props.onCancel} tabIndex="5">
                 Peruuta
               </button>
             </div>
