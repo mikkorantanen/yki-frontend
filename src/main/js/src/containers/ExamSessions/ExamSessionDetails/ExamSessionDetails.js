@@ -43,11 +43,11 @@ export class ExamSessionDetails extends Component {
           onDelete={this.props.onSubmitDeleteExamSession}
           examSession={this.props.examSession}
         />
-        
+
         {/* maybe should wrap the whole thing to loading spinner? */}
         {this.props.loading ? <Spinner /> : (
           <React.Fragment>
-            <ExamSessionPostAdmission examSession={this.props.examSession} postAdmission={this.props.examSession.postAdmission} />
+            <ExamSessionPostAdmission examSession={this.props.examSession} />
             <ParticipantList
               examSession={this.props.examSession}
               participants={this.props.participants}

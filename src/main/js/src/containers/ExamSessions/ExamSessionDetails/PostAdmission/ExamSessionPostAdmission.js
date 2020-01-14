@@ -18,11 +18,12 @@ export class ExamSessionPostAdmission extends Component {
   }
 
   render() {
+    const postAdmission = this.props.examSession.post_admission;
     return (
       <div data-cy="exam-session-post-admission">
         <h2> Jälki-ilmoittautuminen </h2>
-        {this.props.postAdmission ? 
-          <ExamSessionPostAdmissionEdit postAdmission={this.props.postAdmission} /> : (
+        {postAdmission ? 
+          <ExamSessionPostAdmissionEdit postAdmission={postAdmission} /> : (
             this.state.createMode ? <ExamSessionPostAdmissionCreate examSession={this.props.examSession} onCancel={this.toggleCreateMode} /> : (
             <div data-cy="exam-session-no-post-admission">
               <button 
@@ -40,6 +41,5 @@ export class ExamSessionPostAdmission extends Component {
 }
 
 ExamSessionPostAdmission.propTypes = {
-  postAdmission: PropTypes.object,
   examSession: PropTypes.object.isRequired,
 }
