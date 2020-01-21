@@ -19,6 +19,8 @@ export class ExamSessionPostAdmission extends Component {
 
   render() {
     const postAdmission = this.props.examSession.post_admission;
+
+    console.log("postAdmission", this.props.examSession.post_admission);
     return (
       <div data-cy="exam-session-post-admission">
         <h2> Jälki-ilmoittautuminen </h2>
