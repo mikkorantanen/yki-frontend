@@ -1,6 +1,52 @@
+.Buttons {
+  width: 350px
+}
+
 .Button {
-  height: 28px;
+  height: 41px;
   background-color: hsla(195, 82%, 44%, 1);
   color: white;
+  font-size: 1em;
+  padding: 0 18px;
+}
+
+.ButtonRight {
+  float: right;
+}
+
+.Action {
+  color: hsla(15, 100%, 40%, 1);
+  text-decoration-line: underline;
+  background: none;
+  border: none;
+  padding: 10px;
+}
+
+.Form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.Label {
+  display: block;
   font-size: 0.875em;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.Input {
+  width: 340px;
+  height: 35px;
+  margin-bottom: 20px;
+}
+
+.DatePicker {
+  background: url(/static/media/calendar.850cb14c.svg) no-repeat center right;
+  background-position: 92% center;
+  background-size: 1.5em;
+}
+
+.ErrorMessage {
+  color: hsla(15, 100%, 40%, 1);
+  margin-left: 10px;
 }

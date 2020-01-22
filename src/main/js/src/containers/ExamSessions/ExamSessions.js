@@ -105,7 +105,7 @@ class ExamSessions extends Component {
             modalClosed={this.closeExamSessionDetailsModalHandler}
           >
             <ExamSessionDetails
-              examSession={this.state.selectedExamSession}
+              examSession={this.props.examSessionContent.examSessions.find(es => es.id === this.state.selectedExamSession.id)}
               onSubmitUpdateExamSession={this.updateExamSessionHandler}
               onSubmitDeleteExamSession={this.deleteExamSessionHandler}
             />

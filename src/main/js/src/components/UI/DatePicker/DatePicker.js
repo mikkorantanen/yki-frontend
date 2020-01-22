@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Flatpickr from 'flatpickr';
 import { Finnish } from 'flatpickr/dist/l10n/fi.js';
 import { Swedish } from 'flatpickr/dist/l10n/sv.js';
+import { english } from 'flatpickr/dist/l10n/default';
 import 'flatpickr/dist/themes/airbnb.css';
 import moment from 'moment';
 import { DATE_FORMAT } from '../../../common/Constants';
@@ -13,7 +14,7 @@ class DatePicker extends Component {
   componentDidMount() {
     const options = {
       ...this.props.options,
-      locale: this.props.locale === 'sv' ? Swedish : Finnish,
+      locale: selectLocale(this.props.locale),
       formatDate: d => moment(d).format(DATE_FORMAT),
       onClose: () => this.node.blur && this.node.blur(),
     };
@@ -38,6 +39,17 @@ class DatePicker extends Component {
         tabIndex={this.props.tabIndex}
       />
     );
+  }
+}
+
+var selectLocale = tag => {
+  switch(tag) {
+    case 'sv':
+      return Swedish;
+    case 'fi':
+      return Finnish;
+    default:
+      return english;
   }
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
 import { ExamSessionPostAdmissionEdit } from './ExamSessionPostAdmissionEdit';
 import ExamSessionPostAdmissionCreate from './ExamSessionPostAdmissionCreate';
 import classes from './ExamSessionPostAdmission.module.css';
@@ -18,20 +19,21 @@ export class ExamSessionPostAdmission extends Component {
   }
 
   render() {
+    const t = this.props.t;
     const postAdmission = this.props.examSession.post_admission;
     return (
       <div data-cy="exam-session-post-admission">
-        <h2> Jälki-ilmoittautuminen </h2>
-        {postAdmission ? 
+        <h2> Jälki-ilmoittautuminen {/* {t('examSession.postAdmission')} */} </h2>
+        {postAdmission ?
           <ExamSessionPostAdmissionEdit postAdmission={postAdmission} /> : (
             this.state.createMode ? <ExamSessionPostAdmissionCreate examSession={this.props.examSession} onCancel={this.toggleCreateMode} /> : (
             <div data-cy="exam-session-no-post-admission">
-              <button 
-                className={classes.Button} 
+              <button
+                className={classes.Button}
                 data-cy="button-add-post-admission"
                 onClick={() => this.toggleCreateMode()}
               >
-                Luo jälki-ilmoittautuminen
+                {t('examSession.postAdmission.create')}
               </button>
             </div>)
           )}
@@ -43,3 +45,5 @@ export class ExamSessionPostAdmission extends Component {
 ExamSessionPostAdmission.propTypes = {
   examSession: PropTypes.object.isRequired,
 }
+
+export default withTranslation()(ExamSessionPostAdmission);

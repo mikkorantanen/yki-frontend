@@ -1,20 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
 import moment from 'moment';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from '../../../../components/UI/DatePicker/DatePicker';
 import { DATE_FORMAT } from '../../../../common/Constants';
 import * as actions from '../../../../store/actions/index';
+import classes from './ExamSessionPostAdmission.module.css'
 
 const ExamSessionPostAdmissionCreate = props => {
+  const t = props.t;
   const validationSchema = Yup.object().shape({
-    postAdmissionStart: Yup.string().required('Pakollinen'),
-    postAdmissionEnd: Yup.string().required('Pakollinen'),
-    postAdmissionQuota: Yup.number().required().min(1, 'Vähintään 1').integer(),
+    postAdmissionStart: Yup.string().required(t('error.mandatory')),
+    postAdmissionEnd: Yup.string().required(t('error.mandatory')),
+    postAdmissionQuota: Yup.number().typeError(t('error.numeric.int')).required(t('error.mandatory')).positive(t('error.numeric.positive')).integer(t('error.numeric.int')),
   });
-  
+
   const postAdmissionAddHandler = (postadmission) => {
     props.onPostAdmissionAdd(props.examSession.id, postadmission);
     props.onCancel();
@@ -47,15 +50,17 @@ const ExamSessionPostAdmissionCreate = props => {
         postAdmissionAddHandler(submitPayload);
       }}
       render={({ values, setFieldValue, isValid, handleReset }) => (
-        <Form>
+        <Form className={classes.Form}>
           <div data-cy="post-admission-form-create">
             <div>
-              <label htmlFor="postAdmissionStart">Aloitusajankohta</label>
+              <label className={classes.Label} htmlFor="postAdmissionStart">{t('examSession.postAdmission.startDate')}</label>
               <DatePicker
                 id="postAdmissionStart"
+                className={`${classes.Input} ${classes.DatePicker}`}
                 options={{
                   defaultDate: '',
                   value: values.postAdmissionStart,
+                  minDate: moment(props.examSession.registration_end_date).add(1, 'days').format('YYYY MM DD')
                 }}
                 onChange={d =>
                   setFieldValue(
@@ -63,17 +68,24 @@ const ExamSessionPostAdmissionCreate = props => {
                     moment(d[0], DATE_FORMAT).toISOString(),
                   )
                 }
-                // locale={props.i18n.language}
+                locale={props.i18n.language}
                 tabIndex="1"
+              />
+              <ErrorMessage
+                name="postAdmissionStart"
+                component="span"
+                className={classes.ErrorMessage}
               />
             </div>
             <div>
-              <label htmlFor="postAdmissionEnd">Lopetusajankohta</label>
+              <label className={classes.Label} htmlFor="postAdmissionEnd">{t('examSession.postAdmission.endDate')}</label>
               <DatePicker
                 id="postAdmissionEnd"
+                className={`${classes.Input} ${classes.DatePicker}`}
                 options={{
                   defaultDate: '',
                   value: values.postAdmissionStart,
+                  minDate: moment(props.examSession.registration_end_date).add(1, 'days').format('YYYY MM DD')
                 }}
                 onChange={d =>
                   setFieldValue(
@@ -81,26 +93,37 @@ const ExamSessionPostAdmissionCreate = props => {
                     moment(d[0], DATE_FORMAT).toISOString(),
                   )
                 }
-                // locale={props.i18n.language}
+                locale={props.i18n.language}
                 tabIndex="2"
+              />
+              <ErrorMessage
+                name="postAdmissionEnd"
+                component="span"
+                className={classes.ErrorMessage}
               />
             </div>
             <div>
-              <label htmlFor="postAdmissionParticipantAmount">Paikkojen määrä</label>
+              <label className={classes.Label} htmlFor="postAdmissionParticipantAmount">{t('examSession.postAdmission.participantAmount')}</label>
               <Field
                 id="postAdmissionQuota"
+                className={classes.Input}
                 name="postAdmissionQuota"
                 data-cy="input-admission-quota"
                 tabIndex="3"
               />
+              <ErrorMessage
+                name="postAdmissionQuota"
+                component="span"
+                className={classes.ErrorMessage}
+              />
             </div>
-            <div data-cy="admission-create-form-controls">
-              <button type="submit" tabIndex="4">
-                Ok
+            <div className={classes.Buttons} data-cy="admission-create-form-controls">
+              <button className={`${classes.Button} ${classes.ButtonRight}`} type="submit" tabIndex="4">
+              {t('common.confirm')}
               </button>
-              
-              <button type="button" onClick={props.onCancel} tabIndex="5">
-                Peruuta
+
+              <button className={classes.Action} type="button" onClick={props.onCancel} tabIndex="5">
+                {t('common.cancelConfirm')}
               </button>
             </div>
           </div>
@@ -115,7 +138,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onPostAdmissionAdd: (examSessionId, postadmission) => 
+    onPostAdmissionAdd: (examSessionId, postadmission) =>
       dispatch(actions.addPostAdmission(examSessionId, postadmission))
   }
 };
@@ -126,4 +149,4 @@ ExamSessionPostAdmissionCreate.propTypes = {
   onCancel: PropTypes.func.isRequired,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExamSessionPostAdmissionCreate);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(ExamSessionPostAdmissionCreate));
