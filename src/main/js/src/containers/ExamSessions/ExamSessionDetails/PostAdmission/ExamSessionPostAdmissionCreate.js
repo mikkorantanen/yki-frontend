@@ -6,8 +6,7 @@ import moment from 'moment';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from '../../../../components/UI/DatePicker/DatePicker';
-import { DATE_FORMAT } from '../../../../common/Constants';
-import * as actions from '../../../../store/actions/index';
+import { addPostAdmission } from '../../../../store/actions/index';
 import classes from './ExamSessionPostAdmission.module.css'
 
 const ExamSessionPostAdmissionCreate = props => {
@@ -19,24 +18,15 @@ const ExamSessionPostAdmissionCreate = props => {
   });
 
   const postAdmissionAddHandler = (postadmission) => {
-    props.onPostAdmissionAdd(props.examSession.id, postadmission);
+    props.addPostAdmission(props.examSessionId, postadmission);
     props.onCancel();
-  }
-
-  const formikCheckbox = ({ field, type }) => {
-    return (
-      <label>
-        Jononotifikaatio
-        <input {...field} type={type} />
-      </label>
-    )
   }
 
   return (
     <Formik
       initialValues={{
         postAdmissionStart: '',
-        postAdmissionEnd: '',
+        postAdmissionEnd: moment(props.postAdmissionEndDate).format('D.M.YYYY'),
         postAdmissionQuota: '',
       }}
       validationSchema={validationSchema}
@@ -44,7 +34,8 @@ const ExamSessionPostAdmissionCreate = props => {
         const submitPayload = {
           post_admission_start_date: values.postAdmissionStart,
           post_admission_end_date: values.postAdmissionEnd,
-          post_admission_quota: values.postAdmissionQuota
+          post_admission_quota: values.postAdmissionQuota,
+          post_admission_active: false,
         }
 
         postAdmissionAddHandler(submitPayload);
@@ -60,12 +51,13 @@ const ExamSessionPostAdmissionCreate = props => {
                 options={{
                   defaultDate: '',
                   value: values.postAdmissionStart,
-                  minDate: moment(props.examSession.registration_end_date).add(1, 'days').format('YYYY MM DD')
+                  minDate: moment(props.postAdmissionMinDate).add(1, 'days').format('YYYY MM DD'),
+                  maxDate: moment(props.postAdmissionEndDate).add(-1, 'days').format('YYYY MM DD')
                 }}
                 onChange={d =>
                   setFieldValue(
                     'postAdmissionStart',
-                    moment(d[0], DATE_FORMAT).toISOString(),
+                    moment(d[0]).format('YYYY-MM-DD'),
                   )
                 }
                 locale={props.i18n.language}
@@ -79,31 +71,17 @@ const ExamSessionPostAdmissionCreate = props => {
             </div>
             <div>
               <label className={classes.Label} htmlFor="postAdmissionEnd">{t('examSession.postAdmission.endDate')}</label>
-              <DatePicker
+              <Field
                 id="postAdmissionEnd"
-                className={`${classes.Input} ${classes.DatePicker}`}
-                options={{
-                  defaultDate: '',
-                  value: values.postAdmissionStart,
-                  minDate: moment(props.examSession.registration_end_date).add(1, 'days').format('YYYY MM DD')
-                }}
-                onChange={d =>
-                  setFieldValue(
-                    'postAdmissionEnd',
-                    moment(d[0], DATE_FORMAT).toISOString(),
-                  )
-                }
-                locale={props.i18n.language}
-                tabIndex="2"
-              />
-              <ErrorMessage
+                className={`${classes.Input} ${classes.Disabled}`}
                 name="postAdmissionEnd"
-                component="span"
-                className={classes.ErrorMessage}
+                data-cy="input-admission-endDate"
+                tabIndex="3"
+                disabled
               />
             </div>
             <div>
-              <label className={classes.Label} htmlFor="postAdmissionParticipantAmount">{t('examSession.postAdmission.participantAmount')}</label>
+              <label className={classes.Label} htmlFor="postAdmissionQuota">{t('examSession.postAdmission.participantAmount')}</label>
               <Field
                 id="postAdmissionQuota"
                 className={classes.Input}
@@ -119,7 +97,7 @@ const ExamSessionPostAdmissionCreate = props => {
             </div>
             <div className={classes.Buttons} data-cy="admission-create-form-controls">
               <button className={`${classes.Button} ${classes.ButtonRight}`} type="submit" tabIndex="4">
-              {t('common.confirm')}
+                {t('examSession.postAdmission.createTemplate')}
               </button>
 
               <button className={classes.Action} type="button" onClick={props.onCancel} tabIndex="5">
@@ -132,21 +110,11 @@ const ExamSessionPostAdmissionCreate = props => {
     )
 }
 
-const mapStateToProps = state => {
-  return {};
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onPostAdmissionAdd: (examSessionId, postadmission) =>
-      dispatch(actions.addPostAdmission(examSessionId, postadmission))
-  }
-};
-
 ExamSessionPostAdmissionCreate.propTypes = {
-  examSession: PropTypes.object.isRequired,
-  onPostAdmissionAdd: PropTypes.func.isRequired,
+  examSessionId: PropTypes.number.isRequired,
+  postAdmissionMinDate: PropTypes.string.isRequired,
+  postAdmissionEndDate: PropTypes.string.isRequired,
   onCancel: PropTypes.func.isRequired,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(ExamSessionPostAdmissionCreate));
+export default connect(null, { addPostAdmission })(withTranslation()(ExamSessionPostAdmissionCreate));
