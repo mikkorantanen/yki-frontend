@@ -68,6 +68,7 @@ export const fetchExamSessionContent = () => {
                 examSessionRes,
                 examDateRes,
               ]) => {
+                console.log("EXAM SESSION RESPONSE: ", examSessionRes);
                 flattenOrganizationHierarchy(organizationChildrenRes.data.organisaatiot);
                 dispatch(
                   fetchExamSessionContentSuccess({
@@ -394,11 +395,15 @@ const relocateExamSessionFail = error => {
 
 export const addPostAdmission = (examSessionId, postAdmission) => {
   return dispatch => {
+    console.log("Adding post admission to examSessionId: ", examSessionId);
+    console.log("PA DATA:", postAdmission);
     dispatch(addPostAdmissionStart());
     axios
       .post(`/yki/api/virkailija/organizer/exam-session/${examSessionId}/post-admission`, postAdmission)
       .then(() => {
+        console.log("POST OK");
         dispatch(addPostAdmissionSuccess());
+        console.log("Fetching exam session content");
         dispatch(fetchExamSessionContent());
       })
       .catch(err => {

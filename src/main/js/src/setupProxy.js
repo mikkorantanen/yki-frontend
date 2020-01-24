@@ -292,6 +292,7 @@ module.exports = function(app) {
       };
 
       examSessions.exam_sessions[examSessionIndex].post_admission = postAdmissionEntry;
+      console.log("ExamSessions: ", examSessions);
       res.send({ success: true });
     }
     catch (err) {

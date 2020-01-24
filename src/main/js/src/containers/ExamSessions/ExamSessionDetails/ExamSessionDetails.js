@@ -21,6 +21,10 @@ export class ExamSessionDetails extends Component {
     );
   };
 
+  componentDidUpdate = props => {
+    console.log("updated, exam session: ", props.examSession);
+  }
+
   render() {
     const location = this.props.examSession.location.find(
       l => l.lang === this.props.language,
