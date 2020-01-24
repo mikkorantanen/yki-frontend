@@ -42,7 +42,7 @@ class DatePicker extends Component {
   }
 }
 
-var selectLocale = tag => {
+const selectLocale = tag => {
   switch(tag) {
     case 'sv':
       return Swedish;
