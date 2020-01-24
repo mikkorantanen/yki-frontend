@@ -285,9 +285,10 @@ module.exports = function(app) {
       const examSessionIndex = examSessions.exam_sessions.findIndex(x => x.id == requestPostAdmissionId);
       const postAdmissionEntry = {
         id: getNumberBetween(1000, 100000),
-        quota: postadmission.quota,
+        post_admission_quota: postadmission.post_admission_quota,
         post_admission_start_date: postadmission.post_admission_start_date,
         post_admission_end_date: postadmission.post_admission_end_date,
+        post_admission_active: postadmission.post_admission_active,
       };
 
       examSessions.exam_sessions[examSessionIndex].post_admission = postAdmissionEntry;
