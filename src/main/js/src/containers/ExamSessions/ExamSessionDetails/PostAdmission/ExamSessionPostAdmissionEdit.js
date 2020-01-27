@@ -13,12 +13,22 @@ class ExamSessionPostAdmissionEdit extends React.Component {
   constructor (props) {
     super(props);
 
-    this.state = { edit: false, active: this.props.postAdmission.post_admission_active };
+    this.state = { edit: false };
+  }
+
+  toggleActivePostAdmission = () => {
+    const payload = {
+      post_admission_start_date: this.props.postAdmission.post_admission_start_date,
+      post_admission_end_date: this.props.postAdmission.post_admission_end_date,
+      post_admission_quota: this.props.postAdmission.post_admission_quota,
+      post_admission_active: !this.props.postAdmission.post_admission_active
+    }
+    this.props.addPostAdmission(this.props.examSessionId, payload)
   }
 
   render() {
-    console.log(this.props)
     const t = this.props.t;
+    const active = this.props.postAdmission.post_admission_active;
     const validationSchema = Yup.object().shape({
       postAdmissionStart: Yup.string().required(t('error.mandatory')),
       postAdmissionEnd: Yup.string().required(t('error.mandatory')),
@@ -37,7 +47,6 @@ class ExamSessionPostAdmissionEdit extends React.Component {
           onSubmit={values => {
             const submitPayload = {
               post_admission_start_date: values.postAdmissionStart,
-              post_admission_end_date: values.postAdmissionEnd,
               post_admission_quota: values.postAdmissionQuota,
               post_admission_active: this.state.active
             }
@@ -101,7 +110,7 @@ class ExamSessionPostAdmissionEdit extends React.Component {
                 </div>
                 <div className={classes.Buttons} data-cy="admission-create-form-controls">
                   <button className={classes.Button} type="submit" tabIndex="3">
-                    Tallenna
+                    {t('common.save')}
                   </button>
                 </div>
               </div>
@@ -125,11 +134,13 @@ class ExamSessionPostAdmissionEdit extends React.Component {
           </label>
           <input className={`${classes.Input} ${classes.Disabled}`} value={this.props.postAdmission.post_admission_quota} disabled />
           <div className={classes.Buttons} data-cy="admission-create-form-controls">
-            <button className={classes.Button} type="button" tabIndex="1" onClick={e => this.setState({ edit: true })}>
-              Muokkaa
-            </button>
-            <button className={`${classes.Button} ${classes.ButtonRight}`} type="button" tabIndex="2">
-              Aktivoi
+            {active ?
+             null :
+             <button className={classes.Button} type="button" tabIndex="1" onClick={e => this.setState({ edit: true })}>
+              {t('common.modify')}
+            </button>}
+            <button className={`${classes.Button} ${active ? null : classes.ButtonRight}`} type="button" tabIndex="2" onClick={this.toggleActivePostAdmission}>
+              {active ? t('examSession.postAdmission.hide') : t('examSession.postAdmission.publish')}
             </button>
           </div>
         </>

@@ -24,12 +24,10 @@ class ExamSessions extends Component {
   };
 
   componentDidMount = () => {
-    console.log("mounted LOL");
     this.props.onFetchExamSessionContent();
   };
 
   componentDidUpdate = prevProps => {
-    console.log("")
     // close open modals in case of error
     if (!prevProps.error && this.props.error) {
       if (this.state.showExamSessionDetailsModal) {

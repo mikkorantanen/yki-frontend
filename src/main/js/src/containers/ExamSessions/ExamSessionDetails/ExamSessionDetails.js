@@ -21,10 +21,6 @@ export class ExamSessionDetails extends Component {
     );
   };
 
-  componentDidUpdate = props => {
-    console.log("updated, exam session: ", props.examSession);
-  }
-
   render() {
     const location = this.props.examSession.location.find(
       l => l.lang === this.props.language,
@@ -48,17 +44,19 @@ export class ExamSessionDetails extends Component {
           examSession={this.props.examSession}
         />
         <h2>{this.props.t('examSession.postAdmission')}</h2>
-        <ExamSessionPostAdmission examSession={this.props.examSession} />
         {/* maybe should wrap the whole thing to loading spinner? */}
         {this.props.loading ? <Spinner /> : (
-          <ParticipantList
-            examSession={this.props.examSession}
-            participants={this.props.participants}
-            examSessions={this.props.examSessions}
-            onCancel={this.props.onCancelRegistration}
-            onConfirmPayment={this.props.onConfirmPayment}
-            onRelocate={this.props.onRelocate}
-          />
+          <>
+            <ExamSessionPostAdmission examSession={this.props.examSession} />
+            <ParticipantList
+              examSession={this.props.examSession}
+              participants={this.props.participants}
+              examSessions={this.props.examSessions}
+              onCancel={this.props.onCancelRegistration}
+              onConfirmPayment={this.props.onConfirmPayment}
+              onRelocate={this.props.onRelocate}
+            />
+          </>
         )}
       </div>
     );

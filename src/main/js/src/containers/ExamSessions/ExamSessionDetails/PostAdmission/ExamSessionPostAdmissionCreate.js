@@ -33,7 +33,6 @@ const ExamSessionPostAdmissionCreate = props => {
       onSubmit={values => {
         const submitPayload = {
           post_admission_start_date: values.postAdmissionStart,
-          post_admission_end_date: values.postAdmissionEnd,
           post_admission_quota: values.postAdmissionQuota,
           post_admission_active: false,
         }
