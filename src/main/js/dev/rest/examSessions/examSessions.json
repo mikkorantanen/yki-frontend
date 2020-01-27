@@ -45,8 +45,10 @@
       "open": true,
       "queue": 0,
       "queue_full": false,
-      "post_admission": null,
-      "post_admission_end_date": "2019-12-25"
+      "post_admission_quota": null,
+      "post_admission_start_date": null,
+      "post_admission_end_date": "2019-12-25",
+      "post_admission_active": false
     },
     {
       "published_at": "2018-01-01T00:00:00.000Z",
@@ -92,7 +94,11 @@
       "exam_fee": "100.00",
       "open": false,
       "queue": 0,
-      "queue_full": false
+      "queue_full": false,
+      "post_admission_quota": null,
+      "post_admission_start_date": null,
+      "post_admission_end_date": null,
+      "post_admission_active": false
     },
     {
       "published_at": "2018-01-01T00:00:00.000Z",
@@ -139,7 +145,10 @@
       "open": false,
       "queue": 1,
       "queue_full": false,
-      "post_admission": null
+      "post_admission_quota": null,
+      "post_admission_start_date": null,
+      "post_admission_end_date": null,
+      "post_admission_active": false
     }
   ]
 }

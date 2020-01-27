@@ -283,16 +283,12 @@ module.exports = function(app) {
       const postadmission = req.body;
       const requestPostAdmissionId = req.params.id;
       const examSessionIndex = examSessions.exam_sessions.findIndex(x => x.id == requestPostAdmissionId);
-      const postAdmissionEntry = {
-        id: getNumberBetween(1000, 100000),
-        post_admission_quota: postadmission.post_admission_quota,
-        post_admission_start_date: postadmission.post_admission_start_date,
-        post_admission_end_date: postadmission.post_admission_end_date,
-        post_admission_active: postadmission.post_admission_active,
-      };
+      const examsSession = examSessions.exam_sessions[examSessionIndex];
 
-      examSessions.exam_sessions[examSessionIndex].post_admission = postAdmissionEntry;
-      console.log("ExamSessions: ", examSessions);
+      examsSession.post_admission_quota = postadmission.post_admission_quota;
+      examsSession.post_admission_start_date = postadmission.post_admission_start_date;
+      examsSession.post_admission_active = postadmission.post_admission_active;
+
       res.send({ success: true });
     }
     catch (err) {
