@@ -131,6 +131,7 @@
   "examSession.postAdmission.createTemplate": "Alusta",
   "examSession.postAdmission.publish": "Julkaise ilmoittautuminen",
   "examSession.postAdmission.hide": "Piiloita ilmoittautuminen",
+  "examSession.postAdmission.confirmationText": "Haluatko varmasti muuttaa ilmoittautumisen tilaa?",
   "examSessions.agreementNotFound": "Ei löytynyt voimassaolevaa järjestäjäsopimusta.",
   "feature.languageSelect.disable": "false",
   "logout.text": "Kirjaudu ulos",

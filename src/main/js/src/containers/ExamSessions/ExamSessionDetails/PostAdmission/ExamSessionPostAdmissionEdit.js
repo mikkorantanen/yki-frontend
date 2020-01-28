@@ -10,10 +10,10 @@ import { addPostAdmission } from '../../../../store/actions/examSession';
 import classes from './ExamSessionPostAdmission.module.css'
 
 class ExamSessionPostAdmissionEdit extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
-    this.state = { edit: false };
+    this.state = { edit: false, confirmActiveToggle: false };
   }
 
   toggleActivePostAdmission = () => {
@@ -23,7 +23,8 @@ class ExamSessionPostAdmissionEdit extends React.Component {
       post_admission_quota: this.props.postAdmission.post_admission_quota,
       post_admission_active: !this.props.postAdmission.post_admission_active
     }
-    this.props.addPostAdmission(this.props.examSessionId, payload)
+    this.props.addPostAdmission(this.props.examSessionId, payload);
+    this.setState({ confirmActiveToggle: !this.state.confirmActiveToggle });
   }
 
   render() {
@@ -34,6 +35,33 @@ class ExamSessionPostAdmissionEdit extends React.Component {
       postAdmissionEnd: Yup.string().required(t('error.mandatory')),
       postAdmissionQuota: Yup.number().typeError(t('error.numeric.int')).required(t('error.mandatory')).positive(t('error.numeric.positive')).integer(t('error.numeric.int')),
     });
+
+    const confirmActivityChangeButtons = (
+      <div className={classes.activityToggleButtonBox}>
+        <h3>{t('examSession.postAdmission.confirmationText')}</h3>
+        <button className={classes.Action} type="button" onClick={e => this.setState({ confirmActiveToggle: !this.state.confirmActiveToggle })} tabIndex="5">
+          {t('common.cancelConfirm')}
+        </button>
+        <button className={`${classes.Button} ${classes.ButtonRight}`} type="button" onClick={this.toggleActivePostAdmission}>
+          {t('common.confirm')}
+        </button>
+      </div>
+    )
+
+
+    const modifyFormState = (
+      <>
+        {active ?
+          null :
+          <button className={classes.Button} type="button" tabIndex="1" onClick={e => this.setState({ edit: !this.state.edit })}>
+            {t('common.modify')}
+          </button>}
+        <button className={`${classes.Button} ${active ? null : classes.ButtonRight}`} type="button" tabIndex="2" onClick={e => this.setState({ confirmActiveToggle: !this.state.confirmActiveToggle })}>
+          {active ? t('examSession.postAdmission.hide') : t('examSession.postAdmission.publish')}
+        </button>
+      </>
+    )
+
 
     if (this.state.edit) {
       return (
@@ -109,7 +137,10 @@ class ExamSessionPostAdmissionEdit extends React.Component {
                   />
                 </div>
                 <div className={classes.Buttons} data-cy="admission-create-form-controls">
-                  <button className={classes.Button} type="submit" tabIndex="3">
+                  <button className={classes.Action} type="button" onClick={e => this.setState({ edit: !this.state.edit })} tabIndex="5">
+                    {t('common.cancelConfirm')}
+                  </button>
+                  <button className={`${classes.Button} ${classes.ButtonRight}`} type="submit" tabIndex="3">
                     {t('common.save')}
                   </button>
                 </div>
@@ -134,14 +165,7 @@ class ExamSessionPostAdmissionEdit extends React.Component {
           </label>
           <input className={`${classes.Input} ${classes.Disabled}`} value={this.props.postAdmission.post_admission_quota} disabled />
           <div className={classes.Buttons} data-cy="admission-create-form-controls">
-            {active ?
-             null :
-             <button className={classes.Button} type="button" tabIndex="1" onClick={e => this.setState({ edit: true })}>
-              {t('common.modify')}
-            </button>}
-            <button className={`${classes.Button} ${active ? null : classes.ButtonRight}`} type="button" tabIndex="2" onClick={this.toggleActivePostAdmission}>
-              {active ? t('examSession.postAdmission.hide') : t('examSession.postAdmission.publish')}
-            </button>
+            {this.state.confirmActiveToggle ? confirmActivityChangeButtons : modifyFormState}
           </div>
         </>
       )

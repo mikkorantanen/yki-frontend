@@ -19,7 +19,7 @@
   text-decoration-line: underline;
   background: none;
   border: none;
-  padding: 10px;
+  padding: 10px 0px;
 }
 
 .Form {
@@ -53,4 +53,11 @@
 .ErrorMessage {
   color: hsla(15, 100%, 40%, 1);
   margin-left: 10px;
+}
+
+.activityToggleButtonBox {
+  border: 1px solid #ff00007d;
+  border-radius: 10px;
+  padding: 15px;
+  padding-top: 0px;
 }
