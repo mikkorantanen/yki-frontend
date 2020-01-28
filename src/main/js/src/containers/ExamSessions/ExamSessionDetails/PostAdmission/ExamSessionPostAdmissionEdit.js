@@ -38,11 +38,11 @@ class ExamSessionPostAdmissionEdit extends React.Component {
 
     const confirmActivityChangeButtons = (
       <div className={classes.activityToggleButtonBox}>
-        <h3>{t('examSession.postAdmission.confirmationText')}</h3>
+        <h3 data-cy="h3-admission-confirm-text">{t('examSession.postAdmission.confirmationText')}</h3>
         <button className={classes.Action} type="button" onClick={e => this.setState({ confirmActiveToggle: !this.state.confirmActiveToggle })} tabIndex="5">
           {t('common.cancelConfirm')}
         </button>
-        <button className={`${classes.Button} ${classes.ButtonRight}`} type="button" onClick={this.toggleActivePostAdmission}>
+        <button className={`${classes.Button} ${classes.ButtonRight}`} data-cy="button-admission-activity-confirm" type="button" onClick={this.toggleActivePostAdmission}>
           {t('common.confirm')}
         </button>
       </div>
@@ -53,10 +53,10 @@ class ExamSessionPostAdmissionEdit extends React.Component {
       <>
         {active ?
           null :
-          <button className={classes.Button} type="button" tabIndex="1" onClick={e => this.setState({ edit: !this.state.edit })}>
+          <button className={classes.Button} data-cy="button-admission-modify" type="button" tabIndex="1" onClick={e => this.setState({ edit: !this.state.edit })}>
             {t('common.modify')}
           </button>}
-        <button className={`${classes.Button} ${active ? null : classes.ButtonRight}`} type="button" tabIndex="2" onClick={e => this.setState({ confirmActiveToggle: !this.state.confirmActiveToggle })}>
+        <button className={`${classes.Button} ${active ? null : classes.ButtonRight}`} data-cy="button-admission-toggle-active" type="button" tabIndex="2" onClick={e => this.setState({ confirmActiveToggle: !this.state.confirmActiveToggle })}>
           {active ? t('examSession.postAdmission.hide') : t('examSession.postAdmission.publish')}
         </button>
       </>
@@ -136,11 +136,11 @@ class ExamSessionPostAdmissionEdit extends React.Component {
                     className={classes.ErrorMessage}
                   />
                 </div>
-                <div className={classes.Buttons} data-cy="admission-create-form-controls">
+                <div className={classes.Buttons}>
                   <button className={classes.Action} type="button" onClick={e => this.setState({ edit: !this.state.edit })} tabIndex="5">
                     {t('common.cancelConfirm')}
                   </button>
-                  <button className={`${classes.Button} ${classes.ButtonRight}`} type="submit" tabIndex="3">
+                  <button className={`${classes.Button} ${classes.ButtonRight}`} data-cy="button-admission-submit" type="submit" tabIndex="3">
                     {t('common.save')}
                   </button>
                 </div>
@@ -155,16 +155,16 @@ class ExamSessionPostAdmissionEdit extends React.Component {
           <label className={classes.Label}>
             {t('examSession.postAdmission.startDate')}
           </label>
-          <input className={`${classes.Input} ${classes.Disabled}`} value={moment(this.props.postAdmission.post_admission_start_date).format('D.M.YYYY')} disabled />
+          <input className={`${classes.Input} ${classes.Disabled}`} data-cy="input-admission-startDate" value={moment(this.props.postAdmission.post_admission_start_date).format('D.M.YYYY')} disabled />
           <label className={classes.Label}>
             {t('examSession.postAdmission.endDate')}
           </label>
-          <input className={`${classes.Input} ${classes.Disabled}`} value={moment(this.props.postAdmissionEndDate).format('D.M.YYYY')} disabled />
+          <input className={`${classes.Input} ${classes.Disabled}`} data-cy="input-admission-endDate" value={moment(this.props.postAdmissionEndDate).format('D.M.YYYY')} disabled />
           <label className={classes.Label}>
             {t('examSession.postAdmission.participantAmount')}
           </label>
-          <input className={`${classes.Input} ${classes.Disabled}`} value={this.props.postAdmission.post_admission_quota} disabled />
-          <div className={classes.Buttons} data-cy="admission-create-form-controls">
+          <input className={`${classes.Input} ${classes.Disabled}`} data-cy="input-admission-quota" value={this.props.postAdmission.post_admission_quota} disabled />
+          <div className={classes.Buttons}>
             {this.state.confirmActiveToggle ? confirmActivityChangeButtons : modifyFormState}
           </div>
         </>

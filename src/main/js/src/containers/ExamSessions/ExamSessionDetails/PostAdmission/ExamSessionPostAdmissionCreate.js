@@ -94,8 +94,8 @@ const ExamSessionPostAdmissionCreate = props => {
                 className={classes.ErrorMessage}
               />
             </div>
-            <div className={classes.Buttons} data-cy="admission-create-form-controls">
-              <button className={`${classes.Button} ${classes.ButtonRight}`} type="submit" tabIndex="4">
+            <div className={classes.Buttons}>
+              <button className={`${classes.Button} ${classes.ButtonRight}`} data-cy="button-admission-submit" type="submit" tabIndex="4">
                 {t('examSession.postAdmission.createTemplate')}
               </button>
 
