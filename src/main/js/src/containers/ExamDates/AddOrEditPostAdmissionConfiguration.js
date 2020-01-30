@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import DatePicker from '../../../../components/UI/DatePicker/DatePicker';
 import { DATE_FORMAT } from '../../common/Constants';
 import { languageToString } from '../../util/util';
+import classes from './AddOrEditPostAdmissionConfiguration.module.css';
 
 // olemassaolevaa konfiguraatiota ei voi poistaa jos jälki-ilmoperiodi on käynnissä
 
@@ -23,7 +27,7 @@ const AddOrEditPostAdmissionConfiguration = ({ examDate }) => {
     ))
 }
 
-const ExamDateDetails = ({ examDate, languages })=> (
+const ExamDateDetails = ({ examDate, languages }) => (
   <div>
     <p>Tutkintopäivä: {moment(examDate).format(DATE_FORMAT)}</p>
     <p>Kielet: {languages.map(l => languageToString(l.language_code).toLowerCase()).join(', ')}</p>

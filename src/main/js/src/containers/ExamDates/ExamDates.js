@@ -29,7 +29,7 @@ class ExamDates extends Component {
     this.props.onFetchExamDates();
   };
 
-  showAddOrEditPostAdmissionModalHandler = examDate => 
+  showAddOrEditPostAdmissionModalHandler = examDate =>
     this.setState({ showAddOrEditPostAdmissionModal: true, selectedExamDate: examDate });
 
   closeAddOrEditPostAdmissionModalHandler = () =>
@@ -39,51 +39,19 @@ class ExamDates extends Component {
     const addOrEditPostAdmissionModal = (
       <>
         {
-          this.state.showAddOrEditPostAdmissionModal ? 
+          this.state.showAddOrEditPostAdmissionModal ?
             (
-              <Modal 
+              <Modal
                 show={this.state.showAddOrEditPostAdmissionModal}
                 modalClosed={this.closeAddOrEditPostAdmissionModalHandler}
               >
                 <AddOrEditPostAdmissionConfiguration examDate={this.props.examDates.find(ed => ed == this.state.selectedExamDate)} />
               </Modal>
-            ) : 
+            ) :
             null
         }
       </>
     );
-
-    const examDateRows = examDates => {
-      return examDates.map((e, i) => {
-        const registrationEndDateMoment = moment(e.registration_end_date);
-
-        const finnishOnly =
-          examDates.length === 1 &&
-          e.languages.length === 1 &&
-          e.languages[0].language_code === 'fin';
-
-        const level = finnishOnly
-          ? this.props.t('common.level.middle')
-          : this.props.t('common.level.all');
-
-        const languages = e.languages
-          .map(l => {
-            return languageToString(l.language_code).toLowerCase();
-          })
-          .join(', ');
-
-        return (
-          <React.Fragment key={i}>
-            <p>{moment(e.exam_date).format(DATE_FORMAT)}</p>
-            <p><a href="javascript:void(0)" onClick={() => this.showAddOrEditPostAdmissionModalHandler(e)}>{e.post_admission_end_date ? 
-                  `${registrationEndDateMoment.add(1, 'days').format(DATE_FORMAT)} - ${moment(e.post_admission_end_date).format(DATE_FORMAT)}` : 
-                  "Lisää jälki-ilmoittautuminen"}</a></p>
-            <p>{languages}</p>
-            <p>{level.toLowerCase()}</p>
-          </React.Fragment>
-        );
-      });
-    };
 
     const examDateTables = () => {
       const grouped = R.groupWith(
@@ -109,6 +77,38 @@ class ExamDates extends Component {
               {examDateRows(dates)}
             </div>
             <hr />
+          </React.Fragment>
+        );
+      });
+    };
+
+    const examDateRows = examDates => {
+      return examDates.map((e, i) => {
+        const registrationEndDateMoment = moment(e.registration_end_date);
+
+        const finnishOnly =
+          examDates.length === 1 &&
+          e.languages.length === 1 &&
+          e.languages[0].language_code === 'fin';
+
+        const level = finnishOnly
+          ? this.props.t('common.level.middle')
+          : this.props.t('common.level.all');
+
+        const languages = e.languages
+          .map(l => {
+            return languageToString(l.language_code).toLowerCase();
+          })
+          .join(', ');
+
+        return (
+          <React.Fragment key={i}>
+            <p>{moment(e.exam_date).format(DATE_FORMAT)}</p>
+            <p><a href="javascript:void(0)" onClick={() => this.showAddOrEditPostAdmissionModalHandler(e)}>{e.post_admission_end_date ?
+                  `${registrationEndDateMoment.add(1, 'days').format(DATE_FORMAT)} - ${moment(e.post_admission_end_date).format(DATE_FORMAT)}` :
+                  "Lisää jälki-ilmoittautuminen"}</a></p>
+            <p>{languages}</p>
+            <p>{level.toLowerCase()}</p>
           </React.Fragment>
         );
       });
