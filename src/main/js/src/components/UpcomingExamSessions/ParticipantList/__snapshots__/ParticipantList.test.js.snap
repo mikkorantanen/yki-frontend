@@ -4,7 +4,7 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
 <div
   data-cy="participant-list"
 >
-  <h3>
+  <h2>
     examSession.participants
     :
      
@@ -12,7 +12,7 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
      /
      
     50
-  </h3>
+  </h2>
   <div
     className="ListExport"
   >

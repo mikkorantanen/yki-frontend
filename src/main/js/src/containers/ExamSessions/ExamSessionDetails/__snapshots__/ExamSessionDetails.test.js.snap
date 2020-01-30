@@ -39,7 +39,10 @@ exports[`<ExamSessionDetails /> should render exam session details 1`] = `
     onDelete={[MockFunction]}
     onSubmit={[MockFunction]}
   />
-  <ExamSessionPostAdmission
+  <h2>
+    examSession.postAdmission
+  </h2>
+  <withI18nextTranslation(ExamSessionPostAdmission)
     examSession={
       Object {
         "language_code": "eng",
