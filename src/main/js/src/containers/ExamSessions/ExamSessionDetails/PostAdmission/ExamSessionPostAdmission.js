@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import ExamSessionPostAdmissionEdit from './ExamSessionPostAdmissionEdit';
 import ExamSessionPostAdmissionCreate from './ExamSessionPostAdmissionCreate';
-import Spinner from '../../../../components/UI/Spinner/Spinner';
 import classes from './ExamSessionPostAdmission.module.css';
 
 export class ExamSessionPostAdmission extends Component {
