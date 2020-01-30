@@ -197,7 +197,7 @@ describe('Exam sessions', () => {
 
   const fillPostAdmissionForm = (daySelector, quota) => {
     cy.get('#postAdmissionStart').click();
-    cy.get('.dayContainer').children().not('.flatpickr-disabled').eq(daySelector).click();
+    cy.get('.dayContainer').children().not('.disabled').eq(daySelector).click();
     cy.get('[data-cy=input-admission-quota]').clear().type('-1').blur();
     cy.contains('Arvon pitää olla positiivinen').should('exist');
     cy.get('[data-cy=input-admission-quota]').clear().type('a').blur();
