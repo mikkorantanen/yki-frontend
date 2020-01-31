@@ -33,7 +33,7 @@ const ExamSessionPostAdmissionCreate = props => {
       onSubmit={values => {
         const submitPayload = {
           post_admission_start_date: values.postAdmissionStart,
-          post_admission_quota: values.postAdmissionQuota,
+          post_admission_quota: parseInt(values.postAdmissionQuota),
           post_admission_active: false,
         }
 
@@ -42,11 +42,10 @@ const ExamSessionPostAdmissionCreate = props => {
       render={({ values, setFieldValue, isValid, handleReset }) => (
         <Form className={classes.Form}>
           <div data-cy="post-admission-form-create">
-            <div>
+            <div className={classes.DatePickerWrapper}>
               <label className={classes.Label} htmlFor="postAdmissionStart">{t('examSession.postAdmission.startDate')}</label>
               <DatePicker
                 id="postAdmissionStart"
-                className={`${classes.Input} ${classes.DatePicker}`}
                 options={{
                   defaultDate: '',
                   value: values.postAdmissionStart,

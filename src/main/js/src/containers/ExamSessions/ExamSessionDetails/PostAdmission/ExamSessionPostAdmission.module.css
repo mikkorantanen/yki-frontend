@@ -40,14 +40,14 @@
   margin-bottom: 20px;
 }
 
-.Disabled {
-  cursor: not-allowed;
+.DatePickerWrapper > input {
+  width: 340px;
+  height: 35px;
+  margin-bottom: 20px;
 }
 
-.DatePicker {
-  background: url(/static/media/calendar.850cb14c.svg) no-repeat center right;
-  background-position: 92% center;
-  background-size: 1.5em;
+.Disabled {
+  cursor: not-allowed;
 }
 
 .ErrorMessage {
