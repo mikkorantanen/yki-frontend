@@ -404,3 +404,16 @@ export const addPostAdmission = (examSessionId, postAdmission) => {
       });
   }
 }
+
+export const togglePostAdmissionActivation = (examSessionId, activeState) => {
+  return dispatch => {
+    axios
+      .post(`/yki/api/virkailija/organizer/exam-session/${examSessionId}/post-admission/activation`, activeState)
+      .then(() => {
+        dispatch(fetchExamSessionContent());
+      })
+      .catch(err => {
+        console.error(err)
+      });
+  }
+}

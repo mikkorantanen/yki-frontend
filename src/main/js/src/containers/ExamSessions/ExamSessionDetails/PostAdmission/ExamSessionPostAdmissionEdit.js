@@ -6,7 +6,7 @@ import moment from 'moment';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from '../../../../components/UI/DatePicker/DatePicker';
-import { addPostAdmission } from '../../../../store/actions/examSession';
+import { addPostAdmission, togglePostAdmissionActivation } from '../../../../store/actions/examSession';
 import classes from './ExamSessionPostAdmission.module.css'
 
 class ExamSessionPostAdmissionEdit extends React.Component {
@@ -18,16 +18,14 @@ class ExamSessionPostAdmissionEdit extends React.Component {
 
   toggleActivePostAdmission = () => {
     const payload = {
-      post_admission_start_date: this.props.postAdmission.post_admission_start_date,
-      post_admission_end_date: this.props.postAdmission.post_admission_end_date,
-      post_admission_quota: this.props.postAdmission.post_admission_quota,
       post_admission_active: !this.props.postAdmission.post_admission_active
     }
-    this.props.addPostAdmission(this.props.examSessionId, payload);
+    this.props.togglePostAdmissionActivation(this.props.examSessionId, payload);
     this.setState({ confirmActiveToggle: !this.state.confirmActiveToggle });
   }
 
   render() {
+    console.log(this.props)
     const t = this.props.t;
     const active = this.props.postAdmission.post_admission_active;
     const validationSchema = Yup.object().shape({
@@ -179,4 +177,4 @@ ExamSessionPostAdmissionEdit.propTypes = {
   postAdmissionEndDate: PropTypes.string.isRequired,
 }
 
-export default connect(null, { addPostAdmission })(withTranslation()(ExamSessionPostAdmissionEdit));
+export default connect(null, { addPostAdmission, togglePostAdmissionActivation })(withTranslation()(ExamSessionPostAdmissionEdit));
