@@ -10,7 +10,7 @@ describe('Exam sessions', () => {
   const fillExamSessionForm = () => {
     cy.get('[data-cy=radio-fin]').click();
     cy.get('[data-cy=radio-PERUS]').click();
-    cy.get('[data-cy=radio-2019-11-09]').click();
+    cy.get('[data-cy=radio-2020-03-28]').click();
     cy.get('[data-cy=input-max-participants]').type('100');
     cy.get('[data-cy=input-streetAddress]').type('address');
     cy.get('[data-cy=input-zip]').type('00100');

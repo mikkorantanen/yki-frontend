@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { withTranslation } from 'react-i18next';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import moment from 'moment';
+import { FinnishSSN } from 'finnish-ssn';
 
 import classes from './RegistrationForm.module.css';
 import Button from '../../UI/Button/Button';
@@ -26,6 +27,10 @@ export const registrationForm = props => {
     } else {
       return true;
     }
+  }
+
+  function validateSsn(value) {
+    return !value || FinnishSSN.validate(value);
   }
 
   function validateBirthDate(value) {
@@ -67,15 +72,21 @@ export const registrationForm = props => {
     phoneNumber: Yup.string()
       .required(mandatoryErrorMsg)
       .test(
-        'invalid-phone-number',
-        props.t('error.phoneNumber'),
-        validatePhoneNumber,
-      ),
+      'invalid-phone-number',
+      props.t('error.phoneNumber'),
+      validatePhoneNumber,
+    ),
     email: Yup.string()
       .email(props.t('error.email'))
       .required(mandatoryErrorMsg)
       .max(64, maxErrorMsg),
     nationality: Yup.string().required(mandatoryErrorMsg),
+    ssn: Yup.string()
+      .test(
+        'invalid-ssn',
+        props.t('error.ssn.invalid'),
+        validateSsn,
+      ),
     confirmEmail: Yup.string().test(
       'same-email',
       props.t('error.confirmEmail'),
@@ -155,8 +166,8 @@ export const registrationForm = props => {
         <span>{initialValues[name]}</span>
       </React.Fragment>
     ) : (
-      inputField(name, null, null, type)
-    );
+        inputField(name, null, null, type)
+      );
 
   const showExamLang = () => {
     const lang = props.initData.exam_session.language_code;
@@ -190,6 +201,7 @@ export const registrationForm = props => {
         birthdate: '',
         gender: '',
         phoneNumber: '',
+        ssn: '',
         email: emptyIfAbsent(props.initData.user.email),
         confirmEmail: emptyIfAbsent(props.initData.user.email),
         examLang:
@@ -203,11 +215,11 @@ export const registrationForm = props => {
           last_name: values.lastName,
           nationalities: [values.nationality],
           nationality_desc: getNationalityDesc(values.nationality),
-          ssn: props.initData.user.ssn,
+          ssn: props.initData.user.ssn || values.ssn,
           birthdate: values.birthdate
             ? moment(values.birthdate, DATE_FORMAT).format(
-                ISO_DATE_FORMAT_SHORT,
-              )
+              ISO_DATE_FORMAT_SHORT,
+            )
             : null,
           gender: values.gender,
           certificate_lang: values.certificateLang,
@@ -258,20 +270,27 @@ export const registrationForm = props => {
               </div>
             )}
             {!props.initData.user.ssn && (
-              <div className={classes.FormElement}>
-                <div className={classes.Birthdate}>
-                  {inputField(
-                    'birthdate',
-                    props.t('registration.form.birthdate.placeholder'),
-                  )}
+              <>
+                <div className={classes.FormElement}>
+                  <div className={classes.Birthdate}>
+                    {inputField(
+                      'birthdate',
+                      props.t('registration.form.birthdate.placeholder'),
+                    )}
+                  </div>
+                  <div className={classes.Gender}>
+                    <GenderSelect
+                      genders={props.initData.genders}
+                      className={classes.GenderSelect}
+                    />
+                  </div>
                 </div>
-                <div className={classes.Gender}>
-                  <GenderSelect
-                    genders={props.initData.genders}
-                    className={classes.GenderSelect}
-                  />
+
+                <div className={classes.FormElement}>
+                  {inputField('ssn')}
+                  <p> {props.t('registration.form.ssn.text')}</p>
                 </div>
-              </div>
+              </>
             )}
             {showExamLang() && (
               <div
