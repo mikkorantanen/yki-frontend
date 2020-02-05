@@ -7,6 +7,8 @@ import { ExamSessionDetails } from './ExamSessionDetails';
 
 configure({ adapter: new Adapter() });
 
+const oid = "222.222.11.11.11";
+
 const examSession = {
   registration_end_date: '2028-12-15',
   session_date: '2028-12-30',
@@ -31,6 +33,7 @@ describe('<ExamSessionDetails />', () => {
         participants={[]}
         loading={false}
         t={t => t}
+        oid={oid}
         onFetchExamSessionParticipants={jest.fn()}
         onCancelRegistration={jest.fn()}
         errorConfirmedHandler={jest.fn()}
