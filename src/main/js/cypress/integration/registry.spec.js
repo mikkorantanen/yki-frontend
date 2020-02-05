@@ -17,7 +17,7 @@ describe('Registry', () => {
   });
 
   it('should show registry item details when clicking item', () => {
-    cy.contains('Amiedu').click();
+    cy.contains('Taitotalo').click();
     cy.contains('Kielitutkinnot');
     cy.contains('Yhteystiedot');
     cy.contains('Järjestäjäsopimus');
