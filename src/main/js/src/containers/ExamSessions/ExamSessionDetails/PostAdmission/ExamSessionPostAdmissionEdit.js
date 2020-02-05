@@ -20,12 +20,11 @@ class ExamSessionPostAdmissionEdit extends React.Component {
     const payload = {
       post_admission_active: !this.props.postAdmission.post_admission_active
     }
-    this.props.togglePostAdmissionActivation(this.props.examSessionId, payload);
+    this.props.togglePostAdmissionActivation(this.props.oid, this.props.examSessionId, payload);
     this.setState({ confirmActiveToggle: !this.state.confirmActiveToggle });
   }
 
   render() {
-    console.log(this.props)
     const t = this.props.t;
     const active = this.props.postAdmission.post_admission_active;
     const validationSchema = Yup.object().shape({
@@ -77,7 +76,7 @@ class ExamSessionPostAdmissionEdit extends React.Component {
               post_admission_active: this.state.active
             }
 
-            this.props.addPostAdmission(this.props.examSessionId, submitPayload);
+            this.props.addPostAdmission(this.props.oid, this.props.examSessionId, submitPayload);
             this.setState({ edit: false });
           }}
           render={({ values, setFieldValue, isValid, handleReset }) => (

@@ -278,7 +278,7 @@ module.exports = function(app) {
     }
   });
 
-  app.post('/yki/api/virkailija/organizer/exam-session/:id/post-admission', (req, res) => {
+  app.post('/yki/api/virkailija/organizer/:oid/exam-session/:id/post-admission', (req, res) => {
     try {
       const postadmission = req.body;
       const requestPostAdmissionId = req.params.id;
@@ -296,7 +296,7 @@ module.exports = function(app) {
     }
   });
 
-  app.post('/yki/api/virkailija/organizer/exam-session/:id/post-admission/activation', (req, res) => {
+  app.post('/yki/api/virkailija/organizer/:oid/exam-session/:id/post-admission/activation', (req, res) => {
     try {
       const postadmissionstate = req.body.post_admission_active;
       const requestPostAdmissionId = req.params.id;

@@ -47,7 +47,7 @@ export class ExamSessionDetails extends Component {
         {/* maybe should wrap the whole thing to loading spinner? */}
         {this.props.loading ? <Spinner /> : (
           <>
-            <ExamSessionPostAdmission examSession={this.props.examSession} />
+            <ExamSessionPostAdmission examSession={this.props.examSession} oid={this.props.oid} />
             <ParticipantList
               examSession={this.props.examSession}
               participants={this.props.participants}
@@ -110,6 +110,7 @@ ExamSessionDetails.propTypes = {
   participants: PropTypes.array,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.object,
+  oid: PropTypes.string.isRequired,
   onFetchExamSessionParticipants: PropTypes.func.isRequired,
   onCancelRegistration: PropTypes.func.isRequired,
   onSubmitUpdateExamSession: PropTypes.func.isRequired,

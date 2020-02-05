@@ -106,6 +106,7 @@ class ExamSessions extends Component {
           >
             <ExamSessionDetails
               examSession={this.props.examSessionContent.examSessions.find(es => es.id === this.state.selectedExamSession.id)}
+              oid={this.props.examSessionContent.organization.oid}
               onSubmitUpdateExamSession={this.updateExamSessionHandler}
               onSubmitDeleteExamSession={this.deleteExamSessionHandler}
             />

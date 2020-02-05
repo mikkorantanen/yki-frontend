@@ -18,7 +18,7 @@ const ExamSessionPostAdmissionCreate = props => {
   });
 
   const postAdmissionAddHandler = (postadmission) => {
-    props.addPostAdmission(props.examSessionId, postadmission);
+    props.addPostAdmission(props.oid, props.examSessionId, postadmission);
     props.onCancel();
   }
 

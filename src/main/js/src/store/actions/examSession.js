@@ -392,10 +392,10 @@ const relocateExamSessionFail = error => {
   };
 };
 
-export const addPostAdmission = (examSessionId, postAdmission) => {
+export const addPostAdmission = (orgOid, examSessionId, postAdmission) => {
   return dispatch => {
     axios
-      .post(`/yki/api/virkailija/organizer/exam-session/${examSessionId}/post-admission`, postAdmission)
+      .post(`/yki/api/virkailija/organizer/${orgOid}/exam-session/${examSessionId}/post-admission`, postAdmission)
       .then(() => {
         dispatch(fetchExamSessionContent());
       })
@@ -405,10 +405,10 @@ export const addPostAdmission = (examSessionId, postAdmission) => {
   }
 }
 
-export const togglePostAdmissionActivation = (examSessionId, activeState) => {
+export const togglePostAdmissionActivation = (orgId, examSessionId, activeState) => {
   return dispatch => {
     axios
-      .post(`/yki/api/virkailija/organizer/exam-session/${examSessionId}/post-admission/activation`, activeState)
+      .post(`/yki/api/virkailija/organizer/${orgId}/exam-session/${examSessionId}/post-admission/activation`, activeState)
       .then(() => {
         dispatch(fetchExamSessionContent());
       })
