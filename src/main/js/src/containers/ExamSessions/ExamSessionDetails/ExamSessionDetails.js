@@ -11,6 +11,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import ParticipantList from '../../../components/UpcomingExamSessions/ParticipantList/ParticipantList';
 import ExamSessionUpdateForm from './ExamSessionUpdateForm/ExamSessionUpdateForm';
 import * as actions from '../../../store/actions/index';
+import ExamSessionPostAdmission from './PostAdmission/ExamSessionPostAdmission';
 
 export class ExamSessionDetails extends Component {
   componentDidMount = () => {
@@ -42,17 +43,20 @@ export class ExamSessionDetails extends Component {
           onDelete={this.props.onSubmitDeleteExamSession}
           examSession={this.props.examSession}
         />
-        {this.props.loading ? (
-          <Spinner />
-        ) : (
-          <ParticipantList
-            examSession={this.props.examSession}
-            participants={this.props.participants}
-            examSessions={this.props.examSessions}
-            onCancel={this.props.onCancelRegistration}
-            onConfirmPayment={this.props.onConfirmPayment}
-            onRelocate={this.props.onRelocate}
-          />
+        <h2>{this.props.t('examSession.postAdmission')}</h2>
+        {/* maybe should wrap the whole thing to loading spinner? */}
+        {this.props.loading ? <Spinner /> : (
+          <>
+            <ExamSessionPostAdmission examSession={this.props.examSession} oid={this.props.oid} />
+            <ParticipantList
+              examSession={this.props.examSession}
+              participants={this.props.participants}
+              examSessions={this.props.examSessions}
+              onCancel={this.props.onCancelRegistration}
+              onConfirmPayment={this.props.onConfirmPayment}
+              onRelocate={this.props.onRelocate}
+            />
+          </>
         )}
       </div>
     );
@@ -106,6 +110,7 @@ ExamSessionDetails.propTypes = {
   participants: PropTypes.array,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.object,
+  oid: PropTypes.string.isRequired,
   onFetchExamSessionParticipants: PropTypes.func.isRequired,
   onCancelRegistration: PropTypes.func.isRequired,
   onSubmitUpdateExamSession: PropTypes.func.isRequired,

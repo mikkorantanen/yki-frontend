@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import { ISO_DATE_FORMAT_SHORT } from '../../common/Constants';
 
-const flattenOrganizationHierarchy = (orgChildrenResponse) => {  
+const flattenOrganizationHierarchy = (orgChildrenResponse) => {
   const mapConcatOrgs = (orgs) => {
     return orgs.map(o => [{nimi: o.nimi, oid: o.oid }].concat(mapConcatOrgs(o.children)));
   }
@@ -391,3 +391,29 @@ const relocateExamSessionFail = error => {
     loading: false,
   };
 };
+
+export const addPostAdmission = (orgOid, examSessionId, postAdmission) => {
+  return dispatch => {
+    axios
+      .post(`/yki/api/virkailija/organizer/${orgOid}/exam-session/${examSessionId}/post-admission`, postAdmission)
+      .then(() => {
+        dispatch(fetchExamSessionContent());
+      })
+      .catch(err => {
+        console.error(err)
+      });
+  }
+}
+
+export const togglePostAdmissionActivation = (orgId, examSessionId, activeState) => {
+  return dispatch => {
+    axios
+      .post(`/yki/api/virkailija/organizer/${orgId}/exam-session/${examSessionId}/post-admission/activation`, activeState)
+      .then(() => {
+        dispatch(fetchExamSessionContent());
+      })
+      .catch(err => {
+        console.error(err)
+      });
+  }
+}

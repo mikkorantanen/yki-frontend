@@ -204,11 +204,11 @@ export const participantList = props => {
 
   return (
     <div data-cy="participant-list">
-      <h3>
+      <h2>
         {props.t('examSession.participants')}
         {':'} {props.examSession.participants} /{' '}
         {props.examSession.max_participants}
-      </h3>
+      </h2>
       {props.examSession.queue > 0 && (
         <h3>
           {props.t('examSession.inQueue')}

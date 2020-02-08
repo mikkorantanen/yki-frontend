@@ -44,7 +44,8 @@
       "registration_end_date": "2039-12-14",
       "open": false,
       "queue_full": false,
-      "queue": 0
+      "queue": 0,
+      "post_admission": null
     },
     {
       "level_code": "KESKI",
@@ -90,7 +91,8 @@
       "registration_end_date": "2039-02-28",
       "open": true,
       "queue_full": false,
-      "queue": 0
+      "queue": 0,
+      "post_admission": null
     },
     {
       "level_code": "KESKI",
@@ -136,7 +138,8 @@
       "registration_end_date": "2039-02-28",
       "open": true,
       "queue_full": false,
-      "queue": 0
+      "queue": 0,
+      "post_admission": null
     },
     {
       "level_code": "YLIN",
@@ -181,7 +184,8 @@
       "exam_fee": "160.00",
       "registration_end_date": "2029-02-28",
       "open": true,
-      "queue_full": false
+      "queue_full": false,
+      "post_admission": null
     },
     {
       "level_code": "PERUS",
@@ -226,7 +230,8 @@
       "exam_fee": "100.00",
       "registration_end_date": "2039-02-28",
       "open": true,
-      "queue_full": false
+      "queue_full": false,
+      "post_admission": null
     },
     {
       "level_code": "PERUS",
@@ -271,7 +276,8 @@
       "exam_fee": "100.00",
       "registration_end_date": "2039-02-28",
       "open": true,
-      "queue_full": true
+      "queue_full": true,
+      "post_admission": null
     }
   ]
 }
