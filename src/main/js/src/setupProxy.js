@@ -457,6 +457,27 @@ module.exports = function(app) {
     }
   });
 
+  app.post('/yki/api/exam-date/:id/post-admission-end-date', (req, res) => {
+    try {
+      const examDateId = Number(req.params.id);
+      console.log("examDateId", examDateId);
+      console.log("body: ", req.body);
+      const newEndDate = req.body.post_admission_end_date;
+      console.log("newEndDate:", newEndDate);
+      const edIndex = examDates.dates.findIndex(e => e.id === examDateId);
+      console.log("edIndex: ", edIndex);
+
+      const copyOfEd = examDates.dates.find(e => e.id === examDateId);
+      console.log("copyofed: ", copyOfEd);
+      copyOfEd.post_admission_end_date = newEndDate;
+
+      examDates.dates[edIndex] = copyOfEd;
+      res.send({ success: true });
+    } catch (e) {
+      res.status(404).send(e.message)
+    }
+  });
+
   app.get('/yki/payment/formdata', (req, res) => {
     try {
       res.set('Content-Type', 'application/json; charset=utf-8');

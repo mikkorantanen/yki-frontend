@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { withTranslation } from 'react-i18next';
@@ -8,6 +9,7 @@ import DatePicker from '../../components/UI/DatePicker/DatePicker';
 import { DATE_FORMAT } from '../../common/Constants';
 import { languageToString } from '../../util/util';
 import classes from './AddOrEditPostAdmissionConfiguration.module.css';
+import * as actions from '../../store/actions/index';
 
 // propseihin pitäs varmaan tuoda joku ID? Tarvitaan varmaan insertissä/editissä
 const AddOrEditPostAdmissionConfiguration = (props) => {
@@ -18,6 +20,7 @@ const AddOrEditPostAdmissionConfiguration = (props) => {
 
   const endDateSubmitHandler = (payload) => {
     console.log(payload);
+    props.onUpdateEndDate(props.examDate.id, payload);
     // props.jokuAction(jokuID, payload);
   }
   // action/reducer puuttuu.
@@ -65,7 +68,7 @@ const AddOrEditPostAdmissionConfiguration = (props) => {
             </div>
             <div className={classes.Buttons}>
               <button className={classes.Button} type="submit" tabIndex="2">
-                Submit-nappi-teksti
+                Tallenna
               </button>
             </div>
           </div>
@@ -106,4 +109,10 @@ const AddOrEditPostAdmissionConfiguration = (props) => {
   )
 }
 
-export default withTranslation()(AddOrEditPostAdmissionConfiguration);
+const mapDispatchToProps = dispatch => {
+  return {
+    onUpdateEndDate: (examDateId, endDate) => dispatch(actions.updatePostAdmissionEndDate(examDateId, endDate))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withTranslation()(AddOrEditPostAdmissionConfiguration));
