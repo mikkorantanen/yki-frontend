@@ -45,7 +45,7 @@ class ExamDates extends Component {
                 show={this.state.showAddOrEditPostAdmissionModal}
                 modalClosed={this.closeAddOrEditPostAdmissionModalHandler}
               >
-                <AddOrEditPostAdmissionConfiguration examDate={this.props.examDates.find(ed => ed == this.state.selectedExamDate)} />
+                <AddOrEditPostAdmissionConfiguration onUpdate={this.closeAddOrEditPostAdmissionModalHandler} loadingExamDates={this.props.loading} examDate={this.props.examDates.find(ed => ed === this.state.selectedExamDate)} />
               </Modal>
             ) :
             null
@@ -104,6 +104,7 @@ class ExamDates extends Component {
         return (
           <React.Fragment key={i}>
             <p>{moment(e.exam_date).format(DATE_FORMAT)}</p>
+            {/* eslint-disable-next-line */}
             <p><a href="javascript:void(0)" onClick={() => this.showAddOrEditPostAdmissionModalHandler(e)}>{e.post_admission_end_date ?
                   `${registrationEndDateMoment.add(1, 'days').format(DATE_FORMAT)} - ${moment(e.post_admission_end_date).format(DATE_FORMAT)}` :
                   "Lisää jälki-ilmoittautuminen"}</a></p>

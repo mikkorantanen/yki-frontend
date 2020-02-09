@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, ErrorMessage } from 'formik';
 import { withTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import DatePicker from '../../components/UI/DatePicker/DatePicker';
@@ -19,11 +19,9 @@ const AddOrEditPostAdmissionConfiguration = (props) => {
   });
 
   const endDateSubmitHandler = (payload) => {
-    console.log(payload);
     props.onUpdateEndDate(props.examDate.id, payload);
-    // props.jokuAction(jokuID, payload);
+    props.onUpdate();
   }
-  // action/reducer puuttuu.
 
   const FormFields = () => (
     <Formik
@@ -98,9 +96,7 @@ const AddOrEditPostAdmissionConfiguration = (props) => {
     <>
       <h1>Luo jälki-ilmoittautumisasetukset</h1>
       <ExamDateDetails />
-      {/* Formi tarvii varmaan vähän jotain tunkkausta että toimii editissä ja createssa?
-          Ehkä joku init value ja defaultvalue tyhjä string jos post_admission_end_date puuttuu?
-          Vai ihan oma näkymä / komponentti? */}
+      <FormFields />
     </>
   );
 
@@ -113,6 +109,12 @@ const mapDispatchToProps = dispatch => {
   return {
     onUpdateEndDate: (examDateId, endDate) => dispatch(actions.updatePostAdmissionEndDate(examDateId, endDate))
   }
+}
+
+AddOrEditPostAdmissionConfiguration.propTypes = {
+  examDate: PropTypes.object.isRequired,
+  onUpdateEndDate: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired
 }
 
 export default connect(null, mapDispatchToProps)(withTranslation()(AddOrEditPostAdmissionConfiguration));
