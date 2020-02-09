@@ -6,12 +6,12 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import { withTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import DatePicker from '../../components/UI/DatePicker/DatePicker';
+import ActionButton from '../../components/UI/ActionButton/ActionButton';
 import { DATE_FORMAT } from '../../common/Constants';
 import { languageToString } from '../../util/util';
 import classes from './AddOrEditPostAdmissionConfiguration.module.css';
 import * as actions from '../../store/actions/index';
 
-// propseihin pitäs varmaan tuoda joku ID? Tarvitaan varmaan insertissä/editissä
 const AddOrEditPostAdmissionConfiguration = (props) => {
   const t = props.t;
   const validationSchema = Yup.object().shape({
@@ -22,6 +22,28 @@ const AddOrEditPostAdmissionConfiguration = (props) => {
     props.onUpdateEndDate(props.examDate.id, payload);
     props.onUpdate();
   }
+
+  const deleteHandler = () => {
+    props.onDelete(props.examDate.id);
+    props.onUpdate();
+  }
+
+  const deleteButton = examDate => {
+    const postAdmissionRegistrationStarted = moment().isAfter(
+      moment(examDate.registration_end_date),
+    );
+    return postAdmissionRegistrationStarted || !examDate.post_admission_end_date ? null : (
+      <div className={classes.ActionButton}>
+        <ActionButton
+          onClick={deleteHandler}
+          confirmOnRight={true}
+          children={t('examSession.delete')}
+          confirmText={t('common.confirm')}
+          cancelText={t('common.cancelConfirm')}
+        />
+      </div>
+    );
+  };
 
   const FormFields = () => (
     <Formik
@@ -68,6 +90,7 @@ const AddOrEditPostAdmissionConfiguration = (props) => {
               <button className={classes.Button} type="submit" tabIndex="2">
                 Tallenna
               </button>
+              {deleteButton(props.examDate)}
             </div>
           </div>
         </Form>
@@ -107,7 +130,8 @@ const AddOrEditPostAdmissionConfiguration = (props) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onUpdateEndDate: (examDateId, endDate) => dispatch(actions.updatePostAdmissionEndDate(examDateId, endDate))
+    onUpdateEndDate: (examDateId, endDate) => dispatch(actions.updatePostAdmissionEndDate(examDateId, endDate)),
+    onDelete: (examDateId) => dispatch(actions.deletePostAdmissionEndDate(examDateId)),
   }
 }
 

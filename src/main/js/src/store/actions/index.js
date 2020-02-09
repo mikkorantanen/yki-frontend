@@ -29,5 +29,5 @@ export {
   initRegistrationForm,
   submitRegistrationForm,
 } from './registration';
-export { fetchExamDates, examDatesFailReset, updatePostAdmissionEndDate } from './examDates';
+export { fetchExamDates, examDatesFailReset, updatePostAdmissionEndDate, deletePostAdmissionEndDate } from './examDates';
 export { fetchUser } from './user';

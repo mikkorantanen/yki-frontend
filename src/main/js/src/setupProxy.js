@@ -494,15 +494,10 @@ module.exports = function(app) {
   app.post('/yki/api/exam-date/:id/post-admission-end-date', (req, res) => {
     try {
       const examDateId = Number(req.params.id);
-      console.log("examDateId", examDateId);
-      console.log("body: ", req.body);
       const newEndDate = req.body.post_admission_end_date;
-      console.log("newEndDate:", newEndDate);
       const edIndex = examDates.dates.findIndex(e => e.id === examDateId);
-      console.log("edIndex: ", edIndex);
 
       const copyOfEd = examDates.dates.find(e => e.id === examDateId);
-      console.log("copyofed: ", copyOfEd);
       copyOfEd.post_admission_end_date = newEndDate;
 
       examDates.dates[edIndex] = copyOfEd;
@@ -511,6 +506,20 @@ module.exports = function(app) {
       res.status(404).send(e.message)
     }
   });
+
+  app.delete('/yki/api/exam-date/:id/post-admission-end-date', (req, res) => {
+    try {
+      const examDateId = Number(req.params.id);
+      const examDateIndex = examDates.dates.findIndex(ed => ed.id === examDateId);
+      const examDate = examDates.dates[examDateIndex];
+      examDate.post_admission_end_date = null;
+
+      examDates.dates[examDateIndex] = examDate;
+      res.send({ success: true});
+    } catch(e) {
+      res.status(404).send(e.message);
+    }
+  })
 
   app.get('/yki/payment/formdata', (req, res) => {
     try {
