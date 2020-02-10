@@ -81,6 +81,15 @@ const examSessionListItem = ({
         )} - ${moment(session.registration_end_date).format(
           DATE_FORMAT_WITHOUT_YEAR,
         )}`}
+        {
+          (session.post_admission_start_date && session.post_admission_end_date) ? (
+          <>
+            <br />
+            <span>{`${moment(session.post_admission_start_date).format(DATE_FORMAT_WITHOUT_YEAR)} -
+                    ${moment(session.post_admission_end_date).format(DATE_FORMAT_WITHOUT_YEAR)}`}</span>
+          </>
+          ) : null
+        }
       </span>
     </div>
   );

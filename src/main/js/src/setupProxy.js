@@ -572,11 +572,22 @@ module.exports = function(app) {
       const weekFromNow = moment()
         .add(1, 'weeks')
         .format('YYYY-MM-DD');
+      const weekAndOneDayFromNow = moment()
+        .add(1, 'weeks')
+        .add(1, 'days')
+        .format('YYYY-MM-DD');
+      const monthMinusThreeDaysPast = moment()
+        .add(1, 'months')
+        .subtract(3, 'days')
+        .format('YYYY-MM-DD');
+
       allExamSessions.exam_sessions.forEach(es => {
         if (es.session_date === '2019-04-06') {
           es.session_date = monthFromNow;
           es.registration_start_date = weekInPast;
           es.registration_end_date = weekFromNow;
+          es.post_admission_start_date = weekAndOneDayFromNow;
+          es.post_admission_end_date = monthMinusThreeDaysPast;
         }
         if (es.session_date === '2019-05-26') {
           es.session_date = twoMonthFromNow;
