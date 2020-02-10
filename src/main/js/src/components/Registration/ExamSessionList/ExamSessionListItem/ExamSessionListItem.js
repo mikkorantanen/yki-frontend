@@ -4,6 +4,7 @@ import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
+import { nowBetweenDates } from '../../../../util/util';
 import classes from './ExamSessionListItem.module.css';
 import { levelDescription } from '../../../../util/util';
 import {
@@ -46,6 +47,9 @@ const examSessionListItem = ({
       {name} <br /> {address} <br /> <strong>{city}</strong>
     </span>
   );
+  const postAdmissionActive = session.post_admission_end_date && 
+                              session.post_admission_start_date &&
+                              nowBetweenDates(moment(session.post_admission_start_date), moment(session.post_admission_end_date));
 
   const spotsAvailable = session.max_participants - session.participants;
 

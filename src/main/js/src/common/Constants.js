@@ -1,6 +1,11 @@
 export const DATE_FORMAT = 'D.M.YYYY';
 export const DATE_FORMAT_WITHOUT_YEAR = 'D.M.';
 export const ISO_DATE_FORMAT_SHORT = 'YYYY-MM-DD';
+
+export const REGISTRATION_KIND_ADMISSION = 'ADMISSION';
+export const REGISTRATION_KIND_POST_ADMISSION = 'POST_ADMISSION';
+export const REGISTRATION_KIND_OTHER = 'OTHER';
+
 export const LANGUAGES = [
   {
     code: 'fin',
