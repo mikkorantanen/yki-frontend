@@ -47,12 +47,16 @@ const examSessionListItem = ({
       {name} <br /> {address} <br /> <strong>{city}</strong>
     </span>
   );
+
+
   const postAdmissionActive = session.post_admission_end_date && 
                               session.post_admission_start_date &&
+                              session.post_admission_active &&
+                              session.post_admission_quota &&
                               nowBetweenDates(moment(session.post_admission_start_date), moment(session.post_admission_end_date));
 
-  const spotsAvailable = session.max_participants - session.participants;
-
+  const spotsAvailable = postAdmissionActive ? (session.post_admission_quota - session.pa_participants) : (session.max_participants - session.participants);
+  console.log("session: ", session);
   const spotsAvailableText =
     spotsAvailable === 1
       ? t('registration.examSpots.singleFree')

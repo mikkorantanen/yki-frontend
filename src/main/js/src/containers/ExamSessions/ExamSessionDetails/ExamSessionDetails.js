@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next';
 import moment from 'moment';
 
 import classes from './ExamSessionDetails.module.css';
-import { DATE_FORMAT, REGISTRATION_KIND_ADMISSION, REGISTRATION_KIND_POST_ADMISSION, REGISTRATION_KIND_OTHER } from '../../../common/Constants';
+import { DATE_FORMAT } from '../../../common/Constants';
 import { getLanguagesWithLevelDescriptions } from '../../../util/util';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import ParticipantList from '../../../components/UpcomingExamSessions/ParticipantList/ParticipantList';
