@@ -84,7 +84,9 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
     />
     <div
       className="StateItem"
-    />
+    >
+      examSession.registration
+    </div>
     <div
       className="FirstShowOnHover"
     >
@@ -182,7 +184,9 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
     />
     <div
       className="StateItem"
-    />
+    >
+      examSession.registration
+    </div>
     <div
       className="FirstShowOnHover"
     >
