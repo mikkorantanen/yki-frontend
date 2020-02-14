@@ -40,7 +40,7 @@ exports[`<ExamSessionDetails /> should render exam session details 1`] = `
     onSubmit={[MockFunction]}
   />
   <h2>
-    examSession.postAdmission
+    examSession.postAdmission (examSession.postAdmission.inactive)
   </h2>
   <withI18nextTranslation(ExamSessionPostAdmission)
     examSession={

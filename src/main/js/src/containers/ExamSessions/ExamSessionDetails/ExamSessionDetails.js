@@ -21,6 +21,14 @@ export class ExamSessionDetails extends Component {
     );
   };
 
+  PostAdmissionHeader = () => {
+    if (this.props.examSession.post_admission_end_date && this.props.examSession.post_admission_active) {
+      return <h2>{`${this.props.t('examSession.postAdmission')} (${this.props.t('examSession.postAdmission.active')})`}</h2>
+    }
+
+    return <h2>{`${this.props.t('examSession.postAdmission')} (${this.props.t('examSession.postAdmission.inactive')})`}</h2>
+  }
+
   render() {
     const location = this.props.examSession.location.find(
       l => l.lang === this.props.language,
@@ -43,8 +51,7 @@ export class ExamSessionDetails extends Component {
           onDelete={this.props.onSubmitDeleteExamSession}
           examSession={this.props.examSession}
         />
-        <h2>{this.props.t('examSession.postAdmission')}</h2>
-        {/* maybe should wrap the whole thing to loading spinner? */}
+        {this.PostAdmissionHeader()}
         {this.props.loading ? <Spinner /> : (
           <>
             <ExamSessionPostAdmission examSession={this.props.examSession} oid={this.props.oid} />
