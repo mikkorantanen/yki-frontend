@@ -50,6 +50,37 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
         ]
       }
     />
+    <label
+      htmlFor="participantFilter"
+    >
+      examSession.participants.sortBy
+    </label>
+    <select
+      className="ParticipantFilter"
+      id="ParticipantFilter"
+      onChange={[Function]}
+    >
+      <option
+        value="registrationTime"
+      >
+        examSession.participants.sortBy.registrationTime
+      </option>
+      <option
+        value="registrationType"
+      >
+        examSession.participants.sortBy.registrationType
+      </option>
+      <option
+        value="name"
+      >
+        examSession.participants.sortBy.name
+      </option>
+      <option
+        value="state"
+      >
+        examSession.participants.sortBy.state
+      </option>
+    </select>
   </div>
   <div
     className="ParticipantList"

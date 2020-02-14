@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import moment from 'moment';
@@ -13,7 +13,22 @@ import classes from './ParticipantList.module.css';
 import { ActionButton } from '../../UI/ActionButton/ActionButton';
 import ListExport from './ListExport/ListExport';
 
+const stateComparator = () => (a,b) => {
+  if (a.state === 'COMPLETED')
+    return -1;
+  if (b.state === 'COMPLETED')
+    return 1;
+  if (a.state === "SUBMITTED")
+    return -1;
+  if(b.state === "SUBMITTED")
+    return 1;
+
+  return 0;
+}
+
 export const participantList = props => {
+  const [sortParticipantsFn, setSortParticipantsFn] = useState(R.sort(stateComparator()));
+
   const getStateTranslationKey = state => {
     switch (state) {
       case 'COMPLETED':
@@ -118,6 +133,42 @@ export const participantList = props => {
     ) : null;
   };
 
+  const handleFilterChange = event => {
+    switch (event.target.value) {
+      case 'name': 
+        setSortParticipantsFn(() => R.sortBy(R.path(['form', 'first_name'])));
+        break;
+      case 'state':
+        setSortParticipantsFn(() => R.sort(stateComparator()));
+        break;
+      case 'registrationTime':
+        setSortParticipantsFn(() => R.sortBy(R.prop('created')));
+        break;
+      case 'registrationType':
+        setSortParticipantsFn(() => R.sortBy(R.prop('kind')));
+        break;
+      default:
+        setSortParticipantsFn(() => R.sortBy(R.prop('created')));
+        break;
+    }
+  }
+
+  const participantFiltering = () => {
+    return (
+      <>
+        <label htmlFor="participantFilter">
+          {props.t('examSession.participants.sortBy')}
+        </label>
+        <select id="ParticipantFilter" className={classes.ParticipantFilter} onChange={handleFilterChange}>
+          <option value="registrationTime">{props.t('examSession.participants.sortBy.registrationTime')}</option>
+          <option value="registrationType">{props.t('examSession.participants.sortBy.registrationType')}</option>
+          <option value="name">{props.t('examSession.participants.sortBy.name')}</option>
+          <option value="state">{props.t('examSession.participants.sortBy.state')}</option>
+        </select>
+      </>
+    );
+  }
+
   const cancelRegistrationButton = p => {
     const cancelRegistration = (
       <React.Fragment>
@@ -143,7 +194,7 @@ export const participantList = props => {
   };
 
   const participantRows = participants => {
-    return participants.map((p, i) => (
+    return sortParticipantsFn(participants).map((p, i) => (
       <React.Fragment key={i}>
         <div
           className={[
@@ -220,6 +271,7 @@ export const participantList = props => {
         <React.Fragment>
           <div className={classes.ListExport}>
             <ListExport participants={props.participants} />
+            {participantFiltering()}
           </div>
           <div className={classes.ParticipantList}>
             {participantRows(props.participants)}

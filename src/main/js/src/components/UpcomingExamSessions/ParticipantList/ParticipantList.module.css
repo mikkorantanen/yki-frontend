@@ -49,6 +49,15 @@
   margin-bottom: 8px;
 }
 
+.ParticipantFilter {
+  margin-left: 5px;
+  width: 150px;
+  height: 28px;
+  border: 1px solid hsl(0, 0%, 68%);
+  border-radius: 2px;
+  background-color: hsl(0, 0%, 100%);
+}
+
 .ShowOnHover {
   opacity: 0;
 }
