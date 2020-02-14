@@ -271,6 +271,7 @@ module.exports = function(app) {
         registration_end_date: examDate.registration_end_date,
         organizer_oid: req.params.oid,
       };
+
       examSessions.exam_sessions.push(Object.assign(examSession, backendData));
       res.send({ id: id });
     } catch (err) {

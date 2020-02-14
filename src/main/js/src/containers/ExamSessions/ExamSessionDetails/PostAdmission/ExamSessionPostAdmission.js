@@ -27,7 +27,7 @@ export class ExamSessionPostAdmission extends Component {
       post_admission_active: this.props.examSession.post_admission_active,
     }
 
-    if (this.props.examSession.post_admission_end_date === null) {
+    if (!this.props.examSession.post_admission_end_date) {
       // Post admission not available
       return <p>{t('examSession.postAdmission.notAllowed')}</p>
     } else if (this.props.examSession.post_admission_end_date) {

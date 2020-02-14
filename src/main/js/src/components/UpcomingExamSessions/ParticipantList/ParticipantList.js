@@ -5,7 +5,7 @@ import moment from 'moment';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import * as R from 'ramda';
 
-import { DATE_FORMAT, REGISTRATION_KIND_POST_ADMISSION } from '../../../common/Constants';
+import { DATE_FORMAT, REGISTRATION_KIND_POST_ADMISSION, REGISTRATION_KIND_ADMISSION } from '../../../common/Constants';
 import checkMarkDone from '../../../assets/svg/checkmark-done.svg';
 import checkMarkNotDone from '../../../assets/svg/checkmark-not-done.svg';
 import trashcan from '../../../assets/svg/trashcan.svg';
@@ -253,13 +253,21 @@ export const participantList = props => {
     ));
   };
 
-  return (
-    <div data-cy="participant-list">
+  const participantsHeader = () => {
+    const post_admission_quota = (props.examSession.post_admission_quota && props.examSession.post_admission_active) ? props.examSession.post_admission_quota : 0;
+    return (
       <h2>
         {props.t('examSession.participants')}
         {':'} {props.examSession.participants} /{' '}
-        {props.examSession.max_participants}
+        {props.examSession.max_participants + post_admission_quota}
       </h2>
+    );
+  }
+
+  return (
+    <div data-cy="participant-list">
+      {participantsHeader()}
+
       {props.examSession.queue > 0 && (
         <h3>
           {props.t('examSession.inQueue')}
