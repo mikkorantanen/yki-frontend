@@ -27,7 +27,7 @@ const stateComparator = () => (a,b) => {
 }
 
 export const participantList = props => {
-  const [sortParticipantsFn, setSortParticipantsFn] = useState(R.sort(stateComparator()));
+  const [sortParticipantsFn, setSortParticipantsFn] = useState(R.sortBy(R.prop('created')));
 
   const getStateTranslationKey = state => {
     switch (state) {
