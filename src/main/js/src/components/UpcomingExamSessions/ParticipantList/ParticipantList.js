@@ -43,10 +43,42 @@ export const participantList = props => {
         return 'examSession.notPaid';
     }
   };
-  const registratioStatus = registrationState => {
+
+  const onResendLinkClick = (participantName, participantEmail, regId) => {
+    if(window.confirm(`Lähetetäänkö maksulinkki osallistujalle ${participantName} osoitteeseen ${participantEmail}`)){
+      props.onResendLink(
+        props.examSession.organizer_oid,
+        props.examSession.id,
+        regId,
+      );
+    }
+  }
+
+  const registratioStatus = participant => {
+    const registrationState = participant.state;
+    const fullName = participant.form.first_name + " " + participant.form.last_name
     const image =
       registrationState === 'COMPLETED' ? checkMarkDone : checkMarkNotDone;
     const text = props.t(getStateTranslationKey(registrationState));
+
+    // add ability to resend confirmation email if state is submitted
+    if (registrationState === 'SUBMITTED') {
+      return (
+        <React.Fragment>
+        <img src={image} data-cy={`registration-${registrationState}`} alt="" />{' '}
+        {`${text} `}
+        {/* eslint-disable-next-line */}
+        <a 
+          className={classes.ResendEmailLink} 
+          href="javascript:void(0)" // eslint-disable-line
+          onClick={e => onResendLinkClick(fullName, participant.form.email, participant.registration_id)}
+        >
+          {props.t('examSession.participants.resendLink')}
+        </a>
+      </React.Fragment>
+      );
+    }
+    // else just show status
     return (
       <React.Fragment>
         <img src={image} data-cy={`registration-${registrationState}`} alt="" />{' '}
@@ -216,7 +248,7 @@ export const participantList = props => {
             classes.StateItem,
           ].join(' ')}
         >
-          {registratioStatus(p.state)}
+          {registratioStatus(p)}
         </div>
         <div className={classes.StateItem}>
           {p.created && moment(p.created).format(DATE_FORMAT)}
@@ -297,6 +329,7 @@ participantList.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onConfirmPayment: PropTypes.func.isRequired,
   onRelocate: PropTypes.func.isRequired,
+  onResendLink: PropTypes.func.isRequired,
 };
 
 export default withTranslation()(participantList);

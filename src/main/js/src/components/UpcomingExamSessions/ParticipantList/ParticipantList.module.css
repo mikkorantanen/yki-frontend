@@ -49,6 +49,10 @@
   margin-bottom: 8px;
 }
 
+.ResendEmailLink {
+  font-size: 8px;
+}
+
 .ParticipantFilter {
   margin-left: 5px;
   width: 150px;

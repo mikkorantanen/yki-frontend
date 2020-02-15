@@ -62,6 +62,7 @@ export class ExamSessionDetails extends Component {
               onCancel={this.props.onCancelRegistration}
               onConfirmPayment={this.props.onConfirmPayment}
               onRelocate={this.props.onRelocate}
+              onResendLink={this.props.onResendLink}
             />
           </>
         )}
@@ -92,6 +93,10 @@ const mapDispatchToProps = dispatch => {
     onConfirmPayment: (organizerOid, examSessionId, registrationId) =>
       dispatch(
         actions.confirmPayment(organizerOid, examSessionId, registrationId),
+      ),
+    onResendLink: (organizerOid, examSessionId, registrationId) =>
+      dispatch(
+        actions.ResendPaymentEmail(organizerOid, examSessionId, registrationId),
       ),
     errorConfirmedHandler: () => dispatch(actions.examSessionFailReset()),
     onRelocate: (

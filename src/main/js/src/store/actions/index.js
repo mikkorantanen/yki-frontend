@@ -8,7 +8,8 @@ export {
   cancelRegistration,
   confirmPayment,
   relocateExamSession,
-  addPostAdmission
+  addPostAdmission,
+  ResendPaymentEmail,
 } from './examSession';
 export {
   fetchRegistryContent,

@@ -417,3 +417,41 @@ export const togglePostAdmissionActivation = (orgId, examSessionId, activeState)
       });
   }
 }
+
+const ResendPaymentEmailStart = () => {
+  return {
+    type: actionTypes.EXAM_SESSION_RESEND_EMAIL_START,
+    loading: true,
+  };
+};
+
+const ResendPaymentEmailSuccess = () => {
+  return {
+    type: actionTypes.EXAM_SESSION_RESEND_EMAIL_SUCCESS,
+    loading: false,
+  }
+}
+
+const ResendPaymentEmailFailure = () => {
+  return {
+    type: actionTypes.EXAM_SESSION_RESEND_EMAIL_FAIL,
+    loading: false,
+  }
+}
+
+export const ResendPaymentEmail = (orgId, examSessionId, registrationId) => {
+  return dispatch => {
+    dispatch(ResendPaymentEmailStart());
+    axios
+    .post(`/yki/api/virkailija/organizer/${orgId}/exam-session/${examSessionId}/resendConfirmation/${registrationId}`)
+    .then(() => {
+      dispatch(ResendPaymentEmailSuccess());
+      alert("OK");
+    })
+    .catch(err => {
+      dispatch(ResendPaymentEmailFailure());
+      alert("Error");
+      console.error(err);
+    });
+  }
+}
