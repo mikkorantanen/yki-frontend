@@ -64,6 +64,7 @@ describe('<ParticipantList />', () => {
         onCancel={jest.fn()}
         onConfirmPayment={jest.fn()}
         onRelocate={jest.fn()}
+        onResendLink={jest.fn()}
       />,
     );
     expect(toJson(wrapper)).toMatchSnapshot();

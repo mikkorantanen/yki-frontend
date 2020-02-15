@@ -208,7 +208,14 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
         src="checkmark-not-done.svg"
       />
        
-      examSession.notPaid
+      examSession.notPaid 
+      <a
+        className="ResendEmailLink"
+        href="javascript:void(0)"
+        onClick={[Function]}
+      >
+        examSession.participants.resendLink
+      </a>
     </div>
     <div
       className="StateItem"
