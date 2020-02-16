@@ -313,7 +313,7 @@ module.exports = function(app) {
     }
   });
 
-  app.post('/yki/api/virkailija/organizer/:oid/exam-session/:id/resendConfirmation/:regid', (req,res) => {
+  app.post('/yki/api/virkailija/organizer/:oid/exam-session/:examSessionId/registration/:id/resendConfirmation', (req,res) => {
     try {
       res.send({ success: true });
     }

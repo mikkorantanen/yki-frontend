@@ -443,7 +443,7 @@ export const ResendPaymentEmail = (orgId, examSessionId, registrationId, emailLa
   return dispatch => {
     dispatch(ResendPaymentEmailStart());
     axios
-    .post(`/yki/api/virkailija/organizer/${orgId}/exam-session/${examSessionId}/resendConfirmation/${registrationId}?emailLang=${emailLang}`)
+    .post(`/yki/api/virkailija/organizer/${orgId}/exam-session/${examSessionId}/registration/${registrationId}/resendConfirmation?emailLang=${emailLang}`)
     .then(() => {
       dispatch(ResendPaymentEmailSuccess());
       alert("OK");
