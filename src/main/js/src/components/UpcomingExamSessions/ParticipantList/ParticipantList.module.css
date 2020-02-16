@@ -53,6 +53,16 @@
   font-size: 8px;
 }
 
+.ResendEmailButton {
+  margin-left: 5px;
+}
+
+.ResendEmailSelectionText {
+  font-size: 8;
+  font-weight: normal;
+  color: rgb(41, 41, 41);
+}
+
 .ParticipantFilter {
   margin-left: 5px;
   width: 150px;

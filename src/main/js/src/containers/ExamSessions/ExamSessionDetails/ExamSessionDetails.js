@@ -94,9 +94,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(
         actions.confirmPayment(organizerOid, examSessionId, registrationId),
       ),
-    onResendLink: (organizerOid, examSessionId, registrationId) =>
+    onResendLink: (organizerOid, examSessionId, registrationId, emailLang) =>
       dispatch(
-        actions.ResendPaymentEmail(organizerOid, examSessionId, registrationId),
+        actions.ResendPaymentEmail(organizerOid, examSessionId, registrationId, emailLang),
       ),
     errorConfirmedHandler: () => dispatch(actions.examSessionFailReset()),
     onRelocate: (

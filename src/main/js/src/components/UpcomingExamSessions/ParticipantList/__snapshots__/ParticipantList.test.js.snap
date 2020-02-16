@@ -209,13 +209,17 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
       />
        
       examSession.notPaid 
-      <a
-        className="ResendEmailLink"
-        href="javascript:void(0)"
-        onClick={[Function]}
-      >
-        examSession.participants.resendLink
-      </a>
+      <ResendEmailComponent
+        email="natalia.gaddens@test.com"
+        enText="common.language.eng"
+        finText="common.language.fin"
+        fullName="Gaddens Natalia"
+        linkText="examSession.participants.resendLink"
+        onResendLink={[MockFunction]}
+        registrationId={2}
+        sendText="registration.notification.signup.button"
+        svText="common.language.swe"
+      />
     </div>
     <div
       className="StateItem"

@@ -439,11 +439,11 @@ const ResendPaymentEmailFailure = () => {
   }
 }
 
-export const ResendPaymentEmail = (orgId, examSessionId, registrationId) => {
+export const ResendPaymentEmail = (orgId, examSessionId, registrationId, emailLang) => {
   return dispatch => {
     dispatch(ResendPaymentEmailStart());
     axios
-    .post(`/yki/api/virkailija/organizer/${orgId}/exam-session/${examSessionId}/resendConfirmation/${registrationId}`)
+    .post(`/yki/api/virkailija/organizer/${orgId}/exam-session/${examSessionId}/resendConfirmation/${registrationId}?emailLang=${emailLang}`)
     .then(() => {
       dispatch(ResendPaymentEmailSuccess());
       alert("OK");

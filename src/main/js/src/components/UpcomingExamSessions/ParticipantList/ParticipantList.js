@@ -26,6 +26,55 @@ const stateComparator = () => (a,b) => {
   return 0;
 }
 
+const ResendEmailComponent = props => {
+  const [emailLang, setEmailLang] = useState("fi");
+  const [linkClicked, setLinkClicked] = useState(false);
+
+  const onResendClick = (participantName, participantEmail, regId, orgOid, examSessionId) => {
+    if(window.confirm(`Lähetetäänkö maksulinkki osallistujalle ${participantName} osoitteeseen ${participantEmail}`)){
+      props.onResendLink(
+        orgOid,
+        examSessionId,
+        regId,
+        emailLang
+      );
+      setLinkClicked(false);
+    }
+  }
+
+  const langSelection = () => {
+    return (
+      <>
+        <span className={classes.ResendEmailSelectionText}>Sähköpostin kieli: </span>
+        <select onChange={e => setEmailLang(e.target.value)}> 
+          <option value="fi">{props.finText}</option>
+          <option value="sv">{props.svText}</option>
+          <option value="en">{props.enText}</option>
+        </select>
+        <button
+          className={classes.ResendEmailButton}
+          onClick={e => onResendClick(props.fullName, props.email, props.registrationId, props.organizerOid, props.examSessionId)}
+          data-cy="button-export-to-excel"
+        >
+          {props.sendText}
+        </button>
+
+      </>
+    );
+  }
+
+  return linkClicked ? langSelection() : (
+    // eslint-disable-next-line
+    <a 
+      className={classes.ResendEmailLink} 
+      href="javascript:void(0)" // eslint-disable-line
+      onClick={e => setLinkClicked(true)}
+    >
+      {props.linkText}
+    </a>
+  )
+}
+
 export const participantList = props => {
   const [sortParticipantsFn, setSortParticipantsFn] = useState(R.sortBy(R.prop('created')));
 
@@ -44,16 +93,6 @@ export const participantList = props => {
     }
   };
 
-  const onResendLinkClick = (participantName, participantEmail, regId) => {
-    if(window.confirm(`Lähetetäänkö maksulinkki osallistujalle ${participantName} osoitteeseen ${participantEmail}`)){
-      props.onResendLink(
-        props.examSession.organizer_oid,
-        props.examSession.id,
-        regId,
-      );
-    }
-  }
-
   const registratioStatus = participant => {
     const registrationState = participant.state;
     const fullName = participant.form.first_name + " " + participant.form.last_name
@@ -65,16 +104,22 @@ export const participantList = props => {
     if (registrationState === 'SUBMITTED') {
       return (
         <React.Fragment>
-        <img src={image} data-cy={`registration-${registrationState}`} alt="" />{' '}
-        {`${text} `}
-        {/* eslint-disable-next-line */}
-        <a 
-          className={classes.ResendEmailLink} 
-          href="javascript:void(0)" // eslint-disable-line
-          onClick={e => onResendLinkClick(fullName, participant.form.email, participant.registration_id)}
-        >
-          {props.t('examSession.participants.resendLink')}
-        </a>
+          <img src={image} data-cy={`registration-${registrationState}`} alt="" />{' '}
+          {`${text} `}
+          {/* eslint-disable-next-line */}
+          <ResendEmailComponent
+            fullName={fullName}
+            email={participant.form.email}
+            registrationId={participant.registration_id}
+            organizerOid={props.examSession.organizer_oid}
+            examSessionId={props.examSession.id}
+            onResendLink={props.onResendLink}
+            sendText={props.t('registration.notification.signup.button')}
+            linkText={props.t('examSession.participants.resendLink')}
+            finText={props.t("common.language.fin")} 
+            svText={props.t("common.language.swe")}
+            enText={props.t("common.language.eng")}
+          />
       </React.Fragment>
       );
     }
