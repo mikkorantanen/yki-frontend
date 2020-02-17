@@ -330,11 +330,12 @@ export const participantList = props => {
   };
 
   const participantsHeader = () => {
-    const post_admission_quota = (props.examSession.post_admission_quota && props.examSession.post_admission_active) ? props.examSession.post_admission_quota : 0;
+    const post_admission_quota = 
+      (props.examSession.post_admission_quota && props.examSession.post_admission_active) ? props.examSession.post_admission_quota : 0;
     return (
       <h2>
         {props.t('examSession.participants')}
-        {':'} {props.examSession.participants} /{' '}
+        {':'} {props.examSession.participants + props.examSession.pa_participants} /{' '}
         {props.examSession.max_participants + post_admission_quota}
       </h2>
     );
