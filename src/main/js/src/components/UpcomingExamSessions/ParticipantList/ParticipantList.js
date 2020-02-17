@@ -101,28 +101,28 @@ export const participantList = props => {
     const text = props.t(getStateTranslationKey(registrationState));
 
     // add ability to resend confirmation email if state is submitted
-    if (registrationState === 'SUBMITTED') {
-      return (
-        <React.Fragment>
-          <img src={image} data-cy={`registration-${registrationState}`} alt="" />{' '}
-          {`${text} `}
-          {/* eslint-disable-next-line */}
-          <ResendEmailComponent
-            fullName={fullName}
-            email={participant.form.email}
-            registrationId={participant.registration_id}
-            organizerOid={props.examSession.organizer_oid}
-            examSessionId={props.examSession.id}
-            onResendLink={props.onResendLink}
-            sendText={props.t('registration.notification.signup.button')}
-            linkText={props.t('examSession.participants.resendLink')}
-            finText={props.t("common.language.fin")} 
-            svText={props.t("common.language.swe")}
-            enText={props.t("common.language.eng")}
-          />
-      </React.Fragment>
-      );
-    }
+    // if (registrationState === 'SUBMITTED') {
+    //   return (
+    //     <React.Fragment>
+    //       <img src={image} data-cy={`registration-${registrationState}`} alt="" />{' '}
+    //       {`${text} `}
+    //       {/* eslint-disable-next-line */}
+    //       <ResendEmailComponent
+    //         fullName={fullName}
+    //         email={participant.form.email}
+    //         registrationId={participant.registration_id}
+    //         organizerOid={props.examSession.organizer_oid}
+    //         examSessionId={props.examSession.id}
+    //         onResendLink={props.onResendLink}
+    //         sendText={props.t('registration.notification.signup.button')}
+    //         linkText={props.t('examSession.participants.resendLink')}
+    //         finText={props.t("common.language.fin")} 
+    //         svText={props.t("common.language.swe")}
+    //         enText={props.t("common.language.eng")}
+    //       />
+    //   </React.Fragment>
+    //   );
+    // }
     // else just show status
     return (
       <React.Fragment>

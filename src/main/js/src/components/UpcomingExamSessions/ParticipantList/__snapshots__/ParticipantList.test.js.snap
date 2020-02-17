@@ -208,18 +208,7 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
         src="checkmark-not-done.svg"
       />
        
-      examSession.notPaid 
-      <ResendEmailComponent
-        email="natalia.gaddens@test.com"
-        enText="common.language.eng"
-        finText="common.language.fin"
-        fullName="Gaddens Natalia"
-        linkText="examSession.participants.resendLink"
-        onResendLink={[MockFunction]}
-        registrationId={2}
-        sendText="registration.notification.signup.button"
-        svText="common.language.swe"
-      />
+      examSession.notPaid
     </div>
     <div
       className="StateItem"
