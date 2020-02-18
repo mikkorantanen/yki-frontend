@@ -107,7 +107,7 @@ class ExamDates extends Component {
             {/* eslint-disable-next-line */}
             <p><a href="javascript:void(0)" onClick={() => this.showAddOrEditPostAdmissionModalHandler(e)}>{e.post_admission_end_date ?
                   `${registrationEndDateMoment.add(1, 'days').format(DATE_FORMAT)} - ${moment(e.post_admission_end_date).format(DATE_FORMAT)}` :
-                  "Lisää jälki-ilmoittautuminen"}</a></p>
+                  this.props.t('examSession.postAdmission.add')}</a></p>
             <p>{languages}</p>
             <p>{level.toLowerCase()}</p>
           </React.Fragment>
