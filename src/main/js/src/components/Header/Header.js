@@ -1,10 +1,11 @@
 import React from 'react';
 
 import classes from './Header.module.css';
-import Logo from '../UI/Logo/Logo';
 import NavigationItems from './NavigationItems/NavigationItems';
-import LanguageSelect from '../UI/LanguageSelect/LanguageSelect';
-import LogOut from '../UI/LogOut/LogOut';
+import LanguageSelect from '../../containers/LanguageSelect/LanguageSelect';
+
+import OPHLogo from '../../assets/svg/oph-logo-updated.svg';
+import NavigationTabs from "./NavigationTabs/NavigationTabs";
 
 const header = ({ nav }) =>
   nav ? (
@@ -15,12 +16,11 @@ const header = ({ nav }) =>
     </header>
   ) : (
     <header className={classes.RegistrationHeader}>
-      <Logo />
-      <span>Opetushallitus</span>
-      <div className={classes.HeaderLinksContainer}>
-        <LogOut />
-        <LanguageSelect />
+      <img src={OPHLogo} alt={'OPH-Logo'}/>
+      <div className={classes.HeaderTabsContainer}>
+        <NavigationTabs />
       </div>
+      <LanguageSelect />
     </header>
   );
 

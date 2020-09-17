@@ -1,0 +1,69 @@
+.Headline {
+    display: inline-flex;
+    flex-direction: row;
+    width: 100%;
+    height: 372px;
+    background-color: hsla(194, 91%, 21%, 1);
+    color: hsla(0, 0%, 100%, 1);
+    text-align: right;
+}
+
+.BaseContainer {
+    max-width: 50vw;
+    width: 100%;
+}
+
+.HeadlineText {
+    padding-top: 3vh;
+    text-align: left;
+    margin-left: 14vw;
+    margin-right: 1vw;
+}
+
+.HeadlineText h1 {
+    text-transform: uppercase;
+    font: normal normal bold 51px/56px PT Sans Narrow;
+    letter-spacing: 1.02px;
+    margin: 3vh 0 2vh 0 !important;
+}
+
+.HeadlineText p {
+    text-align: left;
+    font: normal normal normal 16px/24px PT Sans;
+    letter-spacing: 0;
+    color: hsla(0, 0%, 100%, 1);
+}
+
+.HeadlineText hr {
+    border: 2px solid hsla(194, 82%, 43%, 1);
+    text-align: left;
+    max-width: 5vw;
+    margin: 0 0 3vh 0 !important;
+}
+
+.ImageContainer {
+    overflow: hidden;
+    height: 372px;
+}
+
+.ImageContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 620px) {
+    .Headline {
+        width: 100%;
+        height: 20%;
+    }
+    .BaseContainer {
+        max-width: 100%;
+    }
+    .ImageContainer img {
+        width: 50%;
+        height: 50%;
+        max-width: 50%;
+        margin: 0 0 88px 100px;
+    }
+}

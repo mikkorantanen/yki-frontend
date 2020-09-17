@@ -1,3 +1,7 @@
+.AddressInput input {
+  border: 1px solid hsla(194, 82%, 43%, 1);
+  border-radius: 4px;
+}
 
 .Zip {
   float: left;

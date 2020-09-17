@@ -1,10 +1,19 @@
 .TextInput {
-  width: 340px;
   height: 30px;
+  width: 260px;
+  background: hsla(0, 0%, 100%, 1) 0 0 no-repeat padding-box;
+  border: 1px solid hsla(194, 82%, 43%, 1);
+  border-radius: 4px;
 }
 
 .Label {
-  font-size: 14px;
+  font: normal normal 14px/24px PT Sans;
+  letter-spacing: 0;
+  color: hsla(194, 91%, 21%, 1);
+}
+
+.Form {
+  margin-left: 5vw;
 }
 
 .Form button {

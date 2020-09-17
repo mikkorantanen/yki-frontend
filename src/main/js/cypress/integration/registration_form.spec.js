@@ -117,7 +117,7 @@ describe('Registration form', () => {
 
     cy.get('[data-cy=form-submit-button]').click();
 
-    cy.get('[data-cy=registration-success-header]').should('exist');
+    cy.get('[data-cy=registration-success]').should('exist');
   });
 
   it('email authenticated user can fill and submit form', () => {
@@ -142,10 +142,10 @@ describe('Registration form', () => {
 
     cy.get('[data-cy=form-submit-button]').click();
 
-    cy.get('[data-cy=registration-success-header]').should('exist');
+    cy.get('[data-cy=registration-success]').should('exist');
     cy.get('[data-cy=exam-details-card').should('exist');
-    cy.get('[data-cy=exam-details-card-extra')
-      .contains('Lisätiedot suomeksi')
+    cy.get('[data-cy=success-details-extra')
+      .contains('Tärkeää!')
       .should('exist');
   });
 });

@@ -1,12 +1,14 @@
 .Filters {
   display: grid;
   grid-auto-flow: column;
-  grid-gap: 5px;
-  max-width: 520px;
+  grid-gap: 3vw;
 }
 
 .Filters label {
-  font-size: 12px;
+  text-align: left;
+  font: normal normal bold 16px/24px PT Sans;
+  letter-spacing: 0;
+  color: hsla(194, 91%, 21%, 1);
 }
 
 .Filters select {
@@ -16,16 +18,37 @@
   padding-left: 7px;
   appearance: none;
   background: url('../../../assets/svg/down-facing-triangle.svg') 90% no-repeat
-    hsl(0, 0%, 100%);
-  border: 1px solid hsl(0, 0%, 70%);
-  border-radius: 2px;
-  font-size: 14px;
+    hsla(0, 0%, 100%, 1);
+  border: 1px solid hsla(0, 0%, 100%, 1);
+  border-radius: 4px;
   text-overflow: ellipsis;
+  text-align: left;
+  font: normal normal normal 16px/24px PT Sans;
+  letter-spacing: 0;
+  color: hsla(194, 91%, 21%, 1);
+}
+
+.FilterCheckboxes {
+  display: flex;
+  margin-top: 5vh;
+  text-align: left;
+  font: normal normal normal 16px/24px PT Sans;
+  letter-spacing: 0;
+  color: hsla(194, 91%, 21%, 1);
+}
+
+.CheckBox {
+  display: inherit;
+  margin-right: 5vw;
+}
+
+.CheckBox label:last-child {
+  margin-left: 1vw;
 }
 
 @media (min-width: 620px) {
   .Filters {
-    grid-gap: 20px;
+    grid-gap: 3vw;
   }
 
   .Filters select {

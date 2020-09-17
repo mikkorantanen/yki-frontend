@@ -1,6 +1,8 @@
 .Content {
-  width: calc(100vw - 40px);
-  margin: 0 auto;
+  width: auto;
+  max-width: 100vw;
+  margin: 0 14vw 0 14vw;
+  min-height: 10vh;
 }
 
 .Loading {
@@ -16,26 +18,35 @@
   font-size: 1.125em;
 }
 
-.Identification {
-  display: grid;
-  grid-row-gap: 10px;
-  justify-items: center;
+.InfoText {
+  text-align: left;
+  font: normal normal normal 16px/24px PT Sans;
+  letter-spacing: 0;
+  color: hsla(194, 91%, 21%, 1);
 }
 
-.EmailIdentificationButton {
-  border: none;
-  background: none;
-  height: 35px;
-  width: 252px;
-  font-size: 0.875em;
-  color: hsl(225, 100%, 40%);
+.Identification {
+  justify-items: center;
+  width: 32vw;
+}
+
+.Identification p {
+  text-align: left;
+  font: normal normal bold 28px/24px PT Sans;
+  letter-spacing: 0;
+  color: hsla(194, 82%, 43%, 1);
+}
+
+.IdentificationButtons {
+  display: flex;
 }
 
 @media (min-width: 620px) {
   .Content {
-    width: calc(100vw - 200px);
-    max-width: 333px;
-    margin: 0 0 0 100px;
+    width: auto;
+    max-width: 100vw;
+    margin: 0 14vw 0 14vw;
+    min-height: 10vh;
   }
 
   .Loading {
@@ -47,7 +58,14 @@
   }
 
   .Identification {
-    grid-row-gap: 20px;
     justify-items: start;
+    /*width: 32vw;*/
+    width: auto;
   }
+
+  .IdentificationButtons {
+    display: flex;
+    width: 32vw;
+  }
+
 }

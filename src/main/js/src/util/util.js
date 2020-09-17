@@ -59,3 +59,24 @@ export const nowBetweenDates = (startDate, endDate) => {
   const now = moment(new Date());
   return now.isBetween(startDate, endDate, 'day', '[]');
 };
+
+export const getObjectValuesCount = (object) => {
+  const valuesArray = Object.values(object);
+  let result = 0;
+
+  for (let key in valuesArray) {
+    if (valuesArray.hasOwnProperty(key)) {
+      let value = valuesArray[key];
+      result += value.length;
+    }
+  }
+  return result;
+};
+
+export const getLanguageAndLevel = (sessionData) => {
+  return (
+  `${i18next.t(`common.language.${sessionData.language_code}`)}, ${levelDescription(
+      sessionData.level_code,
+  ).toLowerCase()}`
+  );
+};

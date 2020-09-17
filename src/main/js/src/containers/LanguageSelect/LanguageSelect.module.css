@@ -1,0 +1,27 @@
+.SelectorContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 2vw;
+}
+
+.SelectorContainer img {
+  margin-right: 2%;
+}
+
+.LanguageSelect {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: hsl(195, 91%, 22%);
+  font: normal normal normal 16px/24px PT Sans;
+}
+
+.LanguageSelect:hover {
+  text-decoration-line: underline;
+}
+
+@media (max-width: 864px) {
+  .SelectorContainer img {
+    display: none;
+  }
+}

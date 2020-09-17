@@ -14,7 +14,7 @@ exports[`<RegistrationSuccess /> should render registration success page 1`] = `
       registration.success.info1
       :
     </p>
-    <examDetailsCard
+    <depr_ExamDetailsCard
       exam={
         Object {
           "exam_fee": "100.00",

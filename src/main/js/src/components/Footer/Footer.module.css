@@ -1,0 +1,38 @@
+.Footer {
+    margin-top: auto !important;
+    background: hsl(195, 91%, 22%) 0 0 no-repeat padding-box;
+    color: hsl(0, 0%, 100%);
+    display: -webkit-box;
+    width: 100%;
+    bottom: 0;
+}
+
+.FooterLogo {
+    margin-top: 2%;
+    margin-right: auto;
+}
+
+.FooterLinks {
+    padding-top: 2%;
+    display: grid;
+    grid-row-gap: 0;
+    padding-left: 20%;
+    text-align: left;
+}
+
+.FooterLinks a {
+    text-decoration: none;
+    font: normal normal bold 16px/24px PT Sans;
+    letter-spacing: 0;
+    color: hsl(0, 0%, 100%);
+}
+
+.FooterText {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    font: normal normal 16px/24px PT Sans;
+    letter-spacing: 0;
+    color: hsl(0, 0%, 100%);
+    opacity: 1;
+}
