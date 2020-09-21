@@ -3,7 +3,7 @@
     top: 0;
     left: 702px;
     width: 258px;
-    font: normal normal bold 20px/26px PT Sans;
+    font: normal normal bold 21px/24px PT Sans;
     letter-spacing: 0.6px;
     color: hsl(195, 91%, 22%);
 }
@@ -31,4 +31,34 @@
     margin-top: 2.5vh;
     color: hsl(195, 91%, 22%);
     text-decoration: none !important;
+}
+
+/* Mobile view */
+@media (max-width: 425px) {
+    .ActiveTab {
+        padding-top: 5vh;
+        height: 24vw;
+        width: 100%;
+    }
+    .InactiveTab {
+        padding-top: 5vh;
+        height: 24vw;
+        width: 100%;
+    }
+    .MobileMenuItems {
+        display: flex;
+        flex-direction: column;
+        padding-top: 5vh;
+        width: 100%;
+        margin-bottom: 0;
+    }
+    .LanguageItem {
+        height: 7vh;
+        padding-top: 5vh;
+        width: 100%;
+    }
+    .MobileMenuItems hr {
+        width: 70vw;
+        border: 1px solid hsla(194, 82%, 43%, 1);
+    }
 }

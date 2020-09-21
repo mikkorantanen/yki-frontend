@@ -5,6 +5,7 @@ import * as actions from '../../store/actions';
 import globe from '../../assets/svg/globe.svg';
 import classes from './LanguageSelect.module.css';
 import i18n from "../../i18n";
+import {capitalize} from "../../util/util";
 
 const texts = {fi: 'suomeksi', sv: 'på svenska', en: 'in english'};
 const languages = ['fi', 'sv', 'en'];
@@ -23,6 +24,7 @@ class LanguageSelect extends React.PureComponent {
   };
 
   handleLanguageChange = (e) => {
+    this.props.setCollapsibleOpen(!this.props.isOpen)
     const selected = e.target.value;
     this.props.onYkiLanguageChange(selected);
     i18n.changeLanguage(selected);
@@ -35,7 +37,7 @@ class LanguageSelect extends React.PureComponent {
             .map(lang => (
                 <option
                     key={lang}
-                    lang={lang}
+                    lang={`SELECTOR-${lang}`}
                     value={lang}
                     className={classes.LanguageSelect}
                 >
@@ -45,12 +47,40 @@ class LanguageSelect extends React.PureComponent {
       </select>
   );
 
+  languageLinks = () => (
+      <div className={classes.MobileMenuItems}>
+        {languages.map((lang) => (
+            <>
+              <button
+                  className={classes.LanguageItem}
+                  key={`LINK-${lang}`}
+                  value={lang}
+                  onClick={e => this.handleLanguageChange(e)}
+              >
+                {capitalize(texts[lang])}
+              </button>
+              <hr/>
+            </>
+        ))}
+      </div>
+  );
+
   render() {
+    const desktop = window.innerWidth > 412;
+
     return (
-        <div className={classes.SelectorContainer}>
-          <img src={globe} aria-disabled alt={'globe-icon'}/>
-          {this.languageSelector()}
-        </div>
+        <>
+          {desktop ?
+              <div className={classes.SelectorContainer}>
+                <img src={globe} aria-disabled alt={'globe-icon'}/>
+                {this.languageSelector()}
+              </div>
+              :
+              <>
+                {this.languageLinks()}
+              </>
+          }
+        </>
     );
   };
 }

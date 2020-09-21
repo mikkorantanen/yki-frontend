@@ -41,9 +41,20 @@
   display: inline-flex;
 }
 
+/* Tablet view */
 @media (min-width: 620px) {
   .RegistrationHeader {
     height: 64px;
+    font-size: 1.125em;
+    background-size: 3.5em;
+  }
+}
+
+/* Mobile view */
+@media (max-width: 425px) {
+  .RegistrationHeader {
+    grid-template-columns: repeat(2, 1fr);
+    height: 72px;
     font-size: 1.125em;
     background-size: 3.5em;
   }

@@ -12,7 +12,7 @@ const DescriptionCollapsible = (props) => {
   const [show, setOpen] = useState(false);
   const { headerText, content } = props;
 
-  return(
+  return (
       <>
         <Collapsible
             className={show ? classes.DescriptionsBarOpen : classes.DescriptionsBarClosed }
@@ -27,12 +27,8 @@ const DescriptionCollapsible = (props) => {
   )
 }
 
-// Todo: add examlevels & description
-// todo: examLevelNumber && examLevel OR just examLevel ???
 DescriptionCollapsible.propTypes = {
   headerText: PropTypes.string.isRequired,
-  // examLevelNumber: PropTypes.number.isRequired,
-  // examLevel: PropTypes.string.isRequired,
   content: PropTypes.array.isRequired,
 };
 

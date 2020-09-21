@@ -24,4 +24,28 @@
   .SelectorContainer img {
     display: none;
   }
+
+  .MobileMenuItems {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5vh;
+    width: 100%;
+    margin-bottom: 0;
+  }
+  .LanguageItem {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    width: 100%;
+    top: 0;
+    left: 702px;
+    background: hsla(0, 0%, 100%, 1);
+    border: none;
+    font: normal normal bold 21px/24px PT Sans;
+    letter-spacing: 0.6px;
+    color: hsl(195, 91%, 22%);
+  }
+  .MobileMenuItems hr {
+    width: 70vw;
+    border: 1px solid hsla(194, 82%, 43%, 1);
+  }
 }

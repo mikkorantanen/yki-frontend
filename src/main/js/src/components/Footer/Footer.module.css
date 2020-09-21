@@ -36,3 +36,21 @@
     color: hsl(0, 0%, 100%);
     opacity: 1;
 }
+
+/* Mobile view */
+@media (max-width: 425px) {
+    .Footer {
+        display: block;
+        text-align: center;
+    }
+    .FooterLinks {
+        padding: 5% 0 2% 0;
+        text-align: inherit;
+    }
+    .FooterText {
+        text-align: inherit;
+    }
+    .FooterLogo {
+        margin-top: 5vh;
+    }
+}

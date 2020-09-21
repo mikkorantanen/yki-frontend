@@ -1,5 +1,4 @@
 .ArticleContent {
-  width: calc(100vw - 40px);
   text-align: left;
   font: normal normal normal 16px/24px PT Sans;
   letter-spacing: 0;
@@ -11,6 +10,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  z-index: 1;
 }
 
 .ArticleContent h1 {
@@ -55,69 +55,13 @@
   margin: 28px 0 0 0;
 }
 
-.PriceContainer {
-  text-align: center;
-}
+/* Mobile view */
+@media (max-width: 425px) {
+  .InnerContainer {
+    padding-left: 5vw;
+  }
 
-.PriceContainer h2 {
-  padding-left: 5%;
-  font-size: 28px;
-  color: hsla(194, 82%, 43%, 1);
-  text-align: center;
-}
-
-.PriceBox {
-  width: 160px;
-  background: hsla(0, 0%, 100%, 1) 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 16px hsla(0, 0%, 0%, 0.1);
-  border-radius: 8px;
-  opacity: 1;
-  text-align: center;
-  padding: 5%;
-  margin-left: 5%;
-}
-
-.PriceBox hr {
-  text-align: center;
-  width: 70%;
-  border: 1px solid hsla(0, 0%, 86%, 1);
-  opacity: 1;
-}
-
-.PriceTag {
-  display: inline-flex;
-  padding-bottom: 1vh;
-}
-
-.Price {
- color: hsla(194, 82%, 43%, 1) !important;
-  font: normal normal bold 37px/34px PT Sans !important;
-}
-
-.Currency {
-  text-align: left;
-  font: normal normal bold 27px/34px PT Sans;
-  letter-spacing: 0;
-  color: hsla(194, 91%, 21%, 1);
-  padding-left: 1vw;
-}
-
-.PriceBox p {
-  color: hsla(194, 91%, 21%, 1);
-  font: normal normal bold 21px/27px PT Sans;
-  letter-spacing: 0;
-}
-
-.PriceBox span {
-  text-align: left;
-  font: normal normal bold 37px/34px PT Sans;
-  letter-spacing: 0;
-  color: hsla(194, 82%, 43%, 1);
-}
-
-@media (min-width: 620px) {
   .ArticleContent {
-    width: calc(100vw - 200px);
     max-width: 457px;
   }
 

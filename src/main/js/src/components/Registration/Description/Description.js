@@ -8,9 +8,9 @@ import YkiImage1 from '../../../assets/images/ophYki_image1.png';
 
 import classes from './Description.module.css';
 import {levelTranslations} from "../../../util/util";
+import PriceContainer from "../../PriceContainer/PriceContainer";
 
 //TODO: new localizations and content!
-
 const content = [
   {
     languageLevel: 'A1',
@@ -22,11 +22,71 @@ const content = [
   }
 ];
 
+const desktopView = window.innerWidth > 425;
+
 const description = ({history}) => {
   const {t} = useTranslation();
 
   document.title = 'YKI';
   const examLevelsHeader = 'Tasojen kuvaukset';
+
+  const desktopContent = (
+      <>
+        <div className={classes.InnerContainer}>
+          <article className={classes.ArticleContent}>
+            <p>{t('registration.description.text2')}</p>
+            <p>{t('registration.description.text3')}</p>
+            <p>{t('registration.description.text4')}</p>
+          </article>
+          <>
+            <h2>{examLevelsHeader}</h2>
+            <DescriptionCollapsible headerText={levelTranslations.PERUS} content={content}/>
+            <DescriptionCollapsible headerText={levelTranslations.KESKI} content={content}/>
+            <DescriptionCollapsible headerText={levelTranslations.YLIN} content={content}/>
+          </>
+          <>
+            <button
+                className={'YkiButton'}
+                data-cy="continue-button"
+                onClick={() => history.push(t('registration.path.select.exam'))}
+                role="link"
+            >
+              {t('registration.register')}
+            </button>
+          </>
+        </div>
+        <PriceContainer/>
+      </>
+  );
+
+  const mobileContent = (
+      <>
+        <div className={classes.InnerContainer}>
+          <article className={classes.ArticleContent}>
+            <p>{t('registration.description.text2')}</p>
+            <p>{t('registration.description.text3')}</p>
+            <p>{t('registration.description.text4')}</p>
+          </article>
+          <>
+            <h2>{examLevelsHeader}</h2>
+            <DescriptionCollapsible headerText={levelTranslations.PERUS} content={content}/>
+            <DescriptionCollapsible headerText={levelTranslations.KESKI} content={content}/>
+            <DescriptionCollapsible headerText={levelTranslations.YLIN} content={content}/>
+          </>
+        </div>
+        <>
+          <PriceContainer/>
+          <button
+              className={'YkiButton'}
+              data-cy="continue-button"
+              onClick={() => history.push(t('registration.path.select.exam'))}
+              role="link"
+          >
+            {t('registration.register')}
+          </button>
+        </>
+      </>
+  )
 
   return (
       <>
@@ -36,51 +96,15 @@ const description = ({history}) => {
               headlineContent={<p>{t('registration.description.text1')}</p>}
               headlineImage={YkiImage1}
           />
-          <div className={classes.InnerContainer}>
-            <article className={classes.ArticleContent}>
-              <p>{t('registration.description.text2')}</p>
-              <p>{t('registration.description.text3')}</p>
-              <p>{t('registration.description.text4')}</p>
-            </article>
-            <>
-              <h2>{examLevelsHeader}</h2>
-              <DescriptionCollapsible headerText={levelTranslations.PERUS} content={content}/>
-              <DescriptionCollapsible headerText={levelTranslations.KESKI} content={content}/>
-              <DescriptionCollapsible headerText={levelTranslations.YLIN} content={content}/>
-            </>
-            <>
-              <button
-                  className={'YkiButton'}
-                  data-cy="continue-button"
-                  onClick={() => history.push(t('registration.path.select.exam'))}
-                  role="link"
-              >
-                {t('registration.register')}
-              </button>
-            </>
-          </div>
-          <div className={classes.PriceContainer}>
-            <h2>Hinnasto</h2>
-            <div className={classes.PriceBox}>
-              <p>{t(levelTranslations.PERUS)}</p>
-              <div className={classes.PriceTag}>
-                <div className={classes.Price}>100</div>
-                <div className={classes.Currency}>{'€'}</div>
-              </div>
-              <hr/>
-              <p>{t(levelTranslations.KESKI)}</p>
-              <div className={classes.PriceTag}>
-                <div className={classes.Price}>123</div>
-                <div className={classes.Currency}>{'€'}</div>
-              </div>
-              <hr/>
-              <p>{t(levelTranslations.YLIN)}</p>
-              <div className={classes.PriceTag}>
-                <div className={classes.Price}>160</div>
-                <div className={classes.Currency}>{'€'}</div>
-              </div>
-            </div>
-          </div>
+          {desktopView ?
+              <>
+                {desktopContent}
+              </>
+              :
+              <>
+                {mobileContent}
+              </>
+          }
         </main>
       </>
   );
