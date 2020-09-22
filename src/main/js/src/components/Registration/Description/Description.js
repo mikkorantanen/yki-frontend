@@ -9,6 +9,7 @@ import YkiImage1 from '../../../assets/images/ophYki_image1.png';
 import classes from './Description.module.css';
 import {levelTranslations} from "../../../util/util";
 import PriceContainer from "../../PriceContainer/PriceContainer";
+import {MOBILE_VIEW} from "../../../common/Constants";
 
 //TODO: new localizations and content!
 const content = [
@@ -21,8 +22,6 @@ const content = [
     descriptionText: 'Ymmärtää selkeää ja yksinkertaistettua puhetta, joka käsittelee jokapäiväisiä ja tuttuja asioita. Ymmärtää helposti lyhyitä, yksinkertaisia tekstejä ja saa selville pääasiat jokapäiväisen elämän aihepiirejä käsittelevistä teksteistä. Selviää rutiininomaisissa yksinkertaista tiedonvaihtoa vaativissa puhetilanteissa, vaikka ääntäminen tai kielen hallinta voi olla vielä puutteellista. Pystyy kirjoittamaan suppeita, yksinkertaisia tekstejä jokapäiväisistä asioista, mutta teksti voi olla hajanaista.'
   }
 ];
-
-const desktopView = window.innerWidth > 425;
 
 const description = ({history}) => {
   const {t} = useTranslation();
@@ -96,13 +95,14 @@ const description = ({history}) => {
               headlineContent={<p>{t('registration.description.text1')}</p>}
               headlineImage={YkiImage1}
           />
-          {desktopView ?
+          {MOBILE_VIEW ?
               <>
-                {desktopContent}
+                {mobileContent}
+
               </>
               :
               <>
-                {mobileContent}
+                {desktopContent}
               </>
           }
         </main>

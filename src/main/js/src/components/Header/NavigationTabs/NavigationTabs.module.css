@@ -3,9 +3,13 @@
     top: 0;
     left: 702px;
     width: 258px;
-    font: normal normal bold 21px/24px PT Sans;
+    font: normal normal bold 20px/26px PT Sans;
     letter-spacing: 0.6px;
     color: hsl(195, 91%, 22%);
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 .ActiveTab {
@@ -19,31 +23,55 @@
     font: inherit;
 }
 
-.ActiveTab a {
-    display: block;
+.ActiveTab button {
+    background: none;
+    border: none;
     margin-top: 2.5vh;
     color: hsla(0, 0%, 100%, 1) !important;
     text-decoration: none !important;
+    font: normal normal bold 20px/26px PT Sans;
+    letter-spacing: inherit;
 }
 
-.InactiveTab a {
-    display: block;
+.InactiveTab button {
+    background: none;
+    border: none;
     margin-top: 2.5vh;
     color: hsl(195, 91%, 22%);
     text-decoration: none !important;
+    font: normal normal bold 20px/26px PT Sans;
+    letter-spacing: inherit;
+}
+
+.Divider {
+    width: 90vw;
+    border: 1px solid hsla(194, 82%, 43%, 1);
 }
 
 /* Mobile view */
 @media (max-width: 425px) {
+    .LinkButton {
+        padding-top: 2vh;
+        background: none;
+        border: none;
+        font: normal normal bold 21px/24px PT Sans;
+        letter-spacing: 0.6px;
+    }
     .ActiveTab {
         padding-top: 5vh;
         height: 24vw;
         width: 100%;
     }
+    .ActiveTab .LinkButton {
+        color: hsla(0, 0%, 100%, 1) !important;
+    }
     .InactiveTab {
         padding-top: 5vh;
         height: 24vw;
         width: 100%;
+    }
+    .InactiveTab .LinkButton {
+        color: hsl(195, 91%, 22%);
     }
     .MobileMenuItems {
         display: flex;

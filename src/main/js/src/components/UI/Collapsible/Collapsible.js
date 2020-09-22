@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import classes from './Collapsible.module.css';
-import {prop} from "ramda";
 
 const collapsible = props => (
     <React.Fragment>

@@ -8,8 +8,7 @@ import OPHLogo from '../../assets/svg/oph-logo-updated.svg';
 
 import NavigationTabs from "./NavigationTabs/NavigationTabs";
 import Menu from "../Menu/Menu";
-
-const desktopView = window.innerWidth > 425;
+import {MOBILE_VIEW, TABLET_VIEW} from "../../common/Constants";
 
 const header = ({nav}) =>
     nav ? (
@@ -21,15 +20,15 @@ const header = ({nav}) =>
     ) : (
         <header className={classes.RegistrationHeader}>
           <img src={OPHLogo} alt={'OPH-Logo'}/>
-          {desktopView ?
+          {(MOBILE_VIEW || TABLET_VIEW) ?
+              <Menu/>
+              :
               <>
                 <div className={classes.HeaderTabsContainer}>
                   <NavigationTabs/>
                 </div>
                 <LanguageSelect/>
               </>
-              :
-              <Menu/>
           }
         </header>
     );

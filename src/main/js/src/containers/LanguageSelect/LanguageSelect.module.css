@@ -20,7 +20,7 @@
   text-decoration-line: underline;
 }
 
-@media (max-width: 864px) {
+@media (max-width: 425px) {
   .SelectorContainer img {
     display: none;
   }
@@ -44,8 +44,10 @@
     letter-spacing: 0.6px;
     color: hsl(195, 91%, 22%);
   }
+
   .MobileMenuItems hr {
     width: 70vw;
     border: 1px solid hsla(194, 82%, 43%, 1);
   }
+
 }
