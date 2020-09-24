@@ -12,7 +12,7 @@ import RadioButton from '../../UI/RadioButton/RadioButton';
 import NationalitySelect from './NationalitySelect/NationalitySelect';
 import ZipAndPostOffice from '../../ZipAndPostOffice/ZipAndPostOffice';
 import GenderSelect from './GenderSelect/GenderSelect';
-import {DATE_FORMAT, ISO_DATE_FORMAT_SHORT} from '../../../common/Constants';
+import {DATE_FORMAT, ISO_DATE_FORMAT_SHORT, MOBILE_VIEW} from '../../../common/Constants';
 import RegistrationError from '../RegistrationError/RegistrationError';
 
 export const registrationForm = props => {
@@ -128,7 +128,7 @@ export const registrationForm = props => {
   };
 
   const inputField = (name, placeholder = '', extra, type = 'text') => (
-      <React.Fragment>
+      <>
         <h3>{props.t(`registration.form.${name}`)}</h3>
         <Field
             name={name}
@@ -145,15 +145,15 @@ export const registrationForm = props => {
             component="span"
             className={classes.ErrorMessage}
         />
-      </React.Fragment>
+      </>
   );
 
   const readonlyWhenExistsInput = (name, initialValues, type) =>
       initialValues[name] && initialValues[name].length > 0 ? (
-          <React.Fragment>
+          <>
             <h3>{props.t(`registration.form.${name}`)}</h3>
             <span>{initialValues[name]}</span>
-          </React.Fragment>
+          </>
       ) : (
           inputField(name, null, null, type)
       );
@@ -234,27 +234,64 @@ export const registrationForm = props => {
                       {readonlyWhenExistsInput('lastName', initialValues)}
                     </div>
                   </div>
-                  <div className={classes.InputFieldGrid}>
-                    <div className={classes.FormElement}>
-                      {inputField('streetAddress')}
-                    </div>
-                    <div className={classes.FormElement}>
-                      <ZipAndPostOffice values={values} setFieldValue={setFieldValue}/>
-                    </div>
-                  </div>
-                  <div className={classes.InputFieldGrid}>
-                    <div className={classes.FormElement}>
-                      {inputField('phoneNumber', '(+358)', null, 'tel')}
-                    </div>
-                    <div className={classes.FormElement}>
-                      {readonlyWhenExistsInput('email', initialValues, 'email')}
-                    </div>
-                    {!props.initData.user.email && (
-                        <div className={classes.FormElement}>
-                          {inputField('confirmEmail', null, null, 'email')}
+                  {MOBILE_VIEW ?
+                      <>
+                        <div className={classes.InputFieldGrid}>
+                          <div className={classes.FormElement}>
+                            {inputField('streetAddress')}
+                          </div>
                         </div>
-                    )}
-                  </div>
+                        <div className={classes.InputFieldGrid}>
+                          <div className={classes.FormElement}>
+                            <ZipAndPostOffice values={values} setFieldValue={setFieldValue}/>
+                          </div>
+                        </div>
+                      </>
+                      :
+                    <div className={classes.InputFieldGrid}>
+                      <div className={classes.FormElement}>
+                        {inputField('streetAddress')}
+                      </div>
+                      <div className={classes.FormElement}>
+                        <ZipAndPostOffice values={values} setFieldValue={setFieldValue}/>
+                      </div>
+                    </div>
+                  }
+                  {MOBILE_VIEW ?
+                      <>
+                        <div className={classes.InputFieldGrid}>
+                          <div className={classes.FormElement}>
+                            {inputField('phoneNumber', '(+358)', null, 'tel')}
+                          </div>
+                        </div>
+                        <div className={classes.InputFieldGrid}>
+                        <div className={classes.FormElement}>
+                            {readonlyWhenExistsInput('email', initialValues, 'email')}
+                          </div>
+                        </div>
+                          {!props.initData.user.email && (
+                              <div className={classes.InputFieldGrid}>
+                              <div className={classes.FormElement}>
+                                {inputField('confirmEmail', null, null, 'email')}
+                              </div>
+                              </div>
+                          )}
+                      </>
+                      :
+                    <div className={classes.InputFieldGrid}>
+                      <div className={classes.FormElement}>
+                        {inputField('phoneNumber', '(+358)', null, 'tel')}
+                      </div>
+                      <div className={classes.FormElement}>
+                        {readonlyWhenExistsInput('email', initialValues, 'email')}
+                      </div>
+                      {!props.initData.user.email && (
+                          <div className={classes.FormElement}>
+                            {inputField('confirmEmail', null, null, 'email')}
+                          </div>
+                      )}
+                    </div>
+                  }
                   {!initialValues.nationality && (
                       <div className={classes.FormElement}>
                         <NationalitySelect

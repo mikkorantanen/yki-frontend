@@ -55,3 +55,23 @@
 .SuccessDetailsCard article p:last-child {
     padding-left: 0.5vw;
 }
+
+@media (max-width: 425px) {
+    .Exception {
+        margin: 2vh 5vw 3vh 5vw;
+    }
+    .DetailsCard {
+        text-align: left;
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+    .DetailsCard p:nth-child(2n) {
+        padding-left: 2vw;
+    }
+    .DetailsCard article {
+        padding-left: 2vw;
+    }
+    .SuccessDetailsCard article {
+        display: block;
+    }
+}

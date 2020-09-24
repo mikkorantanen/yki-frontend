@@ -6,8 +6,11 @@ import {MOBILE_VIEW, TABLET_VIEW} from "../../common/Constants";
 
 /** HeadlineContainer takes props from parent:
  * headlineTitle as string, headlineContent as any/JSX element, headlineImage as string or object. */
+/* @TODO: remove disableContent after exam details are sent from backend
+     OR errorMessage is provided in PaymentStatus component
+*/
 const HeadlineContainer = (props) => {
-  const {headlineTitle, headlineContent, headlineImage} = props;
+  const {headlineTitle, headlineContent, headlineImage, disableContent} = props;
 
   return (
       <div className={classes.Headline}>
@@ -16,11 +19,19 @@ const HeadlineContainer = (props) => {
               <>
                 <div className={classes.HeadlineText}
                      style={{background: `url(${headlineImage})`, backgroundSize: '100%'}}>
-                  <h1>{headlineTitle}</h1>
+                  {disableContent ?
+                      <h1 style={{paddingBottom: '0'}}>{headlineTitle}</h1>
+                      :
+                      <h1>{headlineTitle}</h1>
+                  }
                 </div>
-                <div className={classes.HeadlineMobileContent}>
-                  {headlineContent}
-                </div>
+                {disableContent ?
+                    null
+                    :
+                    <div className={classes.HeadlineMobileContent}>
+                      {headlineContent}
+                    </div>
+                }
               </>
               :
               <div className={classes.HeadlineText}>

@@ -62,7 +62,6 @@ class LanguageSelect extends React.PureComponent {
               >
                 {capitalize(texts[lang])}
               </button>
-              <hr/>
             </div>
         ))}
       </div>

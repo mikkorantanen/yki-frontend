@@ -46,6 +46,8 @@
   margin-left: 1vw;
 }
 
+/* TODO: */
+/* Tablet */
 @media (min-width: 620px) {
   .Filters {
     grid-gap: 3vw;
@@ -54,5 +56,34 @@
   .Filters select {
     background: url('../../../assets/svg/down-facing-triangle.svg') 95%
       no-repeat hsl(0, 0%, 100%);
+  }
+}
+
+/* Mobile */
+@media (max-width: 425px) {
+  .Filters {
+    display: block;
+  }
+
+  .Filters select {
+    background: url('../../../assets/svg/down-facing-triangle.svg') 95%
+    no-repeat hsl(0, 0%, 100%);
+  }
+
+  .Filters select {
+    margin-bottom: 4vh;
+  }
+
+  .FilterCheckboxes {
+    display: block;
+  }
+
+  .CheckBox {
+    display: flex;
+    padding-bottom: 4vh;
+  }
+
+  .CheckBox label:nth-child(2) {
+    margin-left: 5vw;
   }
 }

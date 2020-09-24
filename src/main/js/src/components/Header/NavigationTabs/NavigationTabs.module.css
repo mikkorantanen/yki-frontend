@@ -45,7 +45,8 @@ button:hover {
 
 .Divider {
     width: 90vw;
-    border: 1px solid hsla(194, 82%, 43%, 1);
+    margin-top: 5%;
+    border: 1px solid hsla(195, 82%, 44%, 0.25);
 }
 
 /* Mobile view */

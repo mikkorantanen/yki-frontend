@@ -47,6 +47,9 @@
         padding: 5% 0 2% 0;
         text-align: inherit;
     }
+    .FooterLinks a {
+        margin-bottom: 1.5vh;
+    }
     .FooterText {
         text-align: inherit;
     }

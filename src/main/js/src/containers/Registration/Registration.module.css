@@ -1,6 +1,9 @@
 .Content {
-  width: calc(100vw - 40px);
-  margin: 0 auto;
+  /*width: calc(100vw - 40px);*/
+  /*margin: 0 auto;*/
+  margin-left: 5vw;
+  margin-right: 5vw;
+  width: auto;
 }
 
 .Content h1 {
@@ -35,11 +38,27 @@
 }
 
 @media (min-width: 620px) {
-  .Content {
-    width: calc(100vw - 200px);
-  }
-
   .Upcoming {
     font-size: 16px;
+  }
+}
+
+/* Mobile view */
+@media (max-width: 425px) {
+  .Content {
+    width: 100%;
+    margin: auto;
+  }
+
+  .FilterContainer {
+    height: 100%;
+  }
+
+  .FilterContainer hr {
+    margin: 0;
+  }
+
+  .FilterSelectors {
+    margin-bottom: 10vh;
   }
 }

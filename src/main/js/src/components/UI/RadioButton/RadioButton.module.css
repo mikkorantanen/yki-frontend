@@ -28,3 +28,9 @@
 .RadioButtonExtraLabel {
   display: inline-block;
 }
+
+@media (max-width: 425px) {
+  .RadioButton {
+    padding-right: 3%;
+  }
+}

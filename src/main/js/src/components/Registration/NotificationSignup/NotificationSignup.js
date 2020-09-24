@@ -8,6 +8,7 @@ import classes from './NotificationSignup.module.css';
 import Button from '../../UI/Button/Button';
 import axios from '../../../axios';
 import Alert from '../../Alert/Alert';
+import {MOBILE_VIEW} from "../../../common/Constants";
 
 const notificationSignup = ({examSessionId}) => {
   const [t] = useTranslation();
@@ -34,6 +35,7 @@ const notificationSignup = ({examSessionId}) => {
         .required(t('registration.form.confirmEmail')),
   });
 
+  // @TODO: localizations!
   return (
       <>
         {signup.success ? (
@@ -52,8 +54,8 @@ const notificationSignup = ({examSessionId}) => {
                 render={({isValid, status}) => (
                     <Form className={classes.Form}>
                       <h2>{'Tilaa ilmoitus mahdollisista peruutuspaikoista'}</h2>
-                     <div className={classes.EmailContainer}>
-                       <div>
+                      <div className={classes.EmailContainer}>
+                        <div>
                           <label htmlFor="email" className={classes.BoldLabel}>
                             {t('registration.form.email')}
                           </label>
@@ -65,7 +67,7 @@ const notificationSignup = ({examSessionId}) => {
                               placeholder="essi@esimerkki.fi"
                               autoFocus
                           />
-                      </div>
+                        </div>
                         <div>
                           <label htmlFor="email" className={classes.BoldLabel}>
                             {t('registration.form.confirmEmail')}
@@ -78,7 +80,7 @@ const notificationSignup = ({examSessionId}) => {
                               placeholder="essi@esimerkki.fi"
                           />
                         </div>
-                   </div>
+                      </div>
                       <ErrorMessage
                           name="email"
                           component="span"
@@ -89,17 +91,27 @@ const notificationSignup = ({examSessionId}) => {
                           component="span"
                           className={classes.ErrorMessage}
                       />
-                      <div style={{width: '260px'}}>
-                        <Button
-                            type="submit"
-                            disabled={!isValid}
-                            datacy="registry-item-form-submit"
-                            isRegistration
-                            style={{width: '100% !important'}}
-                        >
-                          {t('registration.notification.signup.button')}
-                        </Button>
-                      </div>
+                      {MOBILE_VIEW ?
+                          <Button
+                              type="submit"
+                              disabled={!isValid}
+                              datacy="registry-item-form-submit"
+                              isRegistration
+                          >
+                            {t('registration.notification.signup.button')}
+                          </Button>
+                          :
+                          <div style={{width: '260px'}}>
+                            <Button
+                                type="submit"
+                                disabled={!isValid}
+                                datacy="registry-item-form-submit"
+                                isRegistration
+                            >
+                              {t('registration.notification.signup.button')}
+                            </Button>
+                          </div>
+                      }
                       {!!status && (
                           <Alert
                               title={

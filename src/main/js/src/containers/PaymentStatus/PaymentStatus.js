@@ -84,6 +84,7 @@ export class PaymentStatus extends Component {
                 headlineTitle={this.props.t('payment.status.cancel')}
                 headlineContent={null}
                 headlineImage={YkiImage2}
+                disableContent={true}
             />
           }
           default: {
@@ -91,6 +92,7 @@ export class PaymentStatus extends Component {
                 headlineTitle={this.props.t('payment.status.error')}
                 headlineContent={null}
                 headlineImage={YkiImage2}
+                disableContent={true}
             />
           }
         }

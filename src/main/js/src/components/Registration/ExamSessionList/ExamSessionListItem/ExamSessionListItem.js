@@ -8,7 +8,7 @@ import classes from './ExamSessionListItem.module.css';
 import {levelDescription} from '../../../../util/util';
 import {
   DATE_FORMAT,
-  DATE_FORMAT_WITHOUT_YEAR,
+  DATE_FORMAT_WITHOUT_YEAR, MOBILE_VIEW,
 } from '../../../../common/Constants';
 import * as actions from '../../../../store/actions/index';
 
@@ -28,6 +28,9 @@ const examSessionListItem = ({
   const examDate = moment(session.session_date).format(DATE_FORMAT);
   const date = <div className={classes.Date}>{examDate}</div>;
 
+  // TODO: localization
+  const examFee = `Hinta: ${session.exam_fee} €`;
+
   const examLanguage = t(`common.language.${language.code}`);
   const examLevel = levelDescription(session.level_code).toLowerCase();
   const exam = (
@@ -40,10 +43,10 @@ const examSessionListItem = ({
       session.location.find(l => l.lang === i18n.language) || session.location[0];
   const name = sessionLocation.name;
   const address = sessionLocation.street_address || '';
-  const city = sessionLocation.post_office || '';
+  const city = sessionLocation.post_office.toUpperCase() || '';
   const location = (
       <span className={classes.Location}>
-      {name} <br/> {address} <br/> <strong>{city}</strong>
+      {name} <br/> {address} <br/> {session.location[0].zip} <strong>{city}</strong>
     </span>
   );
 
@@ -102,18 +105,55 @@ const examSessionListItem = ({
       </button>
   );
 
-  return (
-      <div
-          className={classes.ExamSessionListItem}
-          data-cy="exam-session-list-item"
-      >
-        {date}
-        {location}
-        {exam}
-        {availability}
-        {registrationOpen}
-        {registerButton}
+  const locationOnMobileView = (
+      <div className={classes.Location}>
+        <span>
+          {name}<br/>{address}<br/>
+        </span>
+        <span>
+          {session.location[0].zip}{' '}{city}
+        </span>
       </div>
+  )
+
+  return (
+      <>
+        {MOBILE_VIEW ?
+            <div
+                className={classes.ExamSessionListItem}
+                data-cy="exam-session-list-item"
+            >
+              <div className={classes.MobileRow}>
+                <div>{exam}</div>
+                <div>{date}</div>
+              </div>
+              <hr/>
+              <div>{registrationOpen}</div>
+              <hr/>
+              <div className={classes.MobileRow}>
+                <div>{availability}</div>
+                {session.queue_full ? null : <div className={classes.ExamFee}>{examFee}</div>}
+              </div>
+              <hr/>
+              <div>
+                {locationOnMobileView}
+                {registerButton}
+              </div>
+            </div>
+            :
+            <div
+                className={classes.ExamSessionListItem}
+                data-cy="exam-session-list-item"
+            >
+              {date}
+              {location}
+              {exam}
+              {availability}
+              {registrationOpen}
+              {registerButton}
+            </div>
+        }
+      </>
   );
 };
 

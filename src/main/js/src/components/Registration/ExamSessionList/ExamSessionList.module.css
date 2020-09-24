@@ -24,6 +24,7 @@
   color: hsla(194, 91%, 21%, 1);
 }
 
+/* TODO: Tablet */
 @media (min-width: 620px) {
   .Date {
     margin-bottom: -2px;
@@ -53,5 +54,16 @@
 
   .List {
     display: grid;
+  }
+}
+
+/* Mobile */
+@media (max-width: 425px) {
+  .ColumnHeaders {
+    display: none;
+  }
+
+  .ExamsOnDate {
+    display: none;
   }
 }

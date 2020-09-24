@@ -2,7 +2,7 @@
     display: inline-flex;
     flex-direction: row;
     width: 100%;
-    height: 372px;
+    max-height: 420px;
     background-color: hsla(194, 91%, 21%, 1);
     color: hsla(0, 0%, 100%, 1);
     text-align: right;
@@ -43,7 +43,7 @@
 
 .ImageContainer {
     overflow: hidden;
-    height: 372px;
+    height: 100%;
 }
 
 .ImageContainer img {
@@ -55,7 +55,7 @@
 @media (max-width: 620px) {
     .Headline {
         width: 100%;
-        height: 20%;
+        height: 50%;
     }
     .BaseContainer {
         max-width: 100%;
@@ -71,11 +71,12 @@
 @media (max-width: 425px) {
     .Headline {
         width: 100%;
-        height: 50vh;
+        height: 100%;
         max-width: 100%;
     }
     .HeadlineText {
         padding-top: 2vh;
+        min-height: 145px;
         margin: 0 !important;
     }
     .HeadlineText h1 {
@@ -87,6 +88,9 @@
         text-align: center;
         padding-left: 3vw;
         padding-right: 3vw;
+        max-height: 245px;
+        min-height: 145px;
+        padding-bottom: 2vh;
     }
     .BaseContainer {
         max-width: 100% !important;

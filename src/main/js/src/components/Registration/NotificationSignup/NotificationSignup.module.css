@@ -53,3 +53,27 @@
     justify-self: start;
   }
 }
+
+@media (max-width: 425px) {
+  .Form {
+    display: block;
+    width: 100%;
+  }
+  .Form h2 {
+    width: 100%;
+  }
+  .Form button {
+    width: 100%;
+  }
+  .EmailContainer {
+    display: block;
+  }
+  .EmailContainer div {
+    display: inherit;
+    padding-right: 0 !important;
+  }
+  .Field {
+   margin-bottom: 4vh;
+    width: 100%;
+  }
+}
