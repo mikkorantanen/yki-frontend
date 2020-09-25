@@ -29,8 +29,25 @@
   display: inline-block;
 }
 
-@media (max-width: 425px) {
+@media screen and (max-width: 1020px) {
   .RadioButton {
     padding-right: 3%;
+    align-items: center;
+    margin-left: 0;
+  }
+  .RadioButton input {
+    width: 30px !important;
+  }
+}
+
+@media screen and (max-width: 1020px) and (orientation: landscape) {
+  .RadioButton {
+    padding-right: 3%;
+    align-items: center;
+    margin-left: 0;
+  }
+  .RadioButton input {
+    /*height: 30px !important;*/
+    width: 30px !important;
   }
 }

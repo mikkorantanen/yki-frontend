@@ -8,7 +8,7 @@
 .MenuItems {
     display: block;
     position: absolute;
-    margin-top: 75px;
+    margin-top: 74px;
     width: 100%;
     height: 100vh;
     background: hsla(0, 0%, 100%, 1);
@@ -22,4 +22,16 @@
     margin-top: 2.5vh;
     color: hsl(195, 91%, 22%);
     text-decoration: none;
+}
+
+/* Tablet view */
+@media (min-width: 768px) {
+    .MenuIcon {
+        padding-right: 3vw;
+    }
+    .MenuItems {
+        width: 35vw;
+        right: 0;
+        box-shadow: 0 3px 16px hsla(0, 0%, 0%, 0.1);
+    }
 }

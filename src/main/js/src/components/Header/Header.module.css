@@ -41,22 +41,14 @@
   display: inline-flex;
 }
 
-/* Tablet view */
-@media (min-width: 620px) {
-  .RegistrationHeader {
-    height: 64px;
-    font-size: 1.125em;
-    background-size: 3.5em;
-  }
-}
 
-/* Mobile view */
-@media (max-width: 425px) {
+/* Mobile & Tablet view */
+@media (max-width: 768px) {
   .RegistrationHeader {
     grid-template-columns: repeat(2, 1fr);
     height: 72px;
     font-size: 1.125em;
     background-size: 3.5em;
-    padding-top: 0.5vh;
+    padding-top: 2%;
   }
 }

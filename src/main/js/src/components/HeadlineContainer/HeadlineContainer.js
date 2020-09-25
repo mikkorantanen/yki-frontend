@@ -15,7 +15,7 @@ const HeadlineContainer = (props) => {
   return (
       <div className={classes.Headline}>
         <div className={classes.BaseContainer}>
-          {(MOBILE_VIEW || TABLET_VIEW) ?
+          {MOBILE_VIEW ?
               <>
                 <div className={classes.HeadlineText}
                      style={{background: `url(${headlineImage})`, backgroundSize: '100%'}}>
@@ -41,7 +41,7 @@ const HeadlineContainer = (props) => {
               </div>
           }
         </div>
-        {MOBILE_VIEW || TABLET_VIEW ?
+        {MOBILE_VIEW ?
             null
             :
             <div className={classes.BaseContainer}>

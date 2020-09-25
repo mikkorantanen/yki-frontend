@@ -13,7 +13,7 @@ import BackButton from '../BackButton/BackButton';
 import AuthButton from '../AuthButton/AuthButton';
 import NotificationSignup from '../NotificationSignup/NotificationSignup';
 import LoginLink from '../LoginLink/LoginLink';
-import {DATE_FORMAT_WITHOUT_YEAR, MOBILE_VIEW} from '../../../common/Constants';
+import {DATE_FORMAT_WITHOUT_YEAR} from '../../../common/Constants';
 import HeadlineContainer from "../../HeadlineContainer/HeadlineContainer";
 
 import YkiImage1 from '../../../assets/images/ophYki_image1.png';

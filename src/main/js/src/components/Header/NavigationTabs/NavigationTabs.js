@@ -48,7 +48,7 @@ const NavigationTabs = (props) => {
             :
             <>
               {baseLinks()}
-              {MOBILE_VIEW ?
+              {MOBILE_VIEW || TABLET_VIEW ?
                   <div onClick={() => handleOnClick()}>
                     <p className={classes.InactiveTab}>Kielen valinta</p>
                   </div>

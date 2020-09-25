@@ -12,7 +12,7 @@ import RadioButton from '../../UI/RadioButton/RadioButton';
 import NationalitySelect from './NationalitySelect/NationalitySelect';
 import ZipAndPostOffice from '../../ZipAndPostOffice/ZipAndPostOffice';
 import GenderSelect from './GenderSelect/GenderSelect';
-import {DATE_FORMAT, ISO_DATE_FORMAT_SHORT, MOBILE_VIEW} from '../../../common/Constants';
+import {DATE_FORMAT, ISO_DATE_FORMAT_SHORT, MOBILE_VIEW, TABLET_VIEW} from '../../../common/Constants';
 import RegistrationError from '../RegistrationError/RegistrationError';
 
 export const registrationForm = props => {
@@ -234,7 +234,7 @@ export const registrationForm = props => {
                       {readonlyWhenExistsInput('lastName', initialValues)}
                     </div>
                   </div>
-                  {MOBILE_VIEW ?
+                  {MOBILE_VIEW || TABLET_VIEW ?
                       <>
                         <div className={classes.InputFieldGrid}>
                           <div className={classes.FormElement}>
@@ -257,7 +257,7 @@ export const registrationForm = props => {
                       </div>
                     </div>
                   }
-                  {MOBILE_VIEW ?
+                  {MOBILE_VIEW || TABLET_VIEW ?
                       <>
                         <div className={classes.InputFieldGrid}>
                           <div className={classes.FormElement}>

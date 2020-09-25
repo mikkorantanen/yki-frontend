@@ -54,7 +54,8 @@
   }
 }
 
-@media (max-width: 425px) {
+/* Mobile view */
+@media screen and (max-width: 425px){
   .Form {
     display: block;
     width: 100%;
@@ -75,5 +76,14 @@
   .Field {
    margin-bottom: 4vh;
     width: 100%;
+  }
+}
+
+/* Tablet view */
+@media screen and (max-width: 768px) {
+  .Form button {
+    margin-top: 3vh;
+    width: 30vh;
+    height: 10vh;
   }
 }

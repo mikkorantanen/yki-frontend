@@ -20,7 +20,7 @@
   text-decoration-line: underline;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 768px) {
   .SelectorContainer img {
     display: none;
   }

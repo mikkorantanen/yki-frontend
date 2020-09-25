@@ -9,7 +9,7 @@ import YkiImage1 from '../../../assets/images/ophYki_image1.png';
 import classes from './Description.module.css';
 import {levelTranslations} from "../../../util/util";
 import PriceContainer from "../../PriceContainer/PriceContainer";
-import {MOBILE_VIEW} from "../../../common/Constants";
+import {MOBILE_VIEW, MOBILE_VIEW_LANDSCAPE, SCREEN_ORIENTATION} from "../../../common/Constants";
 
 //TODO: new localizations and content!
 const content = [
@@ -95,7 +95,7 @@ const description = ({history}) => {
               headlineContent={<p>{t('registration.description.text1')}</p>}
               headlineImage={YkiImage1}
           />
-          {MOBILE_VIEW ?
+          {MOBILE_VIEW ||(MOBILE_VIEW && (SCREEN_ORIENTATION.type === 'landscape-primary')) ?
               <>
                 {mobileContent}
 

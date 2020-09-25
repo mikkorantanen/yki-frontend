@@ -1,6 +1,4 @@
 .Content {
-  /*width: calc(100vw - 40px);*/
-  /*margin: 0 auto;*/
   margin-left: 5vw;
   margin-right: 5vw;
   width: auto;
@@ -43,22 +41,58 @@
   }
 }
 
+/* Tablet portrait */
+@media screen and (max-width: 768px) {
+  .Content {
+    margin: 0;
+  }
+  .FilterContainer {
+    height: 100%;
+  }
+  .FilterContainer p {
+    margin-bottom: 5vh;
+  }
+  .FilterContainer hr {
+    margin-top: 3vh;
+  }
+}
+
+/* Tablet landscape */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  .Content {
+    margin: 0 auto;
+  }
+  .FilterContainer {
+    height: 100%;
+  }
+  .FilterContainer p {
+    margin-bottom: 0;
+  }
+  .FilterContainer hr {
+    margin-top: 3vh;
+  }
+}
+
 /* Mobile view */
-@media (max-width: 425px) {
+@media screen and (max-width: 425px) {
   .Content {
     width: 100%;
     margin: auto;
   }
-
   .FilterContainer {
     height: 100%;
   }
-
   .FilterContainer hr {
     margin: 0;
   }
-
   .FilterSelectors {
+    margin-bottom: 10vh;
+  }
+}
+
+/* Mobile landscape */
+@media screen and (min-width: 640px) and (max-width: 1023px) and (orientation: landscape) {
+  .FilterContainer p {
     margin-bottom: 10vh;
   }
 }

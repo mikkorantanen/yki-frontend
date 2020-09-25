@@ -24,8 +24,8 @@
   color: hsla(194, 91%, 21%, 1);
 }
 
-/* TODO: Tablet */
-@media (min-width: 620px) {
+/* desktop */
+@media (min-width: 1440px) {
   .Date {
     margin-bottom: -2px;
   }
@@ -57,12 +57,57 @@
   }
 }
 
-/* Mobile */
-@media (max-width: 425px) {
+/* Tablet landscape */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  .ExamsOnDate {
+    display: none;
+  }
+  .ColumnHeaders {
+    height: 6vh;
+    font-size: 14px;
+    display: grid;
+    grid-template-columns: 0.6fr 1.9fr 0.9fr 0.9fr 0.6fr 1fr;
+    align-items: end;
+    text-align: left;
+    padding: 5px 20px 5px 20px;
+  }
+}
+
+/* Tablet */
+@media screen and (max-width: 768px) and (orientation: portrait) {
   .ColumnHeaders {
     display: none;
   }
+  .ExamsOnDate {
+    display: none;
+  }
+}
 
+/* Mobile */
+@media screen and (max-width: 425px) {
+  .ColumnHeaders {
+    display: none;
+  }
+  .ExamsOnDate {
+    display: none;
+  }
+}
+
+/* Mobile landscape */
+@media screen and (min-width: 640px) and (max-width: 767px) and (orientation: landscape) {
+  .ColumnHeaders {
+    display: none;
+  }
+  .ExamsOnDate {
+    display: none;
+  }
+}
+
+/* Mobile large landscape */
+@media screen and (min-width: 640px) and (max-width: 1023px) and (orientation: landscape) {
+  .ColumnHeaders {
+    display: none;
+  }
   .ExamsOnDate {
     display: none;
   }

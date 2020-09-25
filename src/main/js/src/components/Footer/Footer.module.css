@@ -5,6 +5,15 @@
     display: -webkit-box;
     width: 100%;
     bottom: 0;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.Footer a {
+    text-decoration: none;
+    font: normal normal bold 16px/24px PT Sans;
+    letter-spacing: 0;
+    color: hsl(0, 0%, 100%);
 }
 
 .FooterLogo {
@@ -20,14 +29,7 @@
     text-align: left;
 }
 
-.FooterLinks a {
-    text-decoration: none;
-    font: normal normal bold 16px/24px PT Sans;
-    letter-spacing: 0;
-    color: hsl(0, 0%, 100%);
-}
-
-.FooterText {
+.FooterContact {
     margin-left: auto;
     margin-right: auto;
     text-align: left;
@@ -50,10 +52,44 @@
     .FooterLinks a {
         margin-bottom: 1.5vh;
     }
-    .FooterText {
+    .FooterContact {
         text-align: inherit;
     }
     .FooterLogo {
         margin-top: 5vh;
+    }
+}
+
+/* Tablet view */
+@media screen and (max-width: 768px) and (min-width: 425px) {
+    .Footer {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-gap: 10px;
+    }
+    .FooterLinks {
+        flex-direction: row;
+        padding-top: 3vh;
+        padding-left: 0;
+        grid-column: 2/4;
+        width: 100%;
+        grid-row: 1;
+    }
+    .FooterLinks a {
+        padding-bottom: 2vh;
+    }
+    .FooterContact {
+        padding-left: 5vw;
+        grid-column: 4/6;
+        grid-row: 1;
+        padding-top: 3vh;
+    }
+    .FooterContact p {
+        margin-top: 0;
+    }
+    .FooterLogo {
+        grid-column: 3/5;
+        grid-row: 2;
+        margin-bottom: 5vh;
     }
 }

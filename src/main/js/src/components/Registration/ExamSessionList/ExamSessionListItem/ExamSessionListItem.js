@@ -8,9 +8,14 @@ import classes from './ExamSessionListItem.module.css';
 import {levelDescription} from '../../../../util/util';
 import {
   DATE_FORMAT,
-  DATE_FORMAT_WITHOUT_YEAR, MOBILE_VIEW,
+  DATE_FORMAT_WITHOUT_YEAR, MOBILE_VIEW, MOBILE_VIEW_LARGE_LANDSCAPE, TABLET_VIEW,
 } from '../../../../common/Constants';
 import * as actions from '../../../../store/actions/index';
+
+/*const min = window.innerWidth > 640;
+const max = window.innerWidth < 1023;
+const orientation = window.screen.orientation.type === 'landscape-primary';
+const MOBILE_VIEW_LARGE_LANDSCAPE = min && max && orientation;*/
 
 const examSessionListItem = ({
                                examSession: session,
@@ -118,7 +123,7 @@ const examSessionListItem = ({
 
   return (
       <>
-        {MOBILE_VIEW ?
+        {MOBILE_VIEW || TABLET_VIEW || MOBILE_VIEW_LARGE_LANDSCAPE ?
             <div
                 className={classes.ExamSessionListItem}
                 data-cy="exam-session-list-item"

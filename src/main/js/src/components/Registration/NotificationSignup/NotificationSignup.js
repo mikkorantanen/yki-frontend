@@ -8,7 +8,7 @@ import classes from './NotificationSignup.module.css';
 import Button from '../../UI/Button/Button';
 import axios from '../../../axios';
 import Alert from '../../Alert/Alert';
-import {MOBILE_VIEW} from "../../../common/Constants";
+import {MOBILE_VIEW, TABLET_VIEW} from "../../../common/Constants";
 
 const notificationSignup = ({examSessionId}) => {
   const [t] = useTranslation();
@@ -91,7 +91,7 @@ const notificationSignup = ({examSessionId}) => {
                           component="span"
                           className={classes.ErrorMessage}
                       />
-                      {MOBILE_VIEW ?
+                      {MOBILE_VIEW || TABLET_VIEW ?
                           <Button
                               type="submit"
                               disabled={!isValid}

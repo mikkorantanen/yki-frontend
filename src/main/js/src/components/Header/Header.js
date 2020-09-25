@@ -10,6 +10,7 @@ import NavigationTabs from "./NavigationTabs/NavigationTabs";
 import Menu from "../Menu/Menu";
 import {MOBILE_VIEW, TABLET_VIEW} from "../../common/Constants";
 
+// TODO: Tablet responsivity
 const header = ({nav}) =>
     nav ? (
         <header className={classes.Header}>
@@ -21,7 +22,7 @@ const header = ({nav}) =>
         <header className={classes.RegistrationHeader}>
           <img src={OPHLogo} alt={'OPH-Logo'}/>
           {(MOBILE_VIEW || TABLET_VIEW) ?
-              <Menu/>
+              <Menu />
               :
               <>
                 <div className={classes.HeaderTabsContainer}>
