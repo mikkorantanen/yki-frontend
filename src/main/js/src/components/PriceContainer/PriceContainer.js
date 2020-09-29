@@ -12,14 +12,15 @@ const PriceContainer = () => {
 
     const state = useSelector(state => state);
     const onMobileSV = (state.yki.ykiLanguage === 'sv' && MOBILE_VIEW);
+    const onMobileEN = (state.yki.ykiLanguage === 'en' && MOBILE_VIEW);
 
     return (
         <div className={classes.PriceContainer}>
             <h2>Hinnasto</h2>
-             <div className={onMobileSV ? classes.PriceBoxSV : classes.PriceBox}>
+             <div className={onMobileSV || onMobileEN ? classes.PriceBoxSV : classes.PriceBox}>
                 <div className={classes.MobilePriceBox}>
                     <p>{t(levelTranslations.PERUS)}</p>
-                    <div className={classes.PriceTag}>
+                    <div className={onMobileEN ?  classes.PriceTagEN : classes.PriceTag}>
                         <div className={classes.Price}>100</div>
                         <div className={classes.Currency}>{'€'}</div>
                     </div>

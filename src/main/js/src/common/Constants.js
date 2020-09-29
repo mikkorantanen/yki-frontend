@@ -49,7 +49,4 @@ export const LANGUAGES = [
   },
 ];
 export const MOBILE_VIEW = window.innerWidth < 426;
-export const MOBILE_VIEW_LARGE_LANDSCAPE =
-    window.innerWidth > 426 && window.innerWidth < 1023 && window.screen.orientation.type === 'landscape-primary';
-export const TABLET_VIEW = window.innerWidth < 770;
-export const SCREEN_ORIENTATION = window.screen.orientation;
+export const TABLET_VIEW = window.innerWidth < 1025;

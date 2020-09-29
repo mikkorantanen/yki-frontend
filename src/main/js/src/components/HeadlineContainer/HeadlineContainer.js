@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import classes from './HeadlineContainer.module.css';
-import {MOBILE_VIEW, TABLET_VIEW} from "../../common/Constants";
+import {MOBILE_VIEW} from "../../common/Constants";
+import {getDeviceOrientation} from "../../util/util";
 
 /** HeadlineContainer takes props from parent:
  * headlineTitle as string, headlineContent as any/JSX element, headlineImage as string or object. */
@@ -12,10 +13,12 @@ import {MOBILE_VIEW, TABLET_VIEW} from "../../common/Constants";
 const HeadlineContainer = (props) => {
   const {headlineTitle, headlineContent, headlineImage, disableContent} = props;
 
+  const mobileLandscape = window.screen.availWidth < 768 && getDeviceOrientation() === 'landscape';
+
   return (
       <div className={classes.Headline}>
         <div className={classes.BaseContainer}>
-          {MOBILE_VIEW ?
+          {MOBILE_VIEW || mobileLandscape ?
               <>
                 <div className={classes.HeadlineText}
                      style={{background: `url(${headlineImage})`, backgroundSize: '100%'}}>
@@ -41,7 +44,7 @@ const HeadlineContainer = (props) => {
               </div>
           }
         </div>
-        {MOBILE_VIEW ?
+        {MOBILE_VIEW || mobileLandscape ?
             null
             :
             <div className={classes.BaseContainer}>

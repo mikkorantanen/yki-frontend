@@ -7,9 +7,9 @@ import DescriptionCollapsible from "../../DescriptionsCollapsible/DescriptionCol
 import YkiImage1 from '../../../assets/images/ophYki_image1.png';
 
 import classes from './Description.module.css';
-import {levelTranslations} from "../../../util/util";
+import {getDeviceOrientation, levelTranslations} from "../../../util/util";
 import PriceContainer from "../../PriceContainer/PriceContainer";
-import {MOBILE_VIEW, MOBILE_VIEW_LANDSCAPE, SCREEN_ORIENTATION} from "../../../common/Constants";
+import {MOBILE_VIEW} from "../../../common/Constants";
 
 //TODO: new localizations and content!
 const content = [
@@ -60,18 +60,19 @@ const description = ({history}) => {
 
   const mobileContent = (
       <>
-        <div className={classes.InnerContainer}>
+        <div className={classes.InnerContainer} style={{width: `calc(${window.screen.availWidth}px - 20px)`}}>
           <article className={classes.ArticleContent}>
             <p>{t('registration.description.text2')}</p>
             <p>{t('registration.description.text3')}</p>
             <p>{t('registration.description.text4')}</p>
           </article>
-          <>
-            <h2>{examLevelsHeader}</h2>
+          {/*<div style={{width: `${window.screen.availWidth}px`, padding: '0 2px'}}>*/}
+          <div style={{width: `calc(${window.screen.availWidth}px - 20px)`, padding: '0 2px'}}>
+          <h2>{examLevelsHeader}</h2>
             <DescriptionCollapsible headerText={levelTranslations.PERUS} content={content}/>
             <DescriptionCollapsible headerText={levelTranslations.KESKI} content={content}/>
             <DescriptionCollapsible headerText={levelTranslations.YLIN} content={content}/>
-          </>
+          </div>
         </div>
         <>
           <PriceContainer/>
@@ -95,10 +96,9 @@ const description = ({history}) => {
               headlineContent={<p>{t('registration.description.text1')}</p>}
               headlineImage={YkiImage1}
           />
-          {MOBILE_VIEW ||(MOBILE_VIEW && (SCREEN_ORIENTATION.type === 'landscape-primary')) ?
+          {MOBILE_VIEW || (MOBILE_VIEW && (getDeviceOrientation() === 'landscape')) ?
               <>
                 {mobileContent}
-
               </>
               :
               <>

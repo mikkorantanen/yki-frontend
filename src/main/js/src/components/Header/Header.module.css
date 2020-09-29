@@ -27,6 +27,7 @@
   grid-column-gap: 10px;
   width: 100%;
   align-items: center;
+  min-height: 60px;
 }
 
 .RegistrationHeader img {
@@ -43,7 +44,7 @@
 
 
 /* Mobile & Tablet view */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .RegistrationHeader {
     grid-template-columns: repeat(2, 1fr);
     height: 72px;

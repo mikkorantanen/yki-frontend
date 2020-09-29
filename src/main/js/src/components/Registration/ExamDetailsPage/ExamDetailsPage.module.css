@@ -42,7 +42,7 @@
 }
 
 /* TODO: tablet view */
-@media (min-width: 800px) {
+@media (min-width: 1440px) {
   .Content {
     width: auto;
     max-width: 100vw;
@@ -101,7 +101,7 @@
   }
   .IdentificationButtons button {
     margin-bottom: 5vh;
-    width: 260px;
+    max-width: 220px;
     height: 8vh;
   }
 }

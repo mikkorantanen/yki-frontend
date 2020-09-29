@@ -5,17 +5,12 @@ import {useTranslation} from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import classes from './ExamSessionListItem.module.css';
-import {levelDescription} from '../../../../util/util';
+import {getDeviceOrientation, levelDescription} from '../../../../util/util';
 import {
   DATE_FORMAT,
-  DATE_FORMAT_WITHOUT_YEAR, MOBILE_VIEW, MOBILE_VIEW_LARGE_LANDSCAPE, TABLET_VIEW,
+  DATE_FORMAT_WITHOUT_YEAR, MOBILE_VIEW
 } from '../../../../common/Constants';
 import * as actions from '../../../../store/actions/index';
-
-/*const min = window.innerWidth > 640;
-const max = window.innerWidth < 1023;
-const orientation = window.screen.orientation.type === 'landscape-primary';
-const MOBILE_VIEW_LARGE_LANDSCAPE = min && max && orientation;*/
 
 const examSessionListItem = ({
                                examSession: session,
@@ -119,11 +114,11 @@ const examSessionListItem = ({
           {session.location[0].zip}{' '}{city}
         </span>
       </div>
-  )
+  );
 
   return (
       <>
-        {MOBILE_VIEW || TABLET_VIEW || MOBILE_VIEW_LARGE_LANDSCAPE ?
+        {MOBILE_VIEW || window.innerWidth < 1024 || (window.innerWidth < 1024 && getDeviceOrientation() === 'landscape') ?
             <div
                 className={classes.ExamSessionListItem}
                 data-cy="exam-session-list-item"

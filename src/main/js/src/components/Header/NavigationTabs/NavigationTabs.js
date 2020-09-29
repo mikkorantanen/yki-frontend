@@ -36,7 +36,7 @@ const NavigationTabs = (props) => {
               {t('common.registration')}
             </button>
           </div>
-          {divider ? <hr className={classes.Divider} /> : null}
+          {divider ? <hr className={classes.Divider}/> : null}
         </>
     );
   };

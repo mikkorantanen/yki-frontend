@@ -1,6 +1,5 @@
 .DescriptionItem {
     display: block;
-    width: 100%;
 }
 
 .DescriptionItem h3 {
@@ -28,7 +27,17 @@
     margin-bottom: 5%;
 }
 
+.RowItem article {
+    margin-right: 4vw;
+}
+
 .DescriptionItem hr {
     border: 1px solid hsla(194, 82%, 43%, 1);
     opacity: 0.5;
+}
+
+@media screen and (max-width: 425px) {
+    .RowItem article {
+        margin-right: 25px;
+    }
 }

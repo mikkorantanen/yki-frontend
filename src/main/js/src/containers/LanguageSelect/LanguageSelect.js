@@ -56,7 +56,7 @@ class LanguageSelect extends React.PureComponent {
         {languages.map((lang) => (
             <div key={`LINK-${lang}`}>
               <button
-                  className={classes.LanguageItem}
+                  className={this.state.ykiLanguage === lang ? classes.LanguageItemActive : classes.LanguageItem}
                   value={lang}
                   onClick={e => this.handleLanguageChange(e)}
               >

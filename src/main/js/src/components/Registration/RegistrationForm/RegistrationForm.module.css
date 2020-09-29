@@ -133,7 +133,7 @@
   }
 }
 
-@media screen and (max-width: 1020px) {
+@media screen and (max-width: 1023px) {
   .InputFieldGrid {
     grid-template-columns: none;
   }
@@ -143,16 +143,13 @@
   }
 
   .RadioButtons div {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 30px);
+    margin-right: 35px;
   }
 
   .FormElement input {
     width: 100%;
-    height: 30px;
-  }
-
-  .FormElement label {
-    font-size: 1.025em;
   }
 
   .Form Button {
@@ -161,9 +158,8 @@
   }
 }
 
-@media screen and (max-width: 1022px) and (orientation: landscape) {
+@media only screen and (max-width: 1023px) and (orientation: landscape) {
   .FormElement input {
     width: 100%;
-    height: 50px !important;
   }
 }

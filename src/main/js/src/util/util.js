@@ -80,3 +80,12 @@ export const getLanguageAndLevel = (sessionData) => {
   ).toLowerCase()}`
   );
 };
+
+export const getDeviceOrientation = () => {
+  if (window.screen.orientation) {
+    return window.screen.orientation.type.includes('landscape') ? 'landscape' : 'portrait';
+  }
+
+  // iOS/safari
+  return Math.abs(+window.orientation) === 90 ? 'landscape' : 'portrait';
+}

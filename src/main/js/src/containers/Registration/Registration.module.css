@@ -49,9 +49,6 @@
   .FilterContainer {
     height: 100%;
   }
-  .FilterContainer p {
-    margin-bottom: 5vh;
-  }
   .FilterContainer hr {
     margin-top: 3vh;
   }
@@ -86,13 +83,6 @@
     margin: 0;
   }
   .FilterSelectors {
-    margin-bottom: 10vh;
-  }
-}
-
-/* Mobile landscape */
-@media screen and (min-width: 640px) and (max-width: 1023px) and (orientation: landscape) {
-  .FilterContainer p {
     margin-bottom: 10vh;
   }
 }

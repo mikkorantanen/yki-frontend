@@ -23,14 +23,9 @@
   margin-left: 4px;
 }
 
-@media (max-width: 425px) {
-  .Zip input {
-    width: 100px;
-    height: 30px;
-    margin-right: 20px;
-  }
-  .PostOffice input {
-    width: 150px;
-    height: 30px;
+@media screen and (max-width: 425px) and (orientation: portrait) {
+  .AddressInput {
+    display: grid;
+    grid-gap: 20px;
   }
 }

@@ -49,7 +49,7 @@ button:hover {
     border: 1px solid hsla(195, 82%, 44%, 0.25);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .ActiveTab {
         padding-top: 1vh;
         padding-bottom: 2vh;

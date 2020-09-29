@@ -30,7 +30,6 @@ input {
   color: hsla(0, 0%, 40%, 1);
   padding-left: 5px;
   border: 1px solid hsla(0, 0%, 68%, 1);
-  border-radius: 2px;
 }
 
 textarea {
@@ -66,8 +65,4 @@ button {
 .YkiButton:disabled {
   color: hsla(0, 0%, 60%, 1);
   background-color: hsla(0, 0%, 80%, 1);
-}
-
-@media only screen and (min-width: 768px) {
-
 }
