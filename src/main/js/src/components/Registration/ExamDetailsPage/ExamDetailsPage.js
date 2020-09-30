@@ -15,10 +15,10 @@ import NotificationSignup from '../NotificationSignup/NotificationSignup';
 import LoginLink from '../LoginLink/LoginLink';
 import {DATE_FORMAT_WITHOUT_YEAR} from '../../../common/Constants';
 import HeadlineContainer from "../../HeadlineContainer/HeadlineContainer";
-
-import YkiImage1 from '../../../assets/images/ophYki_image1.png';
 import {levelDescription} from "../../../util/util";
 import ExamDetailsCard from "./ExamDetailsCard/ExamDetailsCard";
+
+import {languageHeroImages} from "../../../util/languageHeroImageUtil";
 
 const examDetailsPage = ({
                            session,
@@ -62,7 +62,6 @@ const examDetailsPage = ({
       ).toLowerCase()}`}</p>
   );
 
-  // TODO: tee headlineImagelle funktio detaileihin, jolla valitaan sopiva kuva perustuen tentin kieleen (session.language_code)
   return (
       <main>
         {loading ? (
@@ -74,7 +73,7 @@ const examDetailsPage = ({
               <HeadlineContainer
                   headlineTitle={languageAndLevel.props.children.toString()}
                   headlineContent={<ExamDetailsCard exam={session} isFull={!seatsAvailable}/>}
-                  headlineImage={YkiImage1}
+                  headlineImage={languageHeroImages[session.language_code]}
               />
               <div className={classes.Content}>
                 <BackButton

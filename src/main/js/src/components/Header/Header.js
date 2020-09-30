@@ -9,7 +9,6 @@ import OPHLogo from '../../assets/svg/oph-logo-updated.svg';
 import NavigationTabs from "./NavigationTabs/NavigationTabs";
 import Menu from "../Menu/Menu";
 import {MOBILE_VIEW, TABLET_VIEW} from "../../common/Constants";
-import {getDeviceOrientation} from "../../util/util";
 
 const header = ({nav}) =>
     nav ? (

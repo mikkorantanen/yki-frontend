@@ -22,15 +22,14 @@ const NavigationTabs = (props) => {
     return (
         <>
           <div className={onDescriptionPage ? classes.ActiveTab : classes.InactiveTab}>
-            {/* todo: add new localization! */}
             <button className={classes.LinkButton} onClick={() => history.push('/')} role="link">
-              {'Esittely ja hinnasto'}
+              {t('common.registration.root')}
             </button>
           </div>
           <div className={onDescriptionPage ? classes.InactiveTab : classes.ActiveTab}>
             <button
                 className={classes.LinkButton}
-                onClick={() => history.push(`${t('registration.path.select.exam')}`)}
+                onClick={() => history.push('/ilmoittautuminen/valitse-tutkintotilaisuus')}
                 role="link"
             >
               {t('common.registration')}
@@ -50,7 +49,7 @@ const NavigationTabs = (props) => {
               {baseLinks()}
               {MOBILE_VIEW || TABLET_VIEW ?
                   <div onClick={() => handleOnClick()}>
-                    <p className={classes.InactiveTab}>Kielen valinta</p>
+                    <p className={classes.InactiveTab}>{t('common.registration.select.language')}</p>
                   </div>
                   :
                   null

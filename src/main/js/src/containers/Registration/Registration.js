@@ -4,7 +4,7 @@ import {withTranslation} from 'react-i18next';
 import queryString from 'query-string';
 
 import classes from './Registration.module.css';
-import {LANGUAGES, MOBILE_VIEW, TABLET_VIEW} from '../../common/Constants';
+import {LANGUAGES, MOBILE_VIEW} from '../../common/Constants';
 import Filters from '../../components/Registration/Filters/Filters';
 import ExamSessionList from '../../components/Registration/ExamSessionList/ExamSessionList';
 

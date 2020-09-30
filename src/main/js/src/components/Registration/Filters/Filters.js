@@ -91,14 +91,14 @@ const filters = props => {
   const availabilityCheckbox = (
       <div className={classes.CheckBox}>
         <Checkbox onChange={props.onAvailabilityFilterChange}/>
-        <label>{'Näytä vain kurssit joilla on tilaa'}</label>
+        <label>{t('common.exam.availableExams')}</label>
       </div>
   )
 
   const openRegistrationCheckbox = (
       <div className={classes.CheckBox}>
         <Checkbox onChange={props.onRegistrationFilterChange}/>
-        <label>{'Näytä vain avoimet ilmoittautumiset'}</label>
+        <label>{t('common.exam.openExams')}</label>
       </div>
   )
 

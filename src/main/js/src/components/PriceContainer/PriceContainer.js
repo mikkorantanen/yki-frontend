@@ -6,7 +6,6 @@ import classes from './PriceContainer.module.css';
 import {useSelector} from "react-redux";
 import {MOBILE_VIEW} from "../../common/Constants";
 
-//TODO: add new localizations
 const PriceContainer = () => {
     const {t} = useTranslation();
 
@@ -16,7 +15,7 @@ const PriceContainer = () => {
 
     return (
         <div className={classes.PriceContainer}>
-            <h2>Hinnasto</h2>
+            <h2>{t('common.priceList')}</h2>
              <div className={onMobileSV || onMobileEN ? classes.PriceBoxSV : classes.PriceBox}>
                 <div className={classes.MobilePriceBox}>
                     <p>{t(levelTranslations.PERUS)}</p>

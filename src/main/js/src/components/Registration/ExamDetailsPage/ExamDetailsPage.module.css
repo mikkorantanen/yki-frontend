@@ -41,7 +41,6 @@
   display: flex;
 }
 
-/* TODO: tablet view */
 @media (min-width: 1440px) {
   .Content {
     width: auto;
@@ -86,7 +85,6 @@
   }
 }
 
-/* Table view */
 @media screen and (max-width: 768px) and (min-width: 425px) {
   .Identification {
     width: 100%;

@@ -35,7 +35,6 @@ const notificationSignup = ({examSessionId}) => {
         .required(t('registration.form.confirmEmail')),
   });
 
-  // @TODO: localizations!
   return (
       <>
         {signup.success ? (
@@ -53,7 +52,7 @@ const notificationSignup = ({examSessionId}) => {
                 }}
                 render={({isValid, status}) => (
                     <Form className={classes.Form}>
-                      <h2>{'Tilaa ilmoitus mahdollisista peruutuspaikoista'}</h2>
+                      <h2>{t('registration.form.header.notify')}</h2>
                       <div className={classes.EmailContainer}>
                         <div>
                           <label htmlFor="email" className={classes.BoldLabel}>

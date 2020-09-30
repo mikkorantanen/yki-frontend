@@ -10,13 +10,12 @@ import {getLanguageAndLevel} from "../../../../util/util";
 const ExamDetailsCard = ({exam, isFull, successHeader}) => {
   const [t, i18n] = useTranslation();
 
-  // @TODO: add new localizations
   const exceptionStatus = (
       isFull ? <p className={classes.Exception}
                   data-cy={"exam-details-exception-status"}>{t('registration.examSpots.full')}</p>
           : (!exam.open ?
           <p className={classes.Exception}
-             data-cy={"exam-details-exception-status"}>{'Ilmoittautuminen ei ole vielä alkanut'}</p>
+             data-cy={"exam-details-exception-status"}>{t('registration.examSpots.notOpen')}</p>
           : null)
   )
 

@@ -11,16 +11,30 @@ const DescriptionDetail = (props) => {
     }
   }
 
+  const levelBaseNumber = (level) => {
+    switch (level.charAt(0)) {
+      case 'A':
+        return 1;
+      case 'B':
+        return 3;
+      case 'C':
+        return 5;
+      default:
+        return null;
+    }
+  }
+
   return (
      <div className={classes.DescriptionItem}>
        {content.map((item, i) => {
-         const index = i + 1;
+         const addition = levelBaseNumber(item.languageLevel);
+         const headerNum = i + addition;
 
          return (
-             <div key={index}>
+             <div key={i}>
                <div className={classes.RowItem}>
                  <div className={classes.LanguageLevel}>
-                   <h3>{index}</h3>
+                   <h3>{headerNum}</h3>
                    <hr />
                    <h3>{item.languageLevel}</h3>
                  </div>

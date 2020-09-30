@@ -28,8 +28,7 @@ const examSessionListItem = ({
   const examDate = moment(session.session_date).format(DATE_FORMAT);
   const date = <div className={classes.Date}>{examDate}</div>;
 
-  // TODO: localization
-  const examFee = `Hinta: ${session.exam_fee} €`;
+  const examFee = `${t('common.price')}: ${session.exam_fee} €`;
 
   const examLanguage = t(`common.language.${language.code}`);
   const examLevel = levelDescription(session.level_code).toLowerCase();
@@ -116,9 +115,11 @@ const examSessionListItem = ({
       </div>
   );
 
+  const mobileLarge = window.innerWidth < 1024;
+
   return (
       <>
-        {MOBILE_VIEW || window.innerWidth < 1024 || (window.innerWidth < 1024 && getDeviceOrientation() === 'landscape') ?
+        {MOBILE_VIEW || mobileLarge || (mobileLarge && getDeviceOrientation() === 'landscape') ?
             <div
                 className={classes.ExamSessionListItem}
                 data-cy="exam-session-list-item"

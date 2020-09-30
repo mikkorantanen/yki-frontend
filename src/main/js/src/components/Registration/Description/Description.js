@@ -9,25 +9,44 @@ import YkiImage1 from '../../../assets/images/ophYki_image1.png';
 import classes from './Description.module.css';
 import {getDeviceOrientation, levelTranslations} from "../../../util/util";
 import PriceContainer from "../../PriceContainer/PriceContainer";
-import {MOBILE_VIEW} from "../../../common/Constants";
-
-//TODO: new localizations and content!
-const content = [
-  {
-    languageLevel: 'A1',
-    descriptionText: 'Ymmärtää hitaasta ja selkeästä puheesta yksinkertaisia perustason ilmauksia, jotka liittyvät suoraan omaan elämään tai jotka koskevat välitöntä konkreettista ympäristöä. Pystyy ymmärtämään joitakin asioita helppotajuisista ja lyhyistä teksteistä. Selviää kaikkein yksinkertaisimmissa puhetilanteissa, mutta puhe on hidasta ja hyvin katkonaista ja ääntämisessä ja/tai kielen hallinnassa voi olla puutteita. Pystyy kirjoittamaan erittäin lyhyitä tekstejä, joissa on lukuisia kielellisiä puutteita.'
-  },
-  {
-    languageLevel: 'A2',
-    descriptionText: 'Ymmärtää selkeää ja yksinkertaistettua puhetta, joka käsittelee jokapäiväisiä ja tuttuja asioita. Ymmärtää helposti lyhyitä, yksinkertaisia tekstejä ja saa selville pääasiat jokapäiväisen elämän aihepiirejä käsittelevistä teksteistä. Selviää rutiininomaisissa yksinkertaista tiedonvaihtoa vaativissa puhetilanteissa, vaikka ääntäminen tai kielen hallinta voi olla vielä puutteellista. Pystyy kirjoittamaan suppeita, yksinkertaisia tekstejä jokapäiväisistä asioista, mutta teksti voi olla hajanaista.'
-  }
-];
+import { MOBILE_VIEW } from "../../../common/Constants";
 
 const description = ({history}) => {
   const {t} = useTranslation();
 
   document.title = 'YKI';
-  const examLevelsHeader = 'Tasojen kuvaukset';
+
+  const basicLevel = [
+    {
+      languageLevel: 'A1',
+      descriptionText: t('common.examLevel.description.a1'),
+    },
+    {
+      languageLevel: 'A2',
+      descriptionText: t('common.examLevel.description.a2')
+    },
+  ];
+  const middleLevel = [
+    {
+      languageLevel: 'B1',
+      descriptionText: t('common.examLevel.description.b1'),
+    },
+    {
+      languageLevel: 'B2',
+      descriptionText: t('common.examLevel.description.b2')
+    }
+  ];
+
+  const upperLevel = [
+    {
+      languageLevel: 'C1',
+      descriptionText: t('common.examLevel.description.c1')
+    },
+    {
+      languageLevel: 'C2',
+      descriptionText: t('common.examLevel.description.c2')
+    }
+  ];
 
   const desktopContent = (
       <>
@@ -38,16 +57,16 @@ const description = ({history}) => {
             <p>{t('registration.description.text4')}</p>
           </article>
           <>
-            <h2>{examLevelsHeader}</h2>
-            <DescriptionCollapsible headerText={levelTranslations.PERUS} content={content}/>
-            <DescriptionCollapsible headerText={levelTranslations.KESKI} content={content}/>
-            <DescriptionCollapsible headerText={levelTranslations.YLIN} content={content}/>
+            <h2>{t('registration.description.examLevels')}</h2>
+            <DescriptionCollapsible headerText={levelTranslations.PERUS} content={basicLevel}/>
+            <DescriptionCollapsible headerText={levelTranslations.KESKI} content={middleLevel}/>
+            <DescriptionCollapsible headerText={levelTranslations.YLIN} content={upperLevel}/>
           </>
           <>
             <button
                 className={'YkiButton'}
                 data-cy="continue-button"
-                onClick={() => history.push(t('registration.path.select.exam'))}
+                onClick={() => history.push(t('/ilmoittautuminen/valitse-tutkintotilaisuus'))}
                 role="link"
             >
               {t('registration.register')}
@@ -66,12 +85,11 @@ const description = ({history}) => {
             <p>{t('registration.description.text3')}</p>
             <p>{t('registration.description.text4')}</p>
           </article>
-          {/*<div style={{width: `${window.screen.availWidth}px`, padding: '0 2px'}}>*/}
           <div style={{width: `calc(${window.screen.availWidth}px - 20px)`, padding: '0 2px'}}>
-          <h2>{examLevelsHeader}</h2>
-            <DescriptionCollapsible headerText={levelTranslations.PERUS} content={content}/>
-            <DescriptionCollapsible headerText={levelTranslations.KESKI} content={content}/>
-            <DescriptionCollapsible headerText={levelTranslations.YLIN} content={content}/>
+            <h2>{t('registration.description.examLevels')}</h2>
+            <DescriptionCollapsible headerText={levelTranslations.PERUS} content={basicLevel}/>
+            <DescriptionCollapsible headerText={levelTranslations.KESKI} content={middleLevel}/>
+            <DescriptionCollapsible headerText={levelTranslations.YLIN} content={upperLevel}/>
           </div>
         </div>
         <>
@@ -79,7 +97,7 @@ const description = ({history}) => {
           <button
               className={'YkiButton'}
               data-cy="continue-button"
-              onClick={() => history.push(t('registration.path.select.exam'))}
+              onClick={() => history.push(t('/ilmoittautuminen/valitse-tutkintotilaisuus'))}
               role="link"
           >
             {t('registration.register')}
