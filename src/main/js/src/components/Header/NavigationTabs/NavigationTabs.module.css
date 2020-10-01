@@ -1,7 +1,6 @@
 .InactiveTab {
     height: 100%;
     top: 0;
-    left: 702px;
     width: 258px;
     font: normal normal bold 20px/26px PT Sans;
     letter-spacing: 0.6px;
@@ -15,7 +14,6 @@ button:hover {
 .ActiveTab {
     height: 100%;
     top: 0;
-    left: 702px;
     width: 258px;
     letter-spacing: 0.6px;
     background: hsl(195, 82%, 44%) 0 0 no-repeat padding-box !important;
@@ -51,7 +49,18 @@ button:hover {
     border: 1px solid hsla(195, 82%, 44%, 0.25);
 }
 
-@media (max-width: 1024px) {
+/* Large screens */
+@media screen and (min-width: 1440px) {
+    .ActiveTab {
+        width: 290px;
+    }
+    .InactiveTab {
+        width: 290px;
+    }
+}
+
+/* Tablet view */
+@media screen and (max-width: 1024px) {
     .ActiveTab {
         padding-top: 1vh;
         padding-bottom: 2vh;

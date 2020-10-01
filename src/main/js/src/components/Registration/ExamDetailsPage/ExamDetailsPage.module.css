@@ -13,11 +13,6 @@
   transform: translate(-50%, -50%);
 }
 
-.Title {
-  text-align: center;
-  font-size: 1.125em;
-}
-
 .InfoText {
   text-align: left;
   font: normal normal normal 16px/24px PT Sans;
@@ -39,33 +34,6 @@
 
 .IdentificationButtons {
   display: flex;
-}
-
-@media (min-width: 1440px) {
-  .Content {
-    width: auto;
-    max-width: 100vw;
-    margin: 0 14vw 0 14vw;
-    min-height: 10vh;
-  }
-
-  .Loading {
-    left: 20%;
-  }
-
-  .Title {
-    text-align: start;
-  }
-
-  .Identification {
-    justify-items: start;
-    width: auto;
-  }
-
-  .IdentificationButtons {
-    display: flex;
-    width: 32vw;
-  }
 }
 
 /* Mobile view */

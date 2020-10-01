@@ -101,14 +101,16 @@ export class PaymentStatus extends Component {
 
     return (
         <>
-          <div>{headLine()}</div>
-          <main className={classes.Content}>
+          <main>
+            <div>{headLine()}</div>
+            <div className={classes.Content}>
             <BackButton
                 clicked={() =>
                     this.props.history.push('/')
                 }
             />
             <div>{content()}</div>
+          </div>
           </main>
         </>
     );

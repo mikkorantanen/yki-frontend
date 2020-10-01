@@ -25,6 +25,10 @@ body {
   box-sizing: border-box;
 }
 
+main {
+  min-height: 80vh;
+}
+
 input {
   font-size: 0.875em;
   color: hsla(0, 0%, 40%, 1);

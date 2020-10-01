@@ -42,9 +42,8 @@
   display: inline-flex;
 }
 
-
 /* Mobile & Tablet view */
-@media (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
   .RegistrationHeader {
     grid-template-columns: repeat(2, 1fr);
     height: 72px;
