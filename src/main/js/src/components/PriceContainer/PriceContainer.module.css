@@ -59,15 +59,9 @@
     color: hsla(194, 82%, 43%, 1);
 }
 
-@media (min-width: 1440px) {
-    .PriceContainer h2 {
-        padding-left: 3vw;
-    }
-}
-
 @media (max-width: 1400px) {
     .PriceContainer h2 {
-        padding-left: 4vw;
+        padding-left: 1vw;
     }
 }
 

@@ -31,6 +31,7 @@ button:hover {
     text-decoration: none !important;
     font: normal normal bold 20px/26px PT Sans;
     letter-spacing: inherit;
+    padding-bottom: 1vh;
 }
 
 .InactiveTab button {
@@ -41,6 +42,7 @@ button:hover {
     text-decoration: none !important;
     font: normal normal bold 20px/26px PT Sans;
     letter-spacing: inherit;
+    padding-bottom: 1vh;
 }
 
 .Divider {
