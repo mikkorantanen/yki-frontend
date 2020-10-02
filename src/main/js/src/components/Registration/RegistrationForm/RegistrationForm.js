@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
@@ -14,8 +14,10 @@ import ZipAndPostOffice from '../../ZipAndPostOffice/ZipAndPostOffice';
 import GenderSelect from './GenderSelect/GenderSelect';
 import {DATE_FORMAT, ISO_DATE_FORMAT_SHORT, MOBILE_VIEW, TABLET_VIEW} from '../../../common/Constants';
 import RegistrationError from '../RegistrationError/RegistrationError';
+import Checkbox from "../../UI/Checkbox/Checkbox";
 
 export const registrationForm = props => {
+  const [consent, setConsent] = useState(false);
   const mandatoryErrorMsg = props.t('error.mandatory');
   const maxErrorMsg = props.t('error.max');
 
@@ -388,13 +390,23 @@ export const registrationForm = props => {
                 </div>
                 <p>{props.t('registration.form.specialArrangements.info')}</p>
                 <p>{props.t('registration.form.summary.info')}</p>
+                <div className={classes.Consent}>
+                  <article>
+                    <h4>{props.t('registration.form.consent.heading')}</h4>
+                    <p>{props.t('registration.form.consent.info')}</p>
+                  </article>
+                  <div className={classes.ConsentCheckbox}>
+                  <Checkbox onChange={() => setConsent(!consent)} />
+                  <p>{props.t('registration.form.consent.confirm')}</p>
+                  </div>
+                </div>
                 <Button
                     type="submit"
                     isRegistration={true}
-                    datacy="form-submit-button"
-                    btnType={!isValid || props.submitting ? 'Disabled' : null}
+                    data-cy="form-submit-button"
+                    btnType={!isValid || props.submitting || consent === false ? 'Disabled' : null}
                     ariaLabel={
-                      !isValid || props.submitting
+                      !isValid || props.submitting || consent === false
                           ? props.t('registration.form.aria.submit.button')
                           : null
                     }
