@@ -128,7 +128,8 @@
 }
 
 .Consent {
-  padding-top: 2vh;
+  padding-top: 1vh;
+  margin-top: 5vh;
   border: 1px solid hsla(0, 0%, 83%, 0.2);
   border-radius: 4px;
   background: hsla(0, 0%, 83%, 0.2);
@@ -174,6 +175,10 @@
     display: grid;
     grid-template-columns: repeat(2, 30px);
     margin-right: 35px;
+  }
+
+  .Consent {
+    margin-top: 35px;
   }
 
   .FormElement input {
