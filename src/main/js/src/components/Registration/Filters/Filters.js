@@ -90,7 +90,7 @@ const filters = props => {
 
   const availabilityCheckbox = (
       <div className={classes.CheckBox}>
-        <Checkbox onChange={props.onAvailabilityFilterChange}/>
+        <Checkbox datacy={'exam-availability-checkbox'} onChange={props.onAvailabilityFilterChange}/>
         <label>{t('common.exam.availableExams')}</label>
       </div>
   )

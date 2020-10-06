@@ -179,7 +179,7 @@ describe('Registration', () => {
 
   it('Should only show exams that has available registration spots', () => {
     cy.visit('/ilmoittautuminen/valitse-tutkintotilaisuus');
-    cy.get(':nth-child(1) > .Checkbox_Container__lfGoQ > .Checkbox_Checkmark__2afwJ').click();
+    cy.get('[data-cy=exam-availability-checkbox]').click();
     cy.get('[data-cy=exam-session-list-item]')
         .contains('Täynnä!')
         .should('not.exist');

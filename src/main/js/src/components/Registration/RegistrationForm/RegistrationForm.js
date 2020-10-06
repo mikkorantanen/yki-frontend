@@ -17,9 +17,15 @@ import RegistrationError from '../RegistrationError/RegistrationError';
 import Checkbox from "../../UI/Checkbox/Checkbox";
 
 export const registrationForm = props => {
-  const [consent, setConsent] = useState(false);
+  const [personalDataConsent, setPersonalDataConsent] = useState(false);
+  const [termsOfUseConsent, setTermsOfUseConsent] = useState(false);
+  const [isDisabled, setDisabled] = useState(true);
+
   const mandatoryErrorMsg = props.t('error.mandatory');
   const maxErrorMsg = props.t('error.max');
+
+  /* Check that both consents are clicked */
+  const consent = termsOfUseConsent && personalDataConsent;
 
   function validatePhoneNumber(value) {
     if (value) {
@@ -250,14 +256,14 @@ export const registrationForm = props => {
                         </div>
                       </>
                       :
-                    <div className={classes.InputFieldGrid}>
-                      <div className={classes.FormElement}>
-                        {inputField('streetAddress')}
+                      <div className={classes.InputFieldGrid}>
+                        <div className={classes.FormElement}>
+                          {inputField('streetAddress')}
+                        </div>
+                        <div className={classes.FormElement}>
+                          <ZipAndPostOffice values={values} setFieldValue={setFieldValue}/>
+                        </div>
                       </div>
-                      <div className={classes.FormElement}>
-                        <ZipAndPostOffice values={values} setFieldValue={setFieldValue}/>
-                      </div>
-                    </div>
                   }
                   {MOBILE_VIEW || TABLET_VIEW ?
                       <>
@@ -267,32 +273,32 @@ export const registrationForm = props => {
                           </div>
                         </div>
                         <div className={classes.InputFieldGrid}>
-                        <div className={classes.FormElement}>
+                          <div className={classes.FormElement}>
                             {readonlyWhenExistsInput('email', initialValues, 'email')}
                           </div>
                         </div>
-                          {!props.initData.user.email && (
-                              <div className={classes.InputFieldGrid}>
+                        {!props.initData.user.email && (
+                            <div className={classes.InputFieldGrid}>
                               <div className={classes.FormElement}>
                                 {inputField('confirmEmail', null, null, 'email')}
                               </div>
-                              </div>
-                          )}
+                            </div>
+                        )}
                       </>
                       :
-                    <div className={classes.InputFieldGrid}>
-                      <div className={classes.FormElement}>
-                        {inputField('phoneNumber', '(+358)', null, 'tel')}
+                      <div className={classes.InputFieldGrid}>
+                        <div className={classes.FormElement}>
+                          {inputField('phoneNumber', '(+358)', null, 'tel')}
+                        </div>
+                        <div className={classes.FormElement}>
+                          {readonlyWhenExistsInput('email', initialValues, 'email')}
+                        </div>
+                        {!props.initData.user.email && (
+                            <div className={classes.FormElement}>
+                              {inputField('confirmEmail', null, null, 'email')}
+                            </div>
+                        )}
                       </div>
-                      <div className={classes.FormElement}>
-                        {readonlyWhenExistsInput('email', initialValues, 'email')}
-                      </div>
-                      {!props.initData.user.email && (
-                          <div className={classes.FormElement}>
-                            {inputField('confirmEmail', null, null, 'email')}
-                          </div>
-                      )}
-                    </div>
                   }
                   {!initialValues.nationality && (
                       <div className={classes.FormElement}>
@@ -390,20 +396,42 @@ export const registrationForm = props => {
                 </div>
                 <p>{props.t('registration.form.specialArrangements.info')}</p>
                 <p>{props.t('registration.form.summary.info')}</p>
-                <div className={classes.Consent}>
-                  <article>
-                    <h4>{props.t('registration.form.consent.heading')}</h4>
-                    <p>{props.t('registration.form.consent.info')}</p>
-                  </article>
-                  <div className={classes.ConsentCheckbox}>
-                  <Checkbox onChange={() => setConsent(!consent)} />
-                  <p>{props.t('registration.form.consent.confirm')}</p>
+                <>
+                  <div className={classes.ConsentContainer}>
+                    <article>
+                      <h4>{props.t('registration.form.consent.heading')}</h4>
+                      <p>{props.t('registration.form.consent.info')}</p>
+                    </article>
+                    <div className={classes.ConsentCheckbox}>
+                      <Checkbox datacy={"form-checkbox-terms"} onChange={() => setTermsOfUseConsent(!termsOfUseConsent)}/>
+                      <p>{props.t('registration.form.consent.confirm')}</p>
+                    </div>
                   </div>
-                </div>
+                  <div className={classes.ConsentContainer}>
+                    <article>
+                      <h4>Hyväksy henkilötietojen käsittely</h4>
+                      <p>Tähän pohjustus lakitekstiä varten</p>
+                      {/* todo: linkki pitää avata että checkbox aktivoituu? */}
+                      <a
+                          data-cy={'form-personal-data-terms'}
+                          href={'http://www.oph.fi'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setDisabled(false)}
+                      >
+                        Linkki Lakitekstiin
+                      </a>
+                    </article>
+                    <div className={isDisabled ? classes.ConsentCheckboxDisabled : classes.ConsentCheckbox}>
+                      <Checkbox datacy={"form-checkbox-personal-data"} disabled={isDisabled} onChange={() => setPersonalDataConsent(!personalDataConsent)}/>
+                      <p>{'Hyväksyn tietojeni käsittelyn.'}</p>
+                    </div>
+                  </div>
+                </>
                 <Button
                     type="submit"
                     isRegistration={true}
-                    data-cy="form-submit-button"
+                    datacy="form-submit-button"
                     btnType={!isValid || props.submitting || consent === false ? 'Disabled' : null}
                     ariaLabel={
                       !isValid || props.submitting || consent === false

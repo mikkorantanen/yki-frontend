@@ -9,14 +9,19 @@ const checkbox = props => (
       type="checkbox"
       onChange={props.onChange}
       defaultChecked={props.checked || false}
+      disabled={props.disabled}
     />
-    <span className={classes.Checkmark} />
+    <span className={classes.Checkmark} data-cy={props.datacy} />
   </label>
 );
 
 checkbox.propTypes = {
   onChange: PropTypes.func.isRequired,
   checked: PropTypes.bool,
+  /* todo: poista disabled jos ei tarpeen */
+  disabled: PropTypes.bool,
+  datacy: PropTypes.string,
+
 };
 
 export default checkbox;
