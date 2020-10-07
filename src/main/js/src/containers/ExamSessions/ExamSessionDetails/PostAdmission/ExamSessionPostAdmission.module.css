@@ -1,0 +1,63 @@
+.Buttons {
+  width: 350px
+}
+
+.Button {
+  height: 41px;
+  background-color: hsla(195, 82%, 44%, 1);
+  color: white;
+  font-size: 1em;
+  padding: 0 18px;
+}
+
+.ButtonRight {
+  float: right;
+}
+
+.Action {
+  color: hsla(15, 100%, 40%, 1);
+  text-decoration-line: underline;
+  background: none;
+  border: none;
+  padding: 10px 0px;
+}
+
+.Form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.Label {
+  display: block;
+  font-size: 0.875em;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.Input {
+  width: 340px;
+  height: 35px;
+  margin-bottom: 20px;
+}
+
+.DatePickerWrapper > input {
+  width: 340px;
+  height: 35px;
+  margin-bottom: 20px;
+}
+
+.Disabled {
+  cursor: not-allowed;
+}
+
+.ErrorMessage {
+  color: hsla(15, 100%, 40%, 1);
+  margin-left: 10px;
+}
+
+.activityToggleButtonBox {
+  border: 1px solid #ff00007d;
+  border-radius: 10px;
+  padding: 15px;
+  padding-top: 0px;
+}

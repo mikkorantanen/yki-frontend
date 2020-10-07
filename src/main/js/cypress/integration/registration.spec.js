@@ -64,7 +64,7 @@ describe('Registration', () => {
 
   it('Filters can handle page refresh and direct links', () => {
     cy.visit('/ilmoittautuminen/valitse-tutkintotilaisuus');
-    cy.get('[data-cy=exam-session-list-item]').should('have.length', 5);
+    cy.get('[data-cy=exam-session-list-item]').should('have.length', 6);
     cy.get('[data-cy=language-filter]').select('Saksa');
     cy.get('[data-cy=level-filter]').select('Ylin taso');
     cy.get('[data-cy=location-filter]').select('Jyväskylä');

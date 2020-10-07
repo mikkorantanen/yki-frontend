@@ -8,6 +8,8 @@ export {
   cancelRegistration,
   confirmPayment,
   relocateExamSession,
+  addPostAdmission,
+  ResendPaymentEmail,
 } from './examSession';
 export {
   fetchRegistryContent,
@@ -31,6 +33,6 @@ export {
   filteredExamSessionsByOpenRegistration,
   filteredExamsByAvailabilityAndRegistration
 } from './registration';
-export { fetchExamDates, examDatesFailReset } from './examDates';
+export { fetchExamDates, examDatesFailReset, updatePostAdmissionEndDate, deletePostAdmissionEndDate } from './examDates';
 export { fetchUser } from './user';
 export { initYKILanguage, changeYKILanguage } from './yki';

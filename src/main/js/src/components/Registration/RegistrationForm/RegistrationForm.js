@@ -5,6 +5,7 @@ import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {withTranslation} from 'react-i18next';
 import {parsePhoneNumberFromString} from 'libphonenumber-js';
 import moment from 'moment';
+import { FinnishSSN } from 'finnish-ssn';
 
 import classes from './RegistrationForm.module.css';
 import Button from '../../UI/Button/Button';
@@ -26,6 +27,10 @@ export const registrationForm = props => {
     } else {
       return true;
     }
+  }
+
+  function validateSsn(value) {
+    return !value || FinnishSSN.validate(value);
   }
 
   function validateBirthDate(value) {
@@ -76,6 +81,12 @@ export const registrationForm = props => {
         .required(mandatoryErrorMsg)
         .max(64, maxErrorMsg),
     nationality: Yup.string().required(mandatoryErrorMsg),
+    ssn: Yup.string()
+      .test(
+        'invalid-ssn',
+        props.t('error.ssn.invalid'),
+        validateSsn,
+      ),
     confirmEmail: Yup.string().test(
         'same-email',
         props.t('error.confirmEmail'),
@@ -203,7 +214,7 @@ export const registrationForm = props => {
               last_name: values.lastName,
               nationalities: [values.nationality],
               nationality_desc: getNationalityDesc(values.nationality),
-              ssn: props.initData.user.ssn,
+              ssn: props.initData.user.ssn || values.ssn,
               birthdate: values.birthdate
                   ? moment(values.birthdate, DATE_FORMAT).format(
                       ISO_DATE_FORMAT_SHORT,

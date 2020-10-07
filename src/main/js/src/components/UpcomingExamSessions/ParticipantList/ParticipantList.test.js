@@ -12,6 +12,7 @@ const examSessionFirst = {
   session_date: '2028-12-30',
   participants: 2,
   max_participants: 50,
+  pa_participants: 0,
   registration_start_date: '2018-09-01',
   language_code: 'eng',
   level_code: 'KESKI',
@@ -20,6 +21,7 @@ const examSessionFirst = {
 const examSessionSecond = {
   ...examSessionFirst,
   session_date: '2029-01-01',
+  pa_participants: 0,
 };
 
 const participants = [
@@ -64,6 +66,7 @@ describe('<ParticipantList />', () => {
         onCancel={jest.fn()}
         onConfirmPayment={jest.fn()}
         onRelocate={jest.fn()}
+        onResendLink={jest.fn()}
       />,
     );
     expect(toJson(wrapper)).toMatchSnapshot();

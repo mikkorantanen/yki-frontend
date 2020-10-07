@@ -43,3 +43,25 @@ export const fetchExamDates = () => {
       });
   };
 };
+
+export const updatePostAdmissionEndDate = (examDateId, endDate) => {
+  return dispatch => {
+    axios
+      .post(`/yki/api/exam-date/${examDateId}/post-admission-end-date`, endDate)
+      .then(res => {
+        dispatch(fetchExamDates());
+      });
+      //TODO: handle error
+  }
+}
+
+export const deletePostAdmissionEndDate = examDateId => {
+  return dispatch => {
+    axios
+      .delete(`/yki/api/exam-date/${examDateId}/post-admission-end-date`)
+      .then(res => {
+        dispatch(fetchExamDates());
+      })
+      //TODO: handle error
+  }
+}
