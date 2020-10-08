@@ -15,6 +15,8 @@ describe('Registration form', () => {
     cy.get('[data-cy=input-error-email]').should('exist');
 
     cy.get('[data-cy=form-checkbox-terms]').click();
+    cy.get('[data-cy=form-checkbox-personal-data]').click();
+
     cy.get('[data-cy=form-submit-button]').should('not.be.disabled');
   });
 
@@ -118,6 +120,8 @@ describe('Registration form', () => {
     cy.get('[data-cy=radio-examLang-sv]').click();
 
     cy.get('[data-cy=form-checkbox-terms]').click();
+    cy.get('[data-cy=form-checkbox-personal-data]').click();
+
     cy.get('[data-cy=form-submit-button]').click();
 
     cy.get('[data-cy=registration-success]').should('exist');
@@ -144,6 +148,8 @@ describe('Registration form', () => {
     cy.get('[data-cy=input-email]').should('not.exist');
 
     cy.get('[data-cy=form-checkbox-terms]').click();
+    cy.get('[data-cy=form-checkbox-personal-data]').click();
+
     cy.get('[data-cy=form-submit-button]').click();
 
     cy.get('[data-cy=registration-success]').should('exist');

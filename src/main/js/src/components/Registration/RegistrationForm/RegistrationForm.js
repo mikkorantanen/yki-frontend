@@ -19,7 +19,6 @@ import Checkbox from "../../UI/Checkbox/Checkbox";
 export const registrationForm = props => {
   const [personalDataConsent, setPersonalDataConsent] = useState(false);
   const [termsOfUseConsent, setTermsOfUseConsent] = useState(false);
-  const [isDisabled, setDisabled] = useState(true);
 
   const mandatoryErrorMsg = props.t('error.mandatory');
   const maxErrorMsg = props.t('error.max');
@@ -411,19 +410,19 @@ export const registrationForm = props => {
                     <article>
                       <h4>Hyväksy henkilötietojen käsittely</h4>
                       <p>Tähän pohjustus lakitekstiä varten</p>
-                      {/* todo: linkki pitää avata että checkbox aktivoituu? */}
                       <a
-                          data-cy={'form-personal-data-terms'}
                           href={'http://www.oph.fi'}
                           target="_blank"
                           rel="noopener noreferrer"
-                          onClick={() => setDisabled(false)}
                       >
                         Linkki Lakitekstiin
                       </a>
                     </article>
-                    <div className={isDisabled ? classes.ConsentCheckboxDisabled : classes.ConsentCheckbox}>
-                      <Checkbox datacy={"form-checkbox-personal-data"} disabled={isDisabled} onChange={() => setPersonalDataConsent(!personalDataConsent)}/>
+                    <div className={classes.ConsentCheckbox}>
+                      <Checkbox
+                          datacy={"form-checkbox-personal-data"}
+                          onChange={() => setPersonalDataConsent(!personalDataConsent)}
+                      />
                       <p>{'Hyväksyn tietojeni käsittelyn.'}</p>
                     </div>
                   </div>

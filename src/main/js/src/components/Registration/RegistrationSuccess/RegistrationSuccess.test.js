@@ -27,6 +27,7 @@ describe('<RegistrationSuccess />', () => {
         formData={{ user: { email: 'test@test.com' } }}
       />,
     );
+
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

@@ -18,7 +18,7 @@ describe('<PaymentStatus />', () => {
       />,
     );
     const wrapperHeader = wrapper.find('HeadlineContainer');
-    expect(wrapperHeader.props().headlineTitle).toBe('payment.status.success');
+    expect(wrapperHeader.props().headlineTitle).toBe('email.payment_success.subject!');
   });
   it('should render exam details when url contains id query param', () => {
     const wrapper = shallow(
@@ -34,7 +34,7 @@ describe('<PaymentStatus />', () => {
 
     const wrapperHeader = wrapper.find('HeadlineContainer');
     expect(wrapperHeader.props().headlineContent.type.name).toBe('ExamDetailsCard');
-    expect(wrapperHeader.props().headlineTitle).toBe('payment.status.success');
+    expect(wrapperHeader.props().headlineTitle).toBe('email.payment_success.subject!');
   });
   it('should render payment status error', () => {
     const wrapper = shallow(

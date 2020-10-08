@@ -14,7 +14,7 @@ exports[`<RegistrationSuccess /> should render registration success page 1`] = `
       registration.success.info1
       :
     </p>
-    <depr_ExamDetailsCard
+    <examDetailsCard
       exam={
         Object {
           "exam_fee": "100.00",
@@ -33,7 +33,7 @@ exports[`<RegistrationSuccess /> should render registration success page 1`] = `
   <div>
     <p>
       registration.success.info2
-       
+
     </p>
   </div>
   <div
@@ -43,7 +43,7 @@ exports[`<RegistrationSuccess /> should render registration success page 1`] = `
       <b>
         registration.success.info3
       </b>
-       
+
       registration.success.info4
     </p>
   </div>
