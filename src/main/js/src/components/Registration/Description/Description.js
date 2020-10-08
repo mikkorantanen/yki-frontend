@@ -56,6 +56,36 @@ const description = ({history}) => {
             <p>{t('registration.description.text3')}</p>
             <p>{t('registration.description.text4')}</p>
           </article>
+          <div className={classes.InstructionsVideo}>
+          <p>
+            <a
+                href={t('registration.tutorial.url')}
+                rel="noopener noreferrer"
+                target="_blank"
+            >
+              {t('registration.tutorial')}
+            </a>
+          </p>
+        </div>
+        {/*
+          <div className={classes.InstructionsVideo}>
+            <iframe
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%"
+                }}
+                 src="https://www.youtube.com/embed/pUVgdF-KBWQ"
+                // src="https://www.youtube-nocookie.com//embed/pUVgdF-KBWQ"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title='video'
+            />
+          </div>
+          */}
           <>
             <h2>{t('registration.description.examLevels')}</h2>
             <DescriptionCollapsible headerText={levelTranslations.PERUS} content={basicLevel}/>

@@ -95,6 +95,8 @@ export const registrationForm = props => {
     ),
     examLang: Yup.string().required(mandatoryErrorMsg),
     certificateLang: Yup.string().required(mandatoryErrorMsg),
+    personalDataConsent: Yup.bool().oneOf([true], mandatoryErrorMsg),
+    termsOfUseConsent: Yup.bool().oneOf([true], mandatoryErrorMsg),
   });
 
   const RadioButtonComponent = ({
@@ -202,6 +204,8 @@ export const registrationForm = props => {
             examLang:
                 props.initData.exam_session.language_code === 'swe' ? 'sv' : 'fi',
             certificateLang: 'fi',
+            personalDataConsent: false,
+            termsOfUseConsent: false,
           }}
           validationSchema={validationSchema}
           onSubmit={values => {
@@ -226,6 +230,8 @@ export const registrationForm = props => {
                   'E.164',
               ),
               email: values.email,
+              personalDataConsent: personalDataConsent,
+              termsOfUseConsent: termsOfUseConsent,
             };
             props.onSubmitRegistrationForm(props.initData.registration_id, payload);
           }}
@@ -404,6 +410,11 @@ export const registrationForm = props => {
                     <div className={classes.ConsentCheckbox}>
                       <Checkbox datacy={"form-checkbox-terms"} onChange={() => setTermsOfUseConsent(!termsOfUseConsent)}/>
                       <p>{props.t('registration.form.consent.confirm')}</p>
+                      <ErrorMessage
+                          name={'termsOfUseConsent'}
+                          component="span"
+                          className={classes.ErrorMessage}
+                      />
                     </div>
                   </div>
                   <div className={classes.ConsentContainer}>
@@ -424,6 +435,11 @@ export const registrationForm = props => {
                           onChange={() => setPersonalDataConsent(!personalDataConsent)}
                       />
                       <p>{'Hyväksyn tietojeni käsittelyn.'}</p>
+                      <ErrorMessage
+                          name={'personalDataConsent'}
+                          component="span"
+                          className={classes.ErrorMessage}
+                      />
                     </div>
                   </div>
                 </>

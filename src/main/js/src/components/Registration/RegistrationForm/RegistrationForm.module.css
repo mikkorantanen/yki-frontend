@@ -144,7 +144,8 @@
 }
 
 .ConsentCheckbox {
-  display: flex;
+  display: grid;
+  grid-template-columns: 30px calc(100% - 30px);
   padding-left: 1vw;
 }
 
@@ -154,6 +155,10 @@
 
 .ConsentCheckbox label span {
   border: 1px solid hsla(194, 82%, 43%, 1) !important;
+}
+
+.ConsentCheckbox .ErrorMessage {
+  margin-top: 0;
 }
 
 @media (min-width: 1440px) {

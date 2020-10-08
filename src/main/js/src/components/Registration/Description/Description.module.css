@@ -55,6 +55,19 @@
   margin: 28px 0 0 0;
 }
 
+.InstructionsVideo {
+  padding-bottom: 5vh;
+}
+
+/* for Iframe *
+.InstructionsVideo {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+}
+*/
+
 /* Tablet view */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .Container {
@@ -92,6 +105,10 @@
 
   .YkiButton {
     margin-left: 90px;
+  }
+
+  .InstructionsVideo {
+    min-width: 100%;
   }
 }
 
