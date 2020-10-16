@@ -7,7 +7,7 @@ import LanguageSelect from '../../containers/LanguageSelect/LanguageSelect';
 import OPHLogo from '../../assets/svg/oph-logo-updated.svg';
 
 import NavigationTabs from "./NavigationTabs/NavigationTabs";
-import Menu from "../Menu/Menu";
+import MobileMenu from "../MobileMenu/MobileMenu";
 import {MOBILE_VIEW, TABLET_VIEW} from "../../common/Constants";
 
 const header = ({nav}) =>
@@ -21,7 +21,7 @@ const header = ({nav}) =>
         <header className={classes.RegistrationHeader}>
           <img src={OPHLogo} alt={'OPH-Logo'}/>
           {MOBILE_VIEW || TABLET_VIEW ?
-              <Menu />
+              <MobileMenu />
               :
               <>
                 <div className={classes.HeaderTabsContainer}>

@@ -3,11 +3,11 @@ import React, {useState} from 'react';
 import MenuIcon from '../../assets/svg/menu.svg';
 import CloseSign from '../../assets/svg/close-sign-large.svg';
 
-import classes from './Menu.module.css';
+import classes from './MobileMenu.module.css';
 import Collapsible from "../UI/Collapsible/Collapsible";
 import NavigationTabs from "../Header/NavigationTabs/NavigationTabs";
 
-const Menu = () => {
+const MobileMenu = () => {
   const [isOpen, setCollapsibleOpen] = useState(false);
 
   const CollapsibleMenu = () => {
@@ -48,4 +48,4 @@ const Menu = () => {
   );
 }
 
-export default Menu;
+export default MobileMenu;
