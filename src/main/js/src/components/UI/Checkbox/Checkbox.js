@@ -9,6 +9,7 @@ const checkbox = props => (
       type="checkbox"
       onChange={props.onChange}
       defaultChecked={props.checked || false}
+      aria-label={props.ariaLabel || null}
     />
     <span className={classes.Checkmark} />
   </label>
@@ -17,6 +18,7 @@ const checkbox = props => (
 checkbox.propTypes = {
   onChange: PropTypes.func.isRequired,
   checked: PropTypes.bool,
+  ariaLabel: PropTypes.string
 };
 
 export default checkbox;

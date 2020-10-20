@@ -90,14 +90,14 @@ const filters = props => {
 
   const availabilityCheckbox = (
       <div className={classes.CheckBox}>
-        <Checkbox onChange={props.onAvailabilityFilterChange}/>
+        <Checkbox onChange={props.onAvailabilityFilterChange} ariaLabel={t('common.exam.availableExams')}/>
         <label>{t('common.exam.availableExams')}</label>
       </div>
   )
 
   const openRegistrationCheckbox = (
       <div className={classes.CheckBox}>
-        <Checkbox onChange={props.onRegistrationFilterChange}/>
+        <Checkbox onChange={props.onRegistrationFilterChange} ariaLabel={t('common.exam.openExams')} />
         <label>{t('common.exam.openExams')}</label>
       </div>
   )

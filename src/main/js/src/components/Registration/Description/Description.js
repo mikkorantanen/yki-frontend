@@ -99,6 +99,7 @@ const description = ({history}) => {
               data-cy="continue-button"
               onClick={() => history.push(t('/ilmoittautuminen/valitse-tutkintotilaisuus'))}
               role="link"
+              aria-label={t('registration.register')}
           >
             {t('registration.register')}
           </button>

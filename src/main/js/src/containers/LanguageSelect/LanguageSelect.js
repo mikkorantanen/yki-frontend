@@ -7,6 +7,7 @@ import classes from './LanguageSelect.module.css';
 import i18n from "../../i18n";
 import {capitalize} from "../../util/util";
 import {MOBILE_VIEW, TABLET_VIEW} from "../../common/Constants";
+import {useTranslation, withTranslation} from "react-i18next";
 
 const texts = {fi: 'suomeksi', sv: 'på svenska', en: 'in english'};
 const languages = ['fi', 'sv', 'en'];
@@ -19,7 +20,7 @@ class LanguageSelect extends React.PureComponent {
     }
   }
 
-  changeLanguage = lang => {
+changeLanguage = lang => {
     document.documentElement.lang = lang;
     i18n.changeLanguage(lang);
   };
@@ -36,7 +37,7 @@ class LanguageSelect extends React.PureComponent {
 
   languageSelector = () => (
       <select name="language" className={classes.LanguageSelect} onChange={e => this.handleLanguageChange(e)}
-              data-cy={"language-select"} defaultValue={this.state.ykiLanguage}>
+              data-cy={"language-select"} defaultValue={this.state.ykiLanguage} aria-label={this.props.t('common.aria.changeLanguage')}>
         {languages
             .map(lang => (
                 <option
@@ -97,4 +98,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LanguageSelect);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(LanguageSelect));
