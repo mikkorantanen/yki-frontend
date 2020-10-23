@@ -140,13 +140,13 @@ class ExamDates extends Component {
                         className={classes.AdditionButton}
                         onClick={() => this.showAddNewExamDateModalHandler()}
                     >
-                        Lisää tutkintopäivä
+                        {t('examDates.addNew.confirm')}
                     </button>
                     <button
                         className={classes.DeleteButton}
                         onClick={() => console.log('deleted')}
                     >
-                        Poista valittuja tutkintopäiviä
+                        {t('examDates.delete.selected')}
                     </button>
                 </div>
             );
