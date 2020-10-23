@@ -51,22 +51,22 @@
   opacity: 0.5;
 }
 
-.Tutorial {
-  margin: 28px 0 0 0;
-}
-
-.InstructionsVideo {
-  padding-bottom: 5vh;
-}
-
-/* for Iframe *
-.InstructionsVideo {
+.TutorialVideo {
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 25px;
   height: 0;
+  margin: 0 10px 40px 10px;
+  overflow: auto;
 }
-*/
+
+.TutorialVideo iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
 /* Tablet view */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
@@ -119,11 +119,6 @@
     width: 100%;
     margin-left: 4vw;
   }
-  /*
-  .ArticleContent {
-    max-width: 457px;
-  }
-  */
 
   .ArticleContent p {
     margin-bottom: 25px;

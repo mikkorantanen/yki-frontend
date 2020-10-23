@@ -9,7 +9,7 @@ import YkiImage1 from '../../../assets/images/ophYki_image1.png';
 import classes from './Description.module.css';
 import {getDeviceOrientation, levelTranslations} from "../../../util/util";
 import PriceContainer from "../../PriceContainer/PriceContainer";
-import { MOBILE_VIEW } from "../../../common/Constants";
+import {MOBILE_VIEW} from "../../../common/Constants";
 
 const description = ({history}) => {
   const {t} = useTranslation();
@@ -48,113 +48,100 @@ const description = ({history}) => {
     }
   ];
 
-  const desktopContent = (
-      <>
-        <div className={classes.InnerContainer}>
-          <article className={classes.ArticleContent}>
-            <p>{t('registration.description.text2')}</p>
-            <p>{t('registration.description.text3')}</p>
-            <p>{t('registration.description.text4')}</p>
-          </article>
-          <div className={classes.InstructionsVideo}>
-          <p>
-            <a
-                href={t('registration.tutorial.url')}
-                rel="noopener noreferrer"
-                target="_blank"
-            >
-              {t('registration.tutorial')}
-            </a>
-          </p>
-        </div>
-        {/*
-          <div className={classes.InstructionsVideo}>
-            <iframe
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%"
-                }}
-                 src="https://www.youtube.com/embed/pUVgdF-KBWQ"
-                // src="https://www.youtube-nocookie.com//embed/pUVgdF-KBWQ"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title='video'
-            />
-          </div>
-          */}
-          <>
-            <h2>{t('registration.description.examLevels')}</h2>
-            <DescriptionCollapsible headerText={levelTranslations.PERUS} content={basicLevel}/>
-            <DescriptionCollapsible headerText={levelTranslations.KESKI} content={middleLevel}/>
-            <DescriptionCollapsible headerText={levelTranslations.YLIN} content={upperLevel}/>
-          </>
-          <>
-            <button
-                className={'YkiButton'}
-                data-cy="continue-button"
-                onClick={() => history.push(t('/ilmoittautuminen/valitse-tutkintotilaisuus'))}
-                role="link"
-            >
-              {t('registration.register')}
-            </button>
-          </>
-        </div>
-        <PriceContainer/>
-      </>
+  const tutorialVideo = (
+    <div className={classes.TutorialVideo}>
+      <iframe
+        src="https://www.youtube-nocookie.com//embed/pUVgdF-KBWQ"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        title={t('registration.tutorialVideo')}
+        scrolling="no"
+        width={'300'}
+        height={'500'}
+      />
+    </div>
   );
 
-  const mobileContent = (
-      <>
-        <div className={classes.InnerContainer} style={{width: `calc(${window.screen.availWidth}px - 20px)`}}>
-          <article className={classes.ArticleContent}>
-            <p>{t('registration.description.text2')}</p>
-            <p>{t('registration.description.text3')}</p>
-            <p>{t('registration.description.text4')}</p>
-          </article>
-          <div style={{width: `calc(${window.screen.availWidth}px - 20px)`, padding: '0 2px'}}>
-            <h2>{t('registration.description.examLevels')}</h2>
-            <DescriptionCollapsible headerText={levelTranslations.PERUS} content={basicLevel}/>
-            <DescriptionCollapsible headerText={levelTranslations.KESKI} content={middleLevel}/>
-            <DescriptionCollapsible headerText={levelTranslations.YLIN} content={upperLevel}/>
-          </div>
-        </div>
+  const desktopContent = (
+    <>
+      <div className={classes.InnerContainer}>
+        <article className={classes.ArticleContent}>
+          <p>{t('registration.description.text2')}</p>
+          <p>{t('registration.description.text3')}</p>
+          <p>{t('registration.description.text4')}</p>
+        </article>
+        {tutorialVideo}
         <>
-          <PriceContainer/>
+          <h2>{t('registration.description.examLevels')}</h2>
+          <DescriptionCollapsible headerText={levelTranslations.PERUS} content={basicLevel}/>
+          <DescriptionCollapsible headerText={levelTranslations.KESKI} content={middleLevel}/>
+          <DescriptionCollapsible headerText={levelTranslations.YLIN} content={upperLevel}/>
+        </>
+        <>
           <button
-              className={'YkiButton'}
-              data-cy="continue-button"
-              onClick={() => history.push(t('/ilmoittautuminen/valitse-tutkintotilaisuus'))}
-              role="link"
+            className={'YkiButton'}
+            data-cy="continue-button"
+            onClick={() => history.push(t('/ilmoittautuminen/valitse-tutkintotilaisuus'))}
+            role="link"
           >
             {t('registration.register')}
           </button>
         </>
+      </div>
+      <PriceContainer/>
+    </>
+  );
+
+  const mobileContent = (
+    <>
+      <div className={classes.InnerContainer} style={{width: `calc(${window.screen.availWidth}px - 20px)`}}>
+        <article className={classes.ArticleContent}>
+          <p>{t('registration.description.text2')}</p>
+          <p>{t('registration.description.text3')}</p>
+          <p>{t('registration.description.text4')}</p>
+        </article>
+        {tutorialVideo}
+        <div style={{width: `calc(${window.screen.availWidth}px - 20px)`, padding: '0 2px'}}>
+          <h2>{t('registration.description.examLevels')}</h2>
+          <DescriptionCollapsible headerText={levelTranslations.PERUS} content={basicLevel}/>
+          <DescriptionCollapsible headerText={levelTranslations.KESKI} content={middleLevel}/>
+          <DescriptionCollapsible headerText={levelTranslations.YLIN} content={upperLevel}/>
+        </div>
+      </div>
+      <>
+        <PriceContainer/>
+        <button
+          className={'YkiButton'}
+          data-cy="continue-button"
+          onClick={() => history.push(t('/ilmoittautuminen/valitse-tutkintotilaisuus'))}
+          role="link"
+        >
+          {t('registration.register')}
+        </button>
       </>
+    </>
   )
 
   return (
-      <>
-        <main className={classes.Container}>
-          <HeadlineContainer
-              headlineTitle={t('registration.description.title')}
-              headlineContent={<p>{t('registration.description.text1')}</p>}
-              headlineImage={YkiImage1}
-          />
-          {MOBILE_VIEW || (MOBILE_VIEW && (getDeviceOrientation() === 'landscape')) ?
-              <>
-                {mobileContent}
-              </>
-              :
-              <>
-                {desktopContent}
-              </>
-          }
-        </main>
-      </>
+    <>
+      <main className={classes.Container}>
+        <HeadlineContainer
+          headlineTitle={t('registration.description.title')}
+          headlineContent={<p>{t('registration.description.text1')}</p>}
+          headlineImage={YkiImage1}
+        />
+        {MOBILE_VIEW || (MOBILE_VIEW && (getDeviceOrientation() === 'landscape')) ?
+          <>
+            {mobileContent}
+          </>
+          :
+          <>
+            {desktopContent}
+          </>
+        }
+      </main>
+    </>
   );
 };
 
