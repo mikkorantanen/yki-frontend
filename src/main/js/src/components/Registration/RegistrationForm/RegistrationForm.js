@@ -419,7 +419,7 @@ export const registrationForm = props => {
                   </div>
                   <div className={classes.ConsentContainer}>
                     <article>
-                      <h4>Hyväksy henkilötietojen käsittely</h4>
+                      <h4>{props.t('registration.form.personalData.consent.heading')}</h4>
                       <p>Tähän pohjustus lakitekstiä varten</p>
                       <a
                           href={'http://www.oph.fi'}
@@ -434,7 +434,7 @@ export const registrationForm = props => {
                           datacy={"form-checkbox-personal-data"}
                           onChange={() => setPersonalDataConsent(!personalDataConsent)}
                       />
-                      <p>{'Hyväksyn tietojeni käsittelyn.'}</p>
+                      <p>{props.t('registration.form.personalData.consent.confirm')}</p>
                       <ErrorMessage
                           name={'personalDataConsent'}
                           component="span"
