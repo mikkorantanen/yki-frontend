@@ -6,7 +6,7 @@ import moment from 'moment';
 import * as R from 'ramda';
 
 //import Modal from '../../components/UI/Modal/Modal';
-//import classes from './ExamDates.module.css';
+import classes from './ExamDates.module.css';
 import Page from '../../hoc/Page/Page';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
