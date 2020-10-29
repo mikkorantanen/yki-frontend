@@ -297,7 +297,7 @@ export const participantList = props => {
         <div className={classes.StateItem}>
           {p.created && moment(p.created).format(DATE_FORMAT)}
         </div>
-        <div className={classes.StateItem}>{p.kind === REGISTRATION_KIND_POST_ADMISSION ? props.t('examSession.postAdmission') : props.t('examSession.registration')}</div>
+        <div className={classes.StateItem}>{props.t('examSession.registration')}</div>
         <div className={classes.FirstShowOnHover}>
           {p.state === 'SUBMITTED'
             ? confirmPaymentButton(p)

@@ -44,7 +44,7 @@ export const fetchExamDates = () => {
   };
 };
 
-export const updatePostAdmissionEndDate = (examDateId, endDate) => {
+/*export const updatePostAdmissionEndDate = (examDateId, endDate) => {
   return dispatch => {
     axios
       .post(`/yki/api/exam-date/${examDateId}/post-admission-end-date`, endDate)
@@ -64,4 +64,4 @@ export const deletePostAdmissionEndDate = examDateId => {
       })
       //TODO: handle error
   }
-}
+}*/
