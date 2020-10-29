@@ -48,7 +48,7 @@ const examSessionListItem = ({
     </span>
   );
 
-
+  /*
   const postAdmissionActive = session.post_admission_end_date && 
                               session.post_admission_start_date &&
                               session.post_admission_active &&
@@ -56,6 +56,10 @@ const examSessionListItem = ({
                               nowBetweenDates(moment(session.post_admission_start_date), moment(session.post_admission_end_date));
 
   const spotsAvailable = postAdmissionActive ? (session.post_admission_quota - session.pa_participants) : (session.max_participants - session.participants);
+  */
+
+  const spotsAvailable = (session.max_participants - session.participants);
+
   const spotsAvailableText =
     spotsAvailable === 1
       ? t('registration.examSpots.singleFree')
@@ -88,6 +92,7 @@ const examSessionListItem = ({
         )} - ${moment(session.registration_end_date).format(
           DATE_FORMAT_WITHOUT_YEAR,
         )}`}
+        {/*
         {
           (session.post_admission_start_date && session.post_admission_end_date && session.post_admission_active) ? (
           <>
@@ -97,6 +102,7 @@ const examSessionListItem = ({
           </>
           ) : null
         }
+        */}
       </span>
     </div>
   );
