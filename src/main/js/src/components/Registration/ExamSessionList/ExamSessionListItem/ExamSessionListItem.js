@@ -4,7 +4,7 @@ import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
-import { nowBetweenDates } from '../../../../util/util';
+//import { nowBetweenDates } from '../../../../util/util';
 import classes from './ExamSessionListItem.module.css';
 import { levelDescription } from '../../../../util/util';
 import {

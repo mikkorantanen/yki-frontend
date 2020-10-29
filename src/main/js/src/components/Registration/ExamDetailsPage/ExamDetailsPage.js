@@ -14,7 +14,7 @@ import AuthButton from '../AuthButton/AuthButton';
 import NotificationSignup from '../NotificationSignup/NotificationSignup';
 import LoginLink from '../LoginLink/LoginLink';
 import { DATE_FORMAT_WITHOUT_YEAR } from '../../../common/Constants';
-import { nowBetweenDates } from '../../../util/util';
+//import { nowBetweenDates } from '../../../util/util';
 
 const examDetailsPage = ({
   session,

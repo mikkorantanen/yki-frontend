@@ -5,12 +5,12 @@ import { withTranslation } from 'react-i18next';
 import moment from 'moment';
 import * as R from 'ramda';
 
-import Modal from '../../components/UI/Modal/Modal';
-import classes from './ExamDates.module.css';
+//import Modal from '../../components/UI/Modal/Modal';
+//import classes from './ExamDates.module.css';
 import Page from '../../hoc/Page/Page';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
-import AddOrEditPostAdmissionConfiguration from './AddOrEditPostAdmissionConfiguration';
+//import AddOrEditPostAdmissionConfiguration from './AddOrEditPostAdmissionConfiguration';
 import * as actions from '../../store/actions/index';
 import { DATE_FORMAT, DATE_FORMAT_WITHOUT_YEAR } from '../../common/Constants';
 import { languageToString } from '../../util/util';
@@ -71,7 +71,7 @@ class ExamDates extends Component {
             </h3>
             <div className={classes.Grid} key={i} data-cy="exam-dates-table">
               <h3>{this.props.t('common.examDate')}</h3>
-              //<h3>Jälki-ilmoittautumisen jakso</h3>
+        {/*<h3>Jälki-ilmoittautumisen jakso</h3>*/}
               <h3>{this.props.t('common.language')}</h3>
               <h3>{this.props.t('common.level')}</h3>
               {examDateRows(dates)}
