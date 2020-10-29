@@ -131,7 +131,7 @@ class ExamDates extends Component {
     return (
       <Page>
         <div className={classes.ExamDates}>{content}</div>
-        {addOrEditPostAdmissionModal}
+    {/*{addOrEditPostAdmissionModal}*/}
       </Page>
     );
   }
