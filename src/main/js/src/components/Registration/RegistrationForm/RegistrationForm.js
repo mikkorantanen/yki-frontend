@@ -420,14 +420,7 @@ export const registrationForm = props => {
                   <div className={classes.ConsentContainer}>
                     <article>
                       <h4>{props.t('registration.form.personalData.consent.heading')}</h4>
-                      <p>Tähän pohjustus lakitekstiä varten</p>
-                      <a
-                          href={'http://www.oph.fi'}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                      >
-                        Linkki Lakitekstiin
-                      </a>
+                      <a href={'/consent/fi'} target="_blank">{props.t('common.yki.consent.link')}</a>
                     </article>
                     <div className={classes.ConsentCheckbox}>
                       <Checkbox
