@@ -8,6 +8,8 @@ export {
   cancelRegistration,
   confirmPayment,
   relocateExamSession,
+  addPostAdmission,
+  ResendPaymentEmail,
 } from './examSession';
 export {
   fetchRegistryContent,
@@ -28,5 +30,5 @@ export {
   initRegistrationForm,
   submitRegistrationForm,
 } from './registration';
-export { fetchExamDates, examDatesFailReset } from './examDates';
+export { fetchExamDates, examDatesFailReset, updatePostAdmissionEndDate, deletePostAdmissionEndDate } from './examDates';
 export { fetchUser } from './user';

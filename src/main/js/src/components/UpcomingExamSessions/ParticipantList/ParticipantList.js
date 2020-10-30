@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import moment from 'moment';
@@ -13,7 +13,71 @@ import classes from './ParticipantList.module.css';
 import { ActionButton } from '../../UI/ActionButton/ActionButton';
 import ListExport from './ListExport/ListExport';
 
+const stateComparator = () => (a,b) => {
+  if (a.state === 'COMPLETED')
+    return -1;
+  if (b.state === 'COMPLETED')
+    return 1;
+  if (a.state === "SUBMITTED")
+    return -1;
+  if(b.state === "SUBMITTED")
+    return 1;
+
+  return 0;
+}
+
+// const ResendEmailComponent = props => {
+//   const [emailLang, setEmailLang] = useState("fi");
+//   const [linkClicked, setLinkClicked] = useState(false);
+
+//   const onResendClick = (participantName, participantEmail, regId, orgOid, examSessionId) => {
+//     if(window.confirm(`Lähetetäänkö maksulinkki osallistujalle ${participantName} osoitteeseen ${participantEmail}`)){
+//       props.onResendLink(
+//         orgOid,
+//         examSessionId,
+//         regId,
+//         emailLang
+//       );
+//       setLinkClicked(false);
+//     }
+//   }
+
+//   const langSelection = () => {
+//     return (
+//       <>
+//         <span className={classes.ResendEmailSelectionText}>Sähköpostin kieli: </span>
+//         <select onChange={e => setEmailLang(e.target.value)}> 
+//           <option value="fi">{props.finText}</option>
+//           <option value="sv">{props.svText}</option>
+//           <option value="en">{props.enText}</option>
+//         </select>
+//         <button
+//           className={classes.ResendEmailButton}
+//           onClick={e => onResendClick(props.fullName, props.email, props.registrationId, props.organizerOid, props.examSessionId)}
+//           data-cy="button-export-to-excel"
+//         >
+//           {props.sendText}
+//         </button>
+
+//       </>
+//     );
+//   }
+
+//   return linkClicked ? langSelection() : (
+//     // eslint-disable-next-line
+//     <a 
+//       className={classes.ResendEmailLink} 
+//       href="javascript:void(0)" // eslint-disable-line
+//       onClick={e => setLinkClicked(true)}
+//     >
+//       {props.linkText}
+//     </a>
+//   )
+// }
+
 export const participantList = props => {
+  const [sortParticipantsFn, setSortParticipantsFn] = useState(R.sortBy(R.prop('created')));
+
   const getStateTranslationKey = state => {
     switch (state) {
       case 'COMPLETED':
@@ -28,10 +92,37 @@ export const participantList = props => {
         return 'examSession.notPaid';
     }
   };
-  const registratioStatus = registrationState => {
+
+  const registratioStatus = participant => {
+    const registrationState = participant.state;
     const image =
       registrationState === 'COMPLETED' ? checkMarkDone : checkMarkNotDone;
     const text = props.t(getStateTranslationKey(registrationState));
+
+    // add ability to resend confirmation email if state is submitted
+    // if (registrationState === 'SUBMITTED') {
+    //   return (
+    //     <React.Fragment>
+    //       <img src={image} data-cy={`registration-${registrationState}`} alt="" />{' '}
+    //       {`${text} `}
+    //       {/* eslint-disable-next-line */}
+    //       <ResendEmailComponent
+    //         fullName={fullName}
+    //         email={participant.form.email}
+    //         registrationId={participant.registration_id}
+    //         organizerOid={props.examSession.organizer_oid}
+    //         examSessionId={props.examSession.id}
+    //         onResendLink={props.onResendLink}
+    //         sendText={props.t('registration.notification.signup.button')}
+    //         linkText={props.t('examSession.participants.resendLink')}
+    //         finText={props.t("common.language.fin")} 
+    //         svText={props.t("common.language.swe")}
+    //         enText={props.t("common.language.eng")}
+    //       />
+    //   </React.Fragment>
+    //   );
+    // }
+    // else just show status
     return (
       <React.Fragment>
         <img src={image} data-cy={`registration-${registrationState}`} alt="" />{' '}
@@ -118,6 +209,42 @@ export const participantList = props => {
     ) : null;
   };
 
+  const handleFilterChange = event => {
+    switch (event.target.value) {
+      case 'name': 
+        setSortParticipantsFn(() => R.sortBy(R.path(['form', 'first_name'])));
+        break;
+      case 'state':
+        setSortParticipantsFn(() => R.sort(stateComparator()));
+        break;
+      case 'registrationTime':
+        setSortParticipantsFn(() => R.sortBy(R.prop('created')));
+        break;
+      case 'registrationType':
+        setSortParticipantsFn(() => R.sortBy(R.prop('kind')));
+        break;
+      default:
+        setSortParticipantsFn(() => R.sortBy(R.prop('created')));
+        break;
+    }
+  }
+
+  const participantFiltering = () => {
+    return (
+      <>
+        <label htmlFor="participantFilter">
+          {props.t('examSession.participants.sortBy')}
+        </label>
+        <select id="ParticipantFilter" className={classes.ParticipantFilter} onChange={handleFilterChange}>
+          <option value="registrationTime">{props.t('examSession.participants.sortBy.registrationTime')}</option>
+          <option value="registrationType">{props.t('examSession.participants.sortBy.registrationType')}</option>
+          <option value="name">{props.t('examSession.participants.sortBy.name')}</option>
+          <option value="state">{props.t('examSession.participants.sortBy.state')}</option>
+        </select>
+      </>
+    );
+  }
+
   const cancelRegistrationButton = p => {
     const cancelRegistration = (
       <React.Fragment>
@@ -143,7 +270,7 @@ export const participantList = props => {
   };
 
   const participantRows = participants => {
-    return participants.map((p, i) => (
+    return sortParticipantsFn(participants).map((p, i) => (
       <React.Fragment key={i}>
         <div
           className={[
@@ -165,12 +292,12 @@ export const participantList = props => {
             classes.StateItem,
           ].join(' ')}
         >
-          {registratioStatus(p.state)}
+          {registratioStatus(p)}
         </div>
         <div className={classes.StateItem}>
           {p.created && moment(p.created).format(DATE_FORMAT)}
         </div>
-        <div className={classes.StateItem} />
+        <div className={classes.StateItem}>{props.t('examSession.registration')}</div>
         <div className={classes.FirstShowOnHover}>
           {p.state === 'SUBMITTED'
             ? confirmPaymentButton(p)
@@ -202,13 +329,22 @@ export const participantList = props => {
     ));
   };
 
+  const participantsHeader = () => {
+    const post_admission_quota = 
+      (props.examSession.post_admission_quota && props.examSession.post_admission_active) ? props.examSession.post_admission_quota : 0;
+    return (
+      <h2>
+        {props.t('examSession.participants')}
+        {':'} {props.examSession.participants + props.examSession.pa_participants} /{' '}
+        {props.examSession.max_participants + post_admission_quota}
+      </h2>
+    );
+  }
+
   return (
     <div data-cy="participant-list">
-      <h3>
-        {props.t('examSession.participants')}
-        {':'} {props.examSession.participants} /{' '}
-        {props.examSession.max_participants}
-      </h3>
+      {participantsHeader()}
+
       {props.examSession.queue > 0 && (
         <h3>
           {props.t('examSession.inQueue')}
@@ -220,6 +356,7 @@ export const participantList = props => {
         <React.Fragment>
           <div className={classes.ListExport}>
             <ListExport participants={props.participants} />
+            {participantFiltering()}
           </div>
           <div className={classes.ParticipantList}>
             {participantRows(props.participants)}
@@ -237,6 +374,7 @@ participantList.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onConfirmPayment: PropTypes.func.isRequired,
   onRelocate: PropTypes.func.isRequired,
+  onResendLink: PropTypes.func.isRequired,
 };
 
 export default withTranslation()(participantList);

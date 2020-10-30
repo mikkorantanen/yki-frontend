@@ -4,7 +4,7 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
 <div
   data-cy="participant-list"
 >
-  <h3>
+  <h2>
     examSession.participants
     :
      
@@ -12,7 +12,7 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
      /
      
     50
-  </h3>
+  </h2>
   <div
     className="ListExport"
   >
@@ -50,6 +50,37 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
         ]
       }
     />
+    <label
+      htmlFor="participantFilter"
+    >
+      examSession.participants.sortBy
+    </label>
+    <select
+      className="ParticipantFilter"
+      id="ParticipantFilter"
+      onChange={[Function]}
+    >
+      <option
+        value="registrationTime"
+      >
+        examSession.participants.sortBy.registrationTime
+      </option>
+      <option
+        value="registrationType"
+      >
+        examSession.participants.sortBy.registrationType
+      </option>
+      <option
+        value="name"
+      >
+        examSession.participants.sortBy.name
+      </option>
+      <option
+        value="state"
+      >
+        examSession.participants.sortBy.state
+      </option>
+    </select>
   </div>
   <div
     className="ParticipantList"
@@ -84,7 +115,9 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
     />
     <div
       className="StateItem"
-    />
+    >
+      examSession.registration
+    </div>
     <div
       className="FirstShowOnHover"
     >
@@ -182,7 +215,9 @@ exports[`<ParticipantList /> should render participant rows 1`] = `
     />
     <div
       className="StateItem"
-    />
+    >
+      examSession.registration
+    </div>
     <div
       className="FirstShowOnHover"
     >

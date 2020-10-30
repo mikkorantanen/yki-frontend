@@ -200,7 +200,7 @@ const examSessionForm = props => {
   const organizationSelection = (organizer, children, lang) => 
     children.map(c => 
       <option value={c.oid} key={c.oid}>
-        {getLocalizedName(c.nimi, lang)}
+        {`${getLocalizedName(c.nimi, lang)} (${c.oid ? c.oid : ''})`}
       </option>
     );
 
@@ -290,7 +290,7 @@ const examSessionForm = props => {
               >
                 {organizationSelection(
                   props.examSessionContent.organization,
-                  // fixme: not actually children, its the whole hierarchy
+                  // fixme: not actually just children, its the whole hierarchy
                   props.examSessionContent.organizationChildren,
                   props.i18n.lang,
                 )}

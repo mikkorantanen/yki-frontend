@@ -49,6 +49,29 @@
   margin-bottom: 8px;
 }
 
+.ResendEmailLink {
+  font-size: 8px;
+}
+
+.ResendEmailButton {
+  margin-left: 5px;
+}
+
+.ResendEmailSelectionText {
+  font-size: 8;
+  font-weight: normal;
+  color: rgb(41, 41, 41);
+}
+
+.ParticipantFilter {
+  margin-left: 5px;
+  width: 150px;
+  height: 28px;
+  border: 1px solid hsl(0, 0%, 68%);
+  border-radius: 2px;
+  background-color: hsl(0, 0%, 100%);
+}
+
 .ShowOnHover {
   opacity: 0;
 }

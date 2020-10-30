@@ -14,6 +14,7 @@ import AuthButton from '../AuthButton/AuthButton';
 import NotificationSignup from '../NotificationSignup/NotificationSignup';
 import LoginLink from '../LoginLink/LoginLink';
 import { DATE_FORMAT_WITHOUT_YEAR } from '../../../common/Constants';
+//import { nowBetweenDates } from '../../../util/util';
 
 const examDetailsPage = ({
   session,
@@ -32,8 +33,15 @@ const examDetailsPage = ({
     }
   }, []);
 
-  const seatsAvailable = session.max_participants - session.participants > 0;
   const registrationOpen = session.open;
+  /*const postAdmissionActive = registrationOpen &&
+                              session.post_admission_end_date && 
+                              session.post_admission_start_date &&
+                              session.post_admission_active &&
+                              session.post_admission_quota &&
+                              nowBetweenDates(moment(session.post_admission_start_date), moment(session.post_admission_end_date));*/
+  
+  const seatsAvailable = (session.max_participants - session.participants) > 0;
   const queueFull = session.queue_full;
   const examSessionId = Number(match.params.examSessionId);
 
