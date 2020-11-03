@@ -90,6 +90,7 @@ describe('Registration', () => {
 
   it('Show exam session details page after selecting exam', () => {
     cy.visit('/ilmoittautuminen/valitse-tutkintotilaisuus');
+    cy.get('[data-cy=exam-availability-checkbox]').click();
     cy.contains('Ilmoittaudu').click();
     cy.contains('Suomi');
     cy.contains('Tunnistaudu Suomi.fi:n kautta');
@@ -133,6 +134,7 @@ describe('Registration', () => {
     cy.get('select').contains('Suomi');
     cy.get('select').contains('Kaikki tasot');
     cy.get('select').contains('Koko maa');
+    cy.get('[data-cy=exam-availability-checkbox]').click();
     cy.get('[data-cy=exam-session-list-item]')
       .get('button')
       .contains('Ilmoittaudu')

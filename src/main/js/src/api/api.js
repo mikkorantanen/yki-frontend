@@ -14,6 +14,7 @@ const apiGet = async (name, url, params = {}) => {
       method: 'GET',
       headers: new Headers({
         Accept: 'application/json',
+        'Caller-Id': '1.2.246.562.10.00000000001.yki',
       }),
     }).then(handleErrors);
     return promise;
@@ -30,6 +31,7 @@ const apiPost = async (name, url, body, params = {}) => {
       headers: new Headers({
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        'Caller-Id': '1.2.246.562.10.00000000001.yki',
       }),
     }).then(handleErrors);
     return promise;

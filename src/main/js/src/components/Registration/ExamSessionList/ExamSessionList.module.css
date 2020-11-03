@@ -8,6 +8,7 @@
   justify-content: space-between;
   border-bottom: 1px solid hsl(0, 0%, 59%);
   font-size: 14px;
+  padding: 5px 5px 5px 20px;
 }
 
 .ColumnHeaders {
@@ -35,7 +36,7 @@
   }
 
   .ExamsOnDate {
-    display: none;
+    display: flex;
   }
 
   .ColumnHeaders {
@@ -80,5 +81,6 @@
   }
   .ExamsOnDate {
     display: none;
+    padding-left: 5vw;
   }
 }
