@@ -75,9 +75,9 @@ export const getObjectValuesCount = (object) => {
 
 export const getLanguageAndLevel = (sessionData) => {
   return (
-  `${i18next.t(`common.language.${sessionData.language_code}`)}, ${levelDescription(
+    `${i18next.t(`common.language.${sessionData.language_code}`)}, ${levelDescription(
       sessionData.level_code,
-  ).toLowerCase()}`
+    )}`
   );
 };
 

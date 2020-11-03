@@ -91,7 +91,7 @@ describe('Registration', () => {
   it('Show exam session details page after selecting exam', () => {
     cy.visit('/ilmoittautuminen/valitse-tutkintotilaisuus');
     cy.contains('Ilmoittaudu').click();
-    cy.contains('Suomi, keskitaso');
+    cy.contains('Suomi');
     cy.contains('Tunnistaudu Suomi.fi:n kautta');
     cy.contains('Tunnistaudu sähköpostilla');
   });
@@ -120,12 +120,12 @@ describe('Registration', () => {
 
   it('Login link expired page exists', () => {
     cy.visit('/ilmoittautuminen/vanhentunut');
-    cy.get('[data-cy=link-expired-header]').should('exist');
+    cy.contains('Tunnistautumislinkki on vanhentunut.');
   });
 
   it('Payment link expired page exists', () => {
     cy.visit('/maksu/vanhentunut');
-    cy.get('[data-cy=link-expired-header]').should('exist');
+    cy.contains('Maksulinkki on vanhentunut.');
   });
 
   it('Login link can be send from exam session details page', () => {
@@ -175,5 +175,13 @@ describe('Registration', () => {
     cy.get('[data-cy=exam-details-title]')
       .contains('Tutkintotilaisuus ja jono ovat täynnä!')
       .should('exist');
+  });
+
+  it('Should only show exams that has available registration spots', () => {
+    cy.visit('/ilmoittautuminen/valitse-tutkintotilaisuus');
+    cy.get('[data-cy=exam-availability-checkbox]').click();
+    cy.get('[data-cy=exam-session-list-item]')
+        .contains('Täynnä!')
+        .should('not.exist');
   });
 });

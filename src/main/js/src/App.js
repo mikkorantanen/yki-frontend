@@ -25,6 +25,7 @@ import ExamDetailsPage from './components/Registration/ExamDetailsPage/ExamDetai
 
 import RegistrationRoute from "./hoc/RegistrationRoute/RegistrationRoute";
 import ykiReducer from './store/reducers/ykiReducer';
+import PersonalDataConsentFI from "./components/PersonalDataConsent/PersonalDataConsentFI";
 
 const Registry = lazy(() => import('./containers/Registry/Registry'));
 const ExamSessions = lazy(() =>
@@ -84,6 +85,7 @@ const app = () => (
               />
               <Route path="/jarjestajarekisteri" component={Registry} />
               <Route path="/tutkintopaivat" component={ExamDates} />
+              <Route path="/consent/fi" component={PersonalDataConsentFI} />
             </ErrorBoundary>
             <Route component={NotFound} />
           </Switch>

@@ -127,6 +127,40 @@
   margin-right: 1vw;
 }
 
+.ConsentContainer {
+  padding-top: 1vh;
+  margin-top: 5vh;
+  border: 1px solid hsla(0, 0%, 83%, 0.2);
+  border-radius: 4px;
+  background: hsla(0, 0%, 83%, 0.2);
+}
+
+.ConsentContainer article {
+  padding: 0 1vw 0 1vw;
+}
+
+.ConsentContainer article h4 {
+  margin-block-start: 0;
+}
+
+.ConsentCheckbox {
+  display: grid;
+  grid-template-columns: 30px calc(100% - 30px);
+  padding-left: 1vw;
+}
+
+.ConsentCheckbox p {
+  padding-left: 2vw;
+}
+
+.ConsentCheckbox label span {
+  border: 1px solid hsla(194, 82%, 43%, 1) !important;
+}
+
+.ConsentCheckbox .ErrorMessage {
+  margin-top: 0;
+}
+
 @media (min-width: 1440px) {
   .Form button {
     margin: 0 40px;
@@ -146,6 +180,10 @@
     display: grid;
     grid-template-columns: repeat(2, 30px);
     margin-right: 35px;
+  }
+
+  .ConsentContainer {
+    margin-top: 35px;
   }
 
   .FormElement input {

@@ -11,7 +11,6 @@ const filters = props => {
   const [t, i18n] = useTranslation();
 
   const mounted = useRef(false);
-
   /*
    * To be able to handle page refresh, filter values need to
    * be added to query params when component updates.
@@ -90,7 +89,10 @@ const filters = props => {
 
   const availabilityCheckbox = (
       <div className={classes.CheckBox}>
-        <Checkbox onChange={props.onAvailabilityFilterChange} ariaLabel={t('common.exam.availableExams')}/>
+        <Checkbox datacy={'exam-availability-checkbox'}
+                  onChange={props.onAvailabilityFilterChange}
+                  ariaLabel={t('common.exam.availableExams')}
+        />
         <label>{t('common.exam.availableExams')}</label>
       </div>
   )
@@ -116,7 +118,7 @@ const filters = props => {
       </>
   );
 
-  return <>{filters}</>;
+  return <>{filters}</>
 };
 
 filters.propTypes = {
