@@ -5,12 +5,12 @@ import { withTranslation } from 'react-i18next';
 import moment from 'moment';
 import * as R from 'ramda';
 
-import Modal from '../../components/UI/Modal/Modal';
+//import Modal from '../../components/UI/Modal/Modal';
 import classes from './ExamDates.module.css';
 import Page from '../../hoc/Page/Page';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
-import AddOrEditPostAdmissionConfiguration from './AddOrEditPostAdmissionConfiguration';
+//import AddOrEditPostAdmissionConfiguration from './AddOrEditPostAdmissionConfiguration';
 import * as actions from '../../store/actions/index';
 import { DATE_FORMAT, DATE_FORMAT_WITHOUT_YEAR } from '../../common/Constants';
 import { languageToString } from '../../util/util';
@@ -20,7 +20,7 @@ class ExamDates extends Component {
     super(props);
 
     this.state = {
-      showAddOrEditPostAdmissionModal: false,
+      //showAddOrEditPostAdmissionModal: false,
       selectedExamDate: null
     }
   }
@@ -29,14 +29,14 @@ class ExamDates extends Component {
     this.props.onFetchExamDates();
   };
 
-  showAddOrEditPostAdmissionModalHandler = examDate =>
+  /*showAddOrEditPostAdmissionModalHandler = examDate =>
     this.setState({ showAddOrEditPostAdmissionModal: true, selectedExamDate: examDate });
 
   closeAddOrEditPostAdmissionModalHandler = () =>
-    this.setState({ showAddOrEditPostAdmissionModal: false, selectedExamDateIndex: null });
+    this.setState({ showAddOrEditPostAdmissionModal: false, selectedExamDateIndex: null });*/
 
   render() {
-    const addOrEditPostAdmissionModal = (
+    /*const addOrEditPostAdmissionModal = (
       <>
         {
           this.state.showAddOrEditPostAdmissionModal ?
@@ -51,7 +51,7 @@ class ExamDates extends Component {
             null
         }
       </>
-    );
+    );*/
 
     const examDateTables = () => {
       const grouped = R.groupWith(
@@ -71,7 +71,7 @@ class ExamDates extends Component {
             </h3>
             <div className={classes.Grid} key={i} data-cy="exam-dates-table">
               <h3>{this.props.t('common.examDate')}</h3>
-              <h3>Jälki-ilmoittautumisen jakso</h3>
+              {/*<h3>Jälki-ilmoittautumisen jakso</h3>*/}
               <h3>{this.props.t('common.language')}</h3>
               <h3>{this.props.t('common.level')}</h3>
               {examDateRows(dates)}
@@ -84,7 +84,7 @@ class ExamDates extends Component {
 
     const examDateRows = examDates => {
       return examDates.map((e, i) => {
-        const registrationEndDateMoment = moment(e.registration_end_date);
+        //const registrationEndDateMoment = moment(e.registration_end_date);
 
         const finnishOnly =
           examDates.length === 1 &&
@@ -105,9 +105,9 @@ class ExamDates extends Component {
           <React.Fragment key={i}>
             <p>{moment(e.exam_date).format(DATE_FORMAT)}</p>
             {/* eslint-disable-next-line */}
-            <p><a href="javascript:void(0)" onClick={() => this.showAddOrEditPostAdmissionModalHandler(e)}>{e.post_admission_end_date ?
+            {/*<p><a href="javascript:void(0)" onClick={() => this.showAddOrEditPostAdmissionModalHandler(e)}>{e.post_admission_end_date ?
                   `${registrationEndDateMoment.add(1, 'days').format(DATE_FORMAT)} - ${moment(e.post_admission_end_date).format(DATE_FORMAT)}` :
-                  this.props.t('examSession.postAdmission.add')}</a></p>
+                  this.props.t('examSession.postAdmission.add')}</a></p>*/}
             <p>{languages}</p>
             <p>{level.toLowerCase()}</p>
           </React.Fragment>
@@ -131,7 +131,7 @@ class ExamDates extends Component {
     return (
       <Page>
         <div className={classes.ExamDates}>{content}</div>
-        {addOrEditPostAdmissionModal}
+        {/*{addOrEditPostAdmissionModal}*/}
       </Page>
     );
   }

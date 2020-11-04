@@ -19,8 +19,6 @@ import {levelDescription} from "../../../util/util";
 import ExamDetailsCard from "./ExamDetailsCard/ExamDetailsCard";
 
 import tempHeroImage from '../../../assets/images/ophYki_image2.png'
-
-// import {languageHeroImages} from "../../../util/languageHeroImageUtil";
 // import { nowBetweenDates } from '../../../util/util';
 
 const examDetailsPage = ({
@@ -79,7 +77,11 @@ const examDetailsPage = ({
       ).toLowerCase()}`}</p>
   );
 
-  // TODO: heroimaget headlineImageksi, kun saadaan OPH:n viestinnältä sopivat kuvat
+  /**
+   TODO: heroimaget headlineImageksi, kun saadaan OPH:n viestinnältä sopivat kuvat:
+    esim enum, joka palauttaa kuvan kielen koodin perusteella:
+    headlineImage={languageHeroImages[session.language_code]}
+   */
   return (
       <main>
         {loading ? (
@@ -92,7 +94,6 @@ const examDetailsPage = ({
                   headlineTitle={languageAndLevel.props.children.toString()}
                   headlineContent={<ExamDetailsCard exam={session} isFull={!seatsAvailable}/>}
                   headlineImage={tempHeroImage}
-                  // headlineImage={languageHeroImages[session.language_code]}
               />
               <div className={classes.Content}>
                 <BackButton

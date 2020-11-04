@@ -73,7 +73,6 @@ const ExamDetailsCard = ({exam, isFull, successHeader}) => {
       </>
   );
 
-
   const registrationSuccessContent = (
       <div data-cy="exam-details-card" className={classes.SuccessDetailsCard}>
         <p>{getLanguageAndLevel(exam)}</p>
