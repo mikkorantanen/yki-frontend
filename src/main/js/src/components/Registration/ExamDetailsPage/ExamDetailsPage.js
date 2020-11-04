@@ -39,7 +39,7 @@ const examDetailsPage = ({
   }, []);
 
   const registrationOpen = session.open;
-
+  
   /*
   const postAdmissionActive = registrationOpen && 
                               session.post_admission_end_date && 
@@ -51,7 +51,7 @@ const examDetailsPage = ({
    */
 
   //const seatsAvailable = postAdmissionActive ? (session.post_admission_quota - session.pa_participants) > 0 : (session.max_participants - session.participants) > 0;
-
+  
   const seatsAvailable = (session.max_participants - session.participants) > 0;
 
   const queueFull = session.queue_full;
