@@ -7,6 +7,10 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config) => {
   const lang = i18next.language;
+  config.headers = {
+    ...config.headers,
+    'Caller-Id': '1.2.246.562.10.00000000001.yki'
+  };
   config.params = {lang: lang ? lang : 'fi'};
   return config;
 });

@@ -20,6 +20,7 @@ import RegistrationPeriodSelector from './RegistrationPeriodSelector/Registratio
 import RegistrationPeriod from "./util/RegistrationPeriod";
 
 import editIcon from '../../assets/svg/edit.svg';
+import RegistrationDatesCollapsible from "./RegistrationDatesCollapsible/RegistrationDatesCollapsible";
 
 class ExamDates extends Component {
   constructor(props) {
@@ -33,7 +34,8 @@ class ExamDates extends Component {
       selectedExamDates: [],
       selectedRegistrationPeriod: [],
       selectedRegistrationPeriodIndex: 0,
-      checkboxes: {}
+      checkboxes: {},
+      editExamDates: false,
     }
   }
 
@@ -91,6 +93,12 @@ class ExamDates extends Component {
     this.setState({
       selectedRegistrationPeriodIndex: selected
     });
+  }
+
+  openEditExamDates = () => {
+    this.setState(prev => ({
+      editExamDates: !prev.editExamDates
+    }));
   }
 
   grouped = R.groupWith(
@@ -294,8 +302,7 @@ class ExamDates extends Component {
             registrationPeriods={this.grouped}
             onIndexSelect={this.onIndexSelect}
           />
-          <p>{this.props.t('common.registrationPeriod.edit')}</p>
-          <hr/>
+          <RegistrationDatesCollapsible headerText={'common.registrationPeriod.edit'} content={this.props.examDates} />
         </div>
         <div>
           <div className={classes.ExamDatesListHeader}>

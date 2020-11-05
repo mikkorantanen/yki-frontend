@@ -18,8 +18,8 @@ import HeadlineContainer from "../../HeadlineContainer/HeadlineContainer";
 import {levelDescription} from "../../../util/util";
 import ExamDetailsCard from "./ExamDetailsCard/ExamDetailsCard";
 
-import {languageHeroImages} from "../../../util/languageHeroImageUtil";
-import { nowBetweenDates } from '../../../util/util';
+import tempHeroImage from '../../../assets/images/ophYki_image2.png'
+// import { nowBetweenDates } from '../../../util/util';
 
 const examDetailsPage = ({
                            session,
@@ -39,14 +39,21 @@ const examDetailsPage = ({
   }, []);
 
   const registrationOpen = session.open;
+
+  /*
   const postAdmissionActive = registrationOpen && 
                               session.post_admission_end_date && 
                               session.post_admission_start_date &&
                               session.post_admission_active &&
                               session.post_admission_quota &&
                               nowBetweenDates(moment(session.post_admission_start_date), moment(session.post_admission_end_date));
-  
-  const seatsAvailable = postAdmissionActive ? (session.post_admission_quota - session.pa_participants) > 0 : (session.max_participants - session.participants) > 0;
+
+   */
+
+  //const seatsAvailable = postAdmissionActive ? (session.post_admission_quota - session.pa_participants) > 0 : (session.max_participants - session.participants) > 0;
+
+  const seatsAvailable = (session.max_participants - session.participants) > 0;
+
   const queueFull = session.queue_full;
   const examSessionId = Number(match.params.examSessionId);
 
@@ -70,6 +77,11 @@ const examDetailsPage = ({
       ).toLowerCase()}`}</p>
   );
 
+  /**
+   TODO: heroimaget headlineImageksi, kun saadaan OPH:n viestinnältä sopivat kuvat:
+    esim enum, joka palauttaa kuvan kielen koodin perusteella:
+    headlineImage={languageHeroImages[session.language_code]}
+   */
   return (
       <main>
         {loading ? (
@@ -81,7 +93,7 @@ const examDetailsPage = ({
               <HeadlineContainer
                   headlineTitle={languageAndLevel.props.children.toString()}
                   headlineContent={<ExamDetailsCard exam={session} isFull={!seatsAvailable}/>}
-                  headlineImage={languageHeroImages[session.language_code]}
+                  headlineImage={tempHeroImage}
               />
               <div className={classes.Content}>
                 <BackButton

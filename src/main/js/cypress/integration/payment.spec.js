@@ -7,14 +7,14 @@ describe('Payment', () => {
   });
   it('Payment status should be erroneous', () => {
     cy.visit('/maksu/tila?status=payment-error');
-    cy.contains('Maksu epäonnistui!');
+    cy.contains('Maksu epäonnistui.');
     cy.get('[data-cy=payment-status-text]')
-        .contains('Voit yrittää maksaa uudelleen käyttämällä sähköpostissa olevaa linkkiä.');
+        .contains('Voit yrittää maksaa uudelleen käyttämällä sähköpostissasi olevaa linkkiä.');
   });
   it('Payment status should be cancelled', () => {
     cy.visit('/maksu/tila?status=payment-cancel');
-    cy.contains('Maksutapahtuma keskeytyi!');
+    cy.contains('Maksutapahtuma keskeytyi.');
     cy.get('[data-cy=payment-status-text]')
-        .contains('Voit maksaa ilmoittumisen käyttämällä sähköpostissa olevaa linkkiä.');
+        .contains('Voit yrittää maksaa uudelleen käyttämällä sähköpostissasi olevaa linkkiä.');
   });
 });

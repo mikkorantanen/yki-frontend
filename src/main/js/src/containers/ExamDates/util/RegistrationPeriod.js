@@ -5,14 +5,14 @@ import {useTranslation} from 'react-i18next';
 
 import {DATE_FORMAT, DATE_FORMAT_WITHOUT_YEAR} from "../../../common/Constants";
 
-const RegistrationPeriod = ({ period }) => {
+const RegistrationPeriod = ({ period, withoutText }) => {
   const [t] = useTranslation();
   const start = moment(period[0].registration_start_date).format(DATE_FORMAT_WITHOUT_YEAR);
   const end = moment(period[0].registration_end_date).format(DATE_FORMAT);
 
   return (
     <>
-      {t('common.registationPeriod')}{' '}
+      {withoutText ? null : `${t('common.registationPeriod')} `}
       {start}
       &nbsp;
       &ndash;
@@ -24,6 +24,7 @@ const RegistrationPeriod = ({ period }) => {
 
 RegistrationPeriod.propTypes = {
   period: PropTypes.array.isRequired,
+  withoutText: PropTypes.bool
 };
 
 export default RegistrationPeriod;
