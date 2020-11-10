@@ -5,7 +5,7 @@ import moment from 'moment';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import * as R from 'ramda';
 
-import { DATE_FORMAT, REGISTRATION_KIND_POST_ADMISSION } from '../../../common/Constants';
+import { DATE_FORMAT } from '../../../common/Constants';
 import checkMarkDone from '../../../assets/svg/checkmark-done.svg';
 import checkMarkNotDone from '../../../assets/svg/checkmark-not-done.svg';
 import trashcan from '../../../assets/svg/trashcan.svg';
@@ -297,7 +297,7 @@ export const participantList = props => {
         <div className={classes.StateItem}>
           {p.created && moment(p.created).format(DATE_FORMAT)}
         </div>
-        <div className={classes.StateItem}>{p.kind === REGISTRATION_KIND_POST_ADMISSION ? props.t('examSession.postAdmission') : props.t('examSession.registration')}</div>
+        <div className={classes.StateItem}>{props.t('examSession.registration')}</div>
         <div className={classes.FirstShowOnHover}>
           {p.state === 'SUBMITTED'
             ? confirmPaymentButton(p)
