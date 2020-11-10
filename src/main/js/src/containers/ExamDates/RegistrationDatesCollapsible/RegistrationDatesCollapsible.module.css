@@ -1,3 +1,7 @@
+.ContentContainer {
+    padding: 5px 20px 0 0;
+}
+
 .DescriptionsBarOpen {
     align-items: center;
     width: 100%;
@@ -49,4 +53,29 @@
     border: none;
     width: 2em;
     height: 2em;
+}
+
+.ActionButtons {
+    display: flex;
+    margin-bottom: 5vh;
+}
+
+.ActionButtons button {
+    color: hsl(0, 0%, 100%);
+    border: none;
+    padding: 12px;
+    border-radius: 2px;
+    width: 220px;
+}
+
+.AdditionButton {
+    background-color: hsla(199, 77%, 43%, 0.95);
+}
+
+.DeleteButton {
+    background-color: hsla(358, 75%, 57%, 0.85);
+}
+
+.ActionButtons .AdditionButton {
+    margin-right: 2vw;
 }

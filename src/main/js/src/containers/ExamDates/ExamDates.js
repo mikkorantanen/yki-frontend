@@ -35,7 +35,6 @@ class ExamDates extends Component {
       selectedRegistrationPeriod: [],
       selectedRegistrationPeriodIndex: 0,
       checkboxes: {},
-      editExamDates: false,
     }
   }
 
@@ -66,8 +65,8 @@ class ExamDates extends Component {
     }
   };
 
-  showAddOrEditPostAdmissionModalHandler = (examDate, index) => {
-    this.setState({showAddOrEditPostAdmissionModal: true, selectedExamDate: examDate, selectedExamDateIndex: index});
+  showAddOrEditPostAdmissionModalHandler = examDate => {
+    this.setState({showAddOrEditPostAdmissionModal: true, selectedExamDate: examDate});
   }
 
   closeAddOrEditPostAdmissionModalHandler = () =>
@@ -76,7 +75,17 @@ class ExamDates extends Component {
   showAddOrEditExamDateModalHandler = () =>
     this.setState({showAddOrEditExamDate: !this.state.showAddOrEditExamDate});
 
-  closeAddOrEditExamDateModal = () => this.setState({showAddOrEditExamDate: false});
+  showEditExamDateHandler = selectedDate => {
+    this.setState(prev => ({
+      showAddOrEditExamDate: !prev.showAddOrEditExamDate,
+      selectedExamDate: selectedDate
+    }));
+  }
+
+  closeAddOrEditExamDateModal = () => this.setState({
+    showAddOrEditExamDate: false,
+    selectedExamDate: null
+  });
 
   selectAllCheckboxes = isSelected => {
     Object.keys(this.state.checkboxes).forEach(checkbox => {
@@ -89,16 +98,10 @@ class ExamDates extends Component {
     });
   };
 
-  onIndexSelect = selected => {
+  onIndexSelect = (index, stateItem) => {
     this.setState({
-      selectedRegistrationPeriodIndex: selected
+      [stateItem]: index
     });
-  }
-
-  openEditExamDates = () => {
-    this.setState(prev => ({
-      editExamDates: !prev.editExamDates
-    }));
   }
 
   grouped = R.groupWith(
@@ -122,7 +125,7 @@ class ExamDates extends Component {
               <AddOrEditPostAdmissionConfiguration
                 onUpdate={this.closeAddOrEditPostAdmissionModalHandler}
                 loadingExamDates={this.props.loading}
-                examDate={this.state.selectedRegistrationPeriod[this.state.selectedExamDateIndex]}
+                examDate={this.state.selectedExamDate}
               />
             </Modal>
           ) :
@@ -131,14 +134,26 @@ class ExamDates extends Component {
       </>
     );
 
+    //TODO: handle update event
     const addNewExamDateModal = (
       <>
         {this.state.showAddOrEditExamDate ? (
           <Modal smallModal show={this.state.showAddOrEditExamDate} modalClosed={this.closeAddOrEditExamDateModal}>
-            <AddOrEditExamDate
-              examDates={this.grouped}
-              showAddNewExamDateModalHandler={this.showAddOrEditExamDateModalHandler}
-            />
+            {this.state.selectedExamDate === null ?
+              <AddOrEditExamDate
+                examModal
+                examDates={this.grouped}
+                onUpdate={this.closeAddOrEditExamDateModal}
+                onIndexSelect={this.onIndexSelect}
+              />
+              :
+              <AddOrEditExamDate
+                examModal
+                examDates={[this.state.selectedExamDate]}
+                onUpdate={this.closeAddOrEditExamDateModal}
+                onIndexSelect={this.onIndexSelect}
+              />
+            }
           </Modal>
         ) : null}
       </>
@@ -192,6 +207,7 @@ class ExamDates extends Component {
             <h3>{this.props.t('common.examDate')}</h3>
             <h3>{this.props.t('common.language')}</h3>
             <h3>{this.props.t('common.level')}</h3>
+            <h3>{this.props.t('common.postAdmission')}</h3>
             <h3>{this.props.t('common.edit')}</h3>
           </div>
           <hr className={classes.GridDivider}/>
@@ -228,7 +244,7 @@ class ExamDates extends Component {
         }
 
         return examDates.map((e, i) => {
-          // const registrationEndDateMoment = moment(e.registration_end_date);
+          const registrationEndDateMoment = moment(e.registration_end_date);
 
           const finnishOnly =
             examDates.length === 1 &&
@@ -244,6 +260,9 @@ class ExamDates extends Component {
               return languageToString(l.language_code).toLowerCase();
             })
             .join(', ');
+
+          const postAdmissionDate = `${registrationEndDateMoment.add(1, 'days').format(DATE_FORMAT)} - 
+            ${moment(e.post_admission_end_date).format(DATE_FORMAT)}`;
 
           return (
             <React.Fragment key={i}>
@@ -261,9 +280,10 @@ class ExamDates extends Component {
                             */}
               <p>{languages}</p>
               <p>{level.toLowerCase()}</p>
+              <p>{e.post_admission_end_date ? `Auki: ${postAdmissionDate}` : 'Kiinni'}</p>
               <button
                 className={classes.EditButton}
-                onClick={() => this.showAddOrEditPostAdmissionModalHandler(e, i)}
+                onClick={() => this.showEditExamDateHandler(e)}
               >
                 <img src={editIcon} alt={'edit-icon'}/>
               </button>
@@ -276,12 +296,6 @@ class ExamDates extends Component {
         <>
           {examDateButtons}
           {examDateHeaders}
-          {/* TODO: function to show date rows based on view */}
-          {/*
-          {this.grouped.map((dates, i) => {
-            return <div className={classes.Grid} key={i}>{examDateRows(dates)}</div>
-          })}
-          */}
           {this.state.selectedRegistrationPeriod && (
             <div className={classes.Grid}>
               {examDateRows(this.state.selectedRegistrationPeriod)}
@@ -301,8 +315,13 @@ class ExamDates extends Component {
           <RegistrationPeriodSelector
             registrationPeriods={this.grouped}
             onIndexSelect={this.onIndexSelect}
+            stateItem={'selectedRegistrationPeriodIndex'}
           />
-          <RegistrationDatesCollapsible headerText={'common.registrationPeriod.edit'} content={this.props.examDates} />
+          <RegistrationDatesCollapsible
+            headerText={'common.registrationPeriod.edit'}
+            content={this.props.examDates}
+            onIndexSelect={this.onIndexSelect}
+          />
         </div>
         <div>
           <div className={classes.ExamDatesListHeader}>
